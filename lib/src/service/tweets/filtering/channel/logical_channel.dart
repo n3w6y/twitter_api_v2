@@ -1,12 +1,19 @@
-// Copyright 2022 Kato Shinya. All rights reserved.
-// Redistribution and use in source and binary forms, with or without
-// modification, are permitted provided the conditions.
+import 'package:twitter_api_v2/src/core/client/client_context.dart';
+import 'package:twitter_api_v2/src/service/tweets/filtering/filtering_rule.dart';
+import 'package:twitter_api_v2/src/service/tweets/filtering/syntax/logical_syntax.dart';
 
-// 🌎 Project imports:
-import '../syntax/logical_syntax.dart';
-import 'filtering_rule_channel.dart';
+class LogicalChannel extends LogicalSyntax {
+  LogicalChannel({super.initialRule = ''});
 
-class LogicalChannel extends LogicalSyntax implements FilteringRuleChannel {
-  /// Returns the new instance of [LogicalChannel].
-  const LogicalChannel(super.buffer);
+  @override
+  String build() => super.build();
+
+  @override
+  FilteringRule buildRule({required ClientContext context, String? tag}) {
+    return FilteringRule(
+      context: context,
+      value: build(),
+      tag: tag,
+    );
+  }
 }
