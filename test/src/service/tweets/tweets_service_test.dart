@@ -75,7 +75,7 @@ void main() {
         );
       });
 
-      // Mock second, third, and fourth calls (body: {'text': 'test'})
+      // Mock second and third calls (body: {'text': 'test'})
       when(context.post(
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: null,
@@ -142,7 +142,7 @@ void main() {
         );
       });
 
-      // Mock second, third, and fourth calls (body: {'text': 'test'})
+      // Mock second and third calls (body: {'text': 'test'})
       when(context.post(
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: null,
@@ -209,7 +209,7 @@ void main() {
         );
       });
 
-      // Mock second, third, and fourth calls (body: {'text': 'test'})
+      // Mock second and third calls (body: {'text': 'test'})
       when(context.post(
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: null,
