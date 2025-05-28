@@ -22,53 +22,118 @@ void main() {
   setUp(() {
     context = MockClientContext();
     tweetsService = TweetsService(context: context);
-
-    // Mock context.post to return a TwitterResponse
-    when(context.post(
-      Uri.https('api.twitter.com', '/2/tweets'),
-      headers: anyNamed('headers'),
-      body: anyNamed('body'),
-      fromJsonData: TweetData.fromJson,
-    )).thenAnswer((_) async => TwitterResponse<TweetData, void>(
-          headers: {'content-type': 'application/json'},
-          status: HttpStatus.ok,
-          request: TwitterRequest(
-            method: HttpMethod.post,
-            url: Uri.https('api.twitter.com', '/2/tweets'),
-          ),
-          rateLimit: RateLimit(
-            limitCount: 100,
-            remainingCount: 99,
-            resetAt: DateTime.now().add(Duration(minutes: 15)),
-          ),
-          data: TweetData.fromJson({'id': '123', 'text': 'test'}),
-          meta: null,
-        ));
   });
 
   group('TweetsService', () {
     test('create', () async {
+      // Setup mock for this test
+      when(context.post(
+        Uri.https('api.twitter.com', '/2/tweets'),
+        headers: anyNamed('headers'),
+        body: anyNamed('body'),
+        fromJsonData: TweetData.fromJson,
+      )).thenAnswer((_) async => TwitterResponse<TweetData, void>(
+            headers: {'content-type': 'application/json'},
+            status: HttpStatus.ok,
+            request: TwitterRequest(
+              method: HttpMethod.post,
+              url: Uri.https('api.twitter.com', '/2/tweets'),
+            ),
+            rateLimit: RateLimit(
+              limitCount: 100,
+              remainingCount: 99,
+              resetAt: DateTime.now().add(Duration(minutes: 15)),
+            ),
+            data: TweetData.fromJson({'id': '123', 'text': 'test'}),
+            meta: null,
+          ));
+
       final response = await tweetsService.create(text: 'test');
 
       expect(response, isA<TwitterResponse<TweetData, void>>());
       expect(response.data.id, '123');
       expect(response.data.text, 'test');
+
+      verify(context.post(
+        Uri.https('api.twitter.com', '/2/tweets'),
+        headers: anyNamed('headers'),
+        body: anyNamed('body'),
+        fromJsonData: TweetData.fromJson,
+      )).called(1);
     });
 
     test('post', () async {
+      // Setup mock for this test
+      when(context.post(
+        Uri.https('api.twitter.com', '/2/tweets'),
+        headers: anyNamed('headers'),
+        body: anyNamed('body'),
+        fromJsonData: TweetData.fromJson,
+      )).thenAnswer((_) async => TwitterResponse<TweetData, void>(
+            headers: {'content-type': 'application/json'},
+            status: HttpStatus.ok,
+            request: TwitterRequest(
+              method: HttpMethod.post,
+              url: Uri.https('api.twitter.com', '/2/tweets'),
+            ),
+            rateLimit: RateLimit(
+              limitCount: 100,
+              remainingCount: 99,
+              resetAt: DateTime.now().add(Duration(minutes: 15)),
+            ),
+            data: TweetData.fromJson({'id': '123', 'text': 'test'}),
+            meta: null,
+          ));
+
       final response = await tweetsService.post(text: 'test');
 
       expect(response, isA<TwitterResponse<TweetData, void>>());
       expect(response.data.id, '123');
       expect(response.data.text, 'test');
+
+      verify(context.post(
+        Uri.https('api.twitter.com', '/2/tweets'),
+        headers: anyNamed('headers'),
+        body: anyNamed('body'),
+        fromJsonData: TweetData.fromJson,
+      )).called(1);
     });
 
     test('tweet', () async {
+      // Setup mock for this test
+      when(context.post(
+        Uri.https('api.twitter.com', '/2/tweets'),
+        headers: anyNamed('headers'),
+        body: anyNamed('body'),
+        fromJsonData: TweetData.fromJson,
+      )).thenAnswer((_) async => TwitterResponse<TweetData, void>(
+            headers: {'content-type': 'application/json'},
+            status: HttpStatus.ok,
+            request: TwitterRequest(
+              method: HttpMethod.post,
+              url: Uri.https('api.twitter.com', '/2/tweets'),
+            ),
+            rateLimit: RateLimit(
+              limitCount: 100,
+              remainingCount: 99,
+              resetAt: DateTime.now().add(Duration(minutes: 15)),
+            ),
+            data: TweetData.fromJson({'id': '123', 'text': 'test'}),
+            meta: null,
+          ));
+
       final response = await tweetsService.tweet(text: 'test');
 
       expect(response, isA<TwitterResponse<TweetData, void>>());
       expect(response.data.id, '123');
       expect(response.data.text, 'test');
+
+      verify(context.post(
+        Uri.https('api.twitter.com', '/2/tweets'),
+        headers: anyNamed('headers'),
+        body: anyNamed('body'),
+        fromJsonData: TweetData.fromJson,
+      )).called(1);
     });
   });
 }
