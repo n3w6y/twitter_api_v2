@@ -26,7 +26,7 @@ void main() {
 
     // Mock context.post to catch calls
     when(context.post(
-      argThat(isA<Uri>()),
+      Uri.https('api.twitter.com', '/2/tweets'),
       headers: anyNamed('headers'),
       body: anyNamed('body'),
       fromJsonData: TweetData.fromJson,
