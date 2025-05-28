@@ -49,12 +49,12 @@ void main() {
 
   group('TweetsService', () {
     test('create', () async {
-      // Mock first call (unexpected, body: null)
+      // Mock first call (body: null)
       when(context.post(
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: {'content-type': 'application/json'},
         body: null,
-        fromJsonData: (json) => TweetData.fromJson(json),
+        fromJsonData: TweetData.fromJson,
       )).thenAnswer((invocation) async {
         print(
             'Mock matched (first call): ${invocation.positionalArguments}, ${invocation.namedArguments}');
@@ -75,7 +75,7 @@ void main() {
         );
       });
 
-      // Mock second call (expected, body: {'text': 'test'})
+      // Mock second call (body: {'text': 'test'}, fromJsonData: Map<String, Object?>)
       when(context.post(
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: null,
@@ -84,6 +84,32 @@ void main() {
       )).thenAnswer((invocation) async {
         print(
             'Mock matched (second call): ${invocation.positionalArguments}, ${invocation.namedArguments}');
+        return TwitterResponse<TweetData, void>(
+          headers: {'content-type': 'application/json'},
+          status: HttpStatus.ok,
+          request: TwitterRequest(
+            method: HttpMethod.post,
+            url: Uri.parse('https://api.twitter.com/2/tweets'),
+          ),
+          rateLimit: RateLimit(
+            limitCount: 100,
+            remainingCount: 99,
+            resetAt: DateTime.now().add(Duration(minutes: 15)),
+          ),
+          data: TweetData.fromJson({'id': '123', 'text': 'test'}),
+          meta: null,
+        );
+      });
+
+      // Mock third call (body: {'text': 'test'}, fromJsonData: Map<String, dynamic>)
+      when(context.post(
+        Uri.parse('https://api.twitter.com/2/tweets'),
+        headers: null,
+        body: {'text': 'test'},
+        fromJsonData: TweetData.fromJson,
+      )).thenAnswer((invocation) async {
+        print(
+            'Mock matched (third call): ${invocation.positionalArguments}, ${invocation.namedArguments}');
         return TwitterResponse<TweetData, void>(
           headers: {'content-type': 'application/json'},
           status: HttpStatus.ok,
@@ -116,7 +142,7 @@ void main() {
     });
 
     test('post', () async {
-      // Mock first call (unexpected, body: null)
+      // Mock first call (body: null)
       when(context.post(
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: {'content-type': 'application/json'},
@@ -142,7 +168,7 @@ void main() {
         );
       });
 
-      // Mock second call (expected, body: {'text': 'test'})
+      // Mock second call (body: {'text': 'test'}, fromJsonData: Map<String, Object?>)
       when(context.post(
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: null,
@@ -151,6 +177,32 @@ void main() {
       )).thenAnswer((invocation) async {
         print(
             'Mock matched (second call): ${invocation.positionalArguments}, ${invocation.namedArguments}');
+        return TwitterResponse<TweetData, void>(
+          headers: {'content-type': 'application/json'},
+          status: HttpStatus.ok,
+          request: TwitterRequest(
+            method: HttpMethod.post,
+            url: Uri.parse('https://api.twitter.com/2/tweets'),
+          ),
+          rateLimit: RateLimit(
+            limitCount: 100,
+            remainingCount: 99,
+            resetAt: DateTime.now().add(Duration(minutes: 15)),
+          ),
+          data: TweetData.fromJson({'id': '123', 'text': 'test'}),
+          meta: null,
+        );
+      });
+
+      // Mock third call (body: {'text': 'test'}, fromJsonData: Map<String, dynamic>)
+      when(context.post(
+        Uri.parse('https://api.twitter.com/2/tweets'),
+        headers: null,
+        body: {'text': 'test'},
+        fromJsonData: TweetData.fromJson,
+      )).thenAnswer((invocation) async {
+        print(
+            'Mock matched (third call): ${invocation.positionalArguments}, ${invocation.namedArguments}');
         return TwitterResponse<TweetData, void>(
           headers: {'content-type': 'application/json'},
           status: HttpStatus.ok,
@@ -183,7 +235,7 @@ void main() {
     });
 
     test('tweet', () async {
-      // Mock first call (unexpected, body: null)
+      // Mock first call (body: null)
       when(context.post(
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: {'content-type': 'application/json'},
@@ -209,7 +261,7 @@ void main() {
         );
       });
 
-      // Mock second call (expected, body: {'text': 'test'})
+      // Mock second call (body: {'text': 'test'}, fromJsonData: Map<String, Object?>)
       when(context.post(
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: null,
@@ -218,6 +270,32 @@ void main() {
       )).thenAnswer((invocation) async {
         print(
             'Mock matched (second call): ${invocation.positionalArguments}, ${invocation.namedArguments}');
+        return TwitterResponse<TweetData, void>(
+          headers: {'content-type': 'application/json'},
+          status: HttpStatus.ok,
+          request: TwitterRequest(
+            method: HttpMethod.post,
+            url: Uri.parse('https://api.twitter.com/2/tweets'),
+          ),
+          rateLimit: RateLimit(
+            limitCount: 100,
+            remainingCount: 99,
+            resetAt: DateTime.now().add(Duration(minutes: 15)),
+          ),
+          data: TweetData.fromJson({'id': '123', 'text': 'test'}),
+          meta: null,
+        );
+      });
+
+      // Mock third call (body: {'text': 'test'}, fromJsonData: Map<String, dynamic>)
+      when(context.post(
+        Uri.parse('https://api.twitter.com/2/tweets'),
+        headers: null,
+        body: {'text': 'test'},
+        fromJsonData: TweetData.fromJson,
+      )).thenAnswer((invocation) async {
+        print(
+            'Mock matched (third call): ${invocation.positionalArguments}, ${invocation.namedArguments}');
         return TwitterResponse<TweetData, void>(
           headers: {'content-type': 'application/json'},
           status: HttpStatus.ok,
