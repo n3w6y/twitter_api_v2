@@ -1,5 +1,5 @@
 import 'package:http/http.dart' as http;
-import 'package:twitter_api_v2/src/core/client/client.dart';
+// import 'package:twitter_api_v2/src/core/client/client.dart';
 import 'package:twitter_api_v2/src/core/client/client_context.dart';
 import 'package:twitter_api_v2/src/core/client/oauth_tokens.dart';
 import 'package:twitter_api_v2/src/service/compliance/compliance_service.dart';
@@ -9,7 +9,7 @@ import 'package:twitter_api_v2/src/service/spaces/spaces_service.dart';
 import 'package:twitter_api_v2/src/service/tweets/tweets_service.dart';
 import 'package:twitter_api_v2/src/service/users/users_service.dart';
 import 'package:twitter_api_v2/src/service/response/twitter_response.dart';
-import 'package:universal_io/io.dart';
+// import 'package:universal_io/io.dart';
 
 /// This class provides the interfaces to easily call Twitter API v2.0.
 class TwitterApi {
