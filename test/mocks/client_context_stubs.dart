@@ -8,15 +8,21 @@ import 'package:twitter_api_v2/src/service/response/twitter_response.dart';
 
 class ClientContextStub implements ClientContext {
   @override
+  AuthenticationType get authenticationType => AuthenticationType.oauth2;
+
+  @override
+  void close() {
+    // No-op for stub
+  }
+
+  @override
   Future<TwitterResponse<D, M>> get<D, M>(
     Uri uri, {
-    required Map<String, String> headers,
     required D Function(Map<String, dynamic>) fromJsonData,
     M Function(Map<String, dynamic>)? fromJsonMeta,
-    Map<String, dynamic>? queryParameters,
   }) async =>
       TwitterResponse<D, M>(
-        headers: headers,
+        headers: {'content-type': 'application/json'},
         status: HttpStatus.ok,
         request: TwitterRequest(
           method: HttpMethod.get,
@@ -34,13 +40,13 @@ class ClientContextStub implements ClientContext {
   @override
   Future<TwitterResponse<D, M>> post<D, M>(
     Uri uri, {
-    required Map<String, String> headers,
-    required dynamic body,
+    dynamic body,
     required D Function(Map<String, dynamic>) fromJsonData,
     M Function(Map<String, dynamic>)? fromJsonMeta,
+    Map<String, String>? headers,
   }) async =>
       TwitterResponse<D, M>(
-        headers: headers,
+        headers: headers ?? {'content-type': 'application/json'},
         status: HttpStatus.ok,
         request: TwitterRequest(
           method: HttpMethod.post,
@@ -56,15 +62,15 @@ class ClientContextStub implements ClientContext {
       );
 
   @override
-  Future<TwitterResponse<Map<String, dynamic>, M>> postMultipart<M>(
+  Future<TwitterResponse<D, M>> postMultipart<D, M>(
     Uri uri, {
-    required Map<String, String> headers,
-    required List<http.MultipartFile> files,
-    required Map<String, dynamic> Function(Map<String, dynamic>) fromJsonData,
+    Map<String, String>? data,
+    List<http.MultipartFile>? files,
+    required D Function(Map<String, dynamic>) fromJsonData,
     M Function(Map<String, dynamic>)? fromJsonMeta,
   }) async =>
-      TwitterResponse<Map<String, dynamic>, M>(
-        headers: headers,
+      TwitterResponse<D, M>(
+        headers: {'content-type': 'multipart/form-data'},
         status: HttpStatus.ok,
         request: TwitterRequest(
           method: HttpMethod.post,
@@ -82,12 +88,11 @@ class ClientContextStub implements ClientContext {
   @override
   Future<TwitterResponse<D, M>> delete<D, M>(
     Uri uri, {
-    required Map<String, String> headers,
     required D Function(Map<String, dynamic>) fromJsonData,
     M Function(Map<String, dynamic>)? fromJsonMeta,
   }) async =>
       TwitterResponse<D, M>(
-        headers: headers,
+        headers: {'content-type': 'application/json'},
         status: HttpStatus.ok,
         request: TwitterRequest(
           method: HttpMethod.delete,
@@ -101,9 +106,4 @@ class ClientContextStub implements ClientContext {
         data: fromJsonData({}),
         meta: fromJsonMeta != null ? fromJsonMeta({}) : null,
       );
-
-  @override
-  Future<http.StreamedResponse> send(http.BaseRequest request) {
-    throw UnimplementedError();
-  }
 }
