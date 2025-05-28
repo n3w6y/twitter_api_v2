@@ -9,7 +9,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 // 🌎 Project imports:
 //import '../common/data.dart';
-import '../common/locale.dart';
+//import '../common/locale.dart';
 
 part 'uploaded_media_data.freezed.dart';
 part 'uploaded_media_data.g.dart';
