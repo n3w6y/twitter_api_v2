@@ -8,27 +8,20 @@ part of 'space_meta.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SpaceMeta _$$_SpaceMetaFromJson(Map json) => $checkedCreate(
-      r'_$_SpaceMeta',
+_$SpaceMetaImpl _$$SpaceMetaImplFromJson(Map json) => $checkedCreate(
+      r'_$SpaceMetaImpl',
       json,
       ($checkedConvert) {
-        final val = _$_SpaceMeta(
-          resultCount: $checkedConvert('result_count', (v) => v as int?),
+        final val = _$SpaceMetaImpl(
+          resultCount:
+              $checkedConvert('result_count', (v) => (v as num?)?.toInt()),
         );
         return val;
       },
       fieldKeyMap: const {'resultCount': 'result_count'},
     );
 
-Map<String, dynamic> _$$_SpaceMetaToJson(_$_SpaceMeta instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('result_count', instance.resultCount);
-  return val;
-}
+Map<String, dynamic> _$$SpaceMetaImplToJson(_$SpaceMetaImpl instance) =>
+    <String, dynamic>{
+      if (instance.resultCount case final value?) 'result_count': value,
+    };

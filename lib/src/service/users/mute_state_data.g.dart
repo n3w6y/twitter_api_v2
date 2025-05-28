@@ -8,11 +8,11 @@ part of 'mute_state_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_MuteStateData _$$_MuteStateDataFromJson(Map json) => $checkedCreate(
-      r'_$_MuteStateData',
+_$MuteStateDataImpl _$$MuteStateDataImplFromJson(Map json) => $checkedCreate(
+      r'_$MuteStateDataImpl',
       json,
       ($checkedConvert) {
-        final val = _$_MuteStateData(
+        final val = _$MuteStateDataImpl(
           isMuting: $checkedConvert('muting', (v) => v as bool),
         );
         return val;
@@ -20,7 +20,7 @@ _$_MuteStateData _$$_MuteStateDataFromJson(Map json) => $checkedCreate(
       fieldKeyMap: const {'isMuting': 'muting'},
     );
 
-Map<String, dynamic> _$$_MuteStateDataToJson(_$_MuteStateData instance) =>
+Map<String, dynamic> _$$MuteStateDataImplToJson(_$MuteStateDataImpl instance) =>
     <String, dynamic>{
       'muting': instance.isMuting,
     };

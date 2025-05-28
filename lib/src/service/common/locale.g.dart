@@ -8,11 +8,11 @@ part of 'locale.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Locale _$$_LocaleFromJson(Map json) => $checkedCreate(
-      r'_$_Locale',
+_$LocaleImpl _$$LocaleImplFromJson(Map json) => $checkedCreate(
+      r'_$LocaleImpl',
       json,
       ($checkedConvert) {
-        final val = _$_Locale(
+        final val = _$LocaleImpl(
           lang:
               $checkedConvert('lang', (v) => $enumDecode(_$LanguageEnumMap, v)),
           country: $checkedConvert(
@@ -22,7 +22,8 @@ _$_Locale _$$_LocaleFromJson(Map json) => $checkedCreate(
       },
     );
 
-Map<String, dynamic> _$$_LocaleToJson(_$_Locale instance) => <String, dynamic>{
+Map<String, dynamic> _$$LocaleImplToJson(_$LocaleImpl instance) =>
+    <String, dynamic>{
       'lang': _$LanguageEnumMap[instance.lang]!,
       'country': _$CountryEnumMap[instance.country]!,
     };

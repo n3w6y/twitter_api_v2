@@ -8,15 +8,19 @@ part of 'public_user_metrics.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PublicUserMetrics _$$_PublicUserMetricsFromJson(Map json) => $checkedCreate(
-      r'_$_PublicUserMetrics',
+_$PublicUserMetricsImpl _$$PublicUserMetricsImplFromJson(Map json) =>
+    $checkedCreate(
+      r'_$PublicUserMetricsImpl',
       json,
       ($checkedConvert) {
-        final val = _$_PublicUserMetrics(
-          followersCount: $checkedConvert('followers_count', (v) => v as int),
-          followingCount: $checkedConvert('following_count', (v) => v as int),
-          tweetCount: $checkedConvert('tweet_count', (v) => v as int),
-          listedCount: $checkedConvert('listed_count', (v) => v as int),
+        final val = _$PublicUserMetricsImpl(
+          followersCount:
+              $checkedConvert('followers_count', (v) => (v as num).toInt()),
+          followingCount:
+              $checkedConvert('following_count', (v) => (v as num).toInt()),
+          tweetCount: $checkedConvert('tweet_count', (v) => (v as num).toInt()),
+          listedCount:
+              $checkedConvert('listed_count', (v) => (v as num).toInt()),
         );
         return val;
       },
@@ -28,8 +32,8 @@ _$_PublicUserMetrics _$$_PublicUserMetricsFromJson(Map json) => $checkedCreate(
       },
     );
 
-Map<String, dynamic> _$$_PublicUserMetricsToJson(
-        _$_PublicUserMetrics instance) =>
+Map<String, dynamic> _$$PublicUserMetricsImplToJson(
+        _$PublicUserMetricsImpl instance) =>
     <String, dynamic>{
       'followers_count': instance.followersCount,
       'following_count': instance.followingCount,

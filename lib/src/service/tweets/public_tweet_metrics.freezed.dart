@@ -12,7 +12,7 @@ part of 'public_tweet_metrics.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PublicTweetMetrics _$PublicTweetMetricsFromJson(Map<String, dynamic> json) {
   return _PublicTweetMetrics.fromJson(json);
@@ -33,8 +33,12 @@ mixin _$PublicTweetMetrics {
   /// (also known as Quote).
   int get quoteCount => throw _privateConstructorUsedError;
 
+  /// Serializes this PublicTweetMetrics to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PublicTweetMetrics
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PublicTweetMetricsCopyWith<PublicTweetMetrics> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -58,6 +62,8 @@ class _$PublicTweetMetricsCopyWithImpl<$Res, $Val extends PublicTweetMetrics>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PublicTweetMetrics
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -88,24 +94,26 @@ class _$PublicTweetMetricsCopyWithImpl<$Res, $Val extends PublicTweetMetrics>
 }
 
 /// @nodoc
-abstract class _$$_PublicTweetMetricsCopyWith<$Res>
+abstract class _$$PublicTweetMetricsImplCopyWith<$Res>
     implements $PublicTweetMetricsCopyWith<$Res> {
-  factory _$$_PublicTweetMetricsCopyWith(_$_PublicTweetMetrics value,
-          $Res Function(_$_PublicTweetMetrics) then) =
-      __$$_PublicTweetMetricsCopyWithImpl<$Res>;
+  factory _$$PublicTweetMetricsImplCopyWith(_$PublicTweetMetricsImpl value,
+          $Res Function(_$PublicTweetMetricsImpl) then) =
+      __$$PublicTweetMetricsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int likeCount, int retweetCount, int replyCount, int quoteCount});
 }
 
 /// @nodoc
-class __$$_PublicTweetMetricsCopyWithImpl<$Res>
-    extends _$PublicTweetMetricsCopyWithImpl<$Res, _$_PublicTweetMetrics>
-    implements _$$_PublicTweetMetricsCopyWith<$Res> {
-  __$$_PublicTweetMetricsCopyWithImpl(
-      _$_PublicTweetMetrics _value, $Res Function(_$_PublicTweetMetrics) _then)
+class __$$PublicTweetMetricsImplCopyWithImpl<$Res>
+    extends _$PublicTweetMetricsCopyWithImpl<$Res, _$PublicTweetMetricsImpl>
+    implements _$$PublicTweetMetricsImplCopyWith<$Res> {
+  __$$PublicTweetMetricsImplCopyWithImpl(_$PublicTweetMetricsImpl _value,
+      $Res Function(_$PublicTweetMetricsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PublicTweetMetrics
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -114,7 +122,7 @@ class __$$_PublicTweetMetricsCopyWithImpl<$Res>
     Object? replyCount = null,
     Object? quoteCount = null,
   }) {
-    return _then(_$_PublicTweetMetrics(
+    return _then(_$PublicTweetMetricsImpl(
       likeCount: null == likeCount
           ? _value.likeCount
           : likeCount // ignore: cast_nullable_to_non_nullable
@@ -137,15 +145,15 @@ class __$$_PublicTweetMetricsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PublicTweetMetrics implements _PublicTweetMetrics {
-  const _$_PublicTweetMetrics(
+class _$PublicTweetMetricsImpl implements _PublicTweetMetrics {
+  const _$PublicTweetMetricsImpl(
       {required this.likeCount,
       required this.retweetCount,
       required this.replyCount,
       required this.quoteCount});
 
-  factory _$_PublicTweetMetrics.fromJson(Map<String, dynamic> json) =>
-      _$$_PublicTweetMetricsFromJson(json);
+  factory _$PublicTweetMetricsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PublicTweetMetricsImplFromJson(json);
 
   /// Number of Likes of this Tweet.
   @override
@@ -170,10 +178,10 @@ class _$_PublicTweetMetrics implements _PublicTweetMetrics {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PublicTweetMetrics &&
+            other is _$PublicTweetMetricsImpl &&
             (identical(other.likeCount, likeCount) ||
                 other.likeCount == likeCount) &&
             (identical(other.retweetCount, retweetCount) ||
@@ -184,21 +192,23 @@ class _$_PublicTweetMetrics implements _PublicTweetMetrics {
                 other.quoteCount == quoteCount));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, likeCount, retweetCount, replyCount, quoteCount);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PublicTweetMetrics
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PublicTweetMetricsCopyWith<_$_PublicTweetMetrics> get copyWith =>
-      __$$_PublicTweetMetricsCopyWithImpl<_$_PublicTweetMetrics>(
+  _$$PublicTweetMetricsImplCopyWith<_$PublicTweetMetricsImpl> get copyWith =>
+      __$$PublicTweetMetricsImplCopyWithImpl<_$PublicTweetMetricsImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PublicTweetMetricsToJson(
+    return _$$PublicTweetMetricsImplToJson(
       this,
     );
   }
@@ -209,30 +219,32 @@ abstract class _PublicTweetMetrics implements PublicTweetMetrics {
       {required final int likeCount,
       required final int retweetCount,
       required final int replyCount,
-      required final int quoteCount}) = _$_PublicTweetMetrics;
+      required final int quoteCount}) = _$PublicTweetMetricsImpl;
 
   factory _PublicTweetMetrics.fromJson(Map<String, dynamic> json) =
-      _$_PublicTweetMetrics.fromJson;
-
-  @override
+      _$PublicTweetMetricsImpl.fromJson;
 
   /// Number of Likes of this Tweet.
-  int get likeCount;
   @override
+  int get likeCount;
 
   /// Number of times this Tweet has been Retweeted.
-  int get retweetCount;
   @override
+  int get retweetCount;
 
   /// Number of Replies of this Tweet.
-  int get replyCount;
   @override
+  int get replyCount;
 
   /// Number of times this Tweet has been Retweeted with a comment
   /// (also known as Quote).
-  int get quoteCount;
   @override
-  @JsonKey(ignore: true)
-  _$$_PublicTweetMetricsCopyWith<_$_PublicTweetMetrics> get copyWith =>
+  int get quoteCount;
+
+  /// Create a copy of PublicTweetMetrics
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PublicTweetMetricsImplCopyWith<_$PublicTweetMetricsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -8,11 +8,11 @@ part of 'dm_attachments.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_DMAttachments _$$_DMAttachmentsFromJson(Map json) => $checkedCreate(
-      r'_$_DMAttachments',
+_$DMAttachmentsImpl _$$DMAttachmentsImplFromJson(Map json) => $checkedCreate(
+      r'_$DMAttachmentsImpl',
       json,
       ($checkedConvert) {
-        final val = _$_DMAttachments(
+        final val = _$DMAttachmentsImpl(
           mediaKeys: $checkedConvert('media_keys',
               (v) => (v as List<dynamic>).map((e) => e as String).toList()),
         );
@@ -21,7 +21,7 @@ _$_DMAttachments _$$_DMAttachmentsFromJson(Map json) => $checkedCreate(
       fieldKeyMap: const {'mediaKeys': 'media_keys'},
     );
 
-Map<String, dynamic> _$$_DMAttachmentsToJson(_$_DMAttachments instance) =>
+Map<String, dynamic> _$$DMAttachmentsImplToJson(_$DMAttachmentsImpl instance) =>
     <String, dynamic>{
       'media_keys': instance.mediaKeys,
     };

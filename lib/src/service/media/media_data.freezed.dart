@@ -12,7 +12,7 @@ part of 'media_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 MediaData _$MediaDataFromJson(Map<String, dynamic> json) {
   return _MediaData.fromJson(json);
@@ -108,8 +108,12 @@ mixin _$MediaData {
   ///   with different resolutions or formats.
   List<Variant>? get variants => throw _privateConstructorUsedError;
 
+  /// Serializes this MediaData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of MediaData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $MediaDataCopyWith<MediaData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -150,6 +154,8 @@ class _$MediaDataCopyWithImpl<$Res, $Val extends MediaData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of MediaData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -223,6 +229,8 @@ class _$MediaDataCopyWithImpl<$Res, $Val extends MediaData>
     ) as $Val);
   }
 
+  /// Create a copy of MediaData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PrivateMediaMetricsCopyWith<$Res>? get privateMetrics {
@@ -235,6 +243,8 @@ class _$MediaDataCopyWithImpl<$Res, $Val extends MediaData>
     });
   }
 
+  /// Create a copy of MediaData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $OrganicMediaMetricsCopyWith<$Res>? get organicMetrics {
@@ -247,6 +257,8 @@ class _$MediaDataCopyWithImpl<$Res, $Val extends MediaData>
     });
   }
 
+  /// Create a copy of MediaData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PromotedMediaMetricsCopyWith<$Res>? get promotedMetrics {
@@ -260,6 +272,8 @@ class _$MediaDataCopyWithImpl<$Res, $Val extends MediaData>
     });
   }
 
+  /// Create a copy of MediaData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PublicMediaMetricsCopyWith<$Res>? get publicMetrics {
@@ -274,10 +288,11 @@ class _$MediaDataCopyWithImpl<$Res, $Val extends MediaData>
 }
 
 /// @nodoc
-abstract class _$$_MediaDataCopyWith<$Res> implements $MediaDataCopyWith<$Res> {
-  factory _$$_MediaDataCopyWith(
-          _$_MediaData value, $Res Function(_$_MediaData) then) =
-      __$$_MediaDataCopyWithImpl<$Res>;
+abstract class _$$MediaDataImplCopyWith<$Res>
+    implements $MediaDataCopyWith<$Res> {
+  factory _$$MediaDataImplCopyWith(
+          _$MediaDataImpl value, $Res Function(_$MediaDataImpl) then) =
+      __$$MediaDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -306,13 +321,15 @@ abstract class _$$_MediaDataCopyWith<$Res> implements $MediaDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_MediaDataCopyWithImpl<$Res>
-    extends _$MediaDataCopyWithImpl<$Res, _$_MediaData>
-    implements _$$_MediaDataCopyWith<$Res> {
-  __$$_MediaDataCopyWithImpl(
-      _$_MediaData _value, $Res Function(_$_MediaData) _then)
+class __$$MediaDataImplCopyWithImpl<$Res>
+    extends _$MediaDataCopyWithImpl<$Res, _$MediaDataImpl>
+    implements _$$MediaDataImplCopyWith<$Res> {
+  __$$MediaDataImplCopyWithImpl(
+      _$MediaDataImpl _value, $Res Function(_$MediaDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MediaData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -330,7 +347,7 @@ class __$$_MediaDataCopyWithImpl<$Res>
     Object? publicMetrics = freezed,
     Object? variants = freezed,
   }) {
-    return _then(_$_MediaData(
+    return _then(_$MediaDataImpl(
       key: null == key
           ? _value.key
           : key // ignore: cast_nullable_to_non_nullable
@@ -390,8 +407,8 @@ class __$$_MediaDataCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false)
-class _$_MediaData implements _MediaData {
-  const _$_MediaData(
+class _$MediaDataImpl implements _MediaData {
+  const _$MediaDataImpl(
       {@JsonKey(name: 'media_key') required this.key,
       required this.type,
       this.url,
@@ -407,8 +424,8 @@ class _$_MediaData implements _MediaData {
       final List<Variant>? variants})
       : _variants = variants;
 
-  factory _$_MediaData.fromJson(Map<String, dynamic> json) =>
-      _$$_MediaDataFromJson(json);
+  factory _$MediaDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MediaDataImplFromJson(json);
 
   /// Unique identifier of the expanded media content.
   ///
@@ -530,10 +547,10 @@ class _$_MediaData implements _MediaData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MediaData &&
+            other is _$MediaDataImpl &&
             (identical(other.key, key) || other.key == key) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.url, url) || other.url == url) &&
@@ -555,7 +572,7 @@ class _$_MediaData implements _MediaData {
             const DeepCollectionEquality().equals(other._variants, _variants));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -573,15 +590,17 @@ class _$_MediaData implements _MediaData {
       publicMetrics,
       const DeepCollectionEquality().hash(_variants));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MediaData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MediaDataCopyWith<_$_MediaData> get copyWith =>
-      __$$_MediaDataCopyWithImpl<_$_MediaData>(this, _$identity);
+  _$$MediaDataImplCopyWith<_$MediaDataImpl> get copyWith =>
+      __$$MediaDataImplCopyWithImpl<_$MediaDataImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MediaDataToJson(
+    return _$$MediaDataImplToJson(
       this,
     );
   }
@@ -589,52 +608,48 @@ class _$_MediaData implements _MediaData {
 
 abstract class _MediaData implements MediaData {
   const factory _MediaData(
-      {@JsonKey(name: 'media_key')
-          required final String key,
+      {@JsonKey(name: 'media_key') required final String key,
       required final MediaType type,
       final String? url,
       final String? altText,
-      @JsonKey(name: 'duration_ms')
-          final int? durationMilliseconds,
+      @JsonKey(name: 'duration_ms') final int? durationMilliseconds,
       final int? height,
       final int? width,
       @JsonKey(name: 'non_public_metrics')
-          final PrivateMediaMetrics? privateMetrics,
+      final PrivateMediaMetrics? privateMetrics,
       final OrganicMediaMetrics? organicMetrics,
       final String? previewImageUrl,
       final PromotedMediaMetrics? promotedMetrics,
       final PublicMediaMetrics? publicMetrics,
-      final List<Variant>? variants}) = _$_MediaData;
+      final List<Variant>? variants}) = _$MediaDataImpl;
 
   factory _MediaData.fromJson(Map<String, dynamic> json) =
-      _$_MediaData.fromJson;
-
-  @override
+      _$MediaDataImpl.fromJson;
 
   /// Unique identifier of the expanded media content.
   ///
   /// ## How It Can Be Used
   ///
   /// - Can be used to programmatically retrieve media.
+  @override
   @JsonKey(name: 'media_key')
   String get key;
-  @override
 
   /// Type of content (animated_gif, photo, video).
   ///
   /// ## How It Can Be Used
   ///
   /// - Classify the media as a photo, GIF, or video.
-  MediaType get type;
   @override
+  MediaType get type;
 
   /// A direct URL to the media file on Twitter.
   ///
   /// ## How It Can Be Used
   ///
   /// - Returns a Media object with a URL field for photos.
-  String? get url;
   @override
+  String? get url;
 
   /// A description of an image to enable and support accessibility. Can be
   /// up to 1000 characters long. Alt text can only be added to images at
@@ -644,21 +659,21 @@ abstract class _MediaData implements MediaData {
   ///
   /// - Can be used to provide a written description of an image in case a
   ///   user is visually impaired.
-  String? get altText;
   @override
+  String? get altText;
 
   /// Available when type is video. Duration in milliseconds of the video.
+  @override
   @JsonKey(name: 'duration_ms')
   int? get durationMilliseconds;
-  @override
 
   /// Height of this content in pixels.
-  int? get height;
   @override
+  int? get height;
 
   /// Width of this content in pixels.
-  int? get width;
   @override
+  int? get width;
 
   /// Non-public engagement metrics for the media content at the time of the
   /// request. Requires user context authentication.
@@ -667,9 +682,9 @@ abstract class _MediaData implements MediaData {
   ///
   /// - Determine video engagement: how many users played through to each
   ///   quarter of the video.
+  @override
   @JsonKey(name: 'non_public_metrics')
   PrivateMediaMetrics? get privateMetrics;
-  @override
 
   /// Engagement metrics for the media content, tracked in an organic context,
   /// at the time of the request. Requires user context authentication.
@@ -677,12 +692,12 @@ abstract class _MediaData implements MediaData {
   /// ## How It Can Be Used
   ///
   /// - Determine organic media engagement.
-  OrganicMediaMetrics? get organicMetrics;
   @override
+  OrganicMediaMetrics? get organicMetrics;
 
   /// URL to the static placeholder preview of this content.
-  String? get previewImageUrl;
   @override
+  String? get previewImageUrl;
 
   /// Engagement metrics for the media content, tracked in a promoted context,
   /// at the time of the request. Requires user context authentication.
@@ -690,8 +705,8 @@ abstract class _MediaData implements MediaData {
   /// ## How It Can Be Used
   ///
   /// - Determine media engagement when the Tweet was promoted.
-  PromotedMediaMetrics? get promotedMetrics;
   @override
+  PromotedMediaMetrics? get promotedMetrics;
 
   /// Public engagement metrics for the media content at the time of the
   /// request.
@@ -699,8 +714,8 @@ abstract class _MediaData implements MediaData {
   /// ## How It Can Be Used
   ///
   /// - Determine total number of views for the video attached to the Tweet.
-  PublicMediaMetrics? get publicMetrics;
   @override
+  PublicMediaMetrics? get publicMetrics;
 
   /// Variants of media attached in the MediaObject.
   ///
@@ -708,9 +723,13 @@ abstract class _MediaData implements MediaData {
   ///
   /// - Each media object may have multiple display or playback variants,
   ///   with different resolutions or formats.
-  List<Variant>? get variants;
   @override
-  @JsonKey(ignore: true)
-  _$$_MediaDataCopyWith<_$_MediaData> get copyWith =>
+  List<Variant>? get variants;
+
+  /// Create a copy of MediaData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$MediaDataImplCopyWith<_$MediaDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

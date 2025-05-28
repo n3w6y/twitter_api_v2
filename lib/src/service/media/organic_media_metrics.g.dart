@@ -8,22 +8,23 @@ part of 'organic_media_metrics.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_OrganicMediaMetrics _$$_OrganicMediaMetricsFromJson(Map json) =>
+_$OrganicMediaMetricsImpl _$$OrganicMediaMetricsImplFromJson(Map json) =>
     $checkedCreate(
-      r'_$_OrganicMediaMetrics',
+      r'_$OrganicMediaMetricsImpl',
       json,
       ($checkedConvert) {
-        final val = _$_OrganicMediaMetrics(
-          playback0Count: $checkedConvert('playback_0_count', (v) => v as int),
+        final val = _$OrganicMediaMetricsImpl(
+          playback0Count:
+              $checkedConvert('playback_0_count', (v) => (v as num).toInt()),
           playback25Count:
-              $checkedConvert('playback_25_count', (v) => v as int),
+              $checkedConvert('playback_25_count', (v) => (v as num).toInt()),
           playback50Count:
-              $checkedConvert('playback_50_count', (v) => v as int),
+              $checkedConvert('playback_50_count', (v) => (v as num).toInt()),
           playback75Count:
-              $checkedConvert('playback_75_count', (v) => v as int),
+              $checkedConvert('playback_75_count', (v) => (v as num).toInt()),
           playback100Count:
-              $checkedConvert('playback_100_count', (v) => v as int),
-          viewCount: $checkedConvert('view_count', (v) => v as int),
+              $checkedConvert('playback_100_count', (v) => (v as num).toInt()),
+          viewCount: $checkedConvert('view_count', (v) => (v as num).toInt()),
         );
         return val;
       },
@@ -37,8 +38,8 @@ _$_OrganicMediaMetrics _$$_OrganicMediaMetricsFromJson(Map json) =>
       },
     );
 
-Map<String, dynamic> _$$_OrganicMediaMetricsToJson(
-        _$_OrganicMediaMetrics instance) =>
+Map<String, dynamic> _$$OrganicMediaMetricsImplToJson(
+        _$OrganicMediaMetricsImpl instance) =>
     <String, dynamic>{
       'playback_0_count': instance.playback0Count,
       'playback_25_count': instance.playback25Count,

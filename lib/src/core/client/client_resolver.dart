@@ -1,77 +1,36 @@
-// Copyright 2022 Kato Shinya. All rights reserved.
-// Redistribution and use in source and binary forms, with or without
-// modification, are permitted provided the conditions.
+import 'package:oauth1/oauth1.dart' as oauth1;
+import 'package:twitter_api_v2/src/core/client/oauth1_client.dart'
+    as oauth1_client;
+import 'package:twitter_api_v2/src/core/client/oauth2_client.dart' as oauth2;
 
-// 🌎 Project imports:
-import '../exception/unauthorized_exception.dart';
-import 'client.dart';
-import 'oauth1_client.dart';
-import 'oauth2_client.dart';
-import 'user_context.dart';
+class ClientResolver {
+  ClientResolver._();
 
-abstract class ClientResolver {
-  /// Returns the new instance of [ClientResolver].
-  factory ClientResolver(
-    final OAuth1Client? oauth1Client,
-    final OAuth2Client? oauth2Client,
-  ) =>
-      _ClientResolver(
-        oauth1Client,
-        oauth2Client,
+  static oauth1_client.OAuth1Client oauth1Client({
+    required String consumerKey,
+    required String consumerSecret,
+    required String accessToken,
+    required String accessTokenSecret,
+    required Duration timeout,
+  }) =>
+      oauth1_client.OAuth1Client(
+        clientCredentials: oauth1.ClientCredentials(
+          consumerKey,
+          consumerSecret,
+        ),
+        credentials: oauth1.Credentials(
+          accessToken,
+          accessTokenSecret,
+        ),
+        timeout: timeout,
       );
 
-  /// Returns resolved http client.
-  Client execute(UserContext userContext);
-}
-
-class _ClientResolver implements ClientResolver {
-  /// Returns the new instance of [_ClientResolver].
-  const _ClientResolver(this.oauth1Client, this.oauth2Client);
-
-  /// The OAuth 1.0a client
-  final OAuth1Client? oauth1Client;
-
-  /// The OAuth 2.0 client
-  final OAuth2Client? oauth2Client;
-
-  @override
-  Client execute(UserContext userContext) {
-    //! If an authentication token is set, the OAuth 1.0a method is given
-    //! priority.
-    if (_shouldUseOauth1Client(userContext)) {
-      if (oauth1Client == null) {
-        throw UnauthorizedException(
-          'Required tokens were not passed for an endpoint that '
-          'requires OAuth 1.0a.',
-        );
-      }
-
-      return oauth1Client!;
-    }
-
-    if (oauth2Client == null) {
-      throw UnauthorizedException(
-        'Required access token was not passed for an endpoint that '
-        'requires OAuth 2.0.',
+  static oauth2.OAuth2Client oauth2Client({
+    required String bearerToken,
+    required Duration timeout,
+  }) =>
+      oauth2.OAuth2Client(
+        bearerToken: bearerToken,
+        timeout: timeout,
       );
-    }
-
-    if (userContext == UserContext.appOnly && !oauth2Client!.isAppOnly) {
-      throw UnauthorizedException(
-        'Only AppOnly token is allowed on this endpoint.',
-      );
-    }
-
-    return oauth2Client!;
-  }
-
-  /// Returns true if this context should use OAuth 1.0a client, otherwise
-  /// false.
-  bool _shouldUseOauth1Client(final UserContext userContext) {
-    if (userContext == UserContext.oauth1Only) {
-      return true;
-    }
-
-    return userContext == UserContext.oauth2OrOAuth1 && oauth2Client == null;
-  }
 }

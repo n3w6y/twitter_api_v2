@@ -12,7 +12,7 @@ part of 'upload_error.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 UploadError _$UploadErrorFromJson(Map<String, dynamic> json) {
   return _UploadError.fromJson(json);
@@ -29,8 +29,12 @@ mixin _$UploadError {
   /// The error message.
   String get message => throw _privateConstructorUsedError;
 
+  /// Serializes this UploadError to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UploadError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UploadErrorCopyWith<UploadError> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -54,6 +58,8 @@ class _$UploadErrorCopyWithImpl<$Res, $Val extends UploadError>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of UploadError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -79,24 +85,26 @@ class _$UploadErrorCopyWithImpl<$Res, $Val extends UploadError>
 }
 
 /// @nodoc
-abstract class _$$_UploadErrorCopyWith<$Res>
+abstract class _$$UploadErrorImplCopyWith<$Res>
     implements $UploadErrorCopyWith<$Res> {
-  factory _$$_UploadErrorCopyWith(
-          _$_UploadError value, $Res Function(_$_UploadError) then) =
-      __$$_UploadErrorCopyWithImpl<$Res>;
+  factory _$$UploadErrorImplCopyWith(
+          _$UploadErrorImpl value, $Res Function(_$UploadErrorImpl) then) =
+      __$$UploadErrorImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int code, String name, String message});
 }
 
 /// @nodoc
-class __$$_UploadErrorCopyWithImpl<$Res>
-    extends _$UploadErrorCopyWithImpl<$Res, _$_UploadError>
-    implements _$$_UploadErrorCopyWith<$Res> {
-  __$$_UploadErrorCopyWithImpl(
-      _$_UploadError _value, $Res Function(_$_UploadError) _then)
+class __$$UploadErrorImplCopyWithImpl<$Res>
+    extends _$UploadErrorCopyWithImpl<$Res, _$UploadErrorImpl>
+    implements _$$UploadErrorImplCopyWith<$Res> {
+  __$$UploadErrorImplCopyWithImpl(
+      _$UploadErrorImpl _value, $Res Function(_$UploadErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UploadError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -104,7 +112,7 @@ class __$$_UploadErrorCopyWithImpl<$Res>
     Object? name = null,
     Object? message = null,
   }) {
-    return _then(_$_UploadError(
+    return _then(_$UploadErrorImpl(
       code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
@@ -123,12 +131,12 @@ class __$$_UploadErrorCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UploadError implements _UploadError {
-  const _$_UploadError(
+class _$UploadErrorImpl implements _UploadError {
+  const _$UploadErrorImpl(
       {required this.code, required this.name, required this.message});
 
-  factory _$_UploadError.fromJson(Map<String, dynamic> json) =>
-      _$$_UploadErrorFromJson(json);
+  factory _$UploadErrorImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UploadErrorImplFromJson(json);
 
   /// The error code.
   @override
@@ -148,28 +156,30 @@ class _$_UploadError implements _UploadError {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UploadError &&
+            other is _$UploadErrorImpl &&
             (identical(other.code, code) || other.code == code) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.message, message) || other.message == message));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, code, name, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UploadError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UploadErrorCopyWith<_$_UploadError> get copyWith =>
-      __$$_UploadErrorCopyWithImpl<_$_UploadError>(this, _$identity);
+  _$$UploadErrorImplCopyWith<_$UploadErrorImpl> get copyWith =>
+      __$$UploadErrorImplCopyWithImpl<_$UploadErrorImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UploadErrorToJson(
+    return _$$UploadErrorImplToJson(
       this,
     );
   }
@@ -179,25 +189,27 @@ abstract class _UploadError implements UploadError {
   const factory _UploadError(
       {required final int code,
       required final String name,
-      required final String message}) = _$_UploadError;
+      required final String message}) = _$UploadErrorImpl;
 
   factory _UploadError.fromJson(Map<String, dynamic> json) =
-      _$_UploadError.fromJson;
-
-  @override
+      _$UploadErrorImpl.fromJson;
 
   /// The error code.
-  int get code;
   @override
+  int get code;
 
   /// The error name.
-  String get name;
   @override
+  String get name;
 
   /// The error message.
-  String get message;
   @override
-  @JsonKey(ignore: true)
-  _$$_UploadErrorCopyWith<_$_UploadError> get copyWith =>
+  String get message;
+
+  /// Create a copy of UploadError
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UploadErrorImplCopyWith<_$UploadErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

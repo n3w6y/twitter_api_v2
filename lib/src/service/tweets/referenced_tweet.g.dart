@@ -8,11 +8,12 @@ part of 'referenced_tweet.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ReferencedTweet _$$_ReferencedTweetFromJson(Map json) => $checkedCreate(
-      r'_$_ReferencedTweet',
+_$ReferencedTweetImpl _$$ReferencedTweetImplFromJson(Map json) =>
+    $checkedCreate(
+      r'_$ReferencedTweetImpl',
       json,
       ($checkedConvert) {
-        final val = _$_ReferencedTweet(
+        final val = _$ReferencedTweetImpl(
           id: $checkedConvert('id', (v) => v as String),
           type: $checkedConvert(
               'type', (v) => $enumDecode(_$TweetTypeEnumMap, v)),
@@ -21,7 +22,8 @@ _$_ReferencedTweet _$$_ReferencedTweetFromJson(Map json) => $checkedCreate(
       },
     );
 
-Map<String, dynamic> _$$_ReferencedTweetToJson(_$_ReferencedTweet instance) =>
+Map<String, dynamic> _$$ReferencedTweetImplToJson(
+        _$ReferencedTweetImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'type': _$TweetTypeEnumMap[instance.type]!,

@@ -12,7 +12,7 @@ part of 'variant.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Variant _$VariantFromJson(Map<String, dynamic> json) {
   return _Variant.fromJson(json);
@@ -31,8 +31,12 @@ mixin _$Variant {
   /// The url to the content.
   String get url => throw _privateConstructorUsedError;
 
+  /// Serializes this Variant to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Variant
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $VariantCopyWith<Variant> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -54,6 +58,8 @@ class _$VariantCopyWithImpl<$Res, $Val extends Variant>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Variant
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -79,22 +85,25 @@ class _$VariantCopyWithImpl<$Res, $Val extends Variant>
 }
 
 /// @nodoc
-abstract class _$$_VariantCopyWith<$Res> implements $VariantCopyWith<$Res> {
-  factory _$$_VariantCopyWith(
-          _$_Variant value, $Res Function(_$_Variant) then) =
-      __$$_VariantCopyWithImpl<$Res>;
+abstract class _$$VariantImplCopyWith<$Res> implements $VariantCopyWith<$Res> {
+  factory _$$VariantImplCopyWith(
+          _$VariantImpl value, $Res Function(_$VariantImpl) then) =
+      __$$VariantImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int? bitRate, String contentType, String url});
 }
 
 /// @nodoc
-class __$$_VariantCopyWithImpl<$Res>
-    extends _$VariantCopyWithImpl<$Res, _$_Variant>
-    implements _$$_VariantCopyWith<$Res> {
-  __$$_VariantCopyWithImpl(_$_Variant _value, $Res Function(_$_Variant) _then)
+class __$$VariantImplCopyWithImpl<$Res>
+    extends _$VariantCopyWithImpl<$Res, _$VariantImpl>
+    implements _$$VariantImplCopyWith<$Res> {
+  __$$VariantImplCopyWithImpl(
+      _$VariantImpl _value, $Res Function(_$VariantImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Variant
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -102,7 +111,7 @@ class __$$_VariantCopyWithImpl<$Res>
     Object? contentType = null,
     Object? url = null,
   }) {
-    return _then(_$_Variant(
+    return _then(_$VariantImpl(
       bitRate: freezed == bitRate
           ? _value.bitRate
           : bitRate // ignore: cast_nullable_to_non_nullable
@@ -122,12 +131,12 @@ class __$$_VariantCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false)
-class _$_Variant implements _Variant {
-  const _$_Variant(
+class _$VariantImpl implements _Variant {
+  const _$VariantImpl(
       {this.bitRate, required this.contentType, required this.url});
 
-  factory _$_Variant.fromJson(Map<String, dynamic> json) =>
-      _$$_VariantFromJson(json);
+  factory _$VariantImpl.fromJson(Map<String, dynamic> json) =>
+      _$$VariantImplFromJson(json);
 
   /// The number of bit rates in the content.
   ///
@@ -149,29 +158,31 @@ class _$_Variant implements _Variant {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Variant &&
+            other is _$VariantImpl &&
             (identical(other.bitRate, bitRate) || other.bitRate == bitRate) &&
             (identical(other.contentType, contentType) ||
                 other.contentType == contentType) &&
             (identical(other.url, url) || other.url == url));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, bitRate, contentType, url);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Variant
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_VariantCopyWith<_$_Variant> get copyWith =>
-      __$$_VariantCopyWithImpl<_$_Variant>(this, _$identity);
+  _$$VariantImplCopyWith<_$VariantImpl> get copyWith =>
+      __$$VariantImplCopyWithImpl<_$VariantImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_VariantToJson(
+    return _$$VariantImplToJson(
       this,
     );
   }
@@ -181,26 +192,28 @@ abstract class _Variant implements Variant {
   const factory _Variant(
       {final int? bitRate,
       required final String contentType,
-      required final String url}) = _$_Variant;
+      required final String url}) = _$VariantImpl;
 
-  factory _Variant.fromJson(Map<String, dynamic> json) = _$_Variant.fromJson;
-
-  @override
+  factory _Variant.fromJson(Map<String, dynamic> json) = _$VariantImpl.fromJson;
 
   /// The number of bit rates in the content.
   ///
   /// It may be null when content type is `application/x-mpegURL`.
-  int? get bitRate;
   @override
+  int? get bitRate;
 
   /// The content type.
-  String get contentType;
   @override
+  String get contentType;
 
   /// The url to the content.
-  String get url;
   @override
-  @JsonKey(ignore: true)
-  _$$_VariantCopyWith<_$_Variant> get copyWith =>
+  String get url;
+
+  /// Create a copy of Variant
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$VariantImplCopyWith<_$VariantImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

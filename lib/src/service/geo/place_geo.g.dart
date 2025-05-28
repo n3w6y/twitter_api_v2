@@ -8,11 +8,11 @@ part of 'place_geo.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PlaceGeo _$$_PlaceGeoFromJson(Map json) => $checkedCreate(
-      r'_$_PlaceGeo',
+_$PlaceGeoImpl _$$PlaceGeoImplFromJson(Map json) => $checkedCreate(
+      r'_$PlaceGeoImpl',
       json,
       ($checkedConvert) {
-        final val = _$_PlaceGeo(
+        final val = _$PlaceGeoImpl(
           type: $checkedConvert('type', (v) => v as String),
           bbox: $checkedConvert(
               'bbox',
@@ -26,7 +26,7 @@ _$_PlaceGeo _$$_PlaceGeoFromJson(Map json) => $checkedCreate(
       },
     );
 
-Map<String, dynamic> _$$_PlaceGeoToJson(_$_PlaceGeo instance) =>
+Map<String, dynamic> _$$PlaceGeoImplToJson(_$PlaceGeoImpl instance) =>
     <String, dynamic>{
       'type': instance.type,
       'bbox': instance.bbox,

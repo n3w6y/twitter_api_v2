@@ -8,18 +8,18 @@ part of 'trend_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TrendData _$$_TrendDataFromJson(Map json) => $checkedCreate(
-      r'_$_TrendData',
+_$TrendDataImpl _$$TrendDataImplFromJson(Map json) => $checkedCreate(
+      r'_$TrendDataImpl',
       json,
       ($checkedConvert) {
-        final val = _$_TrendData(
+        final val = _$TrendDataImpl(
           name: $checkedConvert('name', (v) => v as String),
         );
         return val;
       },
     );
 
-Map<String, dynamic> _$$_TrendDataToJson(_$_TrendData instance) =>
+Map<String, dynamic> _$$TrendDataImplToJson(_$TrendDataImpl instance) =>
     <String, dynamic>{
       'name': instance.name,
     };

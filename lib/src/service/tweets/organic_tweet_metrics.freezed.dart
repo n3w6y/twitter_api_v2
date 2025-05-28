@@ -12,7 +12,7 @@ part of 'organic_tweet_metrics.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 OrganicTweetMetrics _$OrganicTweetMetricsFromJson(Map<String, dynamic> json) {
   return _OrganicTweetMetrics.fromJson(json);
@@ -45,8 +45,12 @@ mixin _$OrganicTweetMetrics {
   @JsonKey(name: 'url_link_clicks')
   int? get linkClickCount => throw _privateConstructorUsedError;
 
+  /// Serializes this OrganicTweetMetrics to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of OrganicTweetMetrics
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $OrganicTweetMetricsCopyWith<OrganicTweetMetrics> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -76,6 +80,8 @@ class _$OrganicTweetMetricsCopyWithImpl<$Res, $Val extends OrganicTweetMetrics>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of OrganicTweetMetrics
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -116,11 +122,11 @@ class _$OrganicTweetMetricsCopyWithImpl<$Res, $Val extends OrganicTweetMetrics>
 }
 
 /// @nodoc
-abstract class _$$_OrganicTweetMetricsCopyWith<$Res>
+abstract class _$$OrganicTweetMetricsImplCopyWith<$Res>
     implements $OrganicTweetMetricsCopyWith<$Res> {
-  factory _$$_OrganicTweetMetricsCopyWith(_$_OrganicTweetMetrics value,
-          $Res Function(_$_OrganicTweetMetrics) then) =
-      __$$_OrganicTweetMetricsCopyWithImpl<$Res>;
+  factory _$$OrganicTweetMetricsImplCopyWith(_$OrganicTweetMetricsImpl value,
+          $Res Function(_$OrganicTweetMetricsImpl) then) =
+      __$$OrganicTweetMetricsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -133,13 +139,15 @@ abstract class _$$_OrganicTweetMetricsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OrganicTweetMetricsCopyWithImpl<$Res>
-    extends _$OrganicTweetMetricsCopyWithImpl<$Res, _$_OrganicTweetMetrics>
-    implements _$$_OrganicTweetMetricsCopyWith<$Res> {
-  __$$_OrganicTweetMetricsCopyWithImpl(_$_OrganicTweetMetrics _value,
-      $Res Function(_$_OrganicTweetMetrics) _then)
+class __$$OrganicTweetMetricsImplCopyWithImpl<$Res>
+    extends _$OrganicTweetMetricsCopyWithImpl<$Res, _$OrganicTweetMetricsImpl>
+    implements _$$OrganicTweetMetricsImplCopyWith<$Res> {
+  __$$OrganicTweetMetricsImplCopyWithImpl(_$OrganicTweetMetricsImpl _value,
+      $Res Function(_$OrganicTweetMetricsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of OrganicTweetMetrics
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -150,7 +158,7 @@ class __$$_OrganicTweetMetricsCopyWithImpl<$Res>
     Object? profileClickCount = null,
     Object? linkClickCount = freezed,
   }) {
-    return _then(_$_OrganicTweetMetrics(
+    return _then(_$OrganicTweetMetricsImpl(
       impressionCount: null == impressionCount
           ? _value.impressionCount
           : impressionCount // ignore: cast_nullable_to_non_nullable
@@ -182,8 +190,8 @@ class __$$_OrganicTweetMetricsCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false)
-class _$_OrganicTweetMetrics implements _OrganicTweetMetrics {
-  const _$_OrganicTweetMetrics(
+class _$OrganicTweetMetricsImpl implements _OrganicTweetMetrics {
+  const _$OrganicTweetMetricsImpl(
       {required this.impressionCount,
       required this.likeCount,
       required this.retweetCount,
@@ -191,8 +199,8 @@ class _$_OrganicTweetMetrics implements _OrganicTweetMetrics {
       @JsonKey(name: 'user_profile_clicks') required this.profileClickCount,
       @JsonKey(name: 'url_link_clicks') this.linkClickCount});
 
-  factory _$_OrganicTweetMetrics.fromJson(Map<String, dynamic> json) =>
-      _$$_OrganicTweetMetricsFromJson(json);
+  factory _$OrganicTweetMetricsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$OrganicTweetMetricsImplFromJson(json);
 
   /// A count of how many times the Tweet has been viewed
   /// (not unique by user). A view is counted if any part of the Tweet is
@@ -231,10 +239,10 @@ class _$_OrganicTweetMetrics implements _OrganicTweetMetrics {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrganicTweetMetrics &&
+            other is _$OrganicTweetMetricsImpl &&
             (identical(other.impressionCount, impressionCount) ||
                 other.impressionCount == impressionCount) &&
             (identical(other.likeCount, likeCount) ||
@@ -249,21 +257,23 @@ class _$_OrganicTweetMetrics implements _OrganicTweetMetrics {
                 other.linkClickCount == linkClickCount));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, impressionCount, likeCount,
       retweetCount, replyCount, profileClickCount, linkClickCount);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of OrganicTweetMetrics
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrganicTweetMetricsCopyWith<_$_OrganicTweetMetrics> get copyWith =>
-      __$$_OrganicTweetMetricsCopyWithImpl<_$_OrganicTweetMetrics>(
+  _$$OrganicTweetMetricsImplCopyWith<_$OrganicTweetMetricsImpl> get copyWith =>
+      __$$OrganicTweetMetricsImplCopyWithImpl<_$OrganicTweetMetricsImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_OrganicTweetMetricsToJson(
+    return _$$OrganicTweetMetricsImplToJson(
       this,
     );
   }
@@ -271,51 +281,53 @@ class _$_OrganicTweetMetrics implements _OrganicTweetMetrics {
 
 abstract class _OrganicTweetMetrics implements OrganicTweetMetrics {
   const factory _OrganicTweetMetrics(
-      {required final int impressionCount,
-      required final int likeCount,
-      required final int retweetCount,
-      required final int replyCount,
-      @JsonKey(name: 'user_profile_clicks')
+          {required final int impressionCount,
+          required final int likeCount,
+          required final int retweetCount,
+          required final int replyCount,
+          @JsonKey(name: 'user_profile_clicks')
           required final int profileClickCount,
-      @JsonKey(name: 'url_link_clicks')
-          final int? linkClickCount}) = _$_OrganicTweetMetrics;
+          @JsonKey(name: 'url_link_clicks') final int? linkClickCount}) =
+      _$OrganicTweetMetricsImpl;
 
   factory _OrganicTweetMetrics.fromJson(Map<String, dynamic> json) =
-      _$_OrganicTweetMetrics.fromJson;
-
-  @override
+      _$OrganicTweetMetricsImpl.fromJson;
 
   /// A count of how many times the Tweet has been viewed
   /// (not unique by user). A view is counted if any part of the Tweet is
   /// visible on the screen.
-  int get impressionCount;
   @override
+  int get impressionCount;
 
   /// A count of how many times the Tweet has been liked.
-  int get likeCount;
   @override
+  int get likeCount;
 
   /// A count of how many times the Tweet has been Retweeted. Please note:
   /// This does not include Quote Tweets.
-  int get retweetCount;
   @override
+  int get retweetCount;
 
   /// A count of how many times the Tweet has been replied to.
-  int get replyCount;
   @override
+  int get replyCount;
 
   /// A count of the number of times a user clicks the following portions of
   /// a Tweet: display name, user name, profile picture.
+  @override
   @JsonKey(name: 'user_profile_clicks')
   int get profileClickCount;
-  @override
 
   /// A count of the number of times a user clicks on a URL link or URL
   /// preview card in a Tweet.
+  @override
   @JsonKey(name: 'url_link_clicks')
   int? get linkClickCount;
+
+  /// Create a copy of OrganicTweetMetrics
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_OrganicTweetMetricsCopyWith<_$_OrganicTweetMetrics> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$OrganicTweetMetricsImplCopyWith<_$OrganicTweetMetricsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

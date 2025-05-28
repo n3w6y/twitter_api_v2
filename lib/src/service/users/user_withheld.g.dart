@@ -8,11 +8,11 @@ part of 'user_withheld.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_UserWithheld _$$_UserWithheldFromJson(Map json) => $checkedCreate(
-      r'_$_UserWithheld',
+_$UserWithheldImpl _$$UserWithheldImplFromJson(Map json) => $checkedCreate(
+      r'_$UserWithheldImpl',
       json,
       ($checkedConvert) {
-        final val = _$_UserWithheld(
+        final val = _$UserWithheldImpl(
           countries: $checkedConvert(
               'country_codes',
               (v) => (v as List<dynamic>)
@@ -24,7 +24,7 @@ _$_UserWithheld _$$_UserWithheldFromJson(Map json) => $checkedCreate(
       fieldKeyMap: const {'countries': 'country_codes'},
     );
 
-Map<String, dynamic> _$$_UserWithheldToJson(_$_UserWithheld instance) =>
+Map<String, dynamic> _$$UserWithheldImplToJson(_$UserWithheldImpl instance) =>
     <String, dynamic>{
       'country_codes':
           instance.countries.map((e) => _$CountryEnumMap[e]!).toList(),

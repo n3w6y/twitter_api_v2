@@ -8,21 +8,22 @@ part of 'tweet_count_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TweetCountData _$$_TweetCountDataFromJson(Map json) => $checkedCreate(
-      r'_$_TweetCountData',
+_$TweetCountDataImpl _$$TweetCountDataImplFromJson(Map json) => $checkedCreate(
+      r'_$TweetCountDataImpl',
       json,
       ($checkedConvert) {
-        final val = _$_TweetCountData(
+        final val = _$TweetCountDataImpl(
           start: $checkedConvert('start', (v) => DateTime.parse(v as String)),
           end: $checkedConvert('end', (v) => DateTime.parse(v as String)),
-          count: $checkedConvert('tweet_count', (v) => v as int),
+          count: $checkedConvert('tweet_count', (v) => (v as num).toInt()),
         );
         return val;
       },
       fieldKeyMap: const {'count': 'tweet_count'},
     );
 
-Map<String, dynamic> _$$_TweetCountDataToJson(_$_TweetCountData instance) =>
+Map<String, dynamic> _$$TweetCountDataImplToJson(
+        _$TweetCountDataImpl instance) =>
     <String, dynamic>{
       'start': instance.start.toIso8601String(),
       'end': instance.end.toIso8601String(),

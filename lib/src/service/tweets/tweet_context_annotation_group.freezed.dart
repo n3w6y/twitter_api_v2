@@ -12,7 +12,7 @@ part of 'tweet_context_annotation_group.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 TweetContextAnnotationGroup _$TweetContextAnnotationGroupFromJson(
     Map<String, dynamic> json) {
@@ -29,8 +29,12 @@ mixin _$TweetContextAnnotationGroup {
   /// entity classification bases on Tweet text.
   TweetContextAnnotation get entity => throw _privateConstructorUsedError;
 
+  /// Serializes this TweetContextAnnotationGroup to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TweetContextAnnotationGroup
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TweetContextAnnotationGroupCopyWith<TweetContextAnnotationGroup>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -60,6 +64,8 @@ class _$TweetContextAnnotationGroupCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TweetContextAnnotationGroup
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -78,6 +84,8 @@ class _$TweetContextAnnotationGroupCopyWithImpl<$Res,
     ) as $Val);
   }
 
+  /// Create a copy of TweetContextAnnotationGroup
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $TweetContextAnnotationCopyWith<$Res> get domain {
@@ -86,6 +94,8 @@ class _$TweetContextAnnotationGroupCopyWithImpl<$Res,
     });
   }
 
+  /// Create a copy of TweetContextAnnotationGroup
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $TweetContextAnnotationCopyWith<$Res> get entity {
@@ -96,12 +106,12 @@ class _$TweetContextAnnotationGroupCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_TweetContextAnnotationGroupCopyWith<$Res>
+abstract class _$$TweetContextAnnotationGroupImplCopyWith<$Res>
     implements $TweetContextAnnotationGroupCopyWith<$Res> {
-  factory _$$_TweetContextAnnotationGroupCopyWith(
-          _$_TweetContextAnnotationGroup value,
-          $Res Function(_$_TweetContextAnnotationGroup) then) =
-      __$$_TweetContextAnnotationGroupCopyWithImpl<$Res>;
+  factory _$$TweetContextAnnotationGroupImplCopyWith(
+          _$TweetContextAnnotationGroupImpl value,
+          $Res Function(_$TweetContextAnnotationGroupImpl) then) =
+      __$$TweetContextAnnotationGroupImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({TweetContextAnnotation domain, TweetContextAnnotation entity});
@@ -113,22 +123,24 @@ abstract class _$$_TweetContextAnnotationGroupCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_TweetContextAnnotationGroupCopyWithImpl<$Res>
+class __$$TweetContextAnnotationGroupImplCopyWithImpl<$Res>
     extends _$TweetContextAnnotationGroupCopyWithImpl<$Res,
-        _$_TweetContextAnnotationGroup>
-    implements _$$_TweetContextAnnotationGroupCopyWith<$Res> {
-  __$$_TweetContextAnnotationGroupCopyWithImpl(
-      _$_TweetContextAnnotationGroup _value,
-      $Res Function(_$_TweetContextAnnotationGroup) _then)
+        _$TweetContextAnnotationGroupImpl>
+    implements _$$TweetContextAnnotationGroupImplCopyWith<$Res> {
+  __$$TweetContextAnnotationGroupImplCopyWithImpl(
+      _$TweetContextAnnotationGroupImpl _value,
+      $Res Function(_$TweetContextAnnotationGroupImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TweetContextAnnotationGroup
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? domain = null,
     Object? entity = null,
   }) {
-    return _then(_$_TweetContextAnnotationGroup(
+    return _then(_$TweetContextAnnotationGroupImpl(
       domain: null == domain
           ? _value.domain
           : domain // ignore: cast_nullable_to_non_nullable
@@ -143,12 +155,14 @@ class __$$_TweetContextAnnotationGroupCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TweetContextAnnotationGroup implements _TweetContextAnnotationGroup {
-  const _$_TweetContextAnnotationGroup(
+class _$TweetContextAnnotationGroupImpl
+    implements _TweetContextAnnotationGroup {
+  const _$TweetContextAnnotationGroupImpl(
       {required this.domain, required this.entity});
 
-  factory _$_TweetContextAnnotationGroup.fromJson(Map<String, dynamic> json) =>
-      _$$_TweetContextAnnotationGroupFromJson(json);
+  factory _$TweetContextAnnotationGroupImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$TweetContextAnnotationGroupImplFromJson(json);
 
   /// Contains elements which identify detailed information regarding the
   /// domain classification based on Tweet text.
@@ -166,28 +180,30 @@ class _$_TweetContextAnnotationGroup implements _TweetContextAnnotationGroup {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TweetContextAnnotationGroup &&
+            other is _$TweetContextAnnotationGroupImpl &&
             (identical(other.domain, domain) || other.domain == domain) &&
             (identical(other.entity, entity) || other.entity == entity));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, domain, entity);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TweetContextAnnotationGroup
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TweetContextAnnotationGroupCopyWith<_$_TweetContextAnnotationGroup>
-      get copyWith => __$$_TweetContextAnnotationGroupCopyWithImpl<
-          _$_TweetContextAnnotationGroup>(this, _$identity);
+  _$$TweetContextAnnotationGroupImplCopyWith<_$TweetContextAnnotationGroupImpl>
+      get copyWith => __$$TweetContextAnnotationGroupImplCopyWithImpl<
+          _$TweetContextAnnotationGroupImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TweetContextAnnotationGroupToJson(
+    return _$$TweetContextAnnotationGroupImplToJson(
       this,
     );
   }
@@ -198,23 +214,25 @@ abstract class _TweetContextAnnotationGroup
   const factory _TweetContextAnnotationGroup(
           {required final TweetContextAnnotation domain,
           required final TweetContextAnnotation entity}) =
-      _$_TweetContextAnnotationGroup;
+      _$TweetContextAnnotationGroupImpl;
 
   factory _TweetContextAnnotationGroup.fromJson(Map<String, dynamic> json) =
-      _$_TweetContextAnnotationGroup.fromJson;
-
-  @override
+      _$TweetContextAnnotationGroupImpl.fromJson;
 
   /// Contains elements which identify detailed information regarding the
   /// domain classification based on Tweet text.
-  TweetContextAnnotation get domain;
   @override
+  TweetContextAnnotation get domain;
 
   /// Contains elements which identify detailed information regarding the
   /// entity classification bases on Tweet text.
-  TweetContextAnnotation get entity;
   @override
-  @JsonKey(ignore: true)
-  _$$_TweetContextAnnotationGroupCopyWith<_$_TweetContextAnnotationGroup>
+  TweetContextAnnotation get entity;
+
+  /// Create a copy of TweetContextAnnotationGroup
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$TweetContextAnnotationGroupImplCopyWith<_$TweetContextAnnotationGroupImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

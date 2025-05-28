@@ -8,11 +8,11 @@ part of 'space_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SpaceData _$$_SpaceDataFromJson(Map json) => $checkedCreate(
-      r'_$_SpaceData',
+_$SpaceDataImpl _$$SpaceDataImplFromJson(Map json) => $checkedCreate(
+      r'_$SpaceDataImpl',
       json,
       ($checkedConvert) {
-        final val = _$_SpaceData(
+        final val = _$SpaceDataImpl(
           id: $checkedConvert('id', (v) => v as String),
           title: $checkedConvert('title', (v) => v as String?),
           state: $checkedConvert(
@@ -29,9 +29,9 @@ _$_SpaceData _$$_SpaceDataFromJson(Map json) => $checkedCreate(
           invitedUserIds: $checkedConvert('invited_user_ids',
               (v) => (v as List<dynamic>?)?.map((e) => e as String).toList()),
           subscriberCount:
-              $checkedConvert('subscriber_count', (v) => v as int?),
+              $checkedConvert('subscriber_count', (v) => (v as num?)?.toInt()),
           participantCount:
-              $checkedConvert('participant_count', (v) => v as int?),
+              $checkedConvert('participant_count', (v) => (v as num?)?.toInt()),
           isTicketed: $checkedConvert('is_ticketed', (v) => v as bool?),
           scheduledStart: $checkedConvert('scheduled_start',
               (v) => v == null ? null : DateTime.parse(v as String)),
@@ -63,35 +63,33 @@ _$_SpaceData _$$_SpaceDataFromJson(Map json) => $checkedCreate(
       },
     );
 
-Map<String, dynamic> _$$_SpaceDataToJson(_$_SpaceData instance) {
-  final val = <String, dynamic>{
-    'id': instance.id,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('title', instance.title);
-  writeNotNull('state', _$SpaceStateEnumMap[instance.state]);
-  writeNotNull('creator_id', instance.creatorId);
-  writeNotNull('lang', _$SpaceLanguageEnumMap[instance.lang]);
-  writeNotNull('host_ids', instance.hostIds);
-  writeNotNull('topic_ids', instance.topicIds);
-  writeNotNull('speaker_ids', instance.speakerIds);
-  writeNotNull('invited_user_ids', instance.invitedUserIds);
-  writeNotNull('subscriber_count', instance.subscriberCount);
-  writeNotNull('participant_count', instance.participantCount);
-  writeNotNull('is_ticketed', instance.isTicketed);
-  writeNotNull('scheduled_start', instance.scheduledStart?.toIso8601String());
-  writeNotNull('started_at', instance.startedAt?.toIso8601String());
-  writeNotNull('ended_at', instance.endedAt?.toIso8601String());
-  writeNotNull('created_at', instance.createdAt?.toIso8601String());
-  writeNotNull('updated_at', instance.updatedAt?.toIso8601String());
-  return val;
-}
+Map<String, dynamic> _$$SpaceDataImplToJson(_$SpaceDataImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      if (instance.title case final value?) 'title': value,
+      if (_$SpaceStateEnumMap[instance.state] case final value?) 'state': value,
+      if (instance.creatorId case final value?) 'creator_id': value,
+      if (_$SpaceLanguageEnumMap[instance.lang] case final value?)
+        'lang': value,
+      if (instance.hostIds case final value?) 'host_ids': value,
+      if (instance.topicIds case final value?) 'topic_ids': value,
+      if (instance.speakerIds case final value?) 'speaker_ids': value,
+      if (instance.invitedUserIds case final value?) 'invited_user_ids': value,
+      if (instance.subscriberCount case final value?) 'subscriber_count': value,
+      if (instance.participantCount case final value?)
+        'participant_count': value,
+      if (instance.isTicketed case final value?) 'is_ticketed': value,
+      if (instance.scheduledStart?.toIso8601String() case final value?)
+        'scheduled_start': value,
+      if (instance.startedAt?.toIso8601String() case final value?)
+        'started_at': value,
+      if (instance.endedAt?.toIso8601String() case final value?)
+        'ended_at': value,
+      if (instance.createdAt?.toIso8601String() case final value?)
+        'created_at': value,
+      if (instance.updatedAt?.toIso8601String() case final value?)
+        'updated_at': value,
+    };
 
 const _$SpaceStateEnumMap = {
   SpaceState.scheduled: 'scheduled',

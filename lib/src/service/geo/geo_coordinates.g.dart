@@ -8,11 +8,11 @@ part of 'geo_coordinates.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_GeoCoordinates _$$_GeoCoordinatesFromJson(Map json) => $checkedCreate(
-      r'_$_GeoCoordinates',
+_$GeoCoordinatesImpl _$$GeoCoordinatesImplFromJson(Map json) => $checkedCreate(
+      r'_$GeoCoordinatesImpl',
       json,
       ($checkedConvert) {
-        final val = _$_GeoCoordinates(
+        final val = _$GeoCoordinatesImpl(
           type: $checkedConvert('type', (v) => v as String),
           coordinates: $checkedConvert(
               'coordinates',
@@ -24,7 +24,8 @@ _$_GeoCoordinates _$$_GeoCoordinatesFromJson(Map json) => $checkedCreate(
       },
     );
 
-Map<String, dynamic> _$$_GeoCoordinatesToJson(_$_GeoCoordinates instance) =>
+Map<String, dynamic> _$$GeoCoordinatesImplToJson(
+        _$GeoCoordinatesImpl instance) =>
     <String, dynamic>{
       'type': instance.type,
       'coordinates': instance.coordinates,

@@ -8,12 +8,12 @@ part of 'variant.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Variant _$$_VariantFromJson(Map json) => $checkedCreate(
-      r'_$_Variant',
+_$VariantImpl _$$VariantImplFromJson(Map json) => $checkedCreate(
+      r'_$VariantImpl',
       json,
       ($checkedConvert) {
-        final val = _$_Variant(
-          bitRate: $checkedConvert('bit_rate', (v) => v as int?),
+        final val = _$VariantImpl(
+          bitRate: $checkedConvert('bit_rate', (v) => (v as num?)?.toInt()),
           contentType: $checkedConvert('content_type', (v) => v as String),
           url: $checkedConvert('url', (v) => v as String),
         );
@@ -22,17 +22,9 @@ _$_Variant _$$_VariantFromJson(Map json) => $checkedCreate(
       fieldKeyMap: const {'bitRate': 'bit_rate', 'contentType': 'content_type'},
     );
 
-Map<String, dynamic> _$$_VariantToJson(_$_Variant instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('bit_rate', instance.bitRate);
-  val['content_type'] = instance.contentType;
-  val['url'] = instance.url;
-  return val;
-}
+Map<String, dynamic> _$$VariantImplToJson(_$VariantImpl instance) =>
+    <String, dynamic>{
+      if (instance.bitRate case final value?) 'bit_rate': value,
+      'content_type': instance.contentType,
+      'url': instance.url,
+    };

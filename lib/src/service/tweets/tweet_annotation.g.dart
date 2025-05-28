@@ -8,13 +8,14 @@ part of 'tweet_annotation.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TweetAnnotation _$$_TweetAnnotationFromJson(Map json) => $checkedCreate(
-      r'_$_TweetAnnotation',
+_$TweetAnnotationImpl _$$TweetAnnotationImplFromJson(Map json) =>
+    $checkedCreate(
+      r'_$TweetAnnotationImpl',
       json,
       ($checkedConvert) {
-        final val = _$_TweetAnnotation(
-          start: $checkedConvert('start', (v) => v as int),
-          end: $checkedConvert('end', (v) => v as int),
+        final val = _$TweetAnnotationImpl(
+          start: $checkedConvert('start', (v) => (v as num).toInt()),
+          end: $checkedConvert('end', (v) => (v as num).toInt()),
           probability:
               $checkedConvert('probability', (v) => (v as num).toDouble()),
           type: $checkedConvert('type', (v) => v as String),
@@ -26,7 +27,8 @@ _$_TweetAnnotation _$$_TweetAnnotationFromJson(Map json) => $checkedCreate(
       fieldKeyMap: const {'normalizedText': 'normalized_text'},
     );
 
-Map<String, dynamic> _$$_TweetAnnotationToJson(_$_TweetAnnotation instance) =>
+Map<String, dynamic> _$$TweetAnnotationImplToJson(
+        _$TweetAnnotationImpl instance) =>
     <String, dynamic>{
       'start': instance.start,
       'end': instance.end,

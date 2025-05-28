@@ -12,7 +12,7 @@ part of 'filtering_rule_meta.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 FilteringRuleMeta _$FilteringRuleMetaFromJson(Map<String, dynamic> json) {
   return _FilteringRuleMeta.fromJson(json);
@@ -29,8 +29,12 @@ mixin _$FilteringRuleMeta {
   /// you passed in your request.
   FilteringRuleSummary? get summary => throw _privateConstructorUsedError;
 
+  /// Serializes this FilteringRuleMeta to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of FilteringRuleMeta
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $FilteringRuleMetaCopyWith<FilteringRuleMeta> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -57,6 +61,8 @@ class _$FilteringRuleMetaCopyWithImpl<$Res, $Val extends FilteringRuleMeta>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of FilteringRuleMeta
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -75,6 +81,8 @@ class _$FilteringRuleMetaCopyWithImpl<$Res, $Val extends FilteringRuleMeta>
     ) as $Val);
   }
 
+  /// Create a copy of FilteringRuleMeta
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $FilteringRuleSummaryCopyWith<$Res>? get summary {
@@ -89,11 +97,11 @@ class _$FilteringRuleMetaCopyWithImpl<$Res, $Val extends FilteringRuleMeta>
 }
 
 /// @nodoc
-abstract class _$$_FilteringRuleMetaCopyWith<$Res>
+abstract class _$$FilteringRuleMetaImplCopyWith<$Res>
     implements $FilteringRuleMetaCopyWith<$Res> {
-  factory _$$_FilteringRuleMetaCopyWith(_$_FilteringRuleMeta value,
-          $Res Function(_$_FilteringRuleMeta) then) =
-      __$$_FilteringRuleMetaCopyWithImpl<$Res>;
+  factory _$$FilteringRuleMetaImplCopyWith(_$FilteringRuleMetaImpl value,
+          $Res Function(_$FilteringRuleMetaImpl) then) =
+      __$$FilteringRuleMetaImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -104,20 +112,22 @@ abstract class _$$_FilteringRuleMetaCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_FilteringRuleMetaCopyWithImpl<$Res>
-    extends _$FilteringRuleMetaCopyWithImpl<$Res, _$_FilteringRuleMeta>
-    implements _$$_FilteringRuleMetaCopyWith<$Res> {
-  __$$_FilteringRuleMetaCopyWithImpl(
-      _$_FilteringRuleMeta _value, $Res Function(_$_FilteringRuleMeta) _then)
+class __$$FilteringRuleMetaImplCopyWithImpl<$Res>
+    extends _$FilteringRuleMetaCopyWithImpl<$Res, _$FilteringRuleMetaImpl>
+    implements _$$FilteringRuleMetaImplCopyWith<$Res> {
+  __$$FilteringRuleMetaImplCopyWithImpl(_$FilteringRuleMetaImpl _value,
+      $Res Function(_$FilteringRuleMetaImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of FilteringRuleMeta
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? sentAt = freezed,
     Object? summary = freezed,
   }) {
-    return _then(_$_FilteringRuleMeta(
+    return _then(_$FilteringRuleMetaImpl(
       sentAt: freezed == sentAt
           ? _value.sentAt
           : sentAt // ignore: cast_nullable_to_non_nullable
@@ -133,12 +143,12 @@ class __$$_FilteringRuleMetaCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false)
-class _$_FilteringRuleMeta implements _FilteringRuleMeta {
-  const _$_FilteringRuleMeta(
+class _$FilteringRuleMetaImpl implements _FilteringRuleMeta {
+  const _$FilteringRuleMetaImpl(
       {@JsonKey(name: 'sent') this.sentAt, this.summary});
 
-  factory _$_FilteringRuleMeta.fromJson(Map<String, dynamic> json) =>
-      _$$_FilteringRuleMetaFromJson(json);
+  factory _$FilteringRuleMetaImpl.fromJson(Map<String, dynamic> json) =>
+      _$$FilteringRuleMetaImplFromJson(json);
 
   /// The time when the request body was returned.
   @override
@@ -157,28 +167,30 @@ class _$_FilteringRuleMeta implements _FilteringRuleMeta {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FilteringRuleMeta &&
+            other is _$FilteringRuleMetaImpl &&
             (identical(other.sentAt, sentAt) || other.sentAt == sentAt) &&
             (identical(other.summary, summary) || other.summary == summary));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, sentAt, summary);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of FilteringRuleMeta
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FilteringRuleMetaCopyWith<_$_FilteringRuleMeta> get copyWith =>
-      __$$_FilteringRuleMetaCopyWithImpl<_$_FilteringRuleMeta>(
+  _$$FilteringRuleMetaImplCopyWith<_$FilteringRuleMetaImpl> get copyWith =>
+      __$$FilteringRuleMetaImplCopyWithImpl<_$FilteringRuleMetaImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_FilteringRuleMetaToJson(
+    return _$$FilteringRuleMetaImplToJson(
       this,
     );
   }
@@ -187,24 +199,26 @@ class _$_FilteringRuleMeta implements _FilteringRuleMeta {
 abstract class _FilteringRuleMeta implements FilteringRuleMeta {
   const factory _FilteringRuleMeta(
       {@JsonKey(name: 'sent') final DateTime? sentAt,
-      final FilteringRuleSummary? summary}) = _$_FilteringRuleMeta;
+      final FilteringRuleSummary? summary}) = _$FilteringRuleMetaImpl;
 
   factory _FilteringRuleMeta.fromJson(Map<String, dynamic> json) =
-      _$_FilteringRuleMeta.fromJson;
-
-  @override
+      _$FilteringRuleMetaImpl.fromJson;
 
   /// The time when the request body was returned.
+  @override
   @JsonKey(name: 'sent')
   DateTime? get sentAt;
-  @override
 
   /// Contains fields that describe whether you were successful or
   /// unsuccessful in creating or deleting the different rules that
   /// you passed in your request.
-  FilteringRuleSummary? get summary;
   @override
-  @JsonKey(ignore: true)
-  _$$_FilteringRuleMetaCopyWith<_$_FilteringRuleMeta> get copyWith =>
+  FilteringRuleSummary? get summary;
+
+  /// Create a copy of FilteringRuleMeta
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FilteringRuleMetaImplCopyWith<_$FilteringRuleMetaImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

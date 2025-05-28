@@ -1,117 +1,113 @@
-// Copyright 2022 Kato Shinya. All rights reserved.
-// Redistribution and use in source and binary forms, with or without
-// modification, are permitted provided the conditions.
+import 'package:mockito/mockito.dart';
+import 'package:twitter_api_v2/src/core/client/client_context.dart';
+import 'package:twitter_api_v2/src/service/response/twitter_response.dart';
 
-// 📦 Package imports:
-import 'package:test/test.dart';
+class MockClientContext extends Mock implements ClientContext {
+  @override
+  Future<TwitterResponse<D, M>> get<D, M>(
+    Uri uri, {
+    required D Function(Map<String, dynamic>) fromJsonData,
+    M Function(Map<String, dynamic>)? fromJsonMeta,
+  }) async =>
+      super.noSuchMethod(
+        Invocation.method(
+          #get,
+          [uri],
+          {
+            #fromJsonData: fromJsonData,
+            #fromJsonMeta: fromJsonMeta,
+          },
+        ),
+        returnValue: Future.value(TwitterResponse<D, M>(
+          headers: {},
+          rateLimit: null,
+          status: null,
+          request: null,
+          data: fromJsonData({}),
+          meta: fromJsonMeta != null ? fromJsonMeta({}) : null,
+        )),
+      ) as Future<TwitterResponse<D, M>>;
 
-// 🌎 Project imports:
-import 'package:twitter_api_v2/src/core/client/client_resolver.dart';
-import 'package:twitter_api_v2/src/core/client/oauth1_client.dart';
-import 'package:twitter_api_v2/src/core/client/oauth2_client.dart';
-import 'package:twitter_api_v2/src/core/client/user_context.dart';
-import 'package:twitter_api_v2/src/core/exception/unauthorized_exception.dart';
+  @override
+  Future<TwitterResponse<D, M>> post<D, M>(
+    Uri uri, {
+    required D Function(Map<String, dynamic>) fromJsonData,
+    M Function(Map<String, dynamic>)? fromJsonMeta,
+    Map<String, String>? headers,
+    dynamic body,
+  }) async =>
+      super.noSuchMethod(
+        Invocation.method(
+          #post,
+          [uri],
+          {
+            #fromJsonData: fromJsonData,
+            #fromJsonMeta: fromJsonMeta,
+            #headers: headers,
+            #body: body,
+          },
+        ),
+        returnValue: Future.value(TwitterResponse<D, M>(
+          headers: {},
+          rateLimit: null,
+          status: null,
+          request: null,
+          data: fromJsonData({}),
+          meta: fromJsonMeta != null ? fromJsonMeta({}) : null,
+        )),
+      ) as Future<TwitterResponse<D, M>>;
 
-void main() {
-  group('.execute', () {
-    test('when oauth1 client is null and user context is oauth2OrOAuth1', () {
-      final resolver = ClientResolver(null, OAuth2Client(bearerToken: ''));
-      final client = resolver.execute(UserContext.oauth2OrOAuth1);
+  @override
+  Future<TwitterResponse<D, M>> postMultipart<D, M>(
+    Uri uri, {
+    required D Function(Map<String, dynamic>) fromJsonData,
+    M Function(Map<String, dynamic>)? fromJsonMeta,
+    List<http.MultipartFile>? files,
+    Map<String, String>? data,
+  }) async =>
+      super.noSuchMethod(
+        Invocation.method(
+          #postMultipart,
+          [uri],
+          {
+            #fromJsonData: fromJsonData,
+            #fromJsonMeta: fromJsonMeta,
+            #files: files,
+            #data: data,
+          },
+        ),
+        returnValue: Future.value(TwitterResponse<D, M>(
+          headers: {},
+          rateLimit: null,
+          status: null,
+          request: null,
+          data: fromJsonData({}),
+          meta: fromJsonMeta != null ? fromJsonMeta({}) : null,
+        )),
+      ) as Future<TwitterResponse<D, M>>;
 
-      expect(client, isA<OAuth2Client>());
-    });
-
-    test('when oauth1 client is null and user context is oauth2Only', () {
-      final resolver = ClientResolver(null, OAuth2Client(bearerToken: ''));
-      final client = resolver.execute(UserContext.oauth2Only);
-
-      expect(client, isA<OAuth2Client>());
-    });
-
-    test('when oauth1 client is not null and user context is oauth2Only', () {
-      final resolver = ClientResolver(
-        OAuth1Client(
-            consumerKey: '',
-            consumerSecret: '',
-            accessToken: '',
-            accessTokenSecret: ''),
-        OAuth2Client(bearerToken: ''),
-      );
-
-      final client = resolver.execute(UserContext.oauth2Only);
-
-      expect(client, isA<OAuth2Client>());
-    });
-
-    test('when oauth1 client is not null and user context is oauth2OrOAuth1',
-        () {
-      final resolver = ClientResolver(
-        OAuth1Client(
-            consumerKey: '',
-            consumerSecret: '',
-            accessToken: '',
-            accessTokenSecret: ''),
-        OAuth2Client(bearerToken: ''),
-      );
-
-      final client = resolver.execute(UserContext.oauth2OrOAuth1);
-
-      expect(client, isA<OAuth2Client>());
-    });
-
-    test('when user context is oauth1Only', () {
-      final resolver = ClientResolver(
-        OAuth1Client(
-            consumerKey: '',
-            consumerSecret: '',
-            accessToken: '',
-            accessTokenSecret: ''),
-        OAuth2Client(bearerToken: ''),
-      );
-
-      final client = resolver.execute(UserContext.oauth1Only);
-
-      expect(client, isA<OAuth1Client>());
-    });
-
-    test('when user context is oauth1Only and OAuthTokens is not passed', () {
-      final resolver = ClientResolver(
-        null,
-        OAuth2Client(bearerToken: ''),
-      );
-
-      expect(
-        () => resolver.execute(UserContext.oauth1Only),
-        throwsA(isA<UnauthorizedException>()),
-      );
-    });
-
-    test('when user context is oauth2Only and bearer token is not passed', () {
-      final resolver = ClientResolver(
-        OAuth1Client(
-            consumerKey: '',
-            consumerSecret: '',
-            accessToken: '',
-            accessTokenSecret: ''),
-        null,
-      );
-
-      expect(
-        () => resolver.execute(UserContext.oauth2Only),
-        throwsA(isA<UnauthorizedException>()),
-      );
-    });
-
-    test('when user context is appOnly and client does not for AppOnly', () {
-      final resolver = ClientResolver(
-        null,
-        OAuth2Client(bearerToken: 'TEST'),
-      );
-
-      expect(
-        () => resolver.execute(UserContext.appOnly),
-        throwsA(isA<UnauthorizedException>()),
-      );
-    });
-  });
+  @override
+  Future<TwitterResponse<D, M>> delete<D, M>(
+    Uri uri, {
+    required D Function(Map<String, dynamic>) fromJsonData,
+    M Function(Map<String, dynamic>)? fromJsonMeta,
+  }) async =>
+      super.noSuchMethod(
+        Invocation.method(
+          #delete,
+          [uri],
+          {
+            #fromJsonData: fromJsonData,
+            #fromJsonMeta: fromJsonMeta,
+          },
+        ),
+        returnValue: Future.value(TwitterResponse<D, M>(
+          headers: {},
+          rateLimit: null,
+          status: null,
+          request: null,
+          data: fromJsonData({}),
+          meta: fromJsonMeta != null ? fromJsonMeta({}) : null,
+        )),
+      ) as Future<TwitterResponse<D, M>>;
 }

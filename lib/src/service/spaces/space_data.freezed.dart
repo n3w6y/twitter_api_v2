@@ -12,7 +12,7 @@ part of 'space_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 SpaceData _$SpaceDataFromJson(Map<String, dynamic> json) {
   return _SpaceData.fromJson(json);
@@ -151,8 +151,12 @@ mixin _$SpaceData {
   /// - Keep information up to date.
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
+  /// Serializes this SpaceData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SpaceData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SpaceDataCopyWith<SpaceData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -192,6 +196,8 @@ class _$SpaceDataCopyWithImpl<$Res, $Val extends SpaceData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SpaceData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -287,10 +293,11 @@ class _$SpaceDataCopyWithImpl<$Res, $Val extends SpaceData>
 }
 
 /// @nodoc
-abstract class _$$_SpaceDataCopyWith<$Res> implements $SpaceDataCopyWith<$Res> {
-  factory _$$_SpaceDataCopyWith(
-          _$_SpaceData value, $Res Function(_$_SpaceData) then) =
-      __$$_SpaceDataCopyWithImpl<$Res>;
+abstract class _$$SpaceDataImplCopyWith<$Res>
+    implements $SpaceDataCopyWith<$Res> {
+  factory _$$SpaceDataImplCopyWith(
+          _$SpaceDataImpl value, $Res Function(_$SpaceDataImpl) then) =
+      __$$SpaceDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -314,13 +321,15 @@ abstract class _$$_SpaceDataCopyWith<$Res> implements $SpaceDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_SpaceDataCopyWithImpl<$Res>
-    extends _$SpaceDataCopyWithImpl<$Res, _$_SpaceData>
-    implements _$$_SpaceDataCopyWith<$Res> {
-  __$$_SpaceDataCopyWithImpl(
-      _$_SpaceData _value, $Res Function(_$_SpaceData) _then)
+class __$$SpaceDataImplCopyWithImpl<$Res>
+    extends _$SpaceDataCopyWithImpl<$Res, _$SpaceDataImpl>
+    implements _$$SpaceDataImplCopyWith<$Res> {
+  __$$SpaceDataImplCopyWithImpl(
+      _$SpaceDataImpl _value, $Res Function(_$SpaceDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SpaceData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -342,7 +351,7 @@ class __$$_SpaceDataCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(_$_SpaceData(
+    return _then(_$SpaceDataImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -418,8 +427,8 @@ class __$$_SpaceDataCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false)
-class _$_SpaceData implements _SpaceData {
-  const _$_SpaceData(
+class _$SpaceDataImpl implements _SpaceData {
+  const _$SpaceDataImpl(
       {required this.id,
       this.title,
       this.state,
@@ -442,8 +451,8 @@ class _$_SpaceData implements _SpaceData {
         _speakerIds = speakerIds,
         _invitedUserIds = invitedUserIds;
 
-  factory _$_SpaceData.fromJson(Map<String, dynamic> json) =>
-      _$$_SpaceDataFromJson(json);
+  factory _$SpaceDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SpaceDataImplFromJson(json);
 
   /// The unique identifier of the requested Space.
   ///
@@ -655,10 +664,10 @@ class _$_SpaceData implements _SpaceData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SpaceData &&
+            other is _$SpaceDataImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.state, state) || other.state == state) &&
@@ -688,7 +697,7 @@ class _$_SpaceData implements _SpaceData {
                 other.updatedAt == updatedAt));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -710,15 +719,17 @@ class _$_SpaceData implements _SpaceData {
       createdAt,
       updatedAt);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SpaceData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SpaceDataCopyWith<_$_SpaceData> get copyWith =>
-      __$$_SpaceDataCopyWithImpl<_$_SpaceData>(this, _$identity);
+  _$$SpaceDataImplCopyWith<_$SpaceDataImpl> get copyWith =>
+      __$$SpaceDataImplCopyWithImpl<_$SpaceDataImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SpaceDataToJson(
+    return _$$SpaceDataImplToJson(
       this,
     );
   }
@@ -742,20 +753,18 @@ abstract class _SpaceData implements SpaceData {
       final DateTime? startedAt,
       final DateTime? endedAt,
       final DateTime? createdAt,
-      final DateTime? updatedAt}) = _$_SpaceData;
+      final DateTime? updatedAt}) = _$SpaceDataImpl;
 
   factory _SpaceData.fromJson(Map<String, dynamic> json) =
-      _$_SpaceData.fromJson;
-
-  @override
+      _$SpaceDataImpl.fromJson;
 
   /// The unique identifier of the requested Space.
   ///
   /// ## How It Can Be Used
   ///
   /// - Uniquely identify a Space returned in the response.
-  String get id;
   @override
+  String get id;
 
   /// The title of the Space as specified by the creator.
   ///
@@ -763,8 +772,8 @@ abstract class _SpaceData implements SpaceData {
   ///
   /// - Determine the title of a Space, understand referenced keywords,
   ///   hashtags, and mentions.
-  String? get title;
   @override
+  String? get title;
 
   /// Indicates if the Space has started or will start in the future,
   /// or if it has ended.
@@ -772,12 +781,12 @@ abstract class _SpaceData implements SpaceData {
   /// ## How It Can Be Used
   ///
   /// - Filter live or scheduled Spaces.
-  SpaceState? get state;
   @override
+  SpaceState? get state;
 
   /// The id of the Space creator.
-  String? get creatorId;
   @override
+  String? get creatorId;
 
   /// Language of the Space, if detected by Twitter. Returned as a BCP47
   /// language tag.
@@ -785,16 +794,16 @@ abstract class _SpaceData implements SpaceData {
   /// ## How It Can Be Used
   ///
   /// - Classify Spaces by inferred language.
-  SpaceLanguage? get lang;
   @override
+  SpaceLanguage? get lang;
 
   /// The unique identifier of the users who are hosting this Space.
   ///
   /// ## How It Can Be Used
   ///
   /// - Expand User objects, understand engagement.
-  List<String>? get hostIds;
   @override
+  List<String>? get hostIds;
 
   /// A list of IDs of the topics selected by the creator of the Space.
   ///
@@ -802,8 +811,8 @@ abstract class _SpaceData implements SpaceData {
   ///
   /// - Determine the title of a Space, understand referenced keywords,
   ///   hashtags, and mentions.
-  List<String>? get topicIds;
   @override
+  List<String>? get topicIds;
 
   /// The list of users who were speaking at any point during the Space.
   /// This list contains all the users in invited_user_ids in addition to any
@@ -812,8 +821,8 @@ abstract class _SpaceData implements SpaceData {
   /// ## How It Can Be Used
   ///
   /// - Expand User objects, understand engagement.
-  List<String>? get speakerIds;
   @override
+  List<String>? get speakerIds;
 
   /// The list of user IDs that were invited to join as speakers. Usually,
   /// users in this list are invited to speak via the Invite user option.
@@ -821,8 +830,8 @@ abstract class _SpaceData implements SpaceData {
   /// ## How It Can Be Used
   ///
   /// - Expand User objects, understand engagement.
-  List<String>? get invitedUserIds;
   @override
+  List<String>? get invitedUserIds;
 
   /// The number of people who set a reminder to a Space.
   ///
@@ -831,8 +840,8 @@ abstract class _SpaceData implements SpaceData {
   /// - Understand how many people are interested in attending the event.
   ///   This metric is available for scheduled Spaces and Spaces scheduled in
   ///   the past that are currently live.
-  int? get subscriberCount;
   @override
+  int? get subscriberCount;
 
   /// The current number of users in the Space, including Hosts and Speakers.
   ///
@@ -840,16 +849,16 @@ abstract class _SpaceData implements SpaceData {
   ///
   /// - Understand engagement, and create reports and visualizations for
   ///   creators.
-  int? get participantCount;
   @override
+  int? get participantCount;
 
   /// Indicates is this is a ticketed Space.
   ///
   /// ## How It Can Be Used
   ///
   /// - Create user experiences to highlight content of interest.
-  bool? get isTicketed;
   @override
+  bool? get isTicketed;
 
   /// Indicates the start time of a scheduled Space, as set by the creator
   /// of the Space. This field is returned only if the Space has been
@@ -859,16 +868,16 @@ abstract class _SpaceData implements SpaceData {
   /// ## How It Can Be Used
   ///
   /// - Integrate with calendar notifications, filter and sort Spaces by time.
-  DateTime? get scheduledStart;
   @override
+  DateTime? get scheduledStart;
 
   /// Indicates the actual start time of a Space.
   ///
   /// ## How It Can Be Used
   ///
   /// - Determine start time of a Space.
-  DateTime? get startedAt;
   @override
+  DateTime? get startedAt;
 
   /// Time when the Space was ended. Only available for ended Spaces.
   ///
@@ -876,8 +885,8 @@ abstract class _SpaceData implements SpaceData {
   ///
   /// - Understand when a live Space ended in order to compute
   ///   its runtime duration.
-  DateTime? get endedAt;
   @override
+  DateTime? get endedAt;
 
   /// Creation time of this Space.
   ///
@@ -885,8 +894,8 @@ abstract class _SpaceData implements SpaceData {
   ///
   /// - Understand when a Space was first created and sort Spaces by
   ///   creation time.
-  DateTime? get createdAt;
   @override
+  DateTime? get createdAt;
 
   /// Specifies the date and time of the last update to any of the Space's
   /// metadata, such as its title or scheduled time.
@@ -894,9 +903,13 @@ abstract class _SpaceData implements SpaceData {
   /// ## How It Can Be Used
   ///
   /// - Keep information up to date.
-  DateTime? get updatedAt;
   @override
-  @JsonKey(ignore: true)
-  _$$_SpaceDataCopyWith<_$_SpaceData> get copyWith =>
+  DateTime? get updatedAt;
+
+  /// Create a copy of SpaceData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SpaceDataImplCopyWith<_$SpaceDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

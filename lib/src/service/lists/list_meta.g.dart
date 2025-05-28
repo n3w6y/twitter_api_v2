@@ -8,12 +8,13 @@ part of 'list_meta.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ListMeta _$$_ListMetaFromJson(Map json) => $checkedCreate(
-      r'_$_ListMeta',
+_$ListMetaImpl _$$ListMetaImplFromJson(Map json) => $checkedCreate(
+      r'_$ListMetaImpl',
       json,
       ($checkedConvert) {
-        final val = _$_ListMeta(
-          resultCount: $checkedConvert('result_count', (v) => v as int?),
+        final val = _$ListMetaImpl(
+          resultCount:
+              $checkedConvert('result_count', (v) => (v as num?)?.toInt()),
           nextToken: $checkedConvert('next_token', (v) => v as String?),
           previousToken: $checkedConvert('previous_token', (v) => v as String?),
         );
@@ -26,17 +27,9 @@ _$_ListMeta _$$_ListMetaFromJson(Map json) => $checkedCreate(
       },
     );
 
-Map<String, dynamic> _$$_ListMetaToJson(_$_ListMeta instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('result_count', instance.resultCount);
-  writeNotNull('next_token', instance.nextToken);
-  writeNotNull('previous_token', instance.previousToken);
-  return val;
-}
+Map<String, dynamic> _$$ListMetaImplToJson(_$ListMetaImpl instance) =>
+    <String, dynamic>{
+      if (instance.resultCount case final value?) 'result_count': value,
+      if (instance.nextToken case final value?) 'next_token': value,
+      if (instance.previousToken case final value?) 'previous_token': value,
+    };

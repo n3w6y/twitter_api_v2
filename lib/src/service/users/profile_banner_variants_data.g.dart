@@ -8,12 +8,13 @@ part of 'profile_banner_variants_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ProfileBannerVariantsData _$$_ProfileBannerVariantsDataFromJson(Map json) =>
+_$ProfileBannerVariantsDataImpl _$$ProfileBannerVariantsDataImplFromJson(
+        Map json) =>
     $checkedCreate(
-      r'_$_ProfileBannerVariantsData',
+      r'_$ProfileBannerVariantsDataImpl',
       json,
       ($checkedConvert) {
-        final val = _$_ProfileBannerVariantsData(
+        final val = _$ProfileBannerVariantsDataImpl(
           ipad: $checkedConvert(
               'ipad',
               (v) => ProfileBannerVariant.fromJson(
@@ -48,8 +49,8 @@ _$_ProfileBannerVariantsData _$$_ProfileBannerVariantsDataFromJson(Map json) =>
       },
     );
 
-Map<String, dynamic> _$$_ProfileBannerVariantsDataToJson(
-        _$_ProfileBannerVariantsData instance) =>
+Map<String, dynamic> _$$ProfileBannerVariantsDataImplToJson(
+        _$ProfileBannerVariantsDataImpl instance) =>
     <String, dynamic>{
       'ipad': instance.ipad.toJson(),
       'ipad_retina': instance.ipadRetina.toJson(),

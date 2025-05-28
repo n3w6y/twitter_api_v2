@@ -12,7 +12,7 @@ part of 'pinned_state_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PinnedStateData _$PinnedStateDataFromJson(Map<String, dynamic> json) {
   return _PinnedStateData.fromJson(json);
@@ -25,8 +25,12 @@ mixin _$PinnedStateData {
   @JsonKey(name: 'pinned')
   bool get isPinned => throw _privateConstructorUsedError;
 
+  /// Serializes this PinnedStateData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PinnedStateData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PinnedStateDataCopyWith<PinnedStateData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -50,6 +54,8 @@ class _$PinnedStateDataCopyWithImpl<$Res, $Val extends PinnedStateData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PinnedStateData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -65,30 +71,32 @@ class _$PinnedStateDataCopyWithImpl<$Res, $Val extends PinnedStateData>
 }
 
 /// @nodoc
-abstract class _$$_PinnedStateDataCopyWith<$Res>
+abstract class _$$PinnedStateDataImplCopyWith<$Res>
     implements $PinnedStateDataCopyWith<$Res> {
-  factory _$$_PinnedStateDataCopyWith(
-          _$_PinnedStateData value, $Res Function(_$_PinnedStateData) then) =
-      __$$_PinnedStateDataCopyWithImpl<$Res>;
+  factory _$$PinnedStateDataImplCopyWith(_$PinnedStateDataImpl value,
+          $Res Function(_$PinnedStateDataImpl) then) =
+      __$$PinnedStateDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@JsonKey(name: 'pinned') bool isPinned});
 }
 
 /// @nodoc
-class __$$_PinnedStateDataCopyWithImpl<$Res>
-    extends _$PinnedStateDataCopyWithImpl<$Res, _$_PinnedStateData>
-    implements _$$_PinnedStateDataCopyWith<$Res> {
-  __$$_PinnedStateDataCopyWithImpl(
-      _$_PinnedStateData _value, $Res Function(_$_PinnedStateData) _then)
+class __$$PinnedStateDataImplCopyWithImpl<$Res>
+    extends _$PinnedStateDataCopyWithImpl<$Res, _$PinnedStateDataImpl>
+    implements _$$PinnedStateDataImplCopyWith<$Res> {
+  __$$PinnedStateDataImplCopyWithImpl(
+      _$PinnedStateDataImpl _value, $Res Function(_$PinnedStateDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PinnedStateData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? isPinned = null,
   }) {
-    return _then(_$_PinnedStateData(
+    return _then(_$PinnedStateDataImpl(
       isPinned: null == isPinned
           ? _value.isPinned
           : isPinned // ignore: cast_nullable_to_non_nullable
@@ -99,11 +107,12 @@ class __$$_PinnedStateDataCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PinnedStateData implements _PinnedStateData {
-  const _$_PinnedStateData({@JsonKey(name: 'pinned') required this.isPinned});
+class _$PinnedStateDataImpl implements _PinnedStateData {
+  const _$PinnedStateDataImpl(
+      {@JsonKey(name: 'pinned') required this.isPinned});
 
-  factory _$_PinnedStateData.fromJson(Map<String, dynamic> json) =>
-      _$$_PinnedStateDataFromJson(json);
+  factory _$PinnedStateDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PinnedStateDataImplFromJson(json);
 
   /// Indicates whether the user pinned the specified List as a result
   /// of the request.
@@ -117,27 +126,30 @@ class _$_PinnedStateData implements _PinnedStateData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PinnedStateData &&
+            other is _$PinnedStateDataImpl &&
             (identical(other.isPinned, isPinned) ||
                 other.isPinned == isPinned));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, isPinned);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PinnedStateData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PinnedStateDataCopyWith<_$_PinnedStateData> get copyWith =>
-      __$$_PinnedStateDataCopyWithImpl<_$_PinnedStateData>(this, _$identity);
+  _$$PinnedStateDataImplCopyWith<_$PinnedStateDataImpl> get copyWith =>
+      __$$PinnedStateDataImplCopyWithImpl<_$PinnedStateDataImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PinnedStateDataToJson(
+    return _$$PinnedStateDataImplToJson(
       this,
     );
   }
@@ -146,19 +158,21 @@ class _$_PinnedStateData implements _PinnedStateData {
 abstract class _PinnedStateData implements PinnedStateData {
   const factory _PinnedStateData(
           {@JsonKey(name: 'pinned') required final bool isPinned}) =
-      _$_PinnedStateData;
+      _$PinnedStateDataImpl;
 
   factory _PinnedStateData.fromJson(Map<String, dynamic> json) =
-      _$_PinnedStateData.fromJson;
-
-  @override
+      _$PinnedStateDataImpl.fromJson;
 
   /// Indicates whether the user pinned the specified List as a result
   /// of the request.
+  @override
   @JsonKey(name: 'pinned')
   bool get isPinned;
+
+  /// Create a copy of PinnedStateData
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_PinnedStateDataCopyWith<_$_PinnedStateData> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PinnedStateDataImplCopyWith<_$PinnedStateDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

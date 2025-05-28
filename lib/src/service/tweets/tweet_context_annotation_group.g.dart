@@ -8,13 +8,13 @@ part of 'tweet_context_annotation_group.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TweetContextAnnotationGroup _$$_TweetContextAnnotationGroupFromJson(
+_$TweetContextAnnotationGroupImpl _$$TweetContextAnnotationGroupImplFromJson(
         Map json) =>
     $checkedCreate(
-      r'_$_TweetContextAnnotationGroup',
+      r'_$TweetContextAnnotationGroupImpl',
       json,
       ($checkedConvert) {
-        final val = _$_TweetContextAnnotationGroup(
+        final val = _$TweetContextAnnotationGroupImpl(
           domain: $checkedConvert(
               'domain',
               (v) => TweetContextAnnotation.fromJson(
@@ -28,8 +28,8 @@ _$_TweetContextAnnotationGroup _$$_TweetContextAnnotationGroupFromJson(
       },
     );
 
-Map<String, dynamic> _$$_TweetContextAnnotationGroupToJson(
-        _$_TweetContextAnnotationGroup instance) =>
+Map<String, dynamic> _$$TweetContextAnnotationGroupImplToJson(
+        _$TweetContextAnnotationGroupImpl instance) =>
     <String, dynamic>{
       'domain': instance.domain.toJson(),
       'entity': instance.entity.toJson(),

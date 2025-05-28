@@ -8,11 +8,11 @@ part of 'tweet_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TweetData _$$_TweetDataFromJson(Map json) => $checkedCreate(
-      r'_$_TweetData',
+_$TweetDataImpl _$$TweetDataImplFromJson(Map json) => $checkedCreate(
+      r'_$TweetDataImpl',
       json,
       ($checkedConvert) {
-        final val = _$_TweetData(
+        final val = _$TweetDataImpl(
           id: $checkedConvert('id', (v) => v as String),
           text: $checkedConvert('text', (v) => v as String),
           authorId: $checkedConvert('author_id', (v) => v as String?),
@@ -117,42 +117,46 @@ _$_TweetData _$$_TweetDataFromJson(Map json) => $checkedCreate(
       },
     );
 
-Map<String, dynamic> _$$_TweetDataToJson(_$_TweetData instance) {
-  final val = <String, dynamic>{
-    'id': instance.id,
-    'text': instance.text,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('author_id', instance.authorId);
-  writeNotNull('in_reply_to_user_id', instance.inReplyToUserId);
-  writeNotNull('conversation_id', instance.conversationId);
-  writeNotNull('referenced_tweets',
-      instance.referencedTweets?.map((e) => e.toJson()).toList());
-  writeNotNull('context_annotations',
-      instance.contextAnnotations?.map((e) => e.toJson()).toList());
-  writeNotNull('entities', instance.entities?.toJson());
-  writeNotNull('attachments', instance.attachments?.toJson());
-  writeNotNull('non_public_metrics', instance.privateMetrics?.toJson());
-  writeNotNull('organic_metrics', instance.organicMetrics?.toJson());
-  writeNotNull('promoted_metrics', instance.promotedMetrics?.toJson());
-  writeNotNull('public_metrics', instance.publicMetrics?.toJson());
-  writeNotNull('geo', instance.geo?.toJson());
-  writeNotNull('lang', _$LanguageEnumMap[instance.lang]);
-  writeNotNull('possibly_sensitive', instance.isPossiblySensitive);
-  writeNotNull('reply_settings', _$ReplySettingEnumMap[instance.replySetting]);
-  writeNotNull('source', instance.source);
-  writeNotNull('edit_controls', instance.editControls?.toJson());
-  writeNotNull('edit_history_tweet_ids', instance.editHistoryTweetIds);
-  writeNotNull('withheld', instance.withheld?.toJson());
-  writeNotNull('created_at', instance.createdAt?.toIso8601String());
-  return val;
-}
+Map<String, dynamic> _$$TweetDataImplToJson(_$TweetDataImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'text': instance.text,
+      if (instance.authorId case final value?) 'author_id': value,
+      if (instance.inReplyToUserId case final value?)
+        'in_reply_to_user_id': value,
+      if (instance.conversationId case final value?) 'conversation_id': value,
+      if (instance.referencedTweets?.map((e) => e.toJson()).toList()
+          case final value?)
+        'referenced_tweets': value,
+      if (instance.contextAnnotations?.map((e) => e.toJson()).toList()
+          case final value?)
+        'context_annotations': value,
+      if (instance.entities?.toJson() case final value?) 'entities': value,
+      if (instance.attachments?.toJson() case final value?)
+        'attachments': value,
+      if (instance.privateMetrics?.toJson() case final value?)
+        'non_public_metrics': value,
+      if (instance.organicMetrics?.toJson() case final value?)
+        'organic_metrics': value,
+      if (instance.promotedMetrics?.toJson() case final value?)
+        'promoted_metrics': value,
+      if (instance.publicMetrics?.toJson() case final value?)
+        'public_metrics': value,
+      if (instance.geo?.toJson() case final value?) 'geo': value,
+      if (_$LanguageEnumMap[instance.lang] case final value?) 'lang': value,
+      if (instance.isPossiblySensitive case final value?)
+        'possibly_sensitive': value,
+      if (_$ReplySettingEnumMap[instance.replySetting] case final value?)
+        'reply_settings': value,
+      if (instance.source case final value?) 'source': value,
+      if (instance.editControls?.toJson() case final value?)
+        'edit_controls': value,
+      if (instance.editHistoryTweetIds case final value?)
+        'edit_history_tweet_ids': value,
+      if (instance.withheld?.toJson() case final value?) 'withheld': value,
+      if (instance.createdAt?.toIso8601String() case final value?)
+        'created_at': value,
+    };
 
 const _$LanguageEnumMap = {
   Language.amharic: 'am',

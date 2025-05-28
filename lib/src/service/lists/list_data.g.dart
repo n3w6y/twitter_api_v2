@@ -8,17 +8,19 @@ part of 'list_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ListData _$$_ListDataFromJson(Map json) => $checkedCreate(
-      r'_$_ListData',
+_$ListDataImpl _$$ListDataImplFromJson(Map json) => $checkedCreate(
+      r'_$ListDataImpl',
       json,
       ($checkedConvert) {
-        final val = _$_ListData(
+        final val = _$ListDataImpl(
           id: $checkedConvert('id', (v) => v as String),
           name: $checkedConvert('name', (v) => v as String),
           description: $checkedConvert('description', (v) => v as String?),
           ownerId: $checkedConvert('owner_id', (v) => v as String?),
-          followerCount: $checkedConvert('follower_count', (v) => v as int?),
-          memberCount: $checkedConvert('member_count', (v) => v as int?),
+          followerCount:
+              $checkedConvert('follower_count', (v) => (v as num?)?.toInt()),
+          memberCount:
+              $checkedConvert('member_count', (v) => (v as num?)?.toInt()),
           isPrivate: $checkedConvert('private', (v) => v as bool?),
           createdAt: $checkedConvert('created_at',
               (v) => v == null ? null : DateTime.parse(v as String)),
@@ -34,23 +36,15 @@ _$_ListData _$$_ListDataFromJson(Map json) => $checkedCreate(
       },
     );
 
-Map<String, dynamic> _$$_ListDataToJson(_$_ListData instance) {
-  final val = <String, dynamic>{
-    'id': instance.id,
-    'name': instance.name,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('description', instance.description);
-  writeNotNull('owner_id', instance.ownerId);
-  writeNotNull('follower_count', instance.followerCount);
-  writeNotNull('member_count', instance.memberCount);
-  writeNotNull('private', instance.isPrivate);
-  writeNotNull('created_at', instance.createdAt?.toIso8601String());
-  return val;
-}
+Map<String, dynamic> _$$ListDataImplToJson(_$ListDataImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      if (instance.description case final value?) 'description': value,
+      if (instance.ownerId case final value?) 'owner_id': value,
+      if (instance.followerCount case final value?) 'follower_count': value,
+      if (instance.memberCount case final value?) 'member_count': value,
+      if (instance.isPrivate case final value?) 'private': value,
+      if (instance.createdAt?.toIso8601String() case final value?)
+        'created_at': value,
+    };

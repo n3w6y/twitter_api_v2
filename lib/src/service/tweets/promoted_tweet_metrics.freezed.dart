@@ -12,7 +12,7 @@ part of 'promoted_tweet_metrics.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PromotedTweetMetrics _$PromotedTweetMetricsFromJson(Map<String, dynamic> json) {
   return _PromotedTweetMetrics.fromJson(json);
@@ -45,8 +45,12 @@ mixin _$PromotedTweetMetrics {
   @JsonKey(name: 'url_link_clicks')
   int? get linkClickCount => throw _privateConstructorUsedError;
 
+  /// Serializes this PromotedTweetMetrics to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PromotedTweetMetrics
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PromotedTweetMetricsCopyWith<PromotedTweetMetrics> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -77,6 +81,8 @@ class _$PromotedTweetMetricsCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PromotedTweetMetrics
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -117,11 +123,11 @@ class _$PromotedTweetMetricsCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_PromotedTweetMetricsCopyWith<$Res>
+abstract class _$$PromotedTweetMetricsImplCopyWith<$Res>
     implements $PromotedTweetMetricsCopyWith<$Res> {
-  factory _$$_PromotedTweetMetricsCopyWith(_$_PromotedTweetMetrics value,
-          $Res Function(_$_PromotedTweetMetrics) then) =
-      __$$_PromotedTweetMetricsCopyWithImpl<$Res>;
+  factory _$$PromotedTweetMetricsImplCopyWith(_$PromotedTweetMetricsImpl value,
+          $Res Function(_$PromotedTweetMetricsImpl) then) =
+      __$$PromotedTweetMetricsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -134,13 +140,15 @@ abstract class _$$_PromotedTweetMetricsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PromotedTweetMetricsCopyWithImpl<$Res>
-    extends _$PromotedTweetMetricsCopyWithImpl<$Res, _$_PromotedTweetMetrics>
-    implements _$$_PromotedTweetMetricsCopyWith<$Res> {
-  __$$_PromotedTweetMetricsCopyWithImpl(_$_PromotedTweetMetrics _value,
-      $Res Function(_$_PromotedTweetMetrics) _then)
+class __$$PromotedTweetMetricsImplCopyWithImpl<$Res>
+    extends _$PromotedTweetMetricsCopyWithImpl<$Res, _$PromotedTweetMetricsImpl>
+    implements _$$PromotedTweetMetricsImplCopyWith<$Res> {
+  __$$PromotedTweetMetricsImplCopyWithImpl(_$PromotedTweetMetricsImpl _value,
+      $Res Function(_$PromotedTweetMetricsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PromotedTweetMetrics
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -151,7 +159,7 @@ class __$$_PromotedTweetMetricsCopyWithImpl<$Res>
     Object? profileClickCount = null,
     Object? linkClickCount = freezed,
   }) {
-    return _then(_$_PromotedTweetMetrics(
+    return _then(_$PromotedTweetMetricsImpl(
       impressionCount: null == impressionCount
           ? _value.impressionCount
           : impressionCount // ignore: cast_nullable_to_non_nullable
@@ -183,8 +191,8 @@ class __$$_PromotedTweetMetricsCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false)
-class _$_PromotedTweetMetrics implements _PromotedTweetMetrics {
-  const _$_PromotedTweetMetrics(
+class _$PromotedTweetMetricsImpl implements _PromotedTweetMetrics {
+  const _$PromotedTweetMetricsImpl(
       {required this.impressionCount,
       required this.likeCount,
       required this.retweetCount,
@@ -192,8 +200,8 @@ class _$_PromotedTweetMetrics implements _PromotedTweetMetrics {
       @JsonKey(name: 'user_profile_clicks') required this.profileClickCount,
       @JsonKey(name: 'url_link_clicks') this.linkClickCount});
 
-  factory _$_PromotedTweetMetrics.fromJson(Map<String, dynamic> json) =>
-      _$$_PromotedTweetMetricsFromJson(json);
+  factory _$PromotedTweetMetricsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PromotedTweetMetricsImplFromJson(json);
 
   /// A count of how many times the Tweet has been viewed
   /// (not unique by user). A view is counted if any part of the Tweet is
@@ -232,10 +240,10 @@ class _$_PromotedTweetMetrics implements _PromotedTweetMetrics {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PromotedTweetMetrics &&
+            other is _$PromotedTweetMetricsImpl &&
             (identical(other.impressionCount, impressionCount) ||
                 other.impressionCount == impressionCount) &&
             (identical(other.likeCount, likeCount) ||
@@ -250,21 +258,24 @@ class _$_PromotedTweetMetrics implements _PromotedTweetMetrics {
                 other.linkClickCount == linkClickCount));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, impressionCount, likeCount,
       retweetCount, replyCount, profileClickCount, linkClickCount);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PromotedTweetMetrics
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PromotedTweetMetricsCopyWith<_$_PromotedTweetMetrics> get copyWith =>
-      __$$_PromotedTweetMetricsCopyWithImpl<_$_PromotedTweetMetrics>(
-          this, _$identity);
+  _$$PromotedTweetMetricsImplCopyWith<_$PromotedTweetMetricsImpl>
+      get copyWith =>
+          __$$PromotedTweetMetricsImplCopyWithImpl<_$PromotedTweetMetricsImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PromotedTweetMetricsToJson(
+    return _$$PromotedTweetMetricsImplToJson(
       this,
     );
   }
@@ -272,51 +283,53 @@ class _$_PromotedTweetMetrics implements _PromotedTweetMetrics {
 
 abstract class _PromotedTweetMetrics implements PromotedTweetMetrics {
   const factory _PromotedTweetMetrics(
-      {required final int impressionCount,
-      required final int likeCount,
-      required final int retweetCount,
-      required final int replyCount,
-      @JsonKey(name: 'user_profile_clicks')
+          {required final int impressionCount,
+          required final int likeCount,
+          required final int retweetCount,
+          required final int replyCount,
+          @JsonKey(name: 'user_profile_clicks')
           required final int profileClickCount,
-      @JsonKey(name: 'url_link_clicks')
-          final int? linkClickCount}) = _$_PromotedTweetMetrics;
+          @JsonKey(name: 'url_link_clicks') final int? linkClickCount}) =
+      _$PromotedTweetMetricsImpl;
 
   factory _PromotedTweetMetrics.fromJson(Map<String, dynamic> json) =
-      _$_PromotedTweetMetrics.fromJson;
-
-  @override
+      _$PromotedTweetMetricsImpl.fromJson;
 
   /// A count of how many times the Tweet has been viewed
   /// (not unique by user). A view is counted if any part of the Tweet is
   /// visible on the screen.
-  int get impressionCount;
   @override
+  int get impressionCount;
 
   /// A count of how many times the Tweet has been liked.
-  int get likeCount;
   @override
+  int get likeCount;
 
   /// A count of how many times the Tweet has been Retweeted. Please note:
   /// This does not include Quote Tweets.
-  int get retweetCount;
   @override
+  int get retweetCount;
 
   /// A count of how many times the Tweet has been replied to.
-  int get replyCount;
   @override
+  int get replyCount;
 
   /// A count of the number of times a user clicks the following portions of
   /// a Tweet: display name, user name, profile picture.
+  @override
   @JsonKey(name: 'user_profile_clicks')
   int get profileClickCount;
-  @override
 
   /// A count of the number of times a user clicks on a URL link or URL
   /// preview card in a Tweet.
+  @override
   @JsonKey(name: 'url_link_clicks')
   int? get linkClickCount;
+
+  /// Create a copy of PromotedTweetMetrics
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_PromotedTweetMetricsCopyWith<_$_PromotedTweetMetrics> get copyWith =>
-      throw _privateConstructorUsedError;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PromotedTweetMetricsImplCopyWith<_$PromotedTweetMetricsImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

@@ -8,13 +8,15 @@ part of 'tweet_edit_controls.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TweetEditControls _$$_TweetEditControlsFromJson(Map json) => $checkedCreate(
-      r'_$_TweetEditControls',
+_$TweetEditControlsImpl _$$TweetEditControlsImplFromJson(Map json) =>
+    $checkedCreate(
+      r'_$TweetEditControlsImpl',
       json,
       ($checkedConvert) {
-        final val = _$_TweetEditControls(
+        final val = _$TweetEditControlsImpl(
           isEditable: $checkedConvert('is_edit_eligible', (v) => v as bool),
-          remainingCount: $checkedConvert('edits_remaining', (v) => v as int),
+          remainingCount:
+              $checkedConvert('edits_remaining', (v) => (v as num).toInt()),
           expireAt: $checkedConvert(
               'editable_until', (v) => DateTime.parse(v as String)),
         );
@@ -27,8 +29,8 @@ _$_TweetEditControls _$$_TweetEditControlsFromJson(Map json) => $checkedCreate(
       },
     );
 
-Map<String, dynamic> _$$_TweetEditControlsToJson(
-        _$_TweetEditControls instance) =>
+Map<String, dynamic> _$$TweetEditControlsImplToJson(
+        _$TweetEditControlsImpl instance) =>
     <String, dynamic>{
       'is_edit_eligible': instance.isEditable,
       'edits_remaining': instance.remainingCount,

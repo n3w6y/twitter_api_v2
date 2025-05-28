@@ -8,11 +8,11 @@ part of 'dm_event_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_DMEventData _$$_DMEventDataFromJson(Map json) => $checkedCreate(
-      r'_$_DMEventData',
+_$DMEventDataImpl _$$DMEventDataImplFromJson(Map json) => $checkedCreate(
+      r'_$DMEventDataImpl',
       json,
       ($checkedConvert) {
-        final val = _$_DMEventData(
+        final val = _$DMEventDataImpl(
           id: $checkedConvert('id', (v) => v as String),
           eventType: $checkedConvert(
               'event_type', (v) => $enumDecode(_$DMEventTypeEnumMap, v)),
@@ -46,27 +46,22 @@ _$_DMEventData _$$_DMEventDataFromJson(Map json) => $checkedCreate(
       },
     );
 
-Map<String, dynamic> _$$_DMEventDataToJson(_$_DMEventData instance) {
-  final val = <String, dynamic>{
-    'id': instance.id,
-    'event_type': _$DMEventTypeEnumMap[instance.eventType]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('text', instance.text);
-  writeNotNull('sender_id', instance.senderId);
-  writeNotNull('dm_conversation_id', instance.conversationId);
-  writeNotNull('referenced_tweets',
-      instance.referencedTweets?.map((e) => e.toJson()).toList());
-  writeNotNull('attachments', instance.attachments?.toJson());
-  writeNotNull('created_at', instance.createdAt?.toIso8601String());
-  return val;
-}
+Map<String, dynamic> _$$DMEventDataImplToJson(_$DMEventDataImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'event_type': _$DMEventTypeEnumMap[instance.eventType]!,
+      if (instance.text case final value?) 'text': value,
+      if (instance.senderId case final value?) 'sender_id': value,
+      if (instance.conversationId case final value?)
+        'dm_conversation_id': value,
+      if (instance.referencedTweets?.map((e) => e.toJson()).toList()
+          case final value?)
+        'referenced_tweets': value,
+      if (instance.attachments?.toJson() case final value?)
+        'attachments': value,
+      if (instance.createdAt?.toIso8601String() case final value?)
+        'created_at': value,
+    };
 
 const _$DMEventTypeEnumMap = {
   DMEventType.messageCreate: 'MessageCreate',

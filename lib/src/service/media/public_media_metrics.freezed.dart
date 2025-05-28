@@ -12,7 +12,7 @@ part of 'public_media_metrics.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PublicMediaMetrics _$PublicMediaMetricsFromJson(Map<String, dynamic> json) {
   return _PublicMediaMetrics.fromJson(json);
@@ -29,8 +29,12 @@ mixin _$PublicMediaMetrics {
   /// or re-posted in separate Tweets.
   int get viewCount => throw _privateConstructorUsedError;
 
+  /// Serializes this PublicMediaMetrics to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PublicMediaMetrics
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PublicMediaMetricsCopyWith<PublicMediaMetrics> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -54,6 +58,8 @@ class _$PublicMediaMetricsCopyWithImpl<$Res, $Val extends PublicMediaMetrics>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PublicMediaMetrics
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -69,30 +75,32 @@ class _$PublicMediaMetricsCopyWithImpl<$Res, $Val extends PublicMediaMetrics>
 }
 
 /// @nodoc
-abstract class _$$_PublicMediaMetricsCopyWith<$Res>
+abstract class _$$PublicMediaMetricsImplCopyWith<$Res>
     implements $PublicMediaMetricsCopyWith<$Res> {
-  factory _$$_PublicMediaMetricsCopyWith(_$_PublicMediaMetrics value,
-          $Res Function(_$_PublicMediaMetrics) then) =
-      __$$_PublicMediaMetricsCopyWithImpl<$Res>;
+  factory _$$PublicMediaMetricsImplCopyWith(_$PublicMediaMetricsImpl value,
+          $Res Function(_$PublicMediaMetricsImpl) then) =
+      __$$PublicMediaMetricsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int viewCount});
 }
 
 /// @nodoc
-class __$$_PublicMediaMetricsCopyWithImpl<$Res>
-    extends _$PublicMediaMetricsCopyWithImpl<$Res, _$_PublicMediaMetrics>
-    implements _$$_PublicMediaMetricsCopyWith<$Res> {
-  __$$_PublicMediaMetricsCopyWithImpl(
-      _$_PublicMediaMetrics _value, $Res Function(_$_PublicMediaMetrics) _then)
+class __$$PublicMediaMetricsImplCopyWithImpl<$Res>
+    extends _$PublicMediaMetricsCopyWithImpl<$Res, _$PublicMediaMetricsImpl>
+    implements _$$PublicMediaMetricsImplCopyWith<$Res> {
+  __$$PublicMediaMetricsImplCopyWithImpl(_$PublicMediaMetricsImpl _value,
+      $Res Function(_$PublicMediaMetricsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PublicMediaMetrics
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? viewCount = null,
   }) {
-    return _then(_$_PublicMediaMetrics(
+    return _then(_$PublicMediaMetricsImpl(
       viewCount: null == viewCount
           ? _value.viewCount
           : viewCount // ignore: cast_nullable_to_non_nullable
@@ -103,11 +111,11 @@ class __$$_PublicMediaMetricsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PublicMediaMetrics implements _PublicMediaMetrics {
-  const _$_PublicMediaMetrics({required this.viewCount});
+class _$PublicMediaMetricsImpl implements _PublicMediaMetrics {
+  const _$PublicMediaMetricsImpl({required this.viewCount});
 
-  factory _$_PublicMediaMetrics.fromJson(Map<String, dynamic> json) =>
-      _$$_PublicMediaMetricsFromJson(json);
+  factory _$PublicMediaMetricsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PublicMediaMetricsImplFromJson(json);
 
   /// A count of how many times the video included in the Tweet has been
   /// viewed.
@@ -125,28 +133,30 @@ class _$_PublicMediaMetrics implements _PublicMediaMetrics {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PublicMediaMetrics &&
+            other is _$PublicMediaMetricsImpl &&
             (identical(other.viewCount, viewCount) ||
                 other.viewCount == viewCount));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, viewCount);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PublicMediaMetrics
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PublicMediaMetricsCopyWith<_$_PublicMediaMetrics> get copyWith =>
-      __$$_PublicMediaMetricsCopyWithImpl<_$_PublicMediaMetrics>(
+  _$$PublicMediaMetricsImplCopyWith<_$PublicMediaMetricsImpl> get copyWith =>
+      __$$PublicMediaMetricsImplCopyWithImpl<_$PublicMediaMetricsImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PublicMediaMetricsToJson(
+    return _$$PublicMediaMetricsImplToJson(
       this,
     );
   }
@@ -154,12 +164,10 @@ class _$_PublicMediaMetrics implements _PublicMediaMetrics {
 
 abstract class _PublicMediaMetrics implements PublicMediaMetrics {
   const factory _PublicMediaMetrics({required final int viewCount}) =
-      _$_PublicMediaMetrics;
+      _$PublicMediaMetricsImpl;
 
   factory _PublicMediaMetrics.fromJson(Map<String, dynamic> json) =
-      _$_PublicMediaMetrics.fromJson;
-
-  @override
+      _$PublicMediaMetricsImpl.fromJson;
 
   /// A count of how many times the video included in the Tweet has been
   /// viewed.
@@ -168,9 +176,13 @@ abstract class _PublicMediaMetrics implements PublicMediaMetrics {
   /// the given video has been posted. That means that the metric includes
   /// the combined views from any instance where the video has been Retweeted
   /// or re-posted in separate Tweets.
-  int get viewCount;
   @override
-  @JsonKey(ignore: true)
-  _$$_PublicMediaMetricsCopyWith<_$_PublicMediaMetrics> get copyWith =>
+  int get viewCount;
+
+  /// Create a copy of PublicMediaMetrics
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PublicMediaMetricsImplCopyWith<_$PublicMediaMetricsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -50,29 +50,7 @@ void main() {
     test('Upload media (v1.1)', () async {
       final file = File('test/image.jpg');
       final media = await twitter.mediaService.uploadImage(file: file);
-      expect(media.data.mediaIdString, isNotNull);
+      expect(media.data.media_id_string, isNotNull);
     }, skip: !File('test/image.jpg').existsSync());
-
-    test('Lookup spaces by ID', () async {
-      final response = await twitter.spacesService.lookupById(
-        spaceId: 'SPACE_ID',
-      );
-      expect(response.data.id, 'SPACE_ID');
-    }, skip: 'Replace SPACE_ID with valid ID');
-
-    test('Manage lists', () async {
-      final response = await twitter.listsService.lookupById(
-        listId: 'LIST_ID',
-      );
-      expect(response.data.id, 'LIST_ID');
-    }, skip: 'Replace LIST_ID with valid ID');
-
-    test('Batch compliance', () async {
-      final response = await twitter.complianceService.lookupJobs(
-        jobType: JobType.tweets,
-        ids: ['JOB_ID'],
-      );
-      expect(response.data, isNotEmpty);
-    }, skip: 'Replace JOB_ID with valid ID');
   });
 }

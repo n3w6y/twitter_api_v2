@@ -12,7 +12,7 @@ part of 'trending_location_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 TrendingLocationData _$TrendingLocationDataFromJson(Map<String, dynamic> json) {
   return _TrendingLocationData.fromJson(json);
@@ -39,8 +39,12 @@ mixin _$TrendingLocationData {
   @JsonKey(name: 'countryCode')
   Country? get country => throw _privateConstructorUsedError;
 
+  /// Serializes this TrendingLocationData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TrendingLocationData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TrendingLocationDataCopyWith<TrendingLocationData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -70,6 +74,8 @@ class _$TrendingLocationDataCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TrendingLocationData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -105,11 +111,11 @@ class _$TrendingLocationDataCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_TrendingLocationDataCopyWith<$Res>
+abstract class _$$TrendingLocationDataImplCopyWith<$Res>
     implements $TrendingLocationDataCopyWith<$Res> {
-  factory _$$_TrendingLocationDataCopyWith(_$_TrendingLocationData value,
-          $Res Function(_$_TrendingLocationData) then) =
-      __$$_TrendingLocationDataCopyWithImpl<$Res>;
+  factory _$$TrendingLocationDataImplCopyWith(_$TrendingLocationDataImpl value,
+          $Res Function(_$TrendingLocationDataImpl) then) =
+      __$$TrendingLocationDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -121,13 +127,15 @@ abstract class _$$_TrendingLocationDataCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_TrendingLocationDataCopyWithImpl<$Res>
-    extends _$TrendingLocationDataCopyWithImpl<$Res, _$_TrendingLocationData>
-    implements _$$_TrendingLocationDataCopyWith<$Res> {
-  __$$_TrendingLocationDataCopyWithImpl(_$_TrendingLocationData _value,
-      $Res Function(_$_TrendingLocationData) _then)
+class __$$TrendingLocationDataImplCopyWithImpl<$Res>
+    extends _$TrendingLocationDataCopyWithImpl<$Res, _$TrendingLocationDataImpl>
+    implements _$$TrendingLocationDataImplCopyWith<$Res> {
+  __$$TrendingLocationDataImplCopyWithImpl(_$TrendingLocationDataImpl _value,
+      $Res Function(_$TrendingLocationDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TrendingLocationData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -137,7 +145,7 @@ class __$$_TrendingLocationDataCopyWithImpl<$Res>
     Object? countryName = null,
     Object? country = freezed,
   }) {
-    return _then(_$_TrendingLocationData(
+    return _then(_$TrendingLocationDataImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -165,16 +173,16 @@ class __$$_TrendingLocationDataCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false)
-class _$_TrendingLocationData implements _TrendingLocationData {
-  const _$_TrendingLocationData(
+class _$TrendingLocationDataImpl implements _TrendingLocationData {
+  const _$TrendingLocationDataImpl(
       {@JsonKey(name: 'woeid') required this.id,
       @JsonKey(name: 'parentid') required this.parentId,
       required this.name,
       @JsonKey(name: 'country') required this.countryName,
       @JsonKey(name: 'countryCode') required this.country});
 
-  factory _$_TrendingLocationData.fromJson(Map<String, dynamic> json) =>
-      _$$_TrendingLocationDataFromJson(json);
+  factory _$TrendingLocationDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TrendingLocationDataImplFromJson(json);
 
   /// The identifier of location for trending topics.
   @override
@@ -206,10 +214,10 @@ class _$_TrendingLocationData implements _TrendingLocationData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TrendingLocationData &&
+            other is _$TrendingLocationDataImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.parentId, parentId) ||
                 other.parentId == parentId) &&
@@ -219,21 +227,24 @@ class _$_TrendingLocationData implements _TrendingLocationData {
             (identical(other.country, country) || other.country == country));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, id, parentId, name, countryName, country);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TrendingLocationData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TrendingLocationDataCopyWith<_$_TrendingLocationData> get copyWith =>
-      __$$_TrendingLocationDataCopyWithImpl<_$_TrendingLocationData>(
-          this, _$identity);
+  _$$TrendingLocationDataImplCopyWith<_$TrendingLocationDataImpl>
+      get copyWith =>
+          __$$TrendingLocationDataImplCopyWithImpl<_$TrendingLocationDataImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TrendingLocationDataToJson(
+    return _$$TrendingLocationDataImplToJson(
       this,
     );
   }
@@ -246,37 +257,39 @@ abstract class _TrendingLocationData implements TrendingLocationData {
           required final String name,
           @JsonKey(name: 'country') required final String countryName,
           @JsonKey(name: 'countryCode') required final Country? country}) =
-      _$_TrendingLocationData;
+      _$TrendingLocationDataImpl;
 
   factory _TrendingLocationData.fromJson(Map<String, dynamic> json) =
-      _$_TrendingLocationData.fromJson;
-
-  @override
+      _$TrendingLocationDataImpl.fromJson;
 
   /// The identifier of location for trending topics.
+  @override
   @JsonKey(name: 'woeid')
   int get id;
-  @override
 
   /// The identifier for parent location.
+  @override
   @JsonKey(name: 'parentid')
   int get parentId;
-  @override
 
   /// The name of this location.
-  String get name;
   @override
+  String get name;
 
   /// The country name of this location.
+  @override
   @JsonKey(name: 'country')
   String get countryName;
-  @override
 
   /// The country code of this location.
+  @override
   @JsonKey(name: 'countryCode')
   Country? get country;
+
+  /// Create a copy of TrendingLocationData
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_TrendingLocationDataCopyWith<_$_TrendingLocationData> get copyWith =>
-      throw _privateConstructorUsedError;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$TrendingLocationDataImplCopyWith<_$TrendingLocationDataImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

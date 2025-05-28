@@ -12,7 +12,7 @@ part of 'dm_referenced_tweet.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 DMReferencedTweet _$DMReferencedTweetFromJson(Map<String, dynamic> json) {
   return _ReferencedTweet.fromJson(json);
@@ -23,8 +23,12 @@ mixin _$DMReferencedTweet {
   /// The id of a "shared" Tweet in the Direct Message.
   String get id => throw _privateConstructorUsedError;
 
+  /// Serializes this DMReferencedTweet to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DMReferencedTweet
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DMReferencedTweetCopyWith<DMReferencedTweet> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -48,6 +52,8 @@ class _$DMReferencedTweetCopyWithImpl<$Res, $Val extends DMReferencedTweet>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DMReferencedTweet
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -63,30 +69,32 @@ class _$DMReferencedTweetCopyWithImpl<$Res, $Val extends DMReferencedTweet>
 }
 
 /// @nodoc
-abstract class _$$_ReferencedTweetCopyWith<$Res>
+abstract class _$$ReferencedTweetImplCopyWith<$Res>
     implements $DMReferencedTweetCopyWith<$Res> {
-  factory _$$_ReferencedTweetCopyWith(
-          _$_ReferencedTweet value, $Res Function(_$_ReferencedTweet) then) =
-      __$$_ReferencedTweetCopyWithImpl<$Res>;
+  factory _$$ReferencedTweetImplCopyWith(_$ReferencedTweetImpl value,
+          $Res Function(_$ReferencedTweetImpl) then) =
+      __$$ReferencedTweetImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id});
 }
 
 /// @nodoc
-class __$$_ReferencedTweetCopyWithImpl<$Res>
-    extends _$DMReferencedTweetCopyWithImpl<$Res, _$_ReferencedTweet>
-    implements _$$_ReferencedTweetCopyWith<$Res> {
-  __$$_ReferencedTweetCopyWithImpl(
-      _$_ReferencedTweet _value, $Res Function(_$_ReferencedTweet) _then)
+class __$$ReferencedTweetImplCopyWithImpl<$Res>
+    extends _$DMReferencedTweetCopyWithImpl<$Res, _$ReferencedTweetImpl>
+    implements _$$ReferencedTweetImplCopyWith<$Res> {
+  __$$ReferencedTweetImplCopyWithImpl(
+      _$ReferencedTweetImpl _value, $Res Function(_$ReferencedTweetImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DMReferencedTweet
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = null,
   }) {
-    return _then(_$_ReferencedTweet(
+    return _then(_$ReferencedTweetImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -97,11 +105,11 @@ class __$$_ReferencedTweetCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReferencedTweet implements _ReferencedTweet {
-  const _$_ReferencedTweet({required this.id});
+class _$ReferencedTweetImpl implements _ReferencedTweet {
+  const _$ReferencedTweetImpl({required this.id});
 
-  factory _$_ReferencedTweet.fromJson(Map<String, dynamic> json) =>
-      _$$_ReferencedTweetFromJson(json);
+  factory _$ReferencedTweetImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ReferencedTweetImplFromJson(json);
 
   /// The id of a "shared" Tweet in the Direct Message.
   @override
@@ -113,26 +121,29 @@ class _$_ReferencedTweet implements _ReferencedTweet {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReferencedTweet &&
+            other is _$ReferencedTweetImpl &&
             (identical(other.id, id) || other.id == id));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DMReferencedTweet
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReferencedTweetCopyWith<_$_ReferencedTweet> get copyWith =>
-      __$$_ReferencedTweetCopyWithImpl<_$_ReferencedTweet>(this, _$identity);
+  _$$ReferencedTweetImplCopyWith<_$ReferencedTweetImpl> get copyWith =>
+      __$$ReferencedTweetImplCopyWithImpl<_$ReferencedTweetImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReferencedTweetToJson(
+    return _$$ReferencedTweetImplToJson(
       this,
     );
   }
@@ -140,17 +151,19 @@ class _$_ReferencedTweet implements _ReferencedTweet {
 
 abstract class _ReferencedTweet implements DMReferencedTweet {
   const factory _ReferencedTweet({required final String id}) =
-      _$_ReferencedTweet;
+      _$ReferencedTweetImpl;
 
   factory _ReferencedTweet.fromJson(Map<String, dynamic> json) =
-      _$_ReferencedTweet.fromJson;
-
-  @override
+      _$ReferencedTweetImpl.fromJson;
 
   /// The id of a "shared" Tweet in the Direct Message.
-  String get id;
   @override
-  @JsonKey(ignore: true)
-  _$$_ReferencedTweetCopyWith<_$_ReferencedTweet> get copyWith =>
+  String get id;
+
+  /// Create a copy of DMReferencedTweet
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ReferencedTweetImplCopyWith<_$ReferencedTweetImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

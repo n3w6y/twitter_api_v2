@@ -12,7 +12,7 @@ part of 'mention.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Mention _$MentionFromJson(Map<String, dynamic> json) {
   return _Mention.fromJson(json);
@@ -38,8 +38,12 @@ mixin _$Mention {
   /// he Tweet. This end index is exclusive.
   int get end => throw _privateConstructorUsedError;
 
+  /// Serializes this Mention to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Mention
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $MentionCopyWith<Mention> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -61,6 +65,8 @@ class _$MentionCopyWithImpl<$Res, $Val extends Mention>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Mention
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -91,22 +97,25 @@ class _$MentionCopyWithImpl<$Res, $Val extends Mention>
 }
 
 /// @nodoc
-abstract class _$$_MentionCopyWith<$Res> implements $MentionCopyWith<$Res> {
-  factory _$$_MentionCopyWith(
-          _$_Mention value, $Res Function(_$_Mention) then) =
-      __$$_MentionCopyWithImpl<$Res>;
+abstract class _$$MentionImplCopyWith<$Res> implements $MentionCopyWith<$Res> {
+  factory _$$MentionImplCopyWith(
+          _$MentionImpl value, $Res Function(_$MentionImpl) then) =
+      __$$MentionImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? id, String username, int start, int end});
 }
 
 /// @nodoc
-class __$$_MentionCopyWithImpl<$Res>
-    extends _$MentionCopyWithImpl<$Res, _$_Mention>
-    implements _$$_MentionCopyWith<$Res> {
-  __$$_MentionCopyWithImpl(_$_Mention _value, $Res Function(_$_Mention) _then)
+class __$$MentionImplCopyWithImpl<$Res>
+    extends _$MentionCopyWithImpl<$Res, _$MentionImpl>
+    implements _$$MentionImplCopyWith<$Res> {
+  __$$MentionImplCopyWithImpl(
+      _$MentionImpl _value, $Res Function(_$MentionImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Mention
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -115,7 +124,7 @@ class __$$_MentionCopyWithImpl<$Res>
     Object? start = null,
     Object? end = null,
   }) {
-    return _then(_$_Mention(
+    return _then(_$MentionImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -139,15 +148,15 @@ class __$$_MentionCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false)
-class _$_Mention implements _Mention {
-  const _$_Mention(
+class _$MentionImpl implements _Mention {
+  const _$MentionImpl(
       {this.id,
       required this.username,
       required this.start,
       required this.end});
 
-  factory _$_Mention.fromJson(Map<String, dynamic> json) =>
-      _$$_MentionFromJson(json);
+  factory _$MentionImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MentionImplFromJson(json);
 
   /// The user id that created the mentions.
   @override
@@ -177,10 +186,10 @@ class _$_Mention implements _Mention {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Mention &&
+            other is _$MentionImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.username, username) ||
                 other.username == username) &&
@@ -188,19 +197,21 @@ class _$_Mention implements _Mention {
             (identical(other.end, end) || other.end == end));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, username, start, end);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Mention
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MentionCopyWith<_$_Mention> get copyWith =>
-      __$$_MentionCopyWithImpl<_$_Mention>(this, _$identity);
+  _$$MentionImplCopyWith<_$MentionImpl> get copyWith =>
+      __$$MentionImplCopyWithImpl<_$MentionImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MentionToJson(
+    return _$$MentionImplToJson(
       this,
     );
   }
@@ -211,34 +222,36 @@ abstract class _Mention implements Mention {
       {final String? id,
       required final String username,
       required final int start,
-      required final int end}) = _$_Mention;
+      required final int end}) = _$MentionImpl;
 
-  factory _Mention.fromJson(Map<String, dynamic> json) = _$_Mention.fromJson;
-
-  @override
+  factory _Mention.fromJson(Map<String, dynamic> json) = _$MentionImpl.fromJson;
 
   /// The user id that created the mentions.
-  String? get id;
   @override
+  String? get id;
 
   /// The part of text recognized as a user mention.
   ///
   /// You can obtain the expanded object in includes.users by adding
   /// `TweetExpansion.entitiesMentionsUsername` in the request's query
   /// parameter.
-  String get username;
   @override
+  String get username;
 
   /// The start position (zero-based) of the recognized user mention within
   /// the Tweet. All start indices are inclusive.
-  int get start;
   @override
+  int get start;
 
   /// The end position (zero-based) of the recognized user mention within t
   /// he Tweet. This end index is exclusive.
-  int get end;
   @override
-  @JsonKey(ignore: true)
-  _$$_MentionCopyWith<_$_Mention> get copyWith =>
+  int get end;
+
+  /// Create a copy of Mention
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$MentionImplCopyWith<_$MentionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

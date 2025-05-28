@@ -12,7 +12,7 @@ part of 'poll_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PollData _$PollDataFromJson(Map<String, dynamic> json) {
   return _PollData.fromJson(json);
@@ -37,8 +37,12 @@ mixin _$PollData {
   @JsonKey(name: 'end_datetime')
   DateTime? get endAt => throw _privateConstructorUsedError;
 
+  /// Serializes this PollData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PollData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PollDataCopyWith<PollData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -66,6 +70,8 @@ class _$PollDataCopyWithImpl<$Res, $Val extends PollData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PollData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -101,10 +107,11 @@ class _$PollDataCopyWithImpl<$Res, $Val extends PollData>
 }
 
 /// @nodoc
-abstract class _$$_PollDataCopyWith<$Res> implements $PollDataCopyWith<$Res> {
-  factory _$$_PollDataCopyWith(
-          _$_PollData value, $Res Function(_$_PollData) then) =
-      __$$_PollDataCopyWithImpl<$Res>;
+abstract class _$$PollDataImplCopyWith<$Res>
+    implements $PollDataCopyWith<$Res> {
+  factory _$$PollDataImplCopyWith(
+          _$PollDataImpl value, $Res Function(_$PollDataImpl) then) =
+      __$$PollDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -116,13 +123,15 @@ abstract class _$$_PollDataCopyWith<$Res> implements $PollDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_PollDataCopyWithImpl<$Res>
-    extends _$PollDataCopyWithImpl<$Res, _$_PollData>
-    implements _$$_PollDataCopyWith<$Res> {
-  __$$_PollDataCopyWithImpl(
-      _$_PollData _value, $Res Function(_$_PollData) _then)
+class __$$PollDataImplCopyWithImpl<$Res>
+    extends _$PollDataCopyWithImpl<$Res, _$PollDataImpl>
+    implements _$$PollDataImplCopyWith<$Res> {
+  __$$PollDataImplCopyWithImpl(
+      _$PollDataImpl _value, $Res Function(_$PollDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PollData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -132,7 +141,7 @@ class __$$_PollDataCopyWithImpl<$Res>
     Object? durationMinutes = freezed,
     Object? endAt = freezed,
   }) {
-    return _then(_$_PollData(
+    return _then(_$PollDataImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -160,8 +169,8 @@ class __$$_PollDataCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false)
-class _$_PollData implements _PollData {
-  const _$_PollData(
+class _$PollDataImpl implements _PollData {
+  const _$PollDataImpl(
       {required this.id,
       required final List<PollOption> options,
       this.votingStatus,
@@ -169,8 +178,8 @@ class _$_PollData implements _PollData {
       @JsonKey(name: 'end_datetime') this.endAt})
       : _options = options;
 
-  factory _$_PollData.fromJson(Map<String, dynamic> json) =>
-      _$$_PollDataFromJson(json);
+  factory _$PollDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PollDataImplFromJson(json);
 
   /// Unique identifier of the expanded poll.
   @override
@@ -207,10 +216,10 @@ class _$_PollData implements _PollData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PollData &&
+            other is _$PollDataImpl &&
             (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality().equals(other._options, _options) &&
             (identical(other.votingStatus, votingStatus) ||
@@ -220,7 +229,7 @@ class _$_PollData implements _PollData {
             (identical(other.endAt, endAt) || other.endAt == endAt));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -230,15 +239,17 @@ class _$_PollData implements _PollData {
       durationMinutes,
       endAt);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PollData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PollDataCopyWith<_$_PollData> get copyWith =>
-      __$$_PollDataCopyWithImpl<_$_PollData>(this, _$identity);
+  _$$PollDataImplCopyWith<_$PollDataImpl> get copyWith =>
+      __$$PollDataImplCopyWithImpl<_$PollDataImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PollDataToJson(
+    return _$$PollDataImplToJson(
       this,
     );
   }
@@ -250,34 +261,37 @@ abstract class _PollData implements PollData {
       required final List<PollOption> options,
       final PollVotingStatus? votingStatus,
       final int? durationMinutes,
-      @JsonKey(name: 'end_datetime') final DateTime? endAt}) = _$_PollData;
+      @JsonKey(name: 'end_datetime') final DateTime? endAt}) = _$PollDataImpl;
 
-  factory _PollData.fromJson(Map<String, dynamic> json) = _$_PollData.fromJson;
-
-  @override
+  factory _PollData.fromJson(Map<String, dynamic> json) =
+      _$PollDataImpl.fromJson;
 
   /// Unique identifier of the expanded poll.
-  String get id;
   @override
+  String get id;
 
   /// Contains objects describing each choice in the referenced poll.
-  List<PollOption> get options;
   @override
+  List<PollOption> get options;
 
   /// Indicates if this poll is still active and can receive votes,
   /// or if the voting is now closed.
-  PollVotingStatus? get votingStatus;
   @override
+  PollVotingStatus? get votingStatus;
 
   /// Specifies the total duration of this poll.
-  int? get durationMinutes;
   @override
+  int? get durationMinutes;
 
   /// Specifies the end date and time for this poll.
+  @override
   @JsonKey(name: 'end_datetime')
   DateTime? get endAt;
+
+  /// Create a copy of PollData
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_PollDataCopyWith<_$_PollData> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PollDataImplCopyWith<_$PollDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

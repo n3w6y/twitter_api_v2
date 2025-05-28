@@ -12,7 +12,7 @@ part of 'profile_banner_variant.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ProfileBannerVariant _$ProfileBannerVariantFromJson(Map<String, dynamic> json) {
   return _ProfileBannerVariant.fromJson(json);
@@ -31,8 +31,12 @@ mixin _$ProfileBannerVariant {
   /// The url of this image.
   String get url => throw _privateConstructorUsedError;
 
+  /// Serializes this ProfileBannerVariant to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ProfileBannerVariant
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ProfileBannerVariantCopyWith<ProfileBannerVariant> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -60,6 +64,8 @@ class _$ProfileBannerVariantCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ProfileBannerVariant
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -85,11 +91,11 @@ class _$ProfileBannerVariantCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ProfileBannerVariantCopyWith<$Res>
+abstract class _$$ProfileBannerVariantImplCopyWith<$Res>
     implements $ProfileBannerVariantCopyWith<$Res> {
-  factory _$$_ProfileBannerVariantCopyWith(_$_ProfileBannerVariant value,
-          $Res Function(_$_ProfileBannerVariant) then) =
-      __$$_ProfileBannerVariantCopyWithImpl<$Res>;
+  factory _$$ProfileBannerVariantImplCopyWith(_$ProfileBannerVariantImpl value,
+          $Res Function(_$ProfileBannerVariantImpl) then) =
+      __$$ProfileBannerVariantImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -99,13 +105,15 @@ abstract class _$$_ProfileBannerVariantCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ProfileBannerVariantCopyWithImpl<$Res>
-    extends _$ProfileBannerVariantCopyWithImpl<$Res, _$_ProfileBannerVariant>
-    implements _$$_ProfileBannerVariantCopyWith<$Res> {
-  __$$_ProfileBannerVariantCopyWithImpl(_$_ProfileBannerVariant _value,
-      $Res Function(_$_ProfileBannerVariant) _then)
+class __$$ProfileBannerVariantImplCopyWithImpl<$Res>
+    extends _$ProfileBannerVariantCopyWithImpl<$Res, _$ProfileBannerVariantImpl>
+    implements _$$ProfileBannerVariantImplCopyWith<$Res> {
+  __$$ProfileBannerVariantImplCopyWithImpl(_$ProfileBannerVariantImpl _value,
+      $Res Function(_$ProfileBannerVariantImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ProfileBannerVariant
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -113,7 +121,7 @@ class __$$_ProfileBannerVariantCopyWithImpl<$Res>
     Object? width = null,
     Object? url = null,
   }) {
-    return _then(_$_ProfileBannerVariant(
+    return _then(_$ProfileBannerVariantImpl(
       height: null == height
           ? _value.height
           : height // ignore: cast_nullable_to_non_nullable
@@ -132,14 +140,14 @@ class __$$_ProfileBannerVariantCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ProfileBannerVariant implements _ProfileBannerVariant {
-  const _$_ProfileBannerVariant(
+class _$ProfileBannerVariantImpl implements _ProfileBannerVariant {
+  const _$ProfileBannerVariantImpl(
       {@JsonKey(name: 'h') required this.height,
       @JsonKey(name: 'w') required this.width,
       required this.url});
 
-  factory _$_ProfileBannerVariant.fromJson(Map<String, dynamic> json) =>
-      _$$_ProfileBannerVariantFromJson(json);
+  factory _$ProfileBannerVariantImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ProfileBannerVariantImplFromJson(json);
 
   /// The height of this image.
   @override
@@ -161,29 +169,32 @@ class _$_ProfileBannerVariant implements _ProfileBannerVariant {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ProfileBannerVariant &&
+            other is _$ProfileBannerVariantImpl &&
             (identical(other.height, height) || other.height == height) &&
             (identical(other.width, width) || other.width == width) &&
             (identical(other.url, url) || other.url == url));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, height, width, url);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProfileBannerVariant
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ProfileBannerVariantCopyWith<_$_ProfileBannerVariant> get copyWith =>
-      __$$_ProfileBannerVariantCopyWithImpl<_$_ProfileBannerVariant>(
-          this, _$identity);
+  _$$ProfileBannerVariantImplCopyWith<_$ProfileBannerVariantImpl>
+      get copyWith =>
+          __$$ProfileBannerVariantImplCopyWithImpl<_$ProfileBannerVariantImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ProfileBannerVariantToJson(
+    return _$$ProfileBannerVariantImplToJson(
       this,
     );
   }
@@ -193,27 +204,29 @@ abstract class _ProfileBannerVariant implements ProfileBannerVariant {
   const factory _ProfileBannerVariant(
       {@JsonKey(name: 'h') required final int height,
       @JsonKey(name: 'w') required final int width,
-      required final String url}) = _$_ProfileBannerVariant;
+      required final String url}) = _$ProfileBannerVariantImpl;
 
   factory _ProfileBannerVariant.fromJson(Map<String, dynamic> json) =
-      _$_ProfileBannerVariant.fromJson;
-
-  @override
+      _$ProfileBannerVariantImpl.fromJson;
 
   /// The height of this image.
+  @override
   @JsonKey(name: 'h')
   int get height;
-  @override
 
   /// The height of this image.
+  @override
   @JsonKey(name: 'w')
   int get width;
-  @override
 
   /// The url of this image.
-  String get url;
   @override
-  @JsonKey(ignore: true)
-  _$$_ProfileBannerVariantCopyWith<_$_ProfileBannerVariant> get copyWith =>
-      throw _privateConstructorUsedError;
+  String get url;
+
+  /// Create a copy of ProfileBannerVariant
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ProfileBannerVariantImplCopyWith<_$ProfileBannerVariantImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

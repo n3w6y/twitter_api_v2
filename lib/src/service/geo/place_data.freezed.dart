@@ -12,7 +12,7 @@ part of 'place_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PlaceData _$PlaceDataFromJson(Map<String, dynamic> json) {
   return _PlaceData.fromJson(json);
@@ -73,8 +73,12 @@ mixin _$PlaceData {
   /// place.
   List<String>? get containedWithin => throw _privateConstructorUsedError;
 
+  /// Serializes this PlaceData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PlaceData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PlaceDataCopyWith<PlaceData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -107,6 +111,8 @@ class _$PlaceDataCopyWithImpl<$Res, $Val extends PlaceData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PlaceData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -155,6 +161,8 @@ class _$PlaceDataCopyWithImpl<$Res, $Val extends PlaceData>
     ) as $Val);
   }
 
+  /// Create a copy of PlaceData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PlaceGeoCopyWith<$Res>? get geo {
@@ -169,10 +177,11 @@ class _$PlaceDataCopyWithImpl<$Res, $Val extends PlaceData>
 }
 
 /// @nodoc
-abstract class _$$_PlaceDataCopyWith<$Res> implements $PlaceDataCopyWith<$Res> {
-  factory _$$_PlaceDataCopyWith(
-          _$_PlaceData value, $Res Function(_$_PlaceData) then) =
-      __$$_PlaceDataCopyWithImpl<$Res>;
+abstract class _$$PlaceDataImplCopyWith<$Res>
+    implements $PlaceDataCopyWith<$Res> {
+  factory _$$PlaceDataImplCopyWith(
+          _$PlaceDataImpl value, $Res Function(_$PlaceDataImpl) then) =
+      __$$PlaceDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -190,13 +199,15 @@ abstract class _$$_PlaceDataCopyWith<$Res> implements $PlaceDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_PlaceDataCopyWithImpl<$Res>
-    extends _$PlaceDataCopyWithImpl<$Res, _$_PlaceData>
-    implements _$$_PlaceDataCopyWith<$Res> {
-  __$$_PlaceDataCopyWithImpl(
-      _$_PlaceData _value, $Res Function(_$_PlaceData) _then)
+class __$$PlaceDataImplCopyWithImpl<$Res>
+    extends _$PlaceDataCopyWithImpl<$Res, _$PlaceDataImpl>
+    implements _$$PlaceDataImplCopyWith<$Res> {
+  __$$PlaceDataImplCopyWithImpl(
+      _$PlaceDataImpl _value, $Res Function(_$PlaceDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PlaceData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -209,7 +220,7 @@ class __$$_PlaceDataCopyWithImpl<$Res>
     Object? geo = freezed,
     Object? containedWithin = freezed,
   }) {
-    return _then(_$_PlaceData(
+    return _then(_$PlaceDataImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -249,8 +260,8 @@ class __$$_PlaceDataCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false)
-class _$_PlaceData implements _PlaceData {
-  const _$_PlaceData(
+class _$PlaceDataImpl implements _PlaceData {
+  const _$PlaceDataImpl(
       {required this.id,
       required this.fullName,
       this.name,
@@ -261,8 +272,8 @@ class _$_PlaceData implements _PlaceData {
       final List<String>? containedWithin})
       : _containedWithin = containedWithin;
 
-  factory _$_PlaceData.fromJson(Map<String, dynamic> json) =>
-      _$$_PlaceDataFromJson(json);
+  factory _$PlaceDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PlaceDataImplFromJson(json);
 
   /// The unique identifier of the expanded place, if this is a point of
   /// interest tagged in the Tweet.
@@ -341,10 +352,10 @@ class _$_PlaceData implements _PlaceData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PlaceData &&
+            other is _$PlaceDataImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.fullName, fullName) ||
                 other.fullName == fullName) &&
@@ -359,7 +370,7 @@ class _$_PlaceData implements _PlaceData {
                 .equals(other._containedWithin, _containedWithin));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -372,15 +383,17 @@ class _$_PlaceData implements _PlaceData {
       geo,
       const DeepCollectionEquality().hash(_containedWithin));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PlaceData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PlaceDataCopyWith<_$_PlaceData> get copyWith =>
-      __$$_PlaceDataCopyWithImpl<_$_PlaceData>(this, _$identity);
+  _$$PlaceDataImplCopyWith<_$PlaceDataImpl> get copyWith =>
+      __$$PlaceDataImplCopyWithImpl<_$PlaceDataImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PlaceDataToJson(
+    return _$$PlaceDataImplToJson(
       this,
     );
   }
@@ -395,12 +408,10 @@ abstract class _PlaceData implements PlaceData {
       @JsonKey(name: 'country') final String? countryName,
       @JsonKey(name: 'country_code') final Country? country,
       final PlaceGeo? geo,
-      final List<String>? containedWithin}) = _$_PlaceData;
+      final List<String>? containedWithin}) = _$PlaceDataImpl;
 
   factory _PlaceData.fromJson(Map<String, dynamic> json) =
-      _$_PlaceData.fromJson;
-
-  @override
+      _$PlaceDataImpl.fromJson;
 
   /// The unique identifier of the expanded place, if this is a point of
   /// interest tagged in the Tweet.
@@ -408,24 +419,24 @@ abstract class _PlaceData implements PlaceData {
   /// ## How It Can Be Used
   ///
   /// - Use this to programmatically retrieve a place.
-  String get id;
   @override
+  String get id;
 
   /// A longer-form detailed place name.
   ///
   /// ## How It Can Be Used
   ///
   /// - Classify a Tweet by a specific place name.
-  String get fullName;
   @override
+  String get fullName;
 
   /// The short name of this place.
   ///
   /// ## How It Can Be Used
   ///
   /// - Classify a Tweet by a specific place name
-  String? get name;
   @override
+  String? get name;
 
   /// Specified the particular type of information represented by this place
   /// information, such as a city name, or a point of interest.
@@ -433,36 +444,40 @@ abstract class _PlaceData implements PlaceData {
   /// ## How It Can Be Used
   ///
   /// - Classify a Tweet by a specific type of place.
-  PlaceType? get placeType;
   @override
+  PlaceType? get placeType;
 
   /// The full-length name of the country this place belongs to.
   ///
   /// ## How It Can Be Used
   ///
   /// - Classify a Tweet by country name.
+  @override
   @JsonKey(name: 'country')
   String? get countryName;
-  @override
 
   /// The ISO Alpha-2 country code this place belongs to.
   ///
   /// ## How It Can Be Used
   ///
   /// - Classify a Tweet by country code.
+  @override
   @JsonKey(name: 'country_code')
   Country? get country;
-  @override
 
   /// Contains place details in GeoJSON format.
-  PlaceGeo? get geo;
   @override
+  PlaceGeo? get geo;
 
   /// Returns the identifiers of known places that contain the referenced
   /// place.
-  List<String>? get containedWithin;
   @override
-  @JsonKey(ignore: true)
-  _$$_PlaceDataCopyWith<_$_PlaceData> get copyWith =>
+  List<String>? get containedWithin;
+
+  /// Create a copy of PlaceData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PlaceDataImplCopyWith<_$PlaceDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

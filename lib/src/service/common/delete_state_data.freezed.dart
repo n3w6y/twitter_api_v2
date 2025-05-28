@@ -12,7 +12,7 @@ part of 'delete_state_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 DeleteStateData _$DeleteStateDataFromJson(Map<String, dynamic> json) {
   return _DeleteStateData.fromJson(json);
@@ -24,8 +24,12 @@ mixin _$DeleteStateData {
   @JsonKey(name: 'deleted')
   bool get isDeleted => throw _privateConstructorUsedError;
 
+  /// Serializes this DeleteStateData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DeleteStateData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DeleteStateDataCopyWith<DeleteStateData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +53,8 @@ class _$DeleteStateDataCopyWithImpl<$Res, $Val extends DeleteStateData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DeleteStateData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -64,30 +70,32 @@ class _$DeleteStateDataCopyWithImpl<$Res, $Val extends DeleteStateData>
 }
 
 /// @nodoc
-abstract class _$$_DeleteStateDataCopyWith<$Res>
+abstract class _$$DeleteStateDataImplCopyWith<$Res>
     implements $DeleteStateDataCopyWith<$Res> {
-  factory _$$_DeleteStateDataCopyWith(
-          _$_DeleteStateData value, $Res Function(_$_DeleteStateData) then) =
-      __$$_DeleteStateDataCopyWithImpl<$Res>;
+  factory _$$DeleteStateDataImplCopyWith(_$DeleteStateDataImpl value,
+          $Res Function(_$DeleteStateDataImpl) then) =
+      __$$DeleteStateDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@JsonKey(name: 'deleted') bool isDeleted});
 }
 
 /// @nodoc
-class __$$_DeleteStateDataCopyWithImpl<$Res>
-    extends _$DeleteStateDataCopyWithImpl<$Res, _$_DeleteStateData>
-    implements _$$_DeleteStateDataCopyWith<$Res> {
-  __$$_DeleteStateDataCopyWithImpl(
-      _$_DeleteStateData _value, $Res Function(_$_DeleteStateData) _then)
+class __$$DeleteStateDataImplCopyWithImpl<$Res>
+    extends _$DeleteStateDataCopyWithImpl<$Res, _$DeleteStateDataImpl>
+    implements _$$DeleteStateDataImplCopyWith<$Res> {
+  __$$DeleteStateDataImplCopyWithImpl(
+      _$DeleteStateDataImpl _value, $Res Function(_$DeleteStateDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DeleteStateData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? isDeleted = null,
   }) {
-    return _then(_$_DeleteStateData(
+    return _then(_$DeleteStateDataImpl(
       isDeleted: null == isDeleted
           ? _value.isDeleted
           : isDeleted // ignore: cast_nullable_to_non_nullable
@@ -98,11 +106,12 @@ class __$$_DeleteStateDataCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_DeleteStateData implements _DeleteStateData {
-  const _$_DeleteStateData({@JsonKey(name: 'deleted') required this.isDeleted});
+class _$DeleteStateDataImpl implements _DeleteStateData {
+  const _$DeleteStateDataImpl(
+      {@JsonKey(name: 'deleted') required this.isDeleted});
 
-  factory _$_DeleteStateData.fromJson(Map<String, dynamic> json) =>
-      _$$_DeleteStateDataFromJson(json);
+  factory _$DeleteStateDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DeleteStateDataImplFromJson(json);
 
   /// Indicates whether the content specified in the request has been deleted.
   @override
@@ -115,27 +124,30 @@ class _$_DeleteStateData implements _DeleteStateData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DeleteStateData &&
+            other is _$DeleteStateDataImpl &&
             (identical(other.isDeleted, isDeleted) ||
                 other.isDeleted == isDeleted));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, isDeleted);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DeleteStateData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DeleteStateDataCopyWith<_$_DeleteStateData> get copyWith =>
-      __$$_DeleteStateDataCopyWithImpl<_$_DeleteStateData>(this, _$identity);
+  _$$DeleteStateDataImplCopyWith<_$DeleteStateDataImpl> get copyWith =>
+      __$$DeleteStateDataImplCopyWithImpl<_$DeleteStateDataImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_DeleteStateDataToJson(
+    return _$$DeleteStateDataImplToJson(
       this,
     );
   }
@@ -144,18 +156,20 @@ class _$_DeleteStateData implements _DeleteStateData {
 abstract class _DeleteStateData implements DeleteStateData {
   const factory _DeleteStateData(
           {@JsonKey(name: 'deleted') required final bool isDeleted}) =
-      _$_DeleteStateData;
+      _$DeleteStateDataImpl;
 
   factory _DeleteStateData.fromJson(Map<String, dynamic> json) =
-      _$_DeleteStateData.fromJson;
-
-  @override
+      _$DeleteStateDataImpl.fromJson;
 
   /// Indicates whether the content specified in the request has been deleted.
+  @override
   @JsonKey(name: 'deleted')
   bool get isDeleted;
+
+  /// Create a copy of DeleteStateData
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_DeleteStateDataCopyWith<_$_DeleteStateData> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$DeleteStateDataImplCopyWith<_$DeleteStateDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

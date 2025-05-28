@@ -12,7 +12,7 @@ part of 'user_entities.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 UserEntities _$UserEntitiesFromJson(Map<String, dynamic> json) {
   return _UserEntities.fromJson(json);
@@ -27,8 +27,12 @@ mixin _$UserEntities {
   /// within a user's description.
   UserDescriptionEntity? get description => throw _privateConstructorUsedError;
 
+  /// Serializes this UserEntities to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UserEntities
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UserEntitiesCopyWith<UserEntities> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -55,6 +59,8 @@ class _$UserEntitiesCopyWithImpl<$Res, $Val extends UserEntities>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of UserEntities
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -73,6 +79,8 @@ class _$UserEntitiesCopyWithImpl<$Res, $Val extends UserEntities>
     ) as $Val);
   }
 
+  /// Create a copy of UserEntities
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserUrlEntityCopyWith<$Res>? get url {
@@ -85,6 +93,8 @@ class _$UserEntitiesCopyWithImpl<$Res, $Val extends UserEntities>
     });
   }
 
+  /// Create a copy of UserEntities
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserDescriptionEntityCopyWith<$Res>? get description {
@@ -99,11 +109,11 @@ class _$UserEntitiesCopyWithImpl<$Res, $Val extends UserEntities>
 }
 
 /// @nodoc
-abstract class _$$_UserEntitiesCopyWith<$Res>
+abstract class _$$UserEntitiesImplCopyWith<$Res>
     implements $UserEntitiesCopyWith<$Res> {
-  factory _$$_UserEntitiesCopyWith(
-          _$_UserEntities value, $Res Function(_$_UserEntities) then) =
-      __$$_UserEntitiesCopyWithImpl<$Res>;
+  factory _$$UserEntitiesImplCopyWith(
+          _$UserEntitiesImpl value, $Res Function(_$UserEntitiesImpl) then) =
+      __$$UserEntitiesImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({UserUrlEntity? url, UserDescriptionEntity? description});
@@ -115,20 +125,22 @@ abstract class _$$_UserEntitiesCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_UserEntitiesCopyWithImpl<$Res>
-    extends _$UserEntitiesCopyWithImpl<$Res, _$_UserEntities>
-    implements _$$_UserEntitiesCopyWith<$Res> {
-  __$$_UserEntitiesCopyWithImpl(
-      _$_UserEntities _value, $Res Function(_$_UserEntities) _then)
+class __$$UserEntitiesImplCopyWithImpl<$Res>
+    extends _$UserEntitiesCopyWithImpl<$Res, _$UserEntitiesImpl>
+    implements _$$UserEntitiesImplCopyWith<$Res> {
+  __$$UserEntitiesImplCopyWithImpl(
+      _$UserEntitiesImpl _value, $Res Function(_$UserEntitiesImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserEntities
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? url = freezed,
     Object? description = freezed,
   }) {
-    return _then(_$_UserEntities(
+    return _then(_$UserEntitiesImpl(
       url: freezed == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -144,11 +156,11 @@ class __$$_UserEntitiesCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false)
-class _$_UserEntities implements _UserEntities {
-  const _$_UserEntities({this.url, this.description});
+class _$UserEntitiesImpl implements _UserEntities {
+  const _$UserEntitiesImpl({this.url, this.description});
 
-  factory _$_UserEntities.fromJson(Map<String, dynamic> json) =>
-      _$$_UserEntitiesFromJson(json);
+  factory _$UserEntitiesImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UserEntitiesImplFromJson(json);
 
   /// Contains details about the user's profile website.
   @override
@@ -165,28 +177,30 @@ class _$_UserEntities implements _UserEntities {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserEntities &&
+            other is _$UserEntitiesImpl &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.description, description) ||
                 other.description == description));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, url, description);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserEntities
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserEntitiesCopyWith<_$_UserEntities> get copyWith =>
-      __$$_UserEntitiesCopyWithImpl<_$_UserEntities>(this, _$identity);
+  _$$UserEntitiesImplCopyWith<_$UserEntitiesImpl> get copyWith =>
+      __$$UserEntitiesImplCopyWithImpl<_$UserEntitiesImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserEntitiesToJson(
+    return _$$UserEntitiesImplToJson(
       this,
     );
   }
@@ -195,22 +209,24 @@ class _$_UserEntities implements _UserEntities {
 abstract class _UserEntities implements UserEntities {
   const factory _UserEntities(
       {final UserUrlEntity? url,
-      final UserDescriptionEntity? description}) = _$_UserEntities;
+      final UserDescriptionEntity? description}) = _$UserEntitiesImpl;
 
   factory _UserEntities.fromJson(Map<String, dynamic> json) =
-      _$_UserEntities.fromJson;
-
-  @override
+      _$UserEntitiesImpl.fromJson;
 
   /// Contains details about the user's profile website.
-  UserUrlEntity? get url;
   @override
+  UserUrlEntity? get url;
 
   /// Contains details about URLs, Hashtags, Cashtags, or mentions located
   /// within a user's description.
-  UserDescriptionEntity? get description;
   @override
-  @JsonKey(ignore: true)
-  _$$_UserEntitiesCopyWith<_$_UserEntities> get copyWith =>
+  UserDescriptionEntity? get description;
+
+  /// Create a copy of UserEntities
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UserEntitiesImplCopyWith<_$UserEntitiesImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

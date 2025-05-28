@@ -8,11 +8,12 @@ part of 'filtering_rule_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_FilteringRuleData _$$_FilteringRuleDataFromJson(Map json) => $checkedCreate(
-      r'_$_FilteringRuleData',
+_$FilteringRuleDataImpl _$$FilteringRuleDataImplFromJson(Map json) =>
+    $checkedCreate(
+      r'_$FilteringRuleDataImpl',
       json,
       ($checkedConvert) {
-        final val = _$_FilteringRuleData(
+        final val = _$FilteringRuleDataImpl(
           id: $checkedConvert('id', (v) => v as String),
           value: $checkedConvert('value', (v) => v as String),
           tag: $checkedConvert('tag', (v) => v as String?),
@@ -21,19 +22,10 @@ _$_FilteringRuleData _$$_FilteringRuleDataFromJson(Map json) => $checkedCreate(
       },
     );
 
-Map<String, dynamic> _$$_FilteringRuleDataToJson(
-    _$_FilteringRuleData instance) {
-  final val = <String, dynamic>{
-    'id': instance.id,
-    'value': instance.value,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('tag', instance.tag);
-  return val;
-}
+Map<String, dynamic> _$$FilteringRuleDataImplToJson(
+        _$FilteringRuleDataImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'value': instance.value,
+      if (instance.tag case final value?) 'tag': value,
+    };

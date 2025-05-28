@@ -12,7 +12,7 @@ part of 'filtering_rule_summary.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 FilteringRuleSummary _$FilteringRuleSummaryFromJson(Map<String, dynamic> json) {
   return _FilteringRuleSummary.fromJson(json);
@@ -36,8 +36,12 @@ mixin _$FilteringRuleSummary {
   @JsonKey(name: 'not_deleted')
   int? get notDeletedCount => throw _privateConstructorUsedError;
 
+  /// Serializes this FilteringRuleSummary to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of FilteringRuleSummary
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $FilteringRuleSummaryCopyWith<FilteringRuleSummary> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -66,6 +70,8 @@ class _$FilteringRuleSummaryCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of FilteringRuleSummary
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -96,11 +102,11 @@ class _$FilteringRuleSummaryCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_FilteringRuleSummaryCopyWith<$Res>
+abstract class _$$FilteringRuleSummaryImplCopyWith<$Res>
     implements $FilteringRuleSummaryCopyWith<$Res> {
-  factory _$$_FilteringRuleSummaryCopyWith(_$_FilteringRuleSummary value,
-          $Res Function(_$_FilteringRuleSummary) then) =
-      __$$_FilteringRuleSummaryCopyWithImpl<$Res>;
+  factory _$$FilteringRuleSummaryImplCopyWith(_$FilteringRuleSummaryImpl value,
+          $Res Function(_$FilteringRuleSummaryImpl) then) =
+      __$$FilteringRuleSummaryImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -111,13 +117,15 @@ abstract class _$$_FilteringRuleSummaryCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_FilteringRuleSummaryCopyWithImpl<$Res>
-    extends _$FilteringRuleSummaryCopyWithImpl<$Res, _$_FilteringRuleSummary>
-    implements _$$_FilteringRuleSummaryCopyWith<$Res> {
-  __$$_FilteringRuleSummaryCopyWithImpl(_$_FilteringRuleSummary _value,
-      $Res Function(_$_FilteringRuleSummary) _then)
+class __$$FilteringRuleSummaryImplCopyWithImpl<$Res>
+    extends _$FilteringRuleSummaryCopyWithImpl<$Res, _$FilteringRuleSummaryImpl>
+    implements _$$FilteringRuleSummaryImplCopyWith<$Res> {
+  __$$FilteringRuleSummaryImplCopyWithImpl(_$FilteringRuleSummaryImpl _value,
+      $Res Function(_$FilteringRuleSummaryImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of FilteringRuleSummary
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -126,7 +134,7 @@ class __$$_FilteringRuleSummaryCopyWithImpl<$Res>
     Object? deletedCount = freezed,
     Object? notDeletedCount = freezed,
   }) {
-    return _then(_$_FilteringRuleSummary(
+    return _then(_$FilteringRuleSummaryImpl(
       createdCount: freezed == createdCount
           ? _value.createdCount
           : createdCount // ignore: cast_nullable_to_non_nullable
@@ -150,15 +158,15 @@ class __$$_FilteringRuleSummaryCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false)
-class _$_FilteringRuleSummary implements _FilteringRuleSummary {
-  const _$_FilteringRuleSummary(
+class _$FilteringRuleSummaryImpl implements _FilteringRuleSummary {
+  const _$FilteringRuleSummaryImpl(
       {@JsonKey(name: 'created') this.createdCount,
       @JsonKey(name: 'not_created') this.notCreatedCount,
       @JsonKey(name: 'deleted') this.deletedCount,
       @JsonKey(name: 'not_deleted') this.notDeletedCount});
 
-  factory _$_FilteringRuleSummary.fromJson(Map<String, dynamic> json) =>
-      _$$_FilteringRuleSummaryFromJson(json);
+  factory _$FilteringRuleSummaryImpl.fromJson(Map<String, dynamic> json) =>
+      _$$FilteringRuleSummaryImplFromJson(json);
 
   /// The count of created filtering rules.
   @override
@@ -186,10 +194,10 @@ class _$_FilteringRuleSummary implements _FilteringRuleSummary {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FilteringRuleSummary &&
+            other is _$FilteringRuleSummaryImpl &&
             (identical(other.createdCount, createdCount) ||
                 other.createdCount == createdCount) &&
             (identical(other.notCreatedCount, notCreatedCount) ||
@@ -200,21 +208,24 @@ class _$_FilteringRuleSummary implements _FilteringRuleSummary {
                 other.notDeletedCount == notDeletedCount));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, createdCount, notCreatedCount,
       deletedCount, notDeletedCount);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of FilteringRuleSummary
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FilteringRuleSummaryCopyWith<_$_FilteringRuleSummary> get copyWith =>
-      __$$_FilteringRuleSummaryCopyWithImpl<_$_FilteringRuleSummary>(
-          this, _$identity);
+  _$$FilteringRuleSummaryImplCopyWith<_$FilteringRuleSummaryImpl>
+      get copyWith =>
+          __$$FilteringRuleSummaryImplCopyWithImpl<_$FilteringRuleSummaryImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_FilteringRuleSummaryToJson(
+    return _$$FilteringRuleSummaryImplToJson(
       this,
     );
   }
@@ -226,33 +237,35 @@ abstract class _FilteringRuleSummary implements FilteringRuleSummary {
           @JsonKey(name: 'not_created') final int? notCreatedCount,
           @JsonKey(name: 'deleted') final int? deletedCount,
           @JsonKey(name: 'not_deleted') final int? notDeletedCount}) =
-      _$_FilteringRuleSummary;
+      _$FilteringRuleSummaryImpl;
 
   factory _FilteringRuleSummary.fromJson(Map<String, dynamic> json) =
-      _$_FilteringRuleSummary.fromJson;
-
-  @override
+      _$FilteringRuleSummaryImpl.fromJson;
 
   /// The count of created filtering rules.
+  @override
   @JsonKey(name: 'created')
   int? get createdCount;
-  @override
 
   /// The count of not created filtering rules.
+  @override
   @JsonKey(name: 'not_created')
   int? get notCreatedCount;
-  @override
 
   /// The count of deleted filtering rules.
+  @override
   @JsonKey(name: 'deleted')
   int? get deletedCount;
-  @override
 
   /// The count of not deleted filtering rules.
+  @override
   @JsonKey(name: 'not_deleted')
   int? get notDeletedCount;
+
+  /// Create a copy of FilteringRuleSummary
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_FilteringRuleSummaryCopyWith<_$_FilteringRuleSummary> get copyWith =>
-      throw _privateConstructorUsedError;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FilteringRuleSummaryImplCopyWith<_$FilteringRuleSummaryImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

@@ -8,7 +8,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 // 🌎 Project imports:
-import '../common/data.dart';
+//import '../common/data.dart';
 import '../common/locale.dart';
 
 part 'uploaded_media_data.freezed.dart';
@@ -16,21 +16,11 @@ part 'uploaded_media_data.g.dart';
 
 /// This object represents uploaded media data.
 @freezed
-class UploadedMediaData with _$UploadedMediaData implements Data {
-  @JsonSerializable(includeIfNull: false)
+class UploadedMediaData with _$UploadedMediaData {
   const factory UploadedMediaData({
-    /// The identifier for the uploaded media.
-    @JsonKey(name: 'media_id_string') required String id,
-
-    /// The date and time this media will expire.
-    required DateTime expiresAt,
-
-    /// The locale of this media.
-    ///
-    /// This field is only set if a .srt file is uploaded.
-    Locale? locale,
+    @JsonKey(name: 'media_id_string') required String mediaIdString,
   }) = _UploadedMediaData;
 
-  factory UploadedMediaData.fromJson(Map<String, Object?> json) =>
+  factory UploadedMediaData.fromJson(Map<String, dynamic> json) =>
       _$UploadedMediaDataFromJson(json);
 }

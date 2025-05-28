@@ -12,7 +12,7 @@ part of 'public_user_metrics.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PublicUserMetrics _$PublicUserMetricsFromJson(Map<String, dynamic> json) {
   return _PublicUserMetrics.fromJson(json);
@@ -32,8 +32,12 @@ mixin _$PublicUserMetrics {
   /// Number of lists that include this user.
   int get listedCount => throw _privateConstructorUsedError;
 
+  /// Serializes this PublicUserMetrics to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PublicUserMetrics
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PublicUserMetricsCopyWith<PublicUserMetrics> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -61,6 +65,8 @@ class _$PublicUserMetricsCopyWithImpl<$Res, $Val extends PublicUserMetrics>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PublicUserMetrics
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -91,11 +97,11 @@ class _$PublicUserMetricsCopyWithImpl<$Res, $Val extends PublicUserMetrics>
 }
 
 /// @nodoc
-abstract class _$$_PublicUserMetricsCopyWith<$Res>
+abstract class _$$PublicUserMetricsImplCopyWith<$Res>
     implements $PublicUserMetricsCopyWith<$Res> {
-  factory _$$_PublicUserMetricsCopyWith(_$_PublicUserMetrics value,
-          $Res Function(_$_PublicUserMetrics) then) =
-      __$$_PublicUserMetricsCopyWithImpl<$Res>;
+  factory _$$PublicUserMetricsImplCopyWith(_$PublicUserMetricsImpl value,
+          $Res Function(_$PublicUserMetricsImpl) then) =
+      __$$PublicUserMetricsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -106,13 +112,15 @@ abstract class _$$_PublicUserMetricsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PublicUserMetricsCopyWithImpl<$Res>
-    extends _$PublicUserMetricsCopyWithImpl<$Res, _$_PublicUserMetrics>
-    implements _$$_PublicUserMetricsCopyWith<$Res> {
-  __$$_PublicUserMetricsCopyWithImpl(
-      _$_PublicUserMetrics _value, $Res Function(_$_PublicUserMetrics) _then)
+class __$$PublicUserMetricsImplCopyWithImpl<$Res>
+    extends _$PublicUserMetricsCopyWithImpl<$Res, _$PublicUserMetricsImpl>
+    implements _$$PublicUserMetricsImplCopyWith<$Res> {
+  __$$PublicUserMetricsImplCopyWithImpl(_$PublicUserMetricsImpl _value,
+      $Res Function(_$PublicUserMetricsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PublicUserMetrics
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -121,7 +129,7 @@ class __$$_PublicUserMetricsCopyWithImpl<$Res>
     Object? tweetCount = null,
     Object? listedCount = null,
   }) {
-    return _then(_$_PublicUserMetrics(
+    return _then(_$PublicUserMetricsImpl(
       followersCount: null == followersCount
           ? _value.followersCount
           : followersCount // ignore: cast_nullable_to_non_nullable
@@ -144,15 +152,15 @@ class __$$_PublicUserMetricsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PublicUserMetrics implements _PublicUserMetrics {
-  const _$_PublicUserMetrics(
+class _$PublicUserMetricsImpl implements _PublicUserMetrics {
+  const _$PublicUserMetricsImpl(
       {required this.followersCount,
       required this.followingCount,
       required this.tweetCount,
       required this.listedCount});
 
-  factory _$_PublicUserMetrics.fromJson(Map<String, dynamic> json) =>
-      _$$_PublicUserMetricsFromJson(json);
+  factory _$PublicUserMetricsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PublicUserMetricsImplFromJson(json);
 
   /// Number of users who follow this user.
   @override
@@ -176,10 +184,10 @@ class _$_PublicUserMetrics implements _PublicUserMetrics {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PublicUserMetrics &&
+            other is _$PublicUserMetricsImpl &&
             (identical(other.followersCount, followersCount) ||
                 other.followersCount == followersCount) &&
             (identical(other.followingCount, followingCount) ||
@@ -190,21 +198,23 @@ class _$_PublicUserMetrics implements _PublicUserMetrics {
                 other.listedCount == listedCount));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, followersCount, followingCount, tweetCount, listedCount);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PublicUserMetrics
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PublicUserMetricsCopyWith<_$_PublicUserMetrics> get copyWith =>
-      __$$_PublicUserMetricsCopyWithImpl<_$_PublicUserMetrics>(
+  _$$PublicUserMetricsImplCopyWith<_$PublicUserMetricsImpl> get copyWith =>
+      __$$PublicUserMetricsImplCopyWithImpl<_$PublicUserMetricsImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PublicUserMetricsToJson(
+    return _$$PublicUserMetricsImplToJson(
       this,
     );
   }
@@ -215,29 +225,31 @@ abstract class _PublicUserMetrics implements PublicUserMetrics {
       {required final int followersCount,
       required final int followingCount,
       required final int tweetCount,
-      required final int listedCount}) = _$_PublicUserMetrics;
+      required final int listedCount}) = _$PublicUserMetricsImpl;
 
   factory _PublicUserMetrics.fromJson(Map<String, dynamic> json) =
-      _$_PublicUserMetrics.fromJson;
-
-  @override
+      _$PublicUserMetricsImpl.fromJson;
 
   /// Number of users who follow this user.
-  int get followersCount;
   @override
+  int get followersCount;
 
   /// Number of users this user is following.
-  int get followingCount;
   @override
+  int get followingCount;
 
   /// Number of Tweets (including Retweets) posted by this user.
-  int get tweetCount;
   @override
+  int get tweetCount;
 
   /// Number of lists that include this user.
-  int get listedCount;
   @override
-  @JsonKey(ignore: true)
-  _$$_PublicUserMetricsCopyWith<_$_PublicUserMetrics> get copyWith =>
+  int get listedCount;
+
+  /// Create a copy of PublicUserMetrics
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PublicUserMetricsImplCopyWith<_$PublicUserMetricsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

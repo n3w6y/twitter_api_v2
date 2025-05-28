@@ -12,7 +12,7 @@ part of 'dm_event_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 DMEventData _$DMEventDataFromJson(Map<String, dynamic> json) {
   return _DMEventData.fromJson(json);
@@ -50,8 +50,12 @@ mixin _$DMEventData {
   /// The timestamp of the Direct Message event creation.
   DateTime? get createdAt => throw _privateConstructorUsedError;
 
+  /// Serializes this DMEventData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DMEventData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DMEventDataCopyWith<DMEventData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -85,6 +89,8 @@ class _$DMEventDataCopyWithImpl<$Res, $Val extends DMEventData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DMEventData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -133,6 +139,8 @@ class _$DMEventDataCopyWithImpl<$Res, $Val extends DMEventData>
     ) as $Val);
   }
 
+  /// Create a copy of DMEventData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DMAttachmentsCopyWith<$Res>? get attachments {
@@ -147,11 +155,11 @@ class _$DMEventDataCopyWithImpl<$Res, $Val extends DMEventData>
 }
 
 /// @nodoc
-abstract class _$$_DMEventDataCopyWith<$Res>
+abstract class _$$DMEventDataImplCopyWith<$Res>
     implements $DMEventDataCopyWith<$Res> {
-  factory _$$_DMEventDataCopyWith(
-          _$_DMEventData value, $Res Function(_$_DMEventData) then) =
-      __$$_DMEventDataCopyWithImpl<$Res>;
+  factory _$$DMEventDataImplCopyWith(
+          _$DMEventDataImpl value, $Res Function(_$DMEventDataImpl) then) =
+      __$$DMEventDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -169,13 +177,15 @@ abstract class _$$_DMEventDataCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_DMEventDataCopyWithImpl<$Res>
-    extends _$DMEventDataCopyWithImpl<$Res, _$_DMEventData>
-    implements _$$_DMEventDataCopyWith<$Res> {
-  __$$_DMEventDataCopyWithImpl(
-      _$_DMEventData _value, $Res Function(_$_DMEventData) _then)
+class __$$DMEventDataImplCopyWithImpl<$Res>
+    extends _$DMEventDataCopyWithImpl<$Res, _$DMEventDataImpl>
+    implements _$$DMEventDataImplCopyWith<$Res> {
+  __$$DMEventDataImplCopyWithImpl(
+      _$DMEventDataImpl _value, $Res Function(_$DMEventDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DMEventData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -188,7 +198,7 @@ class __$$_DMEventDataCopyWithImpl<$Res>
     Object? attachments = freezed,
     Object? createdAt = freezed,
   }) {
-    return _then(_$_DMEventData(
+    return _then(_$DMEventDataImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -228,8 +238,8 @@ class __$$_DMEventDataCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false)
-class _$_DMEventData implements _DMEventData {
-  const _$_DMEventData(
+class _$DMEventDataImpl implements _DMEventData {
+  const _$DMEventDataImpl(
       {required this.id,
       required this.eventType,
       this.text,
@@ -240,8 +250,8 @@ class _$_DMEventData implements _DMEventData {
       this.createdAt})
       : _referencedTweets = referencedTweets;
 
-  factory _$_DMEventData.fromJson(Map<String, dynamic> json) =>
-      _$$_DMEventDataFromJson(json);
+  factory _$DMEventDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DMEventDataImplFromJson(json);
 
   /// The id of the Direct Message event.
   @override
@@ -300,10 +310,10 @@ class _$_DMEventData implements _DMEventData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DMEventData &&
+            other is _$DMEventDataImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.eventType, eventType) ||
                 other.eventType == eventType) &&
@@ -320,7 +330,7 @@ class _$_DMEventData implements _DMEventData {
                 other.createdAt == createdAt));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -333,15 +343,17 @@ class _$_DMEventData implements _DMEventData {
       attachments,
       createdAt);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DMEventData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DMEventDataCopyWith<_$_DMEventData> get copyWith =>
-      __$$_DMEventDataCopyWithImpl<_$_DMEventData>(this, _$identity);
+  _$$DMEventDataImplCopyWith<_$DMEventDataImpl> get copyWith =>
+      __$$DMEventDataImplCopyWithImpl<_$DMEventDataImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_DMEventDataToJson(
+    return _$$DMEventDataImplToJson(
       this,
     );
   }
@@ -356,50 +368,52 @@ abstract class _DMEventData implements DMEventData {
       @JsonKey(name: 'dm_conversation_id') final String? conversationId,
       final List<DMReferencedTweet>? referencedTweets,
       final DMAttachments? attachments,
-      final DateTime? createdAt}) = _$_DMEventData;
+      final DateTime? createdAt}) = _$DMEventDataImpl;
 
   factory _DMEventData.fromJson(Map<String, dynamic> json) =
-      _$_DMEventData.fromJson;
-
-  @override
+      _$DMEventDataImpl.fromJson;
 
   /// The id of the Direct Message event.
-  String get id;
   @override
+  String get id;
 
   /// The type of event.
-  DMEventType get eventType;
   @override
+  DMEventType get eventType;
 
   /// The text included in the Direct Message.
-  String? get text;
   @override
+  String? get text;
 
   /// The id of the user who sent the Direct Message.
-  String? get senderId;
   @override
+  String? get senderId;
 
   /// The id of the Direct Message to which the event belongs.
+  @override
   @JsonKey(name: 'dm_conversation_id')
   String? get conversationId;
-  @override
 
   /// Expansion of a "shared" Tweet in the Direct Message.
   ///
   /// If the parent Tweet is a Retweet, a Retweet with comment
   /// (also known as Quoted Tweet) or a Reply, it will include the
   /// related Tweet referenced to by its parent.
-  List<DMReferencedTweet>? get referencedTweets;
   @override
+  List<DMReferencedTweet>? get referencedTweets;
 
   /// The attached urls and media information for expansion.
-  DMAttachments? get attachments;
   @override
+  DMAttachments? get attachments;
 
   /// The timestamp of the Direct Message event creation.
-  DateTime? get createdAt;
   @override
-  @JsonKey(ignore: true)
-  _$$_DMEventDataCopyWith<_$_DMEventData> get copyWith =>
+  DateTime? get createdAt;
+
+  /// Create a copy of DMEventData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$DMEventDataImplCopyWith<_$DMEventDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

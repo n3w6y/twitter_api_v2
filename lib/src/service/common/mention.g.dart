@@ -8,32 +8,24 @@ part of 'mention.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Mention _$$_MentionFromJson(Map json) => $checkedCreate(
-      r'_$_Mention',
+_$MentionImpl _$$MentionImplFromJson(Map json) => $checkedCreate(
+      r'_$MentionImpl',
       json,
       ($checkedConvert) {
-        final val = _$_Mention(
+        final val = _$MentionImpl(
           id: $checkedConvert('id', (v) => v as String?),
           username: $checkedConvert('username', (v) => v as String),
-          start: $checkedConvert('start', (v) => v as int),
-          end: $checkedConvert('end', (v) => v as int),
+          start: $checkedConvert('start', (v) => (v as num).toInt()),
+          end: $checkedConvert('end', (v) => (v as num).toInt()),
         );
         return val;
       },
     );
 
-Map<String, dynamic> _$$_MentionToJson(_$_Mention instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('id', instance.id);
-  val['username'] = instance.username;
-  val['start'] = instance.start;
-  val['end'] = instance.end;
-  return val;
-}
+Map<String, dynamic> _$$MentionImplToJson(_$MentionImpl instance) =>
+    <String, dynamic>{
+      if (instance.id case final value?) 'id': value,
+      'username': instance.username,
+      'start': instance.start,
+      'end': instance.end,
+    };

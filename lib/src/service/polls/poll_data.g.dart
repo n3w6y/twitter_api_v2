@@ -8,11 +8,11 @@ part of 'poll_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PollData _$$_PollDataFromJson(Map json) => $checkedCreate(
-      r'_$_PollData',
+_$PollDataImpl _$$PollDataImplFromJson(Map json) => $checkedCreate(
+      r'_$PollDataImpl',
       json,
       ($checkedConvert) {
-        final val = _$_PollData(
+        final val = _$PollDataImpl(
           id: $checkedConvert('id', (v) => v as String),
           options: $checkedConvert(
               'options',
@@ -23,7 +23,7 @@ _$_PollData _$$_PollDataFromJson(Map json) => $checkedCreate(
           votingStatus: $checkedConvert('voting_status',
               (v) => $enumDecodeNullable(_$PollVotingStatusEnumMap, v)),
           durationMinutes:
-              $checkedConvert('duration_minutes', (v) => v as int?),
+              $checkedConvert('duration_minutes', (v) => (v as num?)?.toInt()),
           endAt: $checkedConvert('end_datetime',
               (v) => v == null ? null : DateTime.parse(v as String)),
         );
@@ -36,24 +36,16 @@ _$_PollData _$$_PollDataFromJson(Map json) => $checkedCreate(
       },
     );
 
-Map<String, dynamic> _$$_PollDataToJson(_$_PollData instance) {
-  final val = <String, dynamic>{
-    'id': instance.id,
-    'options': instance.options.map((e) => e.toJson()).toList(),
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull(
-      'voting_status', _$PollVotingStatusEnumMap[instance.votingStatus]);
-  writeNotNull('duration_minutes', instance.durationMinutes);
-  writeNotNull('end_datetime', instance.endAt?.toIso8601String());
-  return val;
-}
+Map<String, dynamic> _$$PollDataImplToJson(_$PollDataImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'options': instance.options.map((e) => e.toJson()).toList(),
+      if (_$PollVotingStatusEnumMap[instance.votingStatus] case final value?)
+        'voting_status': value,
+      if (instance.durationMinutes case final value?) 'duration_minutes': value,
+      if (instance.endAt?.toIso8601String() case final value?)
+        'end_datetime': value,
+    };
 
 const _$PollVotingStatusEnumMap = {
   PollVotingStatus.open: 'open',

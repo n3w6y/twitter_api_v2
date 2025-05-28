@@ -12,7 +12,7 @@ part of 'uploaded_media_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 UploadedMediaData _$UploadedMediaDataFromJson(Map<String, dynamic> json) {
   return _UploadedMediaData.fromJson(json);
@@ -20,20 +20,15 @@ UploadedMediaData _$UploadedMediaDataFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UploadedMediaData {
-  /// The identifier for the uploaded media.
   @JsonKey(name: 'media_id_string')
-  String get id => throw _privateConstructorUsedError;
+  String get mediaIdString => throw _privateConstructorUsedError;
 
-  /// The date and time this media will expire.
-  DateTime get expiresAt => throw _privateConstructorUsedError;
-
-  /// The locale of this media.
-  ///
-  /// This field is only set if a .srt file is uploaded.
-  Locale? get locale => throw _privateConstructorUsedError;
-
+  /// Serializes this UploadedMediaData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UploadedMediaData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UploadedMediaDataCopyWith<UploadedMediaData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -44,12 +39,7 @@ abstract class $UploadedMediaDataCopyWith<$Res> {
           UploadedMediaData value, $Res Function(UploadedMediaData) then) =
       _$UploadedMediaDataCopyWithImpl<$Res, UploadedMediaData>;
   @useResult
-  $Res call(
-      {@JsonKey(name: 'media_id_string') String id,
-      DateTime expiresAt,
-      Locale? locale});
-
-  $LocaleCopyWith<$Res>? get locale;
+  $Res call({@JsonKey(name: 'media_id_string') String mediaIdString});
 }
 
 /// @nodoc
@@ -62,148 +52,100 @@ class _$UploadedMediaDataCopyWithImpl<$Res, $Val extends UploadedMediaData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of UploadedMediaData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? expiresAt = null,
-    Object? locale = freezed,
+    Object? mediaIdString = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+      mediaIdString: null == mediaIdString
+          ? _value.mediaIdString
+          : mediaIdString // ignore: cast_nullable_to_non_nullable
               as String,
-      expiresAt: null == expiresAt
-          ? _value.expiresAt
-          : expiresAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      locale: freezed == locale
-          ? _value.locale
-          : locale // ignore: cast_nullable_to_non_nullable
-              as Locale?,
     ) as $Val);
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $LocaleCopyWith<$Res>? get locale {
-    if (_value.locale == null) {
-      return null;
-    }
-
-    return $LocaleCopyWith<$Res>(_value.locale!, (value) {
-      return _then(_value.copyWith(locale: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
-abstract class _$$_UploadedMediaDataCopyWith<$Res>
+abstract class _$$UploadedMediaDataImplCopyWith<$Res>
     implements $UploadedMediaDataCopyWith<$Res> {
-  factory _$$_UploadedMediaDataCopyWith(_$_UploadedMediaData value,
-          $Res Function(_$_UploadedMediaData) then) =
-      __$$_UploadedMediaDataCopyWithImpl<$Res>;
+  factory _$$UploadedMediaDataImplCopyWith(_$UploadedMediaDataImpl value,
+          $Res Function(_$UploadedMediaDataImpl) then) =
+      __$$UploadedMediaDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@JsonKey(name: 'media_id_string') String id,
-      DateTime expiresAt,
-      Locale? locale});
-
-  @override
-  $LocaleCopyWith<$Res>? get locale;
+  $Res call({@JsonKey(name: 'media_id_string') String mediaIdString});
 }
 
 /// @nodoc
-class __$$_UploadedMediaDataCopyWithImpl<$Res>
-    extends _$UploadedMediaDataCopyWithImpl<$Res, _$_UploadedMediaData>
-    implements _$$_UploadedMediaDataCopyWith<$Res> {
-  __$$_UploadedMediaDataCopyWithImpl(
-      _$_UploadedMediaData _value, $Res Function(_$_UploadedMediaData) _then)
+class __$$UploadedMediaDataImplCopyWithImpl<$Res>
+    extends _$UploadedMediaDataCopyWithImpl<$Res, _$UploadedMediaDataImpl>
+    implements _$$UploadedMediaDataImplCopyWith<$Res> {
+  __$$UploadedMediaDataImplCopyWithImpl(_$UploadedMediaDataImpl _value,
+      $Res Function(_$UploadedMediaDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UploadedMediaData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? expiresAt = null,
-    Object? locale = freezed,
+    Object? mediaIdString = null,
   }) {
-    return _then(_$_UploadedMediaData(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+    return _then(_$UploadedMediaDataImpl(
+      mediaIdString: null == mediaIdString
+          ? _value.mediaIdString
+          : mediaIdString // ignore: cast_nullable_to_non_nullable
               as String,
-      expiresAt: null == expiresAt
-          ? _value.expiresAt
-          : expiresAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      locale: freezed == locale
-          ? _value.locale
-          : locale // ignore: cast_nullable_to_non_nullable
-              as Locale?,
     ));
   }
 }
 
 /// @nodoc
+@JsonSerializable()
+class _$UploadedMediaDataImpl implements _UploadedMediaData {
+  const _$UploadedMediaDataImpl(
+      {@JsonKey(name: 'media_id_string') required this.mediaIdString});
 
-@JsonSerializable(includeIfNull: false)
-class _$_UploadedMediaData implements _UploadedMediaData {
-  const _$_UploadedMediaData(
-      {@JsonKey(name: 'media_id_string') required this.id,
-      required this.expiresAt,
-      this.locale});
+  factory _$UploadedMediaDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UploadedMediaDataImplFromJson(json);
 
-  factory _$_UploadedMediaData.fromJson(Map<String, dynamic> json) =>
-      _$$_UploadedMediaDataFromJson(json);
-
-  /// The identifier for the uploaded media.
   @override
   @JsonKey(name: 'media_id_string')
-  final String id;
-
-  /// The date and time this media will expire.
-  @override
-  final DateTime expiresAt;
-
-  /// The locale of this media.
-  ///
-  /// This field is only set if a .srt file is uploaded.
-  @override
-  final Locale? locale;
+  final String mediaIdString;
 
   @override
   String toString() {
-    return 'UploadedMediaData(id: $id, expiresAt: $expiresAt, locale: $locale)';
+    return 'UploadedMediaData(mediaIdString: $mediaIdString)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UploadedMediaData &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.expiresAt, expiresAt) ||
-                other.expiresAt == expiresAt) &&
-            (identical(other.locale, locale) || other.locale == locale));
+            other is _$UploadedMediaDataImpl &&
+            (identical(other.mediaIdString, mediaIdString) ||
+                other.mediaIdString == mediaIdString));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, expiresAt, locale);
+  int get hashCode => Object.hash(runtimeType, mediaIdString);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UploadedMediaData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UploadedMediaDataCopyWith<_$_UploadedMediaData> get copyWith =>
-      __$$_UploadedMediaDataCopyWithImpl<_$_UploadedMediaData>(
+  _$$UploadedMediaDataImplCopyWith<_$UploadedMediaDataImpl> get copyWith =>
+      __$$UploadedMediaDataImplCopyWithImpl<_$UploadedMediaDataImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UploadedMediaDataToJson(
+    return _$$UploadedMediaDataImplToJson(
       this,
     );
   }
@@ -211,30 +153,20 @@ class _$_UploadedMediaData implements _UploadedMediaData {
 
 abstract class _UploadedMediaData implements UploadedMediaData {
   const factory _UploadedMediaData(
-      {@JsonKey(name: 'media_id_string') required final String id,
-      required final DateTime expiresAt,
-      final Locale? locale}) = _$_UploadedMediaData;
+      {@JsonKey(name: 'media_id_string')
+      required final String mediaIdString}) = _$UploadedMediaDataImpl;
 
   factory _UploadedMediaData.fromJson(Map<String, dynamic> json) =
-      _$_UploadedMediaData.fromJson;
+      _$UploadedMediaDataImpl.fromJson;
 
   @override
-
-  /// The identifier for the uploaded media.
   @JsonKey(name: 'media_id_string')
-  String get id;
-  @override
+  String get mediaIdString;
 
-  /// The date and time this media will expire.
-  DateTime get expiresAt;
+  /// Create a copy of UploadedMediaData
+  /// with the given fields replaced by the non-null parameter values.
   @override
-
-  /// The locale of this media.
-  ///
-  /// This field is only set if a .srt file is uploaded.
-  Locale? get locale;
-  @override
-  @JsonKey(ignore: true)
-  _$$_UploadedMediaDataCopyWith<_$_UploadedMediaData> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UploadedMediaDataImplCopyWith<_$UploadedMediaDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'dm_event_meta.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 DMEventMeta _$DMEventMetaFromJson(Map<String, dynamic> json) {
   return _DMEventMeta.fromJson(json);
@@ -31,8 +31,12 @@ mixin _$DMEventMeta {
   /// requested, via the `pagination_token` request parameter.
   String? get previousToken => throw _privateConstructorUsedError;
 
+  /// Serializes this DMEventMeta to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DMEventMeta
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DMEventMetaCopyWith<DMEventMeta> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -56,6 +60,8 @@ class _$DMEventMetaCopyWithImpl<$Res, $Val extends DMEventMeta>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DMEventMeta
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -81,24 +87,26 @@ class _$DMEventMetaCopyWithImpl<$Res, $Val extends DMEventMeta>
 }
 
 /// @nodoc
-abstract class _$$_DMEventMetaCopyWith<$Res>
+abstract class _$$DMEventMetaImplCopyWith<$Res>
     implements $DMEventMetaCopyWith<$Res> {
-  factory _$$_DMEventMetaCopyWith(
-          _$_DMEventMeta value, $Res Function(_$_DMEventMeta) then) =
-      __$$_DMEventMetaCopyWithImpl<$Res>;
+  factory _$$DMEventMetaImplCopyWith(
+          _$DMEventMetaImpl value, $Res Function(_$DMEventMetaImpl) then) =
+      __$$DMEventMetaImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int resultCount, String? nextToken, String? previousToken});
 }
 
 /// @nodoc
-class __$$_DMEventMetaCopyWithImpl<$Res>
-    extends _$DMEventMetaCopyWithImpl<$Res, _$_DMEventMeta>
-    implements _$$_DMEventMetaCopyWith<$Res> {
-  __$$_DMEventMetaCopyWithImpl(
-      _$_DMEventMeta _value, $Res Function(_$_DMEventMeta) _then)
+class __$$DMEventMetaImplCopyWithImpl<$Res>
+    extends _$DMEventMetaCopyWithImpl<$Res, _$DMEventMetaImpl>
+    implements _$$DMEventMetaImplCopyWith<$Res> {
+  __$$DMEventMetaImplCopyWithImpl(
+      _$DMEventMetaImpl _value, $Res Function(_$DMEventMetaImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DMEventMeta
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -106,7 +114,7 @@ class __$$_DMEventMetaCopyWithImpl<$Res>
     Object? nextToken = freezed,
     Object? previousToken = freezed,
   }) {
-    return _then(_$_DMEventMeta(
+    return _then(_$DMEventMetaImpl(
       resultCount: null == resultCount
           ? _value.resultCount
           : resultCount // ignore: cast_nullable_to_non_nullable
@@ -126,12 +134,12 @@ class __$$_DMEventMetaCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false)
-class _$_DMEventMeta implements _DMEventMeta {
-  const _$_DMEventMeta(
+class _$DMEventMetaImpl implements _DMEventMeta {
+  const _$DMEventMetaImpl(
       {required this.resultCount, this.nextToken, this.previousToken});
 
-  factory _$_DMEventMeta.fromJson(Map<String, dynamic> json) =>
-      _$$_DMEventMetaFromJson(json);
+  factory _$DMEventMetaImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DMEventMetaImplFromJson(json);
 
   /// The number of results in the current page.
   @override
@@ -153,10 +161,10 @@ class _$_DMEventMeta implements _DMEventMeta {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DMEventMeta &&
+            other is _$DMEventMetaImpl &&
             (identical(other.resultCount, resultCount) ||
                 other.resultCount == resultCount) &&
             (identical(other.nextToken, nextToken) ||
@@ -165,20 +173,22 @@ class _$_DMEventMeta implements _DMEventMeta {
                 other.previousToken == previousToken));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, resultCount, nextToken, previousToken);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DMEventMeta
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DMEventMetaCopyWith<_$_DMEventMeta> get copyWith =>
-      __$$_DMEventMetaCopyWithImpl<_$_DMEventMeta>(this, _$identity);
+  _$$DMEventMetaImplCopyWith<_$DMEventMetaImpl> get copyWith =>
+      __$$DMEventMetaImplCopyWithImpl<_$DMEventMetaImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_DMEventMetaToJson(
+    return _$$DMEventMetaImplToJson(
       this,
     );
   }
@@ -188,27 +198,29 @@ abstract class _DMEventMeta implements DMEventMeta {
   const factory _DMEventMeta(
       {required final int resultCount,
       final String? nextToken,
-      final String? previousToken}) = _$_DMEventMeta;
+      final String? previousToken}) = _$DMEventMetaImpl;
 
   factory _DMEventMeta.fromJson(Map<String, dynamic> json) =
-      _$_DMEventMeta.fromJson;
-
-  @override
+      _$DMEventMetaImpl.fromJson;
 
   /// The number of results in the current page.
-  int get resultCount;
   @override
+  int get resultCount;
 
   /// A value that encodes the next 'page' of results that can be requested,
   /// via the `pagination_token` request parameter.
-  String? get nextToken;
   @override
+  String? get nextToken;
 
   /// A value that encodes the previous 'page' of results that can be
   /// requested, via the `pagination_token` request parameter.
-  String? get previousToken;
   @override
-  @JsonKey(ignore: true)
-  _$$_DMEventMetaCopyWith<_$_DMEventMeta> get copyWith =>
+  String? get previousToken;
+
+  /// Create a copy of DMEventMeta
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$DMEventMetaImplCopyWith<_$DMEventMetaImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

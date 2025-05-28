@@ -8,12 +8,13 @@ part of 'user_meta.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_UserMeta _$$_UserMetaFromJson(Map json) => $checkedCreate(
-      r'_$_UserMeta',
+_$UserMetaImpl _$$UserMetaImplFromJson(Map json) => $checkedCreate(
+      r'_$UserMetaImpl',
       json,
       ($checkedConvert) {
-        final val = _$_UserMeta(
-          resultCount: $checkedConvert('result_count', (v) => v as int),
+        final val = _$UserMetaImpl(
+          resultCount:
+              $checkedConvert('result_count', (v) => (v as num).toInt()),
           nextToken: $checkedConvert('next_token', (v) => v as String?),
           previousToken: $checkedConvert('previous_token', (v) => v as String?),
         );
@@ -26,18 +27,9 @@ _$_UserMeta _$$_UserMetaFromJson(Map json) => $checkedCreate(
       },
     );
 
-Map<String, dynamic> _$$_UserMetaToJson(_$_UserMeta instance) {
-  final val = <String, dynamic>{
-    'result_count': instance.resultCount,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('next_token', instance.nextToken);
-  writeNotNull('previous_token', instance.previousToken);
-  return val;
-}
+Map<String, dynamic> _$$UserMetaImplToJson(_$UserMetaImpl instance) =>
+    <String, dynamic>{
+      'result_count': instance.resultCount,
+      if (instance.nextToken case final value?) 'next_token': value,
+      if (instance.previousToken case final value?) 'previous_token': value,
+    };

@@ -12,7 +12,7 @@ part of 'user_withheld.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 UserWithheld _$UserWithheldFromJson(Map<String, dynamic> json) {
   return _UserWithheld.fromJson(json);
@@ -24,8 +24,12 @@ mixin _$UserWithheld {
   @JsonKey(name: 'country_codes')
   List<Country> get countries => throw _privateConstructorUsedError;
 
+  /// Serializes this UserWithheld to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UserWithheld
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UserWithheldCopyWith<UserWithheld> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +53,8 @@ class _$UserWithheldCopyWithImpl<$Res, $Val extends UserWithheld>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of UserWithheld
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -64,30 +70,32 @@ class _$UserWithheldCopyWithImpl<$Res, $Val extends UserWithheld>
 }
 
 /// @nodoc
-abstract class _$$_UserWithheldCopyWith<$Res>
+abstract class _$$UserWithheldImplCopyWith<$Res>
     implements $UserWithheldCopyWith<$Res> {
-  factory _$$_UserWithheldCopyWith(
-          _$_UserWithheld value, $Res Function(_$_UserWithheld) then) =
-      __$$_UserWithheldCopyWithImpl<$Res>;
+  factory _$$UserWithheldImplCopyWith(
+          _$UserWithheldImpl value, $Res Function(_$UserWithheldImpl) then) =
+      __$$UserWithheldImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@JsonKey(name: 'country_codes') List<Country> countries});
 }
 
 /// @nodoc
-class __$$_UserWithheldCopyWithImpl<$Res>
-    extends _$UserWithheldCopyWithImpl<$Res, _$_UserWithheld>
-    implements _$$_UserWithheldCopyWith<$Res> {
-  __$$_UserWithheldCopyWithImpl(
-      _$_UserWithheld _value, $Res Function(_$_UserWithheld) _then)
+class __$$UserWithheldImplCopyWithImpl<$Res>
+    extends _$UserWithheldCopyWithImpl<$Res, _$UserWithheldImpl>
+    implements _$$UserWithheldImplCopyWith<$Res> {
+  __$$UserWithheldImplCopyWithImpl(
+      _$UserWithheldImpl _value, $Res Function(_$UserWithheldImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserWithheld
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? countries = null,
   }) {
-    return _then(_$_UserWithheld(
+    return _then(_$UserWithheldImpl(
       countries: null == countries
           ? _value._countries
           : countries // ignore: cast_nullable_to_non_nullable
@@ -98,13 +106,13 @@ class __$$_UserWithheldCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserWithheld implements _UserWithheld {
-  const _$_UserWithheld(
+class _$UserWithheldImpl implements _UserWithheld {
+  const _$UserWithheldImpl(
       {@JsonKey(name: 'country_codes') required final List<Country> countries})
       : _countries = countries;
 
-  factory _$_UserWithheld.fromJson(Map<String, dynamic> json) =>
-      _$$_UserWithheldFromJson(json);
+  factory _$UserWithheldImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UserWithheldImplFromJson(json);
 
   /// Provides a list of countries where this user is not available.
   final List<Country> _countries;
@@ -124,28 +132,30 @@ class _$_UserWithheld implements _UserWithheld {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserWithheld &&
+            other is _$UserWithheldImpl &&
             const DeepCollectionEquality()
                 .equals(other._countries, _countries));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_countries));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserWithheld
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserWithheldCopyWith<_$_UserWithheld> get copyWith =>
-      __$$_UserWithheldCopyWithImpl<_$_UserWithheld>(this, _$identity);
+  _$$UserWithheldImplCopyWith<_$UserWithheldImpl> get copyWith =>
+      __$$UserWithheldImplCopyWithImpl<_$UserWithheldImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserWithheldToJson(
+    return _$$UserWithheldImplToJson(
       this,
     );
   }
@@ -154,18 +164,20 @@ class _$_UserWithheld implements _UserWithheld {
 abstract class _UserWithheld implements UserWithheld {
   const factory _UserWithheld(
       {@JsonKey(name: 'country_codes')
-          required final List<Country> countries}) = _$_UserWithheld;
+      required final List<Country> countries}) = _$UserWithheldImpl;
 
   factory _UserWithheld.fromJson(Map<String, dynamic> json) =
-      _$_UserWithheld.fromJson;
-
-  @override
+      _$UserWithheldImpl.fromJson;
 
   /// Provides a list of countries where this user is not available.
+  @override
   @JsonKey(name: 'country_codes')
   List<Country> get countries;
+
+  /// Create a copy of UserWithheld
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_UserWithheldCopyWith<_$_UserWithheld> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UserWithheldImplCopyWith<_$UserWithheldImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

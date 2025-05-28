@@ -12,7 +12,7 @@ part of 'geo_coordinates.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 GeoCoordinates _$GeoCoordinatesFromJson(Map<String, dynamic> json) {
   return _GeoCoordinates.fromJson(json);
@@ -29,8 +29,12 @@ mixin _$GeoCoordinates {
   /// shared their precise location.
   List<double> get coordinates => throw _privateConstructorUsedError;
 
+  /// Serializes this GeoCoordinates to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GeoCoordinates
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GeoCoordinatesCopyWith<GeoCoordinates> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -54,6 +58,8 @@ class _$GeoCoordinatesCopyWithImpl<$Res, $Val extends GeoCoordinates>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GeoCoordinates
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -74,31 +80,33 @@ class _$GeoCoordinatesCopyWithImpl<$Res, $Val extends GeoCoordinates>
 }
 
 /// @nodoc
-abstract class _$$_GeoCoordinatesCopyWith<$Res>
+abstract class _$$GeoCoordinatesImplCopyWith<$Res>
     implements $GeoCoordinatesCopyWith<$Res> {
-  factory _$$_GeoCoordinatesCopyWith(
-          _$_GeoCoordinates value, $Res Function(_$_GeoCoordinates) then) =
-      __$$_GeoCoordinatesCopyWithImpl<$Res>;
+  factory _$$GeoCoordinatesImplCopyWith(_$GeoCoordinatesImpl value,
+          $Res Function(_$GeoCoordinatesImpl) then) =
+      __$$GeoCoordinatesImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String type, List<double> coordinates});
 }
 
 /// @nodoc
-class __$$_GeoCoordinatesCopyWithImpl<$Res>
-    extends _$GeoCoordinatesCopyWithImpl<$Res, _$_GeoCoordinates>
-    implements _$$_GeoCoordinatesCopyWith<$Res> {
-  __$$_GeoCoordinatesCopyWithImpl(
-      _$_GeoCoordinates _value, $Res Function(_$_GeoCoordinates) _then)
+class __$$GeoCoordinatesImplCopyWithImpl<$Res>
+    extends _$GeoCoordinatesCopyWithImpl<$Res, _$GeoCoordinatesImpl>
+    implements _$$GeoCoordinatesImplCopyWith<$Res> {
+  __$$GeoCoordinatesImplCopyWithImpl(
+      _$GeoCoordinatesImpl _value, $Res Function(_$GeoCoordinatesImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GeoCoordinates
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? type = null,
     Object? coordinates = null,
   }) {
-    return _then(_$_GeoCoordinates(
+    return _then(_$GeoCoordinatesImpl(
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -113,13 +121,13 @@ class __$$_GeoCoordinatesCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_GeoCoordinates implements _GeoCoordinates {
-  const _$_GeoCoordinates(
+class _$GeoCoordinatesImpl implements _GeoCoordinates {
+  const _$GeoCoordinatesImpl(
       {required this.type, required final List<double> coordinates})
       : _coordinates = coordinates;
 
-  factory _$_GeoCoordinates.fromJson(Map<String, dynamic> json) =>
-      _$$_GeoCoordinatesFromJson(json);
+  factory _$GeoCoordinatesImpl.fromJson(Map<String, dynamic> json) =>
+      _$$GeoCoordinatesImplFromJson(json);
 
   /// Describes the type of coordinate. The only value supported at present
   /// is Point.
@@ -147,29 +155,32 @@ class _$_GeoCoordinates implements _GeoCoordinates {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GeoCoordinates &&
+            other is _$GeoCoordinatesImpl &&
             (identical(other.type, type) || other.type == type) &&
             const DeepCollectionEquality()
                 .equals(other._coordinates, _coordinates));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, type, const DeepCollectionEquality().hash(_coordinates));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GeoCoordinates
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GeoCoordinatesCopyWith<_$_GeoCoordinates> get copyWith =>
-      __$$_GeoCoordinatesCopyWithImpl<_$_GeoCoordinates>(this, _$identity);
+  _$$GeoCoordinatesImplCopyWith<_$GeoCoordinatesImpl> get copyWith =>
+      __$$GeoCoordinatesImplCopyWithImpl<_$GeoCoordinatesImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GeoCoordinatesToJson(
+    return _$$GeoCoordinatesImplToJson(
       this,
     );
   }
@@ -178,24 +189,26 @@ class _$_GeoCoordinates implements _GeoCoordinates {
 abstract class _GeoCoordinates implements GeoCoordinates {
   const factory _GeoCoordinates(
       {required final String type,
-      required final List<double> coordinates}) = _$_GeoCoordinates;
+      required final List<double> coordinates}) = _$GeoCoordinatesImpl;
 
   factory _GeoCoordinates.fromJson(Map<String, dynamic> json) =
-      _$_GeoCoordinates.fromJson;
-
-  @override
+      _$GeoCoordinatesImpl.fromJson;
 
   /// Describes the type of coordinate. The only value supported at present
   /// is Point.
-  String get type;
   @override
+  String get type;
 
   /// A pair of decimal values representing the precise location of the user
   /// (latitude, longitude). This value be `null` unless the user explicitly
   /// shared their precise location.
-  List<double> get coordinates;
   @override
-  @JsonKey(ignore: true)
-  _$$_GeoCoordinatesCopyWith<_$_GeoCoordinates> get copyWith =>
+  List<double> get coordinates;
+
+  /// Create a copy of GeoCoordinates
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$GeoCoordinatesImplCopyWith<_$GeoCoordinatesImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

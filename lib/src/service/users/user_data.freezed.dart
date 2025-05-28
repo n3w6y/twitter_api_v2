@@ -12,7 +12,7 @@ part of 'user_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 UserData _$UserDataFromJson(Map<String, dynamic> json) {
   return _UserData.fromJson(json);
@@ -123,8 +123,12 @@ mixin _$UserData {
   /// Contains withholding details for [withheld content](https://help.twitter.com/en/rules-and-policies/tweet-withheld-by-country), if applicable.
   UserWithheld? get withheld => throw _privateConstructorUsedError;
 
+  /// Serializes this UserData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UserData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UserDataCopyWith<UserData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -166,6 +170,8 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of UserData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -249,6 +255,8 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
     ) as $Val);
   }
 
+  /// Create a copy of UserData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserEntitiesCopyWith<$Res>? get entities {
@@ -261,6 +269,8 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
     });
   }
 
+  /// Create a copy of UserData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PublicUserMetricsCopyWith<$Res>? get publicMetrics {
@@ -273,6 +283,8 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
     });
   }
 
+  /// Create a copy of UserData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserWithheldCopyWith<$Res>? get withheld {
@@ -287,10 +299,11 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
 }
 
 /// @nodoc
-abstract class _$$_UserDataCopyWith<$Res> implements $UserDataCopyWith<$Res> {
-  factory _$$_UserDataCopyWith(
-          _$_UserData value, $Res Function(_$_UserData) then) =
-      __$$_UserDataCopyWithImpl<$Res>;
+abstract class _$$UserDataImplCopyWith<$Res>
+    implements $UserDataCopyWith<$Res> {
+  factory _$$UserDataImplCopyWith(
+          _$UserDataImpl value, $Res Function(_$UserDataImpl) then) =
+      __$$UserDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -319,13 +332,15 @@ abstract class _$$_UserDataCopyWith<$Res> implements $UserDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UserDataCopyWithImpl<$Res>
-    extends _$UserDataCopyWithImpl<$Res, _$_UserData>
-    implements _$$_UserDataCopyWith<$Res> {
-  __$$_UserDataCopyWithImpl(
-      _$_UserData _value, $Res Function(_$_UserData) _then)
+class __$$UserDataImplCopyWithImpl<$Res>
+    extends _$UserDataCopyWithImpl<$Res, _$UserDataImpl>
+    implements _$$UserDataImplCopyWith<$Res> {
+  __$$UserDataImplCopyWithImpl(
+      _$UserDataImpl _value, $Res Function(_$UserDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -345,7 +360,7 @@ class __$$_UserDataCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? withheld = freezed,
   }) {
-    return _then(_$_UserData(
+    return _then(_$UserDataImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -413,8 +428,8 @@ class __$$_UserDataCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false)
-class _$_UserData implements _UserData {
-  const _$_UserData(
+class _$UserDataImpl implements _UserData {
+  const _$UserDataImpl(
       {required this.id,
       required this.name,
       required this.username,
@@ -431,8 +446,8 @@ class _$_UserData implements _UserData {
       this.createdAt,
       this.withheld});
 
-  factory _$_UserData.fromJson(Map<String, dynamic> json) =>
-      _$$_UserDataFromJson(json);
+  factory _$UserDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UserDataImplFromJson(json);
 
   /// The unique identifier of this user.
   ///
@@ -558,10 +573,10 @@ class _$_UserData implements _UserData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserData &&
+            other is _$UserDataImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.username, username) ||
@@ -591,7 +606,7 @@ class _$_UserData implements _UserData {
                 other.withheld == withheld));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -611,15 +626,17 @@ class _$_UserData implements _UserData {
       createdAt,
       withheld);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserDataCopyWith<_$_UserData> get copyWith =>
-      __$$_UserDataCopyWithImpl<_$_UserData>(this, _$identity);
+  _$$UserDataImplCopyWith<_$UserDataImpl> get copyWith =>
+      __$$UserDataImplCopyWithImpl<_$UserDataImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserDataToJson(
+    return _$$UserDataImplToJson(
       this,
     );
   }
@@ -641,11 +658,10 @@ abstract class _UserData implements UserData {
       final UserEntities? entities,
       final PublicUserMetrics? publicMetrics,
       final DateTime? createdAt,
-      final UserWithheld? withheld}) = _$_UserData;
+      final UserWithheld? withheld}) = _$UserDataImpl;
 
-  factory _UserData.fromJson(Map<String, dynamic> json) = _$_UserData.fromJson;
-
-  @override
+  factory _UserData.fromJson(Map<String, dynamic> json) =
+      _$UserDataImpl.fromJson;
 
   /// The unique identifier of this user.
   ///
@@ -653,26 +669,26 @@ abstract class _UserData implements UserData {
   ///
   /// - Use this to programmatically retrieve information about a specific
   ///   Twitter user.
-  String get id;
   @override
+  String get id;
 
   /// The name of the user, as they’ve defined it on their profile.
   /// Not necessarily a person’s name. Typically capped at 50 characters,
   /// but subject to change.
-  String get name;
   @override
+  String get name;
 
   /// The Twitter screen name, handle, or alias that this user identifies
   /// themselves with. Usernames are unique but subject to change. Typically
   /// a maximum of 15 characters long, but some historical accounts may exist
   /// with longer names.
-  String get username;
   @override
+  String get username;
 
   /// The text of this user's profile description (also known as bio),
   /// if the user provided one.
-  String? get description;
   @override
+  String? get description;
 
   /// The URL specified in the user's profile, if present.
   ///
@@ -680,8 +696,8 @@ abstract class _UserData implements UserData {
   ///
   /// - A URL provided by a Twitter user in their profile.
   ///   This could be a homepage, but is not always the case.
-  String? get url;
   @override
+  String? get url;
 
   /// The URL to the profile image for this user, as shown on the user's
   /// profile.
@@ -689,21 +705,21 @@ abstract class _UserData implements UserData {
   /// ## How It Can Be Used
   ///
   /// - Can be used to download this user's profile image.
-  String? get profileImageUrl;
   @override
+  String? get profileImageUrl;
 
   /// The location specified in the user's profile, if the user provided one.
   /// As this is a freeform value, it may not indicate a valid location,
   /// but it may be fuzzily evaluated when performing searches with
   /// location queries.
-  String? get location;
   @override
+  String? get location;
 
   /// Indicates if this user has chosen to protect their Tweets
   /// (in other words, if this user's Tweets are private).
+  @override
   @JsonKey(name: 'protected')
   bool? get isProtected;
-  @override
 
   /// Indicates if this user is a verified Twitter User.
   ///
@@ -712,14 +728,14 @@ abstract class _UserData implements UserData {
   /// - Indicates whether or not this Twitter user has a verified account.
   ///   A verified account lets people know that an account of public
   ///   interest is authentic.
+  @override
   @JsonKey(name: 'verified')
   bool? get isVerified;
-  @override
 
   /// The Twitter Blue verified type of the user,
   /// eg: blue, government, business or none.
-  UserVerifiedType? get verifiedType;
   @override
+  UserVerifiedType? get verifiedType;
 
   /// Unique identifier of this user's pinned Tweet.
   ///
@@ -727,8 +743,8 @@ abstract class _UserData implements UserData {
   ///
   /// - Determine the Tweet pinned to the top of the user’s profile.
   ///   Can potentially be used to determine the user’s language.
-  String? get pinnedTweetId;
   @override
+  String? get pinnedTweetId;
 
   /// Contains details about text that has a special meaning in the user's
   /// description.
@@ -740,8 +756,8 @@ abstract class _UserData implements UserData {
   ///   description. Reference each respective entity for further details. All
   ///   user start indices are inclusive, while all user end indices are
   ///   exclusive.
-  UserEntities? get entities;
   @override
+  UserEntities? get entities;
 
   /// Contains details about activity for this user.
   ///
@@ -750,21 +766,25 @@ abstract class _UserData implements UserData {
   /// - Can potentially be used to determine a Twitter user’s reach or
   ///   influence, quantify the user’s range of interests, and the user’s
   ///   level of engagement on Twitter.
-  PublicUserMetrics? get publicMetrics;
   @override
+  PublicUserMetrics? get publicMetrics;
 
   /// The UTC date time that the user account was created on Twitter.
   ///
   /// ## How It Can Be Used
   ///
   /// - Can be used to determine how long a someone has been using Twitter.
-  DateTime? get createdAt;
   @override
+  DateTime? get createdAt;
 
   /// Contains withholding details for [withheld content](https://help.twitter.com/en/rules-and-policies/tweet-withheld-by-country), if applicable.
-  UserWithheld? get withheld;
   @override
-  @JsonKey(ignore: true)
-  _$$_UserDataCopyWith<_$_UserData> get copyWith =>
+  UserWithheld? get withheld;
+
+  /// Create a copy of UserData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UserDataImplCopyWith<_$UserDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

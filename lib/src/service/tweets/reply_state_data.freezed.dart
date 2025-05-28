@@ -12,7 +12,7 @@ part of 'reply_state_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ReplyStateData _$ReplyStateDataFromJson(Map<String, dynamic> json) {
   return _ReplyStateData.fromJson(json);
@@ -24,8 +24,12 @@ mixin _$ReplyStateData {
   @JsonKey(name: 'hidden')
   bool get isHidden => throw _privateConstructorUsedError;
 
+  /// Serializes this ReplyStateData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ReplyStateData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ReplyStateDataCopyWith<ReplyStateData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +53,8 @@ class _$ReplyStateDataCopyWithImpl<$Res, $Val extends ReplyStateData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ReplyStateData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -64,30 +70,32 @@ class _$ReplyStateDataCopyWithImpl<$Res, $Val extends ReplyStateData>
 }
 
 /// @nodoc
-abstract class _$$_ReplyStateDataCopyWith<$Res>
+abstract class _$$ReplyStateDataImplCopyWith<$Res>
     implements $ReplyStateDataCopyWith<$Res> {
-  factory _$$_ReplyStateDataCopyWith(
-          _$_ReplyStateData value, $Res Function(_$_ReplyStateData) then) =
-      __$$_ReplyStateDataCopyWithImpl<$Res>;
+  factory _$$ReplyStateDataImplCopyWith(_$ReplyStateDataImpl value,
+          $Res Function(_$ReplyStateDataImpl) then) =
+      __$$ReplyStateDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@JsonKey(name: 'hidden') bool isHidden});
 }
 
 /// @nodoc
-class __$$_ReplyStateDataCopyWithImpl<$Res>
-    extends _$ReplyStateDataCopyWithImpl<$Res, _$_ReplyStateData>
-    implements _$$_ReplyStateDataCopyWith<$Res> {
-  __$$_ReplyStateDataCopyWithImpl(
-      _$_ReplyStateData _value, $Res Function(_$_ReplyStateData) _then)
+class __$$ReplyStateDataImplCopyWithImpl<$Res>
+    extends _$ReplyStateDataCopyWithImpl<$Res, _$ReplyStateDataImpl>
+    implements _$$ReplyStateDataImplCopyWith<$Res> {
+  __$$ReplyStateDataImplCopyWithImpl(
+      _$ReplyStateDataImpl _value, $Res Function(_$ReplyStateDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ReplyStateData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? isHidden = null,
   }) {
-    return _then(_$_ReplyStateData(
+    return _then(_$ReplyStateDataImpl(
       isHidden: null == isHidden
           ? _value.isHidden
           : isHidden // ignore: cast_nullable_to_non_nullable
@@ -98,11 +106,11 @@ class __$$_ReplyStateDataCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReplyStateData implements _ReplyStateData {
-  const _$_ReplyStateData({@JsonKey(name: 'hidden') required this.isHidden});
+class _$ReplyStateDataImpl implements _ReplyStateData {
+  const _$ReplyStateDataImpl({@JsonKey(name: 'hidden') required this.isHidden});
 
-  factory _$_ReplyStateData.fromJson(Map<String, dynamic> json) =>
-      _$$_ReplyStateDataFromJson(json);
+  factory _$ReplyStateDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ReplyStateDataImplFromJson(json);
 
   /// Indicates if the Tweet was successfully hidden or unhidden.
   @override
@@ -115,27 +123,30 @@ class _$_ReplyStateData implements _ReplyStateData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReplyStateData &&
+            other is _$ReplyStateDataImpl &&
             (identical(other.isHidden, isHidden) ||
                 other.isHidden == isHidden));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, isHidden);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ReplyStateData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReplyStateDataCopyWith<_$_ReplyStateData> get copyWith =>
-      __$$_ReplyStateDataCopyWithImpl<_$_ReplyStateData>(this, _$identity);
+  _$$ReplyStateDataImplCopyWith<_$ReplyStateDataImpl> get copyWith =>
+      __$$ReplyStateDataImplCopyWithImpl<_$ReplyStateDataImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReplyStateDataToJson(
+    return _$$ReplyStateDataImplToJson(
       this,
     );
   }
@@ -144,18 +155,20 @@ class _$_ReplyStateData implements _ReplyStateData {
 abstract class _ReplyStateData implements ReplyStateData {
   const factory _ReplyStateData(
           {@JsonKey(name: 'hidden') required final bool isHidden}) =
-      _$_ReplyStateData;
+      _$ReplyStateDataImpl;
 
   factory _ReplyStateData.fromJson(Map<String, dynamic> json) =
-      _$_ReplyStateData.fromJson;
-
-  @override
+      _$ReplyStateDataImpl.fromJson;
 
   /// Indicates if the Tweet was successfully hidden or unhidden.
+  @override
   @JsonKey(name: 'hidden')
   bool get isHidden;
+
+  /// Create a copy of ReplyStateData
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_ReplyStateDataCopyWith<_$_ReplyStateData> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ReplyStateDataImplCopyWith<_$ReplyStateDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

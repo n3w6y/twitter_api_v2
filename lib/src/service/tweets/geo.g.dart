@@ -8,11 +8,11 @@ part of 'geo.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Geo _$$_GeoFromJson(Map json) => $checkedCreate(
-      r'_$_Geo',
+_$GeoImpl _$$GeoImplFromJson(Map json) => $checkedCreate(
+      r'_$GeoImpl',
       json,
       ($checkedConvert) {
-        final val = _$_Geo(
+        final val = _$GeoImpl(
           placeId: $checkedConvert('place_id', (v) => v as String?),
           coordinates: $checkedConvert(
               'coordinates',
@@ -26,16 +26,8 @@ _$_Geo _$$_GeoFromJson(Map json) => $checkedCreate(
       fieldKeyMap: const {'placeId': 'place_id'},
     );
 
-Map<String, dynamic> _$$_GeoToJson(_$_Geo instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('place_id', instance.placeId);
-  writeNotNull('coordinates', instance.coordinates?.toJson());
-  return val;
-}
+Map<String, dynamic> _$$GeoImplToJson(_$GeoImpl instance) => <String, dynamic>{
+      if (instance.placeId case final value?) 'place_id': value,
+      if (instance.coordinates?.toJson() case final value?)
+        'coordinates': value,
+    };

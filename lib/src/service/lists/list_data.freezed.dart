@@ -12,7 +12,7 @@ part of 'list_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ListData _$ListDataFromJson(Map<String, dynamic> json) {
   return _ListData.fromJson(json);
@@ -60,8 +60,12 @@ mixin _$ListData {
   /// - Can be used to determine how long a List has been on Twitter.
   DateTime? get createdAt => throw _privateConstructorUsedError;
 
+  /// Serializes this ListData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ListData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ListDataCopyWith<ListData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -92,6 +96,8 @@ class _$ListDataCopyWithImpl<$Res, $Val extends ListData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ListData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -142,10 +148,11 @@ class _$ListDataCopyWithImpl<$Res, $Val extends ListData>
 }
 
 /// @nodoc
-abstract class _$$_ListDataCopyWith<$Res> implements $ListDataCopyWith<$Res> {
-  factory _$$_ListDataCopyWith(
-          _$_ListData value, $Res Function(_$_ListData) then) =
-      __$$_ListDataCopyWithImpl<$Res>;
+abstract class _$$ListDataImplCopyWith<$Res>
+    implements $ListDataCopyWith<$Res> {
+  factory _$$ListDataImplCopyWith(
+          _$ListDataImpl value, $Res Function(_$ListDataImpl) then) =
+      __$$ListDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -160,13 +167,15 @@ abstract class _$$_ListDataCopyWith<$Res> implements $ListDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_ListDataCopyWithImpl<$Res>
-    extends _$ListDataCopyWithImpl<$Res, _$_ListData>
-    implements _$$_ListDataCopyWith<$Res> {
-  __$$_ListDataCopyWithImpl(
-      _$_ListData _value, $Res Function(_$_ListData) _then)
+class __$$ListDataImplCopyWithImpl<$Res>
+    extends _$ListDataCopyWithImpl<$Res, _$ListDataImpl>
+    implements _$$ListDataImplCopyWith<$Res> {
+  __$$ListDataImplCopyWithImpl(
+      _$ListDataImpl _value, $Res Function(_$ListDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ListData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -179,7 +188,7 @@ class __$$_ListDataCopyWithImpl<$Res>
     Object? isPrivate = freezed,
     Object? createdAt = freezed,
   }) {
-    return _then(_$_ListData(
+    return _then(_$ListDataImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -219,8 +228,8 @@ class __$$_ListDataCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false)
-class _$_ListData implements _ListData {
-  const _$_ListData(
+class _$ListDataImpl implements _ListData {
+  const _$ListDataImpl(
       {required this.id,
       required this.name,
       this.description,
@@ -230,8 +239,8 @@ class _$_ListData implements _ListData {
       @JsonKey(name: 'private') this.isPrivate,
       this.createdAt});
 
-  factory _$_ListData.fromJson(Map<String, dynamic> json) =>
-      _$$_ListDataFromJson(json);
+  factory _$ListDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ListDataImplFromJson(json);
 
   /// The unique identifier of this List.
   ///
@@ -287,10 +296,10 @@ class _$_ListData implements _ListData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ListData &&
+            other is _$ListDataImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
@@ -306,20 +315,22 @@ class _$_ListData implements _ListData {
                 other.createdAt == createdAt));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, description, ownerId,
       followerCount, memberCount, isPrivate, createdAt);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ListData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ListDataCopyWith<_$_ListData> get copyWith =>
-      __$$_ListDataCopyWithImpl<_$_ListData>(this, _$identity);
+  _$$ListDataImplCopyWith<_$ListDataImpl> get copyWith =>
+      __$$ListDataImplCopyWithImpl<_$ListDataImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ListDataToJson(
+    return _$$ListDataImplToJson(
       this,
     );
   }
@@ -334,11 +345,10 @@ abstract class _ListData implements ListData {
       final int? followerCount,
       final int? memberCount,
       @JsonKey(name: 'private') final bool? isPrivate,
-      final DateTime? createdAt}) = _$_ListData;
+      final DateTime? createdAt}) = _$ListDataImpl;
 
-  factory _ListData.fromJson(Map<String, dynamic> json) = _$_ListData.fromJson;
-
-  @override
+  factory _ListData.fromJson(Map<String, dynamic> json) =
+      _$ListDataImpl.fromJson;
 
   /// The unique identifier of this List.
   ///
@@ -346,16 +356,16 @@ abstract class _ListData implements ListData {
   ///
   /// - Use this to programmatically retrieve information about a specific
   ///   Twitter List.
-  String get id;
   @override
+  String get id;
 
   /// The name of the List, as defined when creating the List.
-  String get name;
   @override
+  String get name;
 
   /// A brief description to let users know about the List.
-  String? get description;
   @override
+  String? get description;
 
   /// Unique identifier of this List's owner.
   ///
@@ -364,30 +374,34 @@ abstract class _ListData implements ListData {
   /// - Returns the List owner ID. Can potentially be used to find out if
   ///   this specific user owns any other Lists. Can also be used to expand
   ///   user objects.
-  String? get ownerId;
   @override
+  String? get ownerId;
 
   /// Shows how many users follow this List.
-  int? get followerCount;
   @override
+  int? get followerCount;
 
   /// Shows how many members are part of this List.
-  int? get memberCount;
   @override
+  int? get memberCount;
 
   /// Indicates if the List is private.
+  @override
   @JsonKey(name: 'private')
   bool? get isPrivate;
-  @override
 
   /// The UTC date time that the List was created on Twitter.
   ///
   /// ## How It Can Be Used
   ///
   /// - Can be used to determine how long a List has been on Twitter.
-  DateTime? get createdAt;
   @override
-  @JsonKey(ignore: true)
-  _$$_ListDataCopyWith<_$_ListData> get copyWith =>
+  DateTime? get createdAt;
+
+  /// Create a copy of ListData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ListDataImplCopyWith<_$ListDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

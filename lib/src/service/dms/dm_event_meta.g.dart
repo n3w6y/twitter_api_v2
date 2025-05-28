@@ -8,12 +8,13 @@ part of 'dm_event_meta.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_DMEventMeta _$$_DMEventMetaFromJson(Map json) => $checkedCreate(
-      r'_$_DMEventMeta',
+_$DMEventMetaImpl _$$DMEventMetaImplFromJson(Map json) => $checkedCreate(
+      r'_$DMEventMetaImpl',
       json,
       ($checkedConvert) {
-        final val = _$_DMEventMeta(
-          resultCount: $checkedConvert('result_count', (v) => v as int),
+        final val = _$DMEventMetaImpl(
+          resultCount:
+              $checkedConvert('result_count', (v) => (v as num).toInt()),
           nextToken: $checkedConvert('next_token', (v) => v as String?),
           previousToken: $checkedConvert('previous_token', (v) => v as String?),
         );
@@ -26,18 +27,9 @@ _$_DMEventMeta _$$_DMEventMetaFromJson(Map json) => $checkedCreate(
       },
     );
 
-Map<String, dynamic> _$$_DMEventMetaToJson(_$_DMEventMeta instance) {
-  final val = <String, dynamic>{
-    'result_count': instance.resultCount,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('next_token', instance.nextToken);
-  writeNotNull('previous_token', instance.previousToken);
-  return val;
-}
+Map<String, dynamic> _$$DMEventMetaImplToJson(_$DMEventMetaImpl instance) =>
+    <String, dynamic>{
+      'result_count': instance.resultCount,
+      if (instance.nextToken case final value?) 'next_token': value,
+      if (instance.previousToken case final value?) 'previous_token': value,
+    };

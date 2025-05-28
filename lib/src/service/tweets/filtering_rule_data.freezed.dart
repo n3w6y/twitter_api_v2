@@ -12,7 +12,7 @@ part of 'filtering_rule_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 FilteringRuleData _$FilteringRuleDataFromJson(Map<String, dynamic> json) {
   return _FilteringRuleData.fromJson(json);
@@ -31,8 +31,12 @@ mixin _$FilteringRuleData {
   /// The tag label as defined when creating the rule.
   String? get tag => throw _privateConstructorUsedError;
 
+  /// Serializes this FilteringRuleData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of FilteringRuleData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $FilteringRuleDataCopyWith<FilteringRuleData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -56,6 +60,8 @@ class _$FilteringRuleDataCopyWithImpl<$Res, $Val extends FilteringRuleData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of FilteringRuleData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -81,24 +87,26 @@ class _$FilteringRuleDataCopyWithImpl<$Res, $Val extends FilteringRuleData>
 }
 
 /// @nodoc
-abstract class _$$_FilteringRuleDataCopyWith<$Res>
+abstract class _$$FilteringRuleDataImplCopyWith<$Res>
     implements $FilteringRuleDataCopyWith<$Res> {
-  factory _$$_FilteringRuleDataCopyWith(_$_FilteringRuleData value,
-          $Res Function(_$_FilteringRuleData) then) =
-      __$$_FilteringRuleDataCopyWithImpl<$Res>;
+  factory _$$FilteringRuleDataImplCopyWith(_$FilteringRuleDataImpl value,
+          $Res Function(_$FilteringRuleDataImpl) then) =
+      __$$FilteringRuleDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id, String value, String? tag});
 }
 
 /// @nodoc
-class __$$_FilteringRuleDataCopyWithImpl<$Res>
-    extends _$FilteringRuleDataCopyWithImpl<$Res, _$_FilteringRuleData>
-    implements _$$_FilteringRuleDataCopyWith<$Res> {
-  __$$_FilteringRuleDataCopyWithImpl(
-      _$_FilteringRuleData _value, $Res Function(_$_FilteringRuleData) _then)
+class __$$FilteringRuleDataImplCopyWithImpl<$Res>
+    extends _$FilteringRuleDataCopyWithImpl<$Res, _$FilteringRuleDataImpl>
+    implements _$$FilteringRuleDataImplCopyWith<$Res> {
+  __$$FilteringRuleDataImplCopyWithImpl(_$FilteringRuleDataImpl _value,
+      $Res Function(_$FilteringRuleDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of FilteringRuleData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -106,7 +114,7 @@ class __$$_FilteringRuleDataCopyWithImpl<$Res>
     Object? value = null,
     Object? tag = freezed,
   }) {
-    return _then(_$_FilteringRuleData(
+    return _then(_$FilteringRuleDataImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -126,11 +134,12 @@ class __$$_FilteringRuleDataCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false)
-class _$_FilteringRuleData implements _FilteringRuleData {
-  const _$_FilteringRuleData({required this.id, required this.value, this.tag});
+class _$FilteringRuleDataImpl implements _FilteringRuleData {
+  const _$FilteringRuleDataImpl(
+      {required this.id, required this.value, this.tag});
 
-  factory _$_FilteringRuleData.fromJson(Map<String, dynamic> json) =>
-      _$$_FilteringRuleDataFromJson(json);
+  factory _$FilteringRuleDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$FilteringRuleDataImplFromJson(json);
 
   /// Unique identifier of this rule. This is returned as a string in order
   /// to avoid complications with languages and tools that cannot
@@ -152,29 +161,31 @@ class _$_FilteringRuleData implements _FilteringRuleData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FilteringRuleData &&
+            other is _$FilteringRuleDataImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.value, value) || other.value == value) &&
             (identical(other.tag, tag) || other.tag == tag));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, value, tag);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of FilteringRuleData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FilteringRuleDataCopyWith<_$_FilteringRuleData> get copyWith =>
-      __$$_FilteringRuleDataCopyWithImpl<_$_FilteringRuleData>(
+  _$$FilteringRuleDataImplCopyWith<_$FilteringRuleDataImpl> get copyWith =>
+      __$$FilteringRuleDataImplCopyWithImpl<_$FilteringRuleDataImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_FilteringRuleDataToJson(
+    return _$$FilteringRuleDataImplToJson(
       this,
     );
   }
@@ -184,27 +195,29 @@ abstract class _FilteringRuleData implements FilteringRuleData {
   const factory _FilteringRuleData(
       {required final String id,
       required final String value,
-      final String? tag}) = _$_FilteringRuleData;
+      final String? tag}) = _$FilteringRuleDataImpl;
 
   factory _FilteringRuleData.fromJson(Map<String, dynamic> json) =
-      _$_FilteringRuleData.fromJson;
-
-  @override
+      _$FilteringRuleDataImpl.fromJson;
 
   /// Unique identifier of this rule. This is returned as a string in order
   /// to avoid complications with languages and tools that cannot
   /// handle large integers.
-  String get id;
   @override
+  String get id;
 
   /// The rule text as submitted when creating the rule.
-  String get value;
   @override
+  String get value;
 
   /// The tag label as defined when creating the rule.
-  String? get tag;
   @override
-  @JsonKey(ignore: true)
-  _$$_FilteringRuleDataCopyWith<_$_FilteringRuleData> get copyWith =>
+  String? get tag;
+
+  /// Create a copy of FilteringRuleData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FilteringRuleDataImplCopyWith<_$FilteringRuleDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

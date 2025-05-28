@@ -8,14 +8,14 @@ part of 'profile_banner_variant.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ProfileBannerVariant _$$_ProfileBannerVariantFromJson(Map json) =>
+_$ProfileBannerVariantImpl _$$ProfileBannerVariantImplFromJson(Map json) =>
     $checkedCreate(
-      r'_$_ProfileBannerVariant',
+      r'_$ProfileBannerVariantImpl',
       json,
       ($checkedConvert) {
-        final val = _$_ProfileBannerVariant(
-          height: $checkedConvert('h', (v) => v as int),
-          width: $checkedConvert('w', (v) => v as int),
+        final val = _$ProfileBannerVariantImpl(
+          height: $checkedConvert('h', (v) => (v as num).toInt()),
+          width: $checkedConvert('w', (v) => (v as num).toInt()),
           url: $checkedConvert('url', (v) => v as String),
         );
         return val;
@@ -23,8 +23,8 @@ _$_ProfileBannerVariant _$$_ProfileBannerVariantFromJson(Map json) =>
       fieldKeyMap: const {'height': 'h', 'width': 'w'},
     );
 
-Map<String, dynamic> _$$_ProfileBannerVariantToJson(
-        _$_ProfileBannerVariant instance) =>
+Map<String, dynamic> _$$ProfileBannerVariantImplToJson(
+        _$ProfileBannerVariantImpl instance) =>
     <String, dynamic>{
       'h': instance.height,
       'w': instance.width,

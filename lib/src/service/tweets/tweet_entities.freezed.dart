@@ -12,7 +12,7 @@ part of 'tweet_entities.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 TweetEntities _$TweetEntitiesFromJson(Map<String, dynamic> json) {
   return _TweetEntities.fromJson(json);
@@ -35,8 +35,12 @@ mixin _$TweetEntities {
   /// Contains details about text recognized as a URL.
   List<Url>? get urls => throw _privateConstructorUsedError;
 
+  /// Serializes this TweetEntities to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TweetEntities
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TweetEntitiesCopyWith<TweetEntities> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -65,6 +69,8 @@ class _$TweetEntitiesCopyWithImpl<$Res, $Val extends TweetEntities>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TweetEntities
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -100,11 +106,11 @@ class _$TweetEntitiesCopyWithImpl<$Res, $Val extends TweetEntities>
 }
 
 /// @nodoc
-abstract class _$$_TweetEntitiesCopyWith<$Res>
+abstract class _$$TweetEntitiesImplCopyWith<$Res>
     implements $TweetEntitiesCopyWith<$Res> {
-  factory _$$_TweetEntitiesCopyWith(
-          _$_TweetEntities value, $Res Function(_$_TweetEntities) then) =
-      __$$_TweetEntitiesCopyWithImpl<$Res>;
+  factory _$$TweetEntitiesImplCopyWith(
+          _$TweetEntitiesImpl value, $Res Function(_$TweetEntitiesImpl) then) =
+      __$$TweetEntitiesImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -116,13 +122,15 @@ abstract class _$$_TweetEntitiesCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_TweetEntitiesCopyWithImpl<$Res>
-    extends _$TweetEntitiesCopyWithImpl<$Res, _$_TweetEntities>
-    implements _$$_TweetEntitiesCopyWith<$Res> {
-  __$$_TweetEntitiesCopyWithImpl(
-      _$_TweetEntities _value, $Res Function(_$_TweetEntities) _then)
+class __$$TweetEntitiesImplCopyWithImpl<$Res>
+    extends _$TweetEntitiesCopyWithImpl<$Res, _$TweetEntitiesImpl>
+    implements _$$TweetEntitiesImplCopyWith<$Res> {
+  __$$TweetEntitiesImplCopyWithImpl(
+      _$TweetEntitiesImpl _value, $Res Function(_$TweetEntitiesImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TweetEntities
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -132,7 +140,7 @@ class __$$_TweetEntitiesCopyWithImpl<$Res>
     Object? mentions = freezed,
     Object? urls = freezed,
   }) {
-    return _then(_$_TweetEntities(
+    return _then(_$TweetEntitiesImpl(
       annotations: freezed == annotations
           ? _value._annotations
           : annotations // ignore: cast_nullable_to_non_nullable
@@ -160,8 +168,8 @@ class __$$_TweetEntitiesCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false)
-class _$_TweetEntities implements _TweetEntities {
-  const _$_TweetEntities(
+class _$TweetEntitiesImpl implements _TweetEntities {
+  const _$TweetEntitiesImpl(
       {final List<TweetAnnotation>? annotations,
       final List<Tag>? hashtags,
       final List<Tag>? cashtags,
@@ -173,8 +181,8 @@ class _$_TweetEntities implements _TweetEntities {
         _mentions = mentions,
         _urls = urls;
 
-  factory _$_TweetEntities.fromJson(Map<String, dynamic> json) =>
-      _$$_TweetEntitiesFromJson(json);
+  factory _$TweetEntitiesImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TweetEntitiesImplFromJson(json);
 
   /// Contains details about annotations relative to the text within a Tweet.
   final List<TweetAnnotation>? _annotations;
@@ -247,10 +255,10 @@ class _$_TweetEntities implements _TweetEntities {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TweetEntities &&
+            other is _$TweetEntitiesImpl &&
             const DeepCollectionEquality()
                 .equals(other._annotations, _annotations) &&
             const DeepCollectionEquality().equals(other._hashtags, _hashtags) &&
@@ -259,7 +267,7 @@ class _$_TweetEntities implements _TweetEntities {
             const DeepCollectionEquality().equals(other._urls, _urls));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -269,15 +277,17 @@ class _$_TweetEntities implements _TweetEntities {
       const DeepCollectionEquality().hash(_mentions),
       const DeepCollectionEquality().hash(_urls));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TweetEntities
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TweetEntitiesCopyWith<_$_TweetEntities> get copyWith =>
-      __$$_TweetEntitiesCopyWithImpl<_$_TweetEntities>(this, _$identity);
+  _$$TweetEntitiesImplCopyWith<_$TweetEntitiesImpl> get copyWith =>
+      __$$TweetEntitiesImplCopyWithImpl<_$TweetEntitiesImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TweetEntitiesToJson(
+    return _$$TweetEntitiesImplToJson(
       this,
     );
   }
@@ -289,33 +299,35 @@ abstract class _TweetEntities implements TweetEntities {
       final List<Tag>? hashtags,
       final List<Tag>? cashtags,
       final List<Mention>? mentions,
-      final List<Url>? urls}) = _$_TweetEntities;
+      final List<Url>? urls}) = _$TweetEntitiesImpl;
 
   factory _TweetEntities.fromJson(Map<String, dynamic> json) =
-      _$_TweetEntities.fromJson;
-
-  @override
+      _$TweetEntitiesImpl.fromJson;
 
   /// Contains details about annotations relative to the text within a Tweet.
-  List<TweetAnnotation>? get annotations;
   @override
+  List<TweetAnnotation>? get annotations;
 
   /// Contains details about text recognized as a Hashtag.
-  List<Tag>? get hashtags;
   @override
+  List<Tag>? get hashtags;
 
   /// Contains details about text recognized as a Cashtag.
-  List<Tag>? get cashtags;
   @override
+  List<Tag>? get cashtags;
 
   /// Contains details about text recognized as a user mention.
-  List<Mention>? get mentions;
   @override
+  List<Mention>? get mentions;
 
   /// Contains details about text recognized as a URL.
-  List<Url>? get urls;
   @override
-  @JsonKey(ignore: true)
-  _$$_TweetEntitiesCopyWith<_$_TweetEntities> get copyWith =>
+  List<Url>? get urls;
+
+  /// Create a copy of TweetEntities
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$TweetEntitiesImplCopyWith<_$TweetEntitiesImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

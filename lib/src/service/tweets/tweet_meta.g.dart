@@ -8,14 +8,15 @@ part of 'tweet_meta.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TweetMeta _$$_TweetMetaFromJson(Map json) => $checkedCreate(
-      r'_$_TweetMeta',
+_$TweetMetaImpl _$$TweetMetaImplFromJson(Map json) => $checkedCreate(
+      r'_$TweetMetaImpl',
       json,
       ($checkedConvert) {
-        final val = _$_TweetMeta(
+        final val = _$TweetMetaImpl(
           newestId: $checkedConvert('newest_id', (v) => v as String?),
           oldestId: $checkedConvert('oldest_id', (v) => v as String?),
-          resultCount: $checkedConvert('result_count', (v) => v as int?),
+          resultCount:
+              $checkedConvert('result_count', (v) => (v as num?)?.toInt()),
           nextToken: $checkedConvert('next_token', (v) => v as String?),
           previousToken: $checkedConvert('previous_token', (v) => v as String?),
         );
@@ -30,19 +31,11 @@ _$_TweetMeta _$$_TweetMetaFromJson(Map json) => $checkedCreate(
       },
     );
 
-Map<String, dynamic> _$$_TweetMetaToJson(_$_TweetMeta instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('newest_id', instance.newestId);
-  writeNotNull('oldest_id', instance.oldestId);
-  writeNotNull('result_count', instance.resultCount);
-  writeNotNull('next_token', instance.nextToken);
-  writeNotNull('previous_token', instance.previousToken);
-  return val;
-}
+Map<String, dynamic> _$$TweetMetaImplToJson(_$TweetMetaImpl instance) =>
+    <String, dynamic>{
+      if (instance.newestId case final value?) 'newest_id': value,
+      if (instance.oldestId case final value?) 'oldest_id': value,
+      if (instance.resultCount case final value?) 'result_count': value,
+      if (instance.nextToken case final value?) 'next_token': value,
+      if (instance.previousToken case final value?) 'previous_token': value,
+    };

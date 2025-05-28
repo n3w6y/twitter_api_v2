@@ -8,7 +8,7 @@ import 'dart:typed_data';
 
 // 📦 Package imports:
 import 'package:http/http.dart';
-import 'package:mime/mime.dart';
+import 'package:mime/mime.dart'; // Import this package for mime type detection
 
 // 🌎 Project imports:
 import '../../core/client/client_context.dart';

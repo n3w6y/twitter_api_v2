@@ -1,140 +1,128 @@
-// Copyright 2022 Kato Shinya. All rights reserved.
-// Redistribution and use in source and binary forms, with or without
-// modification, are permitted provided the conditions.
-
-// 🎯 Dart imports:
 import 'dart:convert';
-
-// 📦 Package imports:
 import 'package:http/http.dart' as http;
 import 'package:oauth1/oauth1.dart' as oauth1;
+import 'package:twitter_api_v2/src/core/client/client.dart';
+import 'package:twitter_api_v2/src/core/exception/data_not_found_exception.dart';
+import 'package:twitter_api_v2/src/core/exception/rate_limit_exceeded_exception.dart';
+import 'package:twitter_api_v2/src/core/exception/twitter_exception.dart';
+import 'package:twitter_api_v2/src/core/exception/unauthorized_exception.dart';
+import 'package:twitter_api_v2/src/service/common/rate_limit.dart';
+import 'package:twitter_api_v2/src/service/response/twitter_response.dart';
+import 'package:twitter_api_v2/src/service/response/twitter_request.dart';
 
-// 🌎 Project imports:
-import 'client.dart';
+class OAuth1Client implements Client {
+  OAuth1Client({
+    required this.clientCredentials,
+    required this.credentials,
+    required this.timeout,
+  }) : _httpClient = http.Client();
 
-class OAuth1Client extends Client {
-  const OAuth1Client({
-    required String consumerKey,
-    required String consumerSecret,
-    required String accessToken,
-    required String accessTokenSecret,
-  })  : _consumerKey = consumerKey,
-        _consumerSecret = consumerSecret,
-        _accessToken = accessToken,
-        _accessTokenSecret = accessTokenSecret;
+  final oauth1.ClientCredentials clientCredentials;
+  final oauth1.Credentials credentials;
+  final Duration timeout;
+  final http.Client _httpClient;
 
-  /// The key to authenticate OAuth 1.0a
-  final String _consumerKey;
-
-  /// The key secret to authenticate OAuth 1.0a
-  final String _consumerSecret;
-
-  /// The token to authenticate OAuth 1.0a
-  final String _accessToken;
-
-  /// The token secret to authenticate OAuth 1.0a
-  final String _accessTokenSecret;
-
-  oauth1.Platform get _platform => oauth1.Platform(
-        'https://api.twitter.com/oauth/request_token',
-        'https://api.twitter.com/oauth/authorize',
-        'https://api.twitter.com/oauth/access_token',
+  oauth1.Client get _oauthClient => oauth1.Client(
         oauth1.SignatureMethods.hmacSha1,
-      );
-
-  oauth1.ClientCredentials get _clientCredentials => oauth1.ClientCredentials(
-        _consumerKey,
-        _consumerSecret,
-      );
-
-  oauth1.Client get oauthClient => oauth1.Client(
-        _platform.signatureMethod,
-        _clientCredentials,
-        oauth1.Credentials(_accessToken, _accessTokenSecret),
+        clientCredentials,
+        credentials,
       );
 
   @override
-  Future<http.Response> get(
+  Future<TwitterResponse<D, M>> get<D, M>(
     Uri uri, {
-    required Duration timeout,
-  }) async =>
-      await oauthClient.get(uri).timeout(timeout);
-
-  @override
-  Future<http.StreamedResponse> getStream(
-    http.BaseRequest request, {
-    Map<String, String> headers = const {},
-    required Duration timeout,
+    required D Function(Map<String, dynamic>) fromJsonData,
+    M Function(Map<String, dynamic>)? fromJsonMeta,
   }) async {
-    request.headers.addAll(headers);
-
-    return await oauthClient.send(request).timeout(timeout);
+    final response = await _oauthClient.get(uri).timeout(timeout);
+    return _processResponse(response, fromJsonData, fromJsonMeta);
   }
 
   @override
-  Future<http.Response> post(
+  Future<TwitterResponse<D, M>> post<D, M>(
     Uri uri, {
-    Map<String, String> headers = const {},
+    required D Function(Map<String, dynamic>) fromJsonData,
+    M Function(Map<String, dynamic>)? fromJsonMeta,
+    Map<String, String>? headers,
     dynamic body,
-    required Duration timeout,
-  }) async =>
-      await oauthClient
-          .post(
-            uri,
-            headers: headers,
-            body: body,
-            encoding: utf8,
-          )
-          .timeout(timeout);
+  }) async {
+    final response = await _oauthClient
+        .post(uri, headers: headers, body: body)
+        .timeout(timeout);
+    return _processResponse(response, fromJsonData, fromJsonMeta);
+  }
 
   @override
-  Future<http.Response> postMultipart(
-    http.MultipartRequest request, {
-    List<http.MultipartFile> files = const [],
-    required Duration timeout,
+  Future<TwitterResponse<D, M>> postMultipart<D, M>(
+    Uri uri, {
+    required D Function(Map<String, dynamic>) fromJsonData,
+    M Function(Map<String, dynamic>)? fromJsonMeta,
+    List<http.MultipartFile>? files,
+    Map<String, String>? data,
   }) async {
-    request.files.addAll(files);
+    final request = http.MultipartRequest('POST', uri);
+    if (files != null) request.files.addAll(files);
+    if (data != null) request.fields.addAll(data);
 
-    return http.Response.fromStream(await oauthClient.send(request))
-        .timeout(timeout)
-        .then((response) {
-      if (response.statusCode >= 200 && response.statusCode < 300) {
-        return response;
-      } else {
-        return Future.error(response);
+    final response = await _oauthClient
+        .post(uri, headers: request.headers, body: request.fields)
+        .timeout(timeout);
+    return _processResponse(response, fromJsonData, fromJsonMeta);
+  }
+
+  @override
+  Future<TwitterResponse<D, M>> delete<D, M>(
+    Uri uri, {
+    required D Function(Map<String, dynamic>) fromJsonData,
+    M Function(Map<String, dynamic>)? fromJsonMeta,
+  }) async {
+    final response = await _oauthClient.delete(uri).timeout(timeout);
+    return _processResponse(response, fromJsonData, fromJsonMeta);
+  }
+
+  TwitterResponse<D, M> _processResponse<D, M>(
+    http.Response response,
+    D Function(Map<String, dynamic>) fromJsonData,
+    M Function(Map<String, dynamic>)? fromJsonMeta,
+  ) {
+    final headers = response.headers;
+    final rateLimit = RateLimit.fromJson(headers);
+
+    if (response.statusCode >= 400) {
+      final jsonBody = jsonDecode(response.body);
+      final errorMessage = jsonBody['title'] ?? jsonBody['message'] ?? '';
+      final httpResponse =
+          http.Response(response.body, response.statusCode, headers: headers);
+
+      switch (response.statusCode) {
+        case 401:
+          throw UnauthorizedException(errorMessage, httpResponse);
+        case 404:
+          throw DataNotFoundException(errorMessage, httpResponse);
+        case 429:
+          throw RateLimitExceededException(errorMessage, httpResponse);
+        default:
+          throw TwitterException(errorMessage, httpResponse);
       }
-    });
+    }
+
+    final jsonBody = jsonDecode(response.body);
+
+    return TwitterResponse<D, M>(
+      headers: headers,
+      rateLimit: rateLimit,
+      status: response.statusCode,
+      request: TwitterRequest(
+        url: Uri.parse(response.request!.url.toString()),
+        method: response.request!.method.toLowerCase(),
+      ),
+      data: fromJsonData(jsonBody['data'] ?? jsonBody),
+      meta: fromJsonMeta != null && jsonBody['meta'] != null
+          ? fromJsonMeta(jsonBody['meta'])
+          : null,
+    );
   }
 
   @override
-  Future<http.Response> delete(
-    Uri uri, {
-    Map<String, String> headers = const {},
-    dynamic body,
-    required Duration timeout,
-  }) async =>
-      await oauthClient
-          .delete(
-            uri,
-            headers: headers,
-            body: body,
-            encoding: utf8,
-          )
-          .timeout(timeout);
-
-  @override
-  Future<http.Response> put(
-    Uri uri, {
-    Map<String, String> headers = const {},
-    dynamic body,
-    required Duration timeout,
-  }) async =>
-      await oauthClient
-          .put(
-            uri,
-            headers: headers,
-            body: body,
-            encoding: utf8,
-          )
-          .timeout(timeout);
+  void close() => _httpClient.close();
 }

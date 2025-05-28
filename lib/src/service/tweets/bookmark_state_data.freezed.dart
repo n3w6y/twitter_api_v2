@@ -12,7 +12,7 @@ part of 'bookmark_state_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 BookmarkStateData _$BookmarkStateDataFromJson(Map<String, dynamic> json) {
   return _BookmarkStateData.fromJson(json);
@@ -25,8 +25,12 @@ mixin _$BookmarkStateData {
   @JsonKey(name: 'bookmarked')
   bool get isBookmarked => throw _privateConstructorUsedError;
 
+  /// Serializes this BookmarkStateData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of BookmarkStateData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $BookmarkStateDataCopyWith<BookmarkStateData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -50,6 +54,8 @@ class _$BookmarkStateDataCopyWithImpl<$Res, $Val extends BookmarkStateData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of BookmarkStateData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -65,30 +71,32 @@ class _$BookmarkStateDataCopyWithImpl<$Res, $Val extends BookmarkStateData>
 }
 
 /// @nodoc
-abstract class _$$_BookmarkStateDataCopyWith<$Res>
+abstract class _$$BookmarkStateDataImplCopyWith<$Res>
     implements $BookmarkStateDataCopyWith<$Res> {
-  factory _$$_BookmarkStateDataCopyWith(_$_BookmarkStateData value,
-          $Res Function(_$_BookmarkStateData) then) =
-      __$$_BookmarkStateDataCopyWithImpl<$Res>;
+  factory _$$BookmarkStateDataImplCopyWith(_$BookmarkStateDataImpl value,
+          $Res Function(_$BookmarkStateDataImpl) then) =
+      __$$BookmarkStateDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@JsonKey(name: 'bookmarked') bool isBookmarked});
 }
 
 /// @nodoc
-class __$$_BookmarkStateDataCopyWithImpl<$Res>
-    extends _$BookmarkStateDataCopyWithImpl<$Res, _$_BookmarkStateData>
-    implements _$$_BookmarkStateDataCopyWith<$Res> {
-  __$$_BookmarkStateDataCopyWithImpl(
-      _$_BookmarkStateData _value, $Res Function(_$_BookmarkStateData) _then)
+class __$$BookmarkStateDataImplCopyWithImpl<$Res>
+    extends _$BookmarkStateDataCopyWithImpl<$Res, _$BookmarkStateDataImpl>
+    implements _$$BookmarkStateDataImplCopyWith<$Res> {
+  __$$BookmarkStateDataImplCopyWithImpl(_$BookmarkStateDataImpl _value,
+      $Res Function(_$BookmarkStateDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of BookmarkStateData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? isBookmarked = null,
   }) {
-    return _then(_$_BookmarkStateData(
+    return _then(_$BookmarkStateDataImpl(
       isBookmarked: null == isBookmarked
           ? _value.isBookmarked
           : isBookmarked // ignore: cast_nullable_to_non_nullable
@@ -99,12 +107,12 @@ class __$$_BookmarkStateDataCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_BookmarkStateData implements _BookmarkStateData {
-  const _$_BookmarkStateData(
+class _$BookmarkStateDataImpl implements _BookmarkStateData {
+  const _$BookmarkStateDataImpl(
       {@JsonKey(name: 'bookmarked') required this.isBookmarked});
 
-  factory _$_BookmarkStateData.fromJson(Map<String, dynamic> json) =>
-      _$$_BookmarkStateDataFromJson(json);
+  factory _$BookmarkStateDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BookmarkStateDataImplFromJson(json);
 
   /// Indicates whether the user bookmarks the specified Tweet as a result
   /// of this request.
@@ -118,28 +126,30 @@ class _$_BookmarkStateData implements _BookmarkStateData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BookmarkStateData &&
+            other is _$BookmarkStateDataImpl &&
             (identical(other.isBookmarked, isBookmarked) ||
                 other.isBookmarked == isBookmarked));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, isBookmarked);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of BookmarkStateData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BookmarkStateDataCopyWith<_$_BookmarkStateData> get copyWith =>
-      __$$_BookmarkStateDataCopyWithImpl<_$_BookmarkStateData>(
+  _$$BookmarkStateDataImplCopyWith<_$BookmarkStateDataImpl> get copyWith =>
+      __$$BookmarkStateDataImplCopyWithImpl<_$BookmarkStateDataImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BookmarkStateDataToJson(
+    return _$$BookmarkStateDataImplToJson(
       this,
     );
   }
@@ -148,19 +158,21 @@ class _$_BookmarkStateData implements _BookmarkStateData {
 abstract class _BookmarkStateData implements BookmarkStateData {
   const factory _BookmarkStateData(
           {@JsonKey(name: 'bookmarked') required final bool isBookmarked}) =
-      _$_BookmarkStateData;
+      _$BookmarkStateDataImpl;
 
   factory _BookmarkStateData.fromJson(Map<String, dynamic> json) =
-      _$_BookmarkStateData.fromJson;
-
-  @override
+      _$BookmarkStateDataImpl.fromJson;
 
   /// Indicates whether the user bookmarks the specified Tweet as a result
   /// of this request.
+  @override
   @JsonKey(name: 'bookmarked')
   bool get isBookmarked;
+
+  /// Create a copy of BookmarkStateData
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_BookmarkStateDataCopyWith<_$_BookmarkStateData> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BookmarkStateDataImplCopyWith<_$BookmarkStateDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

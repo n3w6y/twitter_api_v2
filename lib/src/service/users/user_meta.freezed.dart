@@ -12,7 +12,7 @@ part of 'user_meta.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 UserMeta _$UserMetaFromJson(Map<String, dynamic> json) {
   return _UserMeta.fromJson(json);
@@ -40,8 +40,12 @@ mixin _$UserMeta {
   /// you are on the first page of results.
   String? get previousToken => throw _privateConstructorUsedError;
 
+  /// Serializes this UserMeta to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UserMeta
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UserMetaCopyWith<UserMeta> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -64,6 +68,8 @@ class _$UserMetaCopyWithImpl<$Res, $Val extends UserMeta>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of UserMeta
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -89,23 +95,26 @@ class _$UserMetaCopyWithImpl<$Res, $Val extends UserMeta>
 }
 
 /// @nodoc
-abstract class _$$_UserMetaCopyWith<$Res> implements $UserMetaCopyWith<$Res> {
-  factory _$$_UserMetaCopyWith(
-          _$_UserMeta value, $Res Function(_$_UserMeta) then) =
-      __$$_UserMetaCopyWithImpl<$Res>;
+abstract class _$$UserMetaImplCopyWith<$Res>
+    implements $UserMetaCopyWith<$Res> {
+  factory _$$UserMetaImplCopyWith(
+          _$UserMetaImpl value, $Res Function(_$UserMetaImpl) then) =
+      __$$UserMetaImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int resultCount, String? nextToken, String? previousToken});
 }
 
 /// @nodoc
-class __$$_UserMetaCopyWithImpl<$Res>
-    extends _$UserMetaCopyWithImpl<$Res, _$_UserMeta>
-    implements _$$_UserMetaCopyWith<$Res> {
-  __$$_UserMetaCopyWithImpl(
-      _$_UserMeta _value, $Res Function(_$_UserMeta) _then)
+class __$$UserMetaImplCopyWithImpl<$Res>
+    extends _$UserMetaCopyWithImpl<$Res, _$UserMetaImpl>
+    implements _$$UserMetaImplCopyWith<$Res> {
+  __$$UserMetaImplCopyWithImpl(
+      _$UserMetaImpl _value, $Res Function(_$UserMetaImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserMeta
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -113,7 +122,7 @@ class __$$_UserMetaCopyWithImpl<$Res>
     Object? nextToken = freezed,
     Object? previousToken = freezed,
   }) {
-    return _then(_$_UserMeta(
+    return _then(_$UserMetaImpl(
       resultCount: null == resultCount
           ? _value.resultCount
           : resultCount // ignore: cast_nullable_to_non_nullable
@@ -133,12 +142,12 @@ class __$$_UserMetaCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false)
-class _$_UserMeta implements _UserMeta {
-  const _$_UserMeta(
+class _$UserMetaImpl implements _UserMeta {
+  const _$UserMetaImpl(
       {required this.resultCount, this.nextToken, this.previousToken});
 
-  factory _$_UserMeta.fromJson(Map<String, dynamic> json) =>
-      _$$_UserMetaFromJson(json);
+  factory _$UserMetaImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UserMetaImplFromJson(json);
 
   /// The number of users returned in this request. Note that this number
   /// may be lower than what was specified in the max_results query parameter.
@@ -169,10 +178,10 @@ class _$_UserMeta implements _UserMeta {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserMeta &&
+            other is _$UserMetaImpl &&
             (identical(other.resultCount, resultCount) ||
                 other.resultCount == resultCount) &&
             (identical(other.nextToken, nextToken) ||
@@ -181,20 +190,22 @@ class _$_UserMeta implements _UserMeta {
                 other.previousToken == previousToken));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, resultCount, nextToken, previousToken);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserMeta
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserMetaCopyWith<_$_UserMeta> get copyWith =>
-      __$$_UserMetaCopyWithImpl<_$_UserMeta>(this, _$identity);
+  _$$UserMetaImplCopyWith<_$UserMetaImpl> get copyWith =>
+      __$$UserMetaImplCopyWithImpl<_$UserMetaImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserMetaToJson(
+    return _$$UserMetaImplToJson(
       this,
     );
   }
@@ -204,16 +215,15 @@ abstract class _UserMeta implements UserMeta {
   const factory _UserMeta(
       {required final int resultCount,
       final String? nextToken,
-      final String? previousToken}) = _$_UserMeta;
+      final String? previousToken}) = _$UserMetaImpl;
 
-  factory _UserMeta.fromJson(Map<String, dynamic> json) = _$_UserMeta.fromJson;
-
-  @override
+  factory _UserMeta.fromJson(Map<String, dynamic> json) =
+      _$UserMetaImpl.fromJson;
 
   /// The number of users returned in this request. Note that this number
   /// may be lower than what was specified in the max_results query parameter.
-  int get resultCount;
   @override
+  int get resultCount;
 
   /// Pagination token for the next page of results. This value is returned
   /// when there are multiple pages of results, as the current request may
@@ -221,8 +231,8 @@ abstract class _UserMeta implements UserMeta {
   /// the value from this field in the pagination_token query parameter. When
   /// this field is not returned in the response, it means you've reached the
   /// last page of results, and that there are no further pages.
-  String? get nextToken;
   @override
+  String? get nextToken;
 
   /// Pagination token for the previous page of results. This value is
   /// returned when there are multiple pages of results, as the current
@@ -230,9 +240,13 @@ abstract class _UserMeta implements UserMeta {
   /// page, passing the value from this field in the pagination_token query
   /// parameter. When this field is not returned in the response, it means
   /// you are on the first page of results.
-  String? get previousToken;
   @override
-  @JsonKey(ignore: true)
-  _$$_UserMetaCopyWith<_$_UserMeta> get copyWith =>
+  String? get previousToken;
+
+  /// Create a copy of UserMeta
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UserMetaImplCopyWith<_$UserMetaImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

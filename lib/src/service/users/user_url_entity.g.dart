@@ -8,11 +8,11 @@ part of 'user_url_entity.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_UserUrlEntity _$$_UserUrlEntityFromJson(Map json) => $checkedCreate(
-      r'_$_UserUrlEntity',
+_$UserUrlEntityImpl _$$UserUrlEntityImplFromJson(Map json) => $checkedCreate(
+      r'_$UserUrlEntityImpl',
       json,
       ($checkedConvert) {
-        final val = _$_UserUrlEntity(
+        final val = _$UserUrlEntityImpl(
           urls: $checkedConvert(
               'urls',
               (v) => (v as List<dynamic>)
@@ -23,7 +23,7 @@ _$_UserUrlEntity _$$_UserUrlEntityFromJson(Map json) => $checkedCreate(
       },
     );
 
-Map<String, dynamic> _$$_UserUrlEntityToJson(_$_UserUrlEntity instance) =>
+Map<String, dynamic> _$$UserUrlEntityImplToJson(_$UserUrlEntityImpl instance) =>
     <String, dynamic>{
       'urls': instance.urls.map((e) => e.toJson()).toList(),
     };

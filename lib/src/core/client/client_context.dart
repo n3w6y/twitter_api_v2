@@ -1,231 +1,95 @@
-// Copyright 2022 Kato Shinya. All rights reserved.
-// Redistribution and use in source and binary forms, with or without
-// modification, are permitted provided the conditions.
-
-// 🎯 Dart imports:
-import 'dart:async';
-
-// 📦 Package imports:
 import 'package:http/http.dart' as http;
-import 'package:universal_io/io.dart';
+import 'package:oauth1/oauth1.dart' as oauth1;
+import 'package:twitter_api_v2/src/core/client/client.dart' as client;
+import 'package:twitter_api_v2/src/core/client/oauth_tokens.dart';
+import 'package:twitter_api_v2/src/core/client/oauth1_client.dart'
+    as oauth1_client;
+import 'package:twitter_api_v2/src/core/client/oauth2_client.dart'
+    as oauth2_client;
+import 'package:twitter_api_v2/src/service/response/twitter_response.dart';
 
-// 🌎 Project imports:
-import '../config/retry_config.dart';
-import 'client.dart';
-import 'client_resolver.dart';
-import 'oauth1_client.dart';
-import 'oauth2_client.dart';
-import 'oauth_tokens.dart';
-import 'retry_policy.dart';
-import 'stream_request.dart';
-import 'user_context.dart';
+enum AuthenticationType { oauth1, oauth2 }
 
-abstract class ClientContext {
-  /// Returns the new instance of [ClientContext].
-  factory ClientContext({
+class ClientContext {
+  ClientContext({
     required String bearerToken,
     OAuthTokens? oauthTokens,
     required Duration timeout,
-    RetryConfig? retryConfig,
-  }) =>
-      _ClientContext(
-        bearerToken: bearerToken,
-        oauthTokens: oauthTokens,
-        timeout: timeout,
-        retryConfig: retryConfig,
-      );
+  }) : _client = oauthTokens != null
+            ? oauth1_client.OAuth1Client(
+                clientCredentials: oauth1.ClientCredentials(
+                  oauthTokens.consumerKey,
+                  oauthTokens.consumerSecret,
+                ),
+                credentials: oauth1.Credentials(
+                  oauthTokens.accessToken,
+                  oauthTokens.accessTokenSecret,
+                ),
+                timeout: timeout,
+              )
+            : oauth2_client.OAuth2Client(
+                bearerToken: bearerToken,
+                timeout: timeout,
+              );
 
-  Future<http.Response> get(UserContext userContext, Uri uri);
+  final client.Client _client;
 
-  Future<http.Response> post(
-    UserContext userContext,
+  AuthenticationType get authenticationType =>
+      _client is oauth1_client.OAuth1Client
+          ? AuthenticationType.oauth1
+          : AuthenticationType.oauth2;
+
+  Future<TwitterResponse<D, M>> get<D, M>(
     Uri uri, {
-    Map<String, String> headers = const {},
-    dynamic body,
-  });
-
-  Future<http.Response> postMultipart(
-    UserContext userContext,
-    Uri uri, {
-    List<http.MultipartFile> files = const [],
-  });
-
-  Future<http.Response> delete(
-    UserContext userContext,
-    Uri uri,
-  );
-
-  Future<http.Response> put(
-    UserContext userContext,
-    Uri uri, {
-    Map<String, String> headers = const {},
-    dynamic body,
-  });
-
-  Future<http.StreamedResponse> getStream(
-    UserContext userContext,
-    StreamRequest request,
-  );
-}
-
-class _ClientContext implements ClientContext {
-  _ClientContext({
-    required String bearerToken,
-    OAuthTokens? oauthTokens,
-    required this.timeout,
-    RetryConfig? retryConfig,
-  })  : _clientResolver = ClientResolver(
-          oauthTokens != null
-              ? OAuth1Client(
-                  consumerKey: oauthTokens.consumerKey,
-                  consumerSecret: oauthTokens.consumerSecret,
-                  accessToken: oauthTokens.accessToken,
-                  accessTokenSecret: oauthTokens.accessTokenSecret,
-                )
-              : null,
-          bearerToken.isNotEmpty
-              ? OAuth2Client(bearerToken: bearerToken)
-              : null,
-        ),
-        _retryPolicy = RetryPolicy(retryConfig);
-
-  // The resolver of clients
-  final ClientResolver _clientResolver;
-
-  /// The policy of retry.
-  final RetryPolicy _retryPolicy;
-
-  /// The timeout
-  final Duration timeout;
-
-  @override
-  Future<http.Response> get(
-    UserContext userContext,
-    Uri uri,
-  ) async =>
-      await _challengeWithRetryIfNecessary(
-        _clientResolver.execute(userContext),
-        (client) async => await client.get(uri, timeout: timeout),
-      );
-
-  @override
-  Future<http.StreamedResponse> getStream(
-    UserContext userContext,
-    StreamRequest request,
-  ) async =>
-      await _challengeWithRetryIfNecessary(
-        _clientResolver.execute(userContext),
-        (client) async => await client.getStream(
-          //! A new BaseRequest must be generated when the request
-          //! to retrieve the Stream is sent again.
-          http.Request(
-            request.method,
-            request.uri,
-          ),
-          timeout: timeout,
-        ),
-      );
-
-  @override
-  Future<http.Response> post(
-    UserContext userContext,
-    Uri uri, {
-    Map<String, String> headers = const {},
-    body,
+    required D Function(Map<String, dynamic>) fromJsonData,
+    M Function(Map<String, dynamic>)? fromJsonMeta,
   }) async =>
-      await _challengeWithRetryIfNecessary(
-        _clientResolver.execute(userContext),
-        (client) async => await client.post(
-          uri,
-          headers: headers,
-          body: body,
-          timeout: timeout,
-        ),
+      await _client.get<D, M>(
+        uri,
+        fromJsonData: fromJsonData,
+        fromJsonMeta: fromJsonMeta,
       );
 
-  @override
-  Future<http.Response> postMultipart(
-    UserContext userContext,
+  Future<TwitterResponse<D, M>> post<D, M>(
     Uri uri, {
-    List<http.MultipartFile> files = const [],
-  }) async =>
-      await _challengeWithRetryIfNecessary(
-        _clientResolver.execute(userContext),
-        (client) async => await client.postMultipart(
-          http.MultipartRequest('POST', uri),
-          files: files,
-          timeout: timeout,
-        ),
-      );
-
-  @override
-  Future<http.Response> delete(
-    UserContext userContext,
-    Uri uri,
-  ) async =>
-      await _challengeWithRetryIfNecessary(
-        _clientResolver.execute(userContext),
-        (client) async => await client.delete(uri, timeout: timeout),
-      );
-
-  @override
-  Future<http.Response> put(
-    UserContext userContext,
-    Uri uri, {
-    Map<String, String> headers = const {},
+    required D Function(Map<String, dynamic>) fromJsonData,
+    M Function(Map<String, dynamic>)? fromJsonMeta,
+    Map<String, String>? headers,
     dynamic body,
   }) async =>
-      await _challengeWithRetryIfNecessary(
-        _clientResolver.execute(userContext),
-        (client) async => await client.put(
-          uri,
-          headers: headers,
-          body: body,
-          timeout: timeout,
-        ),
+      await _client.post<D, M>(
+        uri,
+        fromJsonData: fromJsonData,
+        fromJsonMeta: fromJsonMeta,
+        headers: headers,
+        body: body,
       );
 
-  dynamic _challengeWithRetryIfNecessary(
-    final Client client,
-    final dynamic Function(Client client) challenge, {
-    int retryCount = 0,
-  }) async {
-    try {
-      final response = await challenge.call(client);
+  Future<TwitterResponse<D, M>> postMultipart<D, M>(
+    Uri uri, {
+    required D Function(Map<String, dynamic>) fromJsonData,
+    M Function(Map<String, dynamic>)? fromJsonMeta,
+    List<http.MultipartFile>? files,
+    Map<String, String>? data,
+  }) async =>
+      await _client.postMultipart<D, M>(
+        uri,
+        fromJsonData: fromJsonData,
+        fromJsonMeta: fromJsonMeta,
+        files: files,
+        data: data,
+      );
 
-      if (response.statusCode == 500 || response.statusCode == 503) {
-        if (_retryPolicy.shouldRetry(retryCount)) {
-          return await _retry(client, challenge, retryCount: ++retryCount);
-        }
-      }
+  Future<TwitterResponse<D, M>> delete<D, M>(
+    Uri uri, {
+    required D Function(Map<String, dynamic>) fromJsonData,
+    M Function(Map<String, dynamic>)? fromJsonMeta,
+  }) async =>
+      await _client.delete<D, M>(
+        uri,
+        fromJsonData: fromJsonData,
+        fromJsonMeta: fromJsonMeta,
+      );
 
-      return response;
-    } on SocketException {
-      if (_retryPolicy.shouldRetry(retryCount)) {
-        return await _retry(client, challenge, retryCount: ++retryCount);
-      }
-
-      rethrow;
-    } on TimeoutException {
-      if (_retryPolicy.shouldRetry(retryCount)) {
-        return await _retry(client, challenge, retryCount: ++retryCount);
-      }
-
-      rethrow;
-    }
-  }
-
-  dynamic _retry(
-    final Client client,
-    final dynamic Function(Client client) challenge, {
-    int retryCount = 0,
-  }) async {
-    await _retryPolicy.wait(retryCount);
-
-    return await _challengeWithRetryIfNecessary(
-      client,
-      challenge,
-      retryCount: retryCount,
-    );
-  }
+  void close() => _client.close();
 }

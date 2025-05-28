@@ -8,12 +8,12 @@ part of 'batch_compliance_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_BatchComplianceData _$$_BatchComplianceDataFromJson(Map json) =>
+_$BatchComplianceDataImpl _$$BatchComplianceDataImplFromJson(Map json) =>
     $checkedCreate(
-      r'_$_BatchComplianceData',
+      r'_$BatchComplianceDataImpl',
       json,
       ($checkedConvert) {
-        final val = _$_BatchComplianceData(
+        final val = _$BatchComplianceDataImpl(
           id: $checkedConvert('id', (v) => v as String),
           type:
               $checkedConvert('type', (v) => $enumDecode(_$JobTypeEnumMap, v)),
@@ -40,8 +40,8 @@ _$_BatchComplianceData _$$_BatchComplianceDataFromJson(Map json) =>
       },
     );
 
-Map<String, dynamic> _$$_BatchComplianceDataToJson(
-        _$_BatchComplianceData instance) =>
+Map<String, dynamic> _$$BatchComplianceDataImplToJson(
+        _$BatchComplianceDataImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'type': _$JobTypeEnumMap[instance.type]!,

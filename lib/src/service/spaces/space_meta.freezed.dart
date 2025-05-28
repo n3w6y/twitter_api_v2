@@ -12,7 +12,7 @@ part of 'space_meta.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 SpaceMeta _$SpaceMetaFromJson(Map<String, dynamic> json) {
   return _SpaceMeta.fromJson(json);
@@ -23,8 +23,12 @@ mixin _$SpaceMeta {
   /// The number of spaces returned in this request.
   int? get resultCount => throw _privateConstructorUsedError;
 
+  /// Serializes this SpaceMeta to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SpaceMeta
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SpaceMetaCopyWith<SpaceMeta> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -47,6 +51,8 @@ class _$SpaceMetaCopyWithImpl<$Res, $Val extends SpaceMeta>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SpaceMeta
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -62,29 +68,32 @@ class _$SpaceMetaCopyWithImpl<$Res, $Val extends SpaceMeta>
 }
 
 /// @nodoc
-abstract class _$$_SpaceMetaCopyWith<$Res> implements $SpaceMetaCopyWith<$Res> {
-  factory _$$_SpaceMetaCopyWith(
-          _$_SpaceMeta value, $Res Function(_$_SpaceMeta) then) =
-      __$$_SpaceMetaCopyWithImpl<$Res>;
+abstract class _$$SpaceMetaImplCopyWith<$Res>
+    implements $SpaceMetaCopyWith<$Res> {
+  factory _$$SpaceMetaImplCopyWith(
+          _$SpaceMetaImpl value, $Res Function(_$SpaceMetaImpl) then) =
+      __$$SpaceMetaImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int? resultCount});
 }
 
 /// @nodoc
-class __$$_SpaceMetaCopyWithImpl<$Res>
-    extends _$SpaceMetaCopyWithImpl<$Res, _$_SpaceMeta>
-    implements _$$_SpaceMetaCopyWith<$Res> {
-  __$$_SpaceMetaCopyWithImpl(
-      _$_SpaceMeta _value, $Res Function(_$_SpaceMeta) _then)
+class __$$SpaceMetaImplCopyWithImpl<$Res>
+    extends _$SpaceMetaCopyWithImpl<$Res, _$SpaceMetaImpl>
+    implements _$$SpaceMetaImplCopyWith<$Res> {
+  __$$SpaceMetaImplCopyWithImpl(
+      _$SpaceMetaImpl _value, $Res Function(_$SpaceMetaImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SpaceMeta
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? resultCount = freezed,
   }) {
-    return _then(_$_SpaceMeta(
+    return _then(_$SpaceMetaImpl(
       resultCount: freezed == resultCount
           ? _value.resultCount
           : resultCount // ignore: cast_nullable_to_non_nullable
@@ -96,11 +105,11 @@ class __$$_SpaceMetaCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false)
-class _$_SpaceMeta implements _SpaceMeta {
-  const _$_SpaceMeta({required this.resultCount});
+class _$SpaceMetaImpl implements _SpaceMeta {
+  const _$SpaceMetaImpl({required this.resultCount});
 
-  factory _$_SpaceMeta.fromJson(Map<String, dynamic> json) =>
-      _$$_SpaceMetaFromJson(json);
+  factory _$SpaceMetaImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SpaceMetaImplFromJson(json);
 
   /// The number of spaces returned in this request.
   @override
@@ -112,44 +121,48 @@ class _$_SpaceMeta implements _SpaceMeta {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SpaceMeta &&
+            other is _$SpaceMetaImpl &&
             (identical(other.resultCount, resultCount) ||
                 other.resultCount == resultCount));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, resultCount);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SpaceMeta
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SpaceMetaCopyWith<_$_SpaceMeta> get copyWith =>
-      __$$_SpaceMetaCopyWithImpl<_$_SpaceMeta>(this, _$identity);
+  _$$SpaceMetaImplCopyWith<_$SpaceMetaImpl> get copyWith =>
+      __$$SpaceMetaImplCopyWithImpl<_$SpaceMetaImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SpaceMetaToJson(
+    return _$$SpaceMetaImplToJson(
       this,
     );
   }
 }
 
 abstract class _SpaceMeta implements SpaceMeta {
-  const factory _SpaceMeta({required final int? resultCount}) = _$_SpaceMeta;
+  const factory _SpaceMeta({required final int? resultCount}) = _$SpaceMetaImpl;
 
   factory _SpaceMeta.fromJson(Map<String, dynamic> json) =
-      _$_SpaceMeta.fromJson;
-
-  @override
+      _$SpaceMetaImpl.fromJson;
 
   /// The number of spaces returned in this request.
-  int? get resultCount;
   @override
-  @JsonKey(ignore: true)
-  _$$_SpaceMetaCopyWith<_$_SpaceMeta> get copyWith =>
+  int? get resultCount;
+
+  /// Create a copy of SpaceMeta
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SpaceMetaImplCopyWith<_$SpaceMetaImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

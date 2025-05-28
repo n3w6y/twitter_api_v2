@@ -8,11 +8,11 @@ part of 'like_state_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_LikeStateData _$$_LikeStateDataFromJson(Map json) => $checkedCreate(
-      r'_$_LikeStateData',
+_$LikeStateDataImpl _$$LikeStateDataImplFromJson(Map json) => $checkedCreate(
+      r'_$LikeStateDataImpl',
       json,
       ($checkedConvert) {
-        final val = _$_LikeStateData(
+        final val = _$LikeStateDataImpl(
           isLiked: $checkedConvert('liked', (v) => v as bool),
         );
         return val;
@@ -20,7 +20,7 @@ _$_LikeStateData _$$_LikeStateDataFromJson(Map json) => $checkedCreate(
       fieldKeyMap: const {'isLiked': 'liked'},
     );
 
-Map<String, dynamic> _$$_LikeStateDataToJson(_$_LikeStateData instance) =>
+Map<String, dynamic> _$$LikeStateDataImplToJson(_$LikeStateDataImpl instance) =>
     <String, dynamic>{
       'liked': instance.isLiked,
     };

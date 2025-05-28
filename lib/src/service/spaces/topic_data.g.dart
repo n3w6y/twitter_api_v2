@@ -8,11 +8,11 @@ part of 'topic_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TopicData _$$_TopicDataFromJson(Map json) => $checkedCreate(
-      r'_$_TopicData',
+_$TopicDataImpl _$$TopicDataImplFromJson(Map json) => $checkedCreate(
+      r'_$TopicDataImpl',
       json,
       ($checkedConvert) {
-        final val = _$_TopicData(
+        final val = _$TopicDataImpl(
           id: $checkedConvert('id', (v) => v as String),
           name: $checkedConvert('name', (v) => v as String),
           description: $checkedConvert('description', (v) => v as String),
@@ -21,7 +21,7 @@ _$_TopicData _$$_TopicDataFromJson(Map json) => $checkedCreate(
       },
     );
 
-Map<String, dynamic> _$$_TopicDataToJson(_$_TopicData instance) =>
+Map<String, dynamic> _$$TopicDataImplToJson(_$TopicDataImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

@@ -8,20 +8,20 @@ part of 'media_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_MediaData _$$_MediaDataFromJson(Map json) => $checkedCreate(
-      r'_$_MediaData',
+_$MediaDataImpl _$$MediaDataImplFromJson(Map json) => $checkedCreate(
+      r'_$MediaDataImpl',
       json,
       ($checkedConvert) {
-        final val = _$_MediaData(
+        final val = _$MediaDataImpl(
           key: $checkedConvert('media_key', (v) => v as String),
           type: $checkedConvert(
               'type', (v) => $enumDecode(_$MediaTypeEnumMap, v)),
           url: $checkedConvert('url', (v) => v as String?),
           altText: $checkedConvert('alt_text', (v) => v as String?),
           durationMilliseconds:
-              $checkedConvert('duration_ms', (v) => v as int?),
-          height: $checkedConvert('height', (v) => v as int?),
-          width: $checkedConvert('width', (v) => v as int?),
+              $checkedConvert('duration_ms', (v) => (v as num?)?.toInt()),
+          height: $checkedConvert('height', (v) => (v as num?)?.toInt()),
+          width: $checkedConvert('width', (v) => (v as num?)?.toInt()),
           privateMetrics: $checkedConvert(
               'non_public_metrics',
               (v) => v == null
@@ -69,31 +69,28 @@ _$_MediaData _$$_MediaDataFromJson(Map json) => $checkedCreate(
       },
     );
 
-Map<String, dynamic> _$$_MediaDataToJson(_$_MediaData instance) {
-  final val = <String, dynamic>{
-    'media_key': instance.key,
-    'type': _$MediaTypeEnumMap[instance.type]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('url', instance.url);
-  writeNotNull('alt_text', instance.altText);
-  writeNotNull('duration_ms', instance.durationMilliseconds);
-  writeNotNull('height', instance.height);
-  writeNotNull('width', instance.width);
-  writeNotNull('non_public_metrics', instance.privateMetrics?.toJson());
-  writeNotNull('organic_metrics', instance.organicMetrics?.toJson());
-  writeNotNull('preview_image_url', instance.previewImageUrl);
-  writeNotNull('promoted_metrics', instance.promotedMetrics?.toJson());
-  writeNotNull('public_metrics', instance.publicMetrics?.toJson());
-  writeNotNull('variants', instance.variants?.map((e) => e.toJson()).toList());
-  return val;
-}
+Map<String, dynamic> _$$MediaDataImplToJson(_$MediaDataImpl instance) =>
+    <String, dynamic>{
+      'media_key': instance.key,
+      'type': _$MediaTypeEnumMap[instance.type]!,
+      if (instance.url case final value?) 'url': value,
+      if (instance.altText case final value?) 'alt_text': value,
+      if (instance.durationMilliseconds case final value?) 'duration_ms': value,
+      if (instance.height case final value?) 'height': value,
+      if (instance.width case final value?) 'width': value,
+      if (instance.privateMetrics?.toJson() case final value?)
+        'non_public_metrics': value,
+      if (instance.organicMetrics?.toJson() case final value?)
+        'organic_metrics': value,
+      if (instance.previewImageUrl case final value?)
+        'preview_image_url': value,
+      if (instance.promotedMetrics?.toJson() case final value?)
+        'promoted_metrics': value,
+      if (instance.publicMetrics?.toJson() case final value?)
+        'public_metrics': value,
+      if (instance.variants?.map((e) => e.toJson()).toList() case final value?)
+        'variants': value,
+    };
 
 const _$MediaTypeEnumMap = {
   MediaType.photo: 'photo',

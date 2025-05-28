@@ -12,7 +12,7 @@ part of 'private_media_metrics.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PrivateMediaMetrics _$PrivateMediaMetricsFromJson(Map<String, dynamic> json) {
   return _PrivateMediaMetrics.fromJson(json);
@@ -55,8 +55,12 @@ mixin _$PrivateMediaMetrics {
   @JsonKey(name: 'playback_100_count')
   int get playback100Count => throw _privateConstructorUsedError;
 
+  /// Serializes this PrivateMediaMetrics to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PrivateMediaMetrics
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PrivateMediaMetricsCopyWith<PrivateMediaMetrics> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -85,6 +89,8 @@ class _$PrivateMediaMetricsCopyWithImpl<$Res, $Val extends PrivateMediaMetrics>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PrivateMediaMetrics
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -120,11 +126,11 @@ class _$PrivateMediaMetricsCopyWithImpl<$Res, $Val extends PrivateMediaMetrics>
 }
 
 /// @nodoc
-abstract class _$$_PrivateMediaMetricsCopyWith<$Res>
+abstract class _$$PrivateMediaMetricsImplCopyWith<$Res>
     implements $PrivateMediaMetricsCopyWith<$Res> {
-  factory _$$_PrivateMediaMetricsCopyWith(_$_PrivateMediaMetrics value,
-          $Res Function(_$_PrivateMediaMetrics) then) =
-      __$$_PrivateMediaMetricsCopyWithImpl<$Res>;
+  factory _$$PrivateMediaMetricsImplCopyWith(_$PrivateMediaMetricsImpl value,
+          $Res Function(_$PrivateMediaMetricsImpl) then) =
+      __$$PrivateMediaMetricsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -136,13 +142,15 @@ abstract class _$$_PrivateMediaMetricsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PrivateMediaMetricsCopyWithImpl<$Res>
-    extends _$PrivateMediaMetricsCopyWithImpl<$Res, _$_PrivateMediaMetrics>
-    implements _$$_PrivateMediaMetricsCopyWith<$Res> {
-  __$$_PrivateMediaMetricsCopyWithImpl(_$_PrivateMediaMetrics _value,
-      $Res Function(_$_PrivateMediaMetrics) _then)
+class __$$PrivateMediaMetricsImplCopyWithImpl<$Res>
+    extends _$PrivateMediaMetricsCopyWithImpl<$Res, _$PrivateMediaMetricsImpl>
+    implements _$$PrivateMediaMetricsImplCopyWith<$Res> {
+  __$$PrivateMediaMetricsImplCopyWithImpl(_$PrivateMediaMetricsImpl _value,
+      $Res Function(_$PrivateMediaMetricsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PrivateMediaMetrics
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -152,7 +160,7 @@ class __$$_PrivateMediaMetricsCopyWithImpl<$Res>
     Object? playback75Count = null,
     Object? playback100Count = null,
   }) {
-    return _then(_$_PrivateMediaMetrics(
+    return _then(_$PrivateMediaMetricsImpl(
       playback0Count: null == playback0Count
           ? _value.playback0Count
           : playback0Count // ignore: cast_nullable_to_non_nullable
@@ -179,16 +187,16 @@ class __$$_PrivateMediaMetricsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PrivateMediaMetrics implements _PrivateMediaMetrics {
-  const _$_PrivateMediaMetrics(
+class _$PrivateMediaMetricsImpl implements _PrivateMediaMetrics {
+  const _$PrivateMediaMetricsImpl(
       {@JsonKey(name: 'playback_0_count') required this.playback0Count,
       @JsonKey(name: 'playback_25_count') required this.playback25Count,
       @JsonKey(name: 'playback_50_count') required this.playback50Count,
       @JsonKey(name: 'playback_75_count') required this.playback75Count,
       @JsonKey(name: 'playback_100_count') required this.playback100Count});
 
-  factory _$_PrivateMediaMetrics.fromJson(Map<String, dynamic> json) =>
-      _$$_PrivateMediaMetricsFromJson(json);
+  factory _$PrivateMediaMetricsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PrivateMediaMetricsImplFromJson(json);
 
   /// The number of users who played through to each quartile in a video.
   ///
@@ -236,10 +244,10 @@ class _$_PrivateMediaMetrics implements _PrivateMediaMetrics {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PrivateMediaMetrics &&
+            other is _$PrivateMediaMetricsImpl &&
             (identical(other.playback0Count, playback0Count) ||
                 other.playback0Count == playback0Count) &&
             (identical(other.playback25Count, playback25Count) ||
@@ -252,21 +260,23 @@ class _$_PrivateMediaMetrics implements _PrivateMediaMetrics {
                 other.playback100Count == playback100Count));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, playback0Count, playback25Count,
       playback50Count, playback75Count, playback100Count);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PrivateMediaMetrics
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PrivateMediaMetricsCopyWith<_$_PrivateMediaMetrics> get copyWith =>
-      __$$_PrivateMediaMetricsCopyWithImpl<_$_PrivateMediaMetrics>(
+  _$$PrivateMediaMetricsImplCopyWith<_$PrivateMediaMetricsImpl> get copyWith =>
+      __$$PrivateMediaMetricsImplCopyWithImpl<_$PrivateMediaMetricsImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PrivateMediaMetricsToJson(
+    return _$$PrivateMediaMetricsImplToJson(
       this,
     );
   }
@@ -274,62 +284,60 @@ class _$_PrivateMediaMetrics implements _PrivateMediaMetrics {
 
 abstract class _PrivateMediaMetrics implements PrivateMediaMetrics {
   const factory _PrivateMediaMetrics(
-      {@JsonKey(name: 'playback_0_count')
-          required final int playback0Count,
-      @JsonKey(name: 'playback_25_count')
-          required final int playback25Count,
-      @JsonKey(name: 'playback_50_count')
-          required final int playback50Count,
-      @JsonKey(name: 'playback_75_count')
-          required final int playback75Count,
+      {@JsonKey(name: 'playback_0_count') required final int playback0Count,
+      @JsonKey(name: 'playback_25_count') required final int playback25Count,
+      @JsonKey(name: 'playback_50_count') required final int playback50Count,
+      @JsonKey(name: 'playback_75_count') required final int playback75Count,
       @JsonKey(name: 'playback_100_count')
-          required final int playback100Count}) = _$_PrivateMediaMetrics;
+      required final int playback100Count}) = _$PrivateMediaMetricsImpl;
 
   factory _PrivateMediaMetrics.fromJson(Map<String, dynamic> json) =
-      _$_PrivateMediaMetrics.fromJson;
-
-  @override
+      _$PrivateMediaMetricsImpl.fromJson;
 
   /// The number of users who played through to each quartile in a video.
   ///
   /// This reflects the number of quartile views across all Tweets in which
   /// the given video has been posted.
+  @override
   @JsonKey(name: 'playback_0_count')
   int get playback0Count;
-  @override
 
   /// The number of users who played through to each quartile in a video.
   ///
   /// This reflects the number of quartile views across all Tweets in which
   /// the given video has been posted.
+  @override
   @JsonKey(name: 'playback_25_count')
   int get playback25Count;
-  @override
 
   /// The number of users who played through to each quartile in a video.
   ///
   /// This reflects the number of quartile views across all Tweets in which
   /// the given video has been posted.
+  @override
   @JsonKey(name: 'playback_50_count')
   int get playback50Count;
-  @override
 
   /// The number of users who played through to each quartile in a video.
   ///
   /// This reflects the number of quartile views across all Tweets in which
   /// the given video has been posted.
+  @override
   @JsonKey(name: 'playback_75_count')
   int get playback75Count;
-  @override
 
   /// The number of users who played through to each quartile in a video.
   ///
   /// This reflects the number of quartile views across all Tweets in which
   /// the given video has been posted.
+  @override
   @JsonKey(name: 'playback_100_count')
   int get playback100Count;
+
+  /// Create a copy of PrivateMediaMetrics
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_PrivateMediaMetricsCopyWith<_$_PrivateMediaMetrics> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PrivateMediaMetricsImplCopyWith<_$PrivateMediaMetricsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

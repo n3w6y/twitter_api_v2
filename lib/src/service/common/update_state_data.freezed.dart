@@ -12,7 +12,7 @@ part of 'update_state_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 UpdateStateData _$UpdateStateDataFromJson(Map<String, dynamic> json) {
   return _UpdateStateData.fromJson(json);
@@ -24,8 +24,12 @@ mixin _$UpdateStateData {
   @JsonKey(name: 'updated')
   bool get isUpdated => throw _privateConstructorUsedError;
 
+  /// Serializes this UpdateStateData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UpdateStateData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UpdateStateDataCopyWith<UpdateStateData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +53,8 @@ class _$UpdateStateDataCopyWithImpl<$Res, $Val extends UpdateStateData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of UpdateStateData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -64,30 +70,32 @@ class _$UpdateStateDataCopyWithImpl<$Res, $Val extends UpdateStateData>
 }
 
 /// @nodoc
-abstract class _$$_UpdateStateDataCopyWith<$Res>
+abstract class _$$UpdateStateDataImplCopyWith<$Res>
     implements $UpdateStateDataCopyWith<$Res> {
-  factory _$$_UpdateStateDataCopyWith(
-          _$_UpdateStateData value, $Res Function(_$_UpdateStateData) then) =
-      __$$_UpdateStateDataCopyWithImpl<$Res>;
+  factory _$$UpdateStateDataImplCopyWith(_$UpdateStateDataImpl value,
+          $Res Function(_$UpdateStateDataImpl) then) =
+      __$$UpdateStateDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@JsonKey(name: 'updated') bool isUpdated});
 }
 
 /// @nodoc
-class __$$_UpdateStateDataCopyWithImpl<$Res>
-    extends _$UpdateStateDataCopyWithImpl<$Res, _$_UpdateStateData>
-    implements _$$_UpdateStateDataCopyWith<$Res> {
-  __$$_UpdateStateDataCopyWithImpl(
-      _$_UpdateStateData _value, $Res Function(_$_UpdateStateData) _then)
+class __$$UpdateStateDataImplCopyWithImpl<$Res>
+    extends _$UpdateStateDataCopyWithImpl<$Res, _$UpdateStateDataImpl>
+    implements _$$UpdateStateDataImplCopyWith<$Res> {
+  __$$UpdateStateDataImplCopyWithImpl(
+      _$UpdateStateDataImpl _value, $Res Function(_$UpdateStateDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UpdateStateData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? isUpdated = null,
   }) {
-    return _then(_$_UpdateStateData(
+    return _then(_$UpdateStateDataImpl(
       isUpdated: null == isUpdated
           ? _value.isUpdated
           : isUpdated // ignore: cast_nullable_to_non_nullable
@@ -98,11 +106,12 @@ class __$$_UpdateStateDataCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UpdateStateData implements _UpdateStateData {
-  const _$_UpdateStateData({@JsonKey(name: 'updated') required this.isUpdated});
+class _$UpdateStateDataImpl implements _UpdateStateData {
+  const _$UpdateStateDataImpl(
+      {@JsonKey(name: 'updated') required this.isUpdated});
 
-  factory _$_UpdateStateData.fromJson(Map<String, dynamic> json) =>
-      _$$_UpdateStateDataFromJson(json);
+  factory _$UpdateStateDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UpdateStateDataImplFromJson(json);
 
   /// Indicates whether the content specified in the request has been updated.
   @override
@@ -115,27 +124,30 @@ class _$_UpdateStateData implements _UpdateStateData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateStateData &&
+            other is _$UpdateStateDataImpl &&
             (identical(other.isUpdated, isUpdated) ||
                 other.isUpdated == isUpdated));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, isUpdated);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UpdateStateData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateStateDataCopyWith<_$_UpdateStateData> get copyWith =>
-      __$$_UpdateStateDataCopyWithImpl<_$_UpdateStateData>(this, _$identity);
+  _$$UpdateStateDataImplCopyWith<_$UpdateStateDataImpl> get copyWith =>
+      __$$UpdateStateDataImplCopyWithImpl<_$UpdateStateDataImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UpdateStateDataToJson(
+    return _$$UpdateStateDataImplToJson(
       this,
     );
   }
@@ -144,18 +156,20 @@ class _$_UpdateStateData implements _UpdateStateData {
 abstract class _UpdateStateData implements UpdateStateData {
   const factory _UpdateStateData(
           {@JsonKey(name: 'updated') required final bool isUpdated}) =
-      _$_UpdateStateData;
+      _$UpdateStateDataImpl;
 
   factory _UpdateStateData.fromJson(Map<String, dynamic> json) =
-      _$_UpdateStateData.fromJson;
-
-  @override
+      _$UpdateStateDataImpl.fromJson;
 
   /// Indicates whether the content specified in the request has been updated.
+  @override
   @JsonKey(name: 'updated')
   bool get isUpdated;
+
+  /// Create a copy of UpdateStateData
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_UpdateStateDataCopyWith<_$_UpdateStateData> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UpdateStateDataImplCopyWith<_$UpdateStateDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'dm_attachments.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 DMAttachments _$DMAttachmentsFromJson(Map<String, dynamic> json) {
   return _DMAttachments.fromJson(json);
@@ -28,8 +28,12 @@ mixin _$DMAttachments {
   /// `TweetExpansion.attachmentsMediaKeys` in the request's query parameter.
   List<String> get mediaKeys => throw _privateConstructorUsedError;
 
+  /// Serializes this DMAttachments to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DMAttachments
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DMAttachmentsCopyWith<DMAttachments> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -53,6 +57,8 @@ class _$DMAttachmentsCopyWithImpl<$Res, $Val extends DMAttachments>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DMAttachments
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -68,30 +74,32 @@ class _$DMAttachmentsCopyWithImpl<$Res, $Val extends DMAttachments>
 }
 
 /// @nodoc
-abstract class _$$_DMAttachmentsCopyWith<$Res>
+abstract class _$$DMAttachmentsImplCopyWith<$Res>
     implements $DMAttachmentsCopyWith<$Res> {
-  factory _$$_DMAttachmentsCopyWith(
-          _$_DMAttachments value, $Res Function(_$_DMAttachments) then) =
-      __$$_DMAttachmentsCopyWithImpl<$Res>;
+  factory _$$DMAttachmentsImplCopyWith(
+          _$DMAttachmentsImpl value, $Res Function(_$DMAttachmentsImpl) then) =
+      __$$DMAttachmentsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<String> mediaKeys});
 }
 
 /// @nodoc
-class __$$_DMAttachmentsCopyWithImpl<$Res>
-    extends _$DMAttachmentsCopyWithImpl<$Res, _$_DMAttachments>
-    implements _$$_DMAttachmentsCopyWith<$Res> {
-  __$$_DMAttachmentsCopyWithImpl(
-      _$_DMAttachments _value, $Res Function(_$_DMAttachments) _then)
+class __$$DMAttachmentsImplCopyWithImpl<$Res>
+    extends _$DMAttachmentsCopyWithImpl<$Res, _$DMAttachmentsImpl>
+    implements _$$DMAttachmentsImplCopyWith<$Res> {
+  __$$DMAttachmentsImplCopyWithImpl(
+      _$DMAttachmentsImpl _value, $Res Function(_$DMAttachmentsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DMAttachments
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? mediaKeys = null,
   }) {
-    return _then(_$_DMAttachments(
+    return _then(_$DMAttachmentsImpl(
       mediaKeys: null == mediaKeys
           ? _value._mediaKeys
           : mediaKeys // ignore: cast_nullable_to_non_nullable
@@ -102,12 +110,12 @@ class __$$_DMAttachmentsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_DMAttachments implements _DMAttachments {
-  const _$_DMAttachments({required final List<String> mediaKeys})
+class _$DMAttachmentsImpl implements _DMAttachments {
+  const _$DMAttachmentsImpl({required final List<String> mediaKeys})
       : _mediaKeys = mediaKeys;
 
-  factory _$_DMAttachments.fromJson(Map<String, dynamic> json) =>
-      _$$_DMAttachmentsFromJson(json);
+  factory _$DMAttachmentsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DMAttachmentsImplFromJson(json);
 
   /// List of unique identifiers of media attached to this Tweet. These
   /// identifiers use the same media key format as those returned by the
@@ -136,28 +144,30 @@ class _$_DMAttachments implements _DMAttachments {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DMAttachments &&
+            other is _$DMAttachmentsImpl &&
             const DeepCollectionEquality()
                 .equals(other._mediaKeys, _mediaKeys));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_mediaKeys));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DMAttachments
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DMAttachmentsCopyWith<_$_DMAttachments> get copyWith =>
-      __$$_DMAttachmentsCopyWithImpl<_$_DMAttachments>(this, _$identity);
+  _$$DMAttachmentsImplCopyWith<_$DMAttachmentsImpl> get copyWith =>
+      __$$DMAttachmentsImplCopyWithImpl<_$DMAttachmentsImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_DMAttachmentsToJson(
+    return _$$DMAttachmentsImplToJson(
       this,
     );
   }
@@ -165,12 +175,10 @@ class _$_DMAttachments implements _DMAttachments {
 
 abstract class _DMAttachments implements DMAttachments {
   const factory _DMAttachments({required final List<String> mediaKeys}) =
-      _$_DMAttachments;
+      _$DMAttachmentsImpl;
 
   factory _DMAttachments.fromJson(Map<String, dynamic> json) =
-      _$_DMAttachments.fromJson;
-
-  @override
+      _$DMAttachmentsImpl.fromJson;
 
   /// List of unique identifiers of media attached to this Tweet. These
   /// identifiers use the same media key format as those returned by the
@@ -178,9 +186,13 @@ abstract class _DMAttachments implements DMAttachments {
   ///
   /// You can obtain the expanded object in includes.media by adding
   /// `TweetExpansion.attachmentsMediaKeys` in the request's query parameter.
-  List<String> get mediaKeys;
   @override
-  @JsonKey(ignore: true)
-  _$$_DMAttachmentsCopyWith<_$_DMAttachments> get copyWith =>
+  List<String> get mediaKeys;
+
+  /// Create a copy of DMAttachments
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$DMAttachmentsImplCopyWith<_$DMAttachmentsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

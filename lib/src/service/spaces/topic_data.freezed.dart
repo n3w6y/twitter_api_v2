@@ -12,7 +12,7 @@ part of 'topic_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 TopicData _$TopicDataFromJson(Map<String, dynamic> json) {
   return _TopicData.fromJson(json);
@@ -29,8 +29,12 @@ mixin _$TopicData {
   /// The description of this topic.
   String get description => throw _privateConstructorUsedError;
 
+  /// Serializes this TopicData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TopicData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TopicDataCopyWith<TopicData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -53,6 +57,8 @@ class _$TopicDataCopyWithImpl<$Res, $Val extends TopicData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TopicData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -78,23 +84,26 @@ class _$TopicDataCopyWithImpl<$Res, $Val extends TopicData>
 }
 
 /// @nodoc
-abstract class _$$_TopicDataCopyWith<$Res> implements $TopicDataCopyWith<$Res> {
-  factory _$$_TopicDataCopyWith(
-          _$_TopicData value, $Res Function(_$_TopicData) then) =
-      __$$_TopicDataCopyWithImpl<$Res>;
+abstract class _$$TopicDataImplCopyWith<$Res>
+    implements $TopicDataCopyWith<$Res> {
+  factory _$$TopicDataImplCopyWith(
+          _$TopicDataImpl value, $Res Function(_$TopicDataImpl) then) =
+      __$$TopicDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id, String name, String description});
 }
 
 /// @nodoc
-class __$$_TopicDataCopyWithImpl<$Res>
-    extends _$TopicDataCopyWithImpl<$Res, _$_TopicData>
-    implements _$$_TopicDataCopyWith<$Res> {
-  __$$_TopicDataCopyWithImpl(
-      _$_TopicData _value, $Res Function(_$_TopicData) _then)
+class __$$TopicDataImplCopyWithImpl<$Res>
+    extends _$TopicDataCopyWithImpl<$Res, _$TopicDataImpl>
+    implements _$$TopicDataImplCopyWith<$Res> {
+  __$$TopicDataImplCopyWithImpl(
+      _$TopicDataImpl _value, $Res Function(_$TopicDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TopicData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -102,7 +111,7 @@ class __$$_TopicDataCopyWithImpl<$Res>
     Object? name = null,
     Object? description = null,
   }) {
-    return _then(_$_TopicData(
+    return _then(_$TopicDataImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -121,12 +130,12 @@ class __$$_TopicDataCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TopicData implements _TopicData {
-  const _$_TopicData(
+class _$TopicDataImpl implements _TopicData {
+  const _$TopicDataImpl(
       {required this.id, required this.name, required this.description});
 
-  factory _$_TopicData.fromJson(Map<String, dynamic> json) =>
-      _$$_TopicDataFromJson(json);
+  factory _$TopicDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TopicDataImplFromJson(json);
 
   /// The id of this topic.
   @override
@@ -146,29 +155,31 @@ class _$_TopicData implements _TopicData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TopicData &&
+            other is _$TopicDataImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
                 other.description == description));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, description);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TopicData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TopicDataCopyWith<_$_TopicData> get copyWith =>
-      __$$_TopicDataCopyWithImpl<_$_TopicData>(this, _$identity);
+  _$$TopicDataImplCopyWith<_$TopicDataImpl> get copyWith =>
+      __$$TopicDataImplCopyWithImpl<_$TopicDataImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TopicDataToJson(
+    return _$$TopicDataImplToJson(
       this,
     );
   }
@@ -178,25 +189,27 @@ abstract class _TopicData implements TopicData {
   const factory _TopicData(
       {required final String id,
       required final String name,
-      required final String description}) = _$_TopicData;
+      required final String description}) = _$TopicDataImpl;
 
   factory _TopicData.fromJson(Map<String, dynamic> json) =
-      _$_TopicData.fromJson;
-
-  @override
+      _$TopicDataImpl.fromJson;
 
   /// The id of this topic.
-  String get id;
   @override
+  String get id;
 
   /// The name of this topic.
-  String get name;
   @override
+  String get name;
 
   /// The description of this topic.
-  String get description;
   @override
-  @JsonKey(ignore: true)
-  _$$_TopicDataCopyWith<_$_TopicData> get copyWith =>
+  String get description;
+
+  /// Create a copy of TopicData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$TopicDataImplCopyWith<_$TopicDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

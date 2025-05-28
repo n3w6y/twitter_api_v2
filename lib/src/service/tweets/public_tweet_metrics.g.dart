@@ -8,16 +8,17 @@ part of 'public_tweet_metrics.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PublicTweetMetrics _$$_PublicTweetMetricsFromJson(Map json) =>
+_$PublicTweetMetricsImpl _$$PublicTweetMetricsImplFromJson(Map json) =>
     $checkedCreate(
-      r'_$_PublicTweetMetrics',
+      r'_$PublicTweetMetricsImpl',
       json,
       ($checkedConvert) {
-        final val = _$_PublicTweetMetrics(
-          likeCount: $checkedConvert('like_count', (v) => v as int),
-          retweetCount: $checkedConvert('retweet_count', (v) => v as int),
-          replyCount: $checkedConvert('reply_count', (v) => v as int),
-          quoteCount: $checkedConvert('quote_count', (v) => v as int),
+        final val = _$PublicTweetMetricsImpl(
+          likeCount: $checkedConvert('like_count', (v) => (v as num).toInt()),
+          retweetCount:
+              $checkedConvert('retweet_count', (v) => (v as num).toInt()),
+          replyCount: $checkedConvert('reply_count', (v) => (v as num).toInt()),
+          quoteCount: $checkedConvert('quote_count', (v) => (v as num).toInt()),
         );
         return val;
       },
@@ -29,8 +30,8 @@ _$_PublicTweetMetrics _$$_PublicTweetMetricsFromJson(Map json) =>
       },
     );
 
-Map<String, dynamic> _$$_PublicTweetMetricsToJson(
-        _$_PublicTweetMetrics instance) =>
+Map<String, dynamic> _$$PublicTweetMetricsImplToJson(
+        _$PublicTweetMetricsImpl instance) =>
     <String, dynamic>{
       'like_count': instance.likeCount,
       'retweet_count': instance.retweetCount,

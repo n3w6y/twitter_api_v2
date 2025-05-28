@@ -12,7 +12,7 @@ part of 'retweet_state_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 RetweetStateData _$RetweetStateDataFromJson(Map<String, dynamic> json) {
   return _RetweetStateData.fromJson(json);
@@ -25,8 +25,12 @@ mixin _$RetweetStateData {
   @JsonKey(name: 'retweeted')
   bool get isRetweeted => throw _privateConstructorUsedError;
 
+  /// Serializes this RetweetStateData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of RetweetStateData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $RetweetStateDataCopyWith<RetweetStateData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -50,6 +54,8 @@ class _$RetweetStateDataCopyWithImpl<$Res, $Val extends RetweetStateData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of RetweetStateData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -65,30 +71,32 @@ class _$RetweetStateDataCopyWithImpl<$Res, $Val extends RetweetStateData>
 }
 
 /// @nodoc
-abstract class _$$_RetweetStateDataCopyWith<$Res>
+abstract class _$$RetweetStateDataImplCopyWith<$Res>
     implements $RetweetStateDataCopyWith<$Res> {
-  factory _$$_RetweetStateDataCopyWith(
-          _$_RetweetStateData value, $Res Function(_$_RetweetStateData) then) =
-      __$$_RetweetStateDataCopyWithImpl<$Res>;
+  factory _$$RetweetStateDataImplCopyWith(_$RetweetStateDataImpl value,
+          $Res Function(_$RetweetStateDataImpl) then) =
+      __$$RetweetStateDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@JsonKey(name: 'retweeted') bool isRetweeted});
 }
 
 /// @nodoc
-class __$$_RetweetStateDataCopyWithImpl<$Res>
-    extends _$RetweetStateDataCopyWithImpl<$Res, _$_RetweetStateData>
-    implements _$$_RetweetStateDataCopyWith<$Res> {
-  __$$_RetweetStateDataCopyWithImpl(
-      _$_RetweetStateData _value, $Res Function(_$_RetweetStateData) _then)
+class __$$RetweetStateDataImplCopyWithImpl<$Res>
+    extends _$RetweetStateDataCopyWithImpl<$Res, _$RetweetStateDataImpl>
+    implements _$$RetweetStateDataImplCopyWith<$Res> {
+  __$$RetweetStateDataImplCopyWithImpl(_$RetweetStateDataImpl _value,
+      $Res Function(_$RetweetStateDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of RetweetStateData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? isRetweeted = null,
   }) {
-    return _then(_$_RetweetStateData(
+    return _then(_$RetweetStateDataImpl(
       isRetweeted: null == isRetweeted
           ? _value.isRetweeted
           : isRetweeted // ignore: cast_nullable_to_non_nullable
@@ -99,12 +107,12 @@ class __$$_RetweetStateDataCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_RetweetStateData implements _RetweetStateData {
-  const _$_RetweetStateData(
+class _$RetweetStateDataImpl implements _RetweetStateData {
+  const _$RetweetStateDataImpl(
       {@JsonKey(name: 'retweeted') required this.isRetweeted});
 
-  factory _$_RetweetStateData.fromJson(Map<String, dynamic> json) =>
-      _$$_RetweetStateDataFromJson(json);
+  factory _$RetweetStateDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$RetweetStateDataImplFromJson(json);
 
   /// Indicates whether the user Retweets the specified Tweet as a result
   /// of this request.
@@ -118,27 +126,30 @@ class _$_RetweetStateData implements _RetweetStateData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RetweetStateData &&
+            other is _$RetweetStateDataImpl &&
             (identical(other.isRetweeted, isRetweeted) ||
                 other.isRetweeted == isRetweeted));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, isRetweeted);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of RetweetStateData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RetweetStateDataCopyWith<_$_RetweetStateData> get copyWith =>
-      __$$_RetweetStateDataCopyWithImpl<_$_RetweetStateData>(this, _$identity);
+  _$$RetweetStateDataImplCopyWith<_$RetweetStateDataImpl> get copyWith =>
+      __$$RetweetStateDataImplCopyWithImpl<_$RetweetStateDataImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_RetweetStateDataToJson(
+    return _$$RetweetStateDataImplToJson(
       this,
     );
   }
@@ -147,19 +158,21 @@ class _$_RetweetStateData implements _RetweetStateData {
 abstract class _RetweetStateData implements RetweetStateData {
   const factory _RetweetStateData(
           {@JsonKey(name: 'retweeted') required final bool isRetweeted}) =
-      _$_RetweetStateData;
+      _$RetweetStateDataImpl;
 
   factory _RetweetStateData.fromJson(Map<String, dynamic> json) =
-      _$_RetweetStateData.fromJson;
-
-  @override
+      _$RetweetStateDataImpl.fromJson;
 
   /// Indicates whether the user Retweets the specified Tweet as a result
   /// of this request.
+  @override
   @JsonKey(name: 'retweeted')
   bool get isRetweeted;
+
+  /// Create a copy of RetweetStateData
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_RetweetStateDataCopyWith<_$_RetweetStateData> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$RetweetStateDataImplCopyWith<_$RetweetStateDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

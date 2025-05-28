@@ -8,11 +8,11 @@ part of 'message_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_MessageData _$$_MessageDataFromJson(Map json) => $checkedCreate(
-      r'_$_MessageData',
+_$MessageDataImpl _$$MessageDataImplFromJson(Map json) => $checkedCreate(
+      r'_$MessageDataImpl',
       json,
       ($checkedConvert) {
-        final val = _$_MessageData(
+        final val = _$MessageDataImpl(
           eventId: $checkedConvert('dm_event_id', (v) => v as String),
           conversationId:
               $checkedConvert('dm_conversation_id', (v) => v as String),
@@ -25,7 +25,7 @@ _$_MessageData _$$_MessageDataFromJson(Map json) => $checkedCreate(
       },
     );
 
-Map<String, dynamic> _$$_MessageDataToJson(_$_MessageData instance) =>
+Map<String, dynamic> _$$MessageDataImplToJson(_$MessageDataImpl instance) =>
     <String, dynamic>{
       'dm_event_id': instance.eventId,
       'dm_conversation_id': instance.conversationId,

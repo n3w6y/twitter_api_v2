@@ -12,7 +12,7 @@ part of 'poll_option.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PollOption _$PollOptionFromJson(Map<String, dynamic> json) {
   return _PollOption.fromJson(json);
@@ -24,8 +24,12 @@ mixin _$PollOption {
   String get label => throw _privateConstructorUsedError;
   int get votes => throw _privateConstructorUsedError;
 
+  /// Serializes this PollOption to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PollOption
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PollOptionCopyWith<PollOption> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +53,8 @@ class _$PollOptionCopyWithImpl<$Res, $Val extends PollOption>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PollOption
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -74,24 +80,26 @@ class _$PollOptionCopyWithImpl<$Res, $Val extends PollOption>
 }
 
 /// @nodoc
-abstract class _$$_PollOptionCopyWith<$Res>
+abstract class _$$PollOptionImplCopyWith<$Res>
     implements $PollOptionCopyWith<$Res> {
-  factory _$$_PollOptionCopyWith(
-          _$_PollOption value, $Res Function(_$_PollOption) then) =
-      __$$_PollOptionCopyWithImpl<$Res>;
+  factory _$$PollOptionImplCopyWith(
+          _$PollOptionImpl value, $Res Function(_$PollOptionImpl) then) =
+      __$$PollOptionImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int position, String label, int votes});
 }
 
 /// @nodoc
-class __$$_PollOptionCopyWithImpl<$Res>
-    extends _$PollOptionCopyWithImpl<$Res, _$_PollOption>
-    implements _$$_PollOptionCopyWith<$Res> {
-  __$$_PollOptionCopyWithImpl(
-      _$_PollOption _value, $Res Function(_$_PollOption) _then)
+class __$$PollOptionImplCopyWithImpl<$Res>
+    extends _$PollOptionCopyWithImpl<$Res, _$PollOptionImpl>
+    implements _$$PollOptionImplCopyWith<$Res> {
+  __$$PollOptionImplCopyWithImpl(
+      _$PollOptionImpl _value, $Res Function(_$PollOptionImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PollOption
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -99,7 +107,7 @@ class __$$_PollOptionCopyWithImpl<$Res>
     Object? label = null,
     Object? votes = null,
   }) {
-    return _then(_$_PollOption(
+    return _then(_$PollOptionImpl(
       position: null == position
           ? _value.position
           : position // ignore: cast_nullable_to_non_nullable
@@ -118,12 +126,12 @@ class __$$_PollOptionCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PollOption implements _PollOption {
-  const _$_PollOption(
+class _$PollOptionImpl implements _PollOption {
+  const _$PollOptionImpl(
       {required this.position, required this.label, required this.votes});
 
-  factory _$_PollOption.fromJson(Map<String, dynamic> json) =>
-      _$$_PollOptionFromJson(json);
+  factory _$PollOptionImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PollOptionImplFromJson(json);
 
   @override
   final int position;
@@ -138,29 +146,31 @@ class _$_PollOption implements _PollOption {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PollOption &&
+            other is _$PollOptionImpl &&
             (identical(other.position, position) ||
                 other.position == position) &&
             (identical(other.label, label) || other.label == label) &&
             (identical(other.votes, votes) || other.votes == votes));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, position, label, votes);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PollOption
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PollOptionCopyWith<_$_PollOption> get copyWith =>
-      __$$_PollOptionCopyWithImpl<_$_PollOption>(this, _$identity);
+  _$$PollOptionImplCopyWith<_$PollOptionImpl> get copyWith =>
+      __$$PollOptionImplCopyWithImpl<_$PollOptionImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PollOptionToJson(
+    return _$$PollOptionImplToJson(
       this,
     );
   }
@@ -170,10 +180,10 @@ abstract class _PollOption implements PollOption {
   const factory _PollOption(
       {required final int position,
       required final String label,
-      required final int votes}) = _$_PollOption;
+      required final int votes}) = _$PollOptionImpl;
 
   factory _PollOption.fromJson(Map<String, dynamic> json) =
-      _$_PollOption.fromJson;
+      _$PollOptionImpl.fromJson;
 
   @override
   int get position;
@@ -181,8 +191,11 @@ abstract class _PollOption implements PollOption {
   String get label;
   @override
   int get votes;
+
+  /// Create a copy of PollOption
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_PollOptionCopyWith<_$_PollOption> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PollOptionImplCopyWith<_$PollOptionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

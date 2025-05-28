@@ -12,7 +12,7 @@ part of 'member_state_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 MemberStateData _$MemberStateDataFromJson(Map<String, dynamic> json) {
   return _ListMemberStateData.fromJson(json);
@@ -24,8 +24,12 @@ mixin _$MemberStateData {
   /// to the List.
   bool get isMember => throw _privateConstructorUsedError;
 
+  /// Serializes this MemberStateData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of MemberStateData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $MemberStateDataCopyWith<MemberStateData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +53,8 @@ class _$MemberStateDataCopyWithImpl<$Res, $Val extends MemberStateData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of MemberStateData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -64,30 +70,32 @@ class _$MemberStateDataCopyWithImpl<$Res, $Val extends MemberStateData>
 }
 
 /// @nodoc
-abstract class _$$_ListMemberStateDataCopyWith<$Res>
+abstract class _$$ListMemberStateDataImplCopyWith<$Res>
     implements $MemberStateDataCopyWith<$Res> {
-  factory _$$_ListMemberStateDataCopyWith(_$_ListMemberStateData value,
-          $Res Function(_$_ListMemberStateData) then) =
-      __$$_ListMemberStateDataCopyWithImpl<$Res>;
+  factory _$$ListMemberStateDataImplCopyWith(_$ListMemberStateDataImpl value,
+          $Res Function(_$ListMemberStateDataImpl) then) =
+      __$$ListMemberStateDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool isMember});
 }
 
 /// @nodoc
-class __$$_ListMemberStateDataCopyWithImpl<$Res>
-    extends _$MemberStateDataCopyWithImpl<$Res, _$_ListMemberStateData>
-    implements _$$_ListMemberStateDataCopyWith<$Res> {
-  __$$_ListMemberStateDataCopyWithImpl(_$_ListMemberStateData _value,
-      $Res Function(_$_ListMemberStateData) _then)
+class __$$ListMemberStateDataImplCopyWithImpl<$Res>
+    extends _$MemberStateDataCopyWithImpl<$Res, _$ListMemberStateDataImpl>
+    implements _$$ListMemberStateDataImplCopyWith<$Res> {
+  __$$ListMemberStateDataImplCopyWithImpl(_$ListMemberStateDataImpl _value,
+      $Res Function(_$ListMemberStateDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MemberStateData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? isMember = null,
   }) {
-    return _then(_$_ListMemberStateData(
+    return _then(_$ListMemberStateDataImpl(
       isMember: null == isMember
           ? _value.isMember
           : isMember // ignore: cast_nullable_to_non_nullable
@@ -98,11 +106,11 @@ class __$$_ListMemberStateDataCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ListMemberStateData implements _ListMemberStateData {
-  const _$_ListMemberStateData({required this.isMember});
+class _$ListMemberStateDataImpl implements _ListMemberStateData {
+  const _$ListMemberStateDataImpl({required this.isMember});
 
-  factory _$_ListMemberStateData.fromJson(Map<String, dynamic> json) =>
-      _$$_ListMemberStateDataFromJson(json);
+  factory _$ListMemberStateDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ListMemberStateDataImplFromJson(json);
 
   /// Indicates whether the member specified in the request has been added
   /// to the List.
@@ -115,28 +123,30 @@ class _$_ListMemberStateData implements _ListMemberStateData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ListMemberStateData &&
+            other is _$ListMemberStateDataImpl &&
             (identical(other.isMember, isMember) ||
                 other.isMember == isMember));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, isMember);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MemberStateData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ListMemberStateDataCopyWith<_$_ListMemberStateData> get copyWith =>
-      __$$_ListMemberStateDataCopyWithImpl<_$_ListMemberStateData>(
+  _$$ListMemberStateDataImplCopyWith<_$ListMemberStateDataImpl> get copyWith =>
+      __$$ListMemberStateDataImplCopyWithImpl<_$ListMemberStateDataImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ListMemberStateDataToJson(
+    return _$$ListMemberStateDataImplToJson(
       this,
     );
   }
@@ -144,18 +154,20 @@ class _$_ListMemberStateData implements _ListMemberStateData {
 
 abstract class _ListMemberStateData implements MemberStateData {
   const factory _ListMemberStateData({required final bool isMember}) =
-      _$_ListMemberStateData;
+      _$ListMemberStateDataImpl;
 
   factory _ListMemberStateData.fromJson(Map<String, dynamic> json) =
-      _$_ListMemberStateData.fromJson;
-
-  @override
+      _$ListMemberStateDataImpl.fromJson;
 
   /// Indicates whether the member specified in the request has been added
   /// to the List.
-  bool get isMember;
   @override
-  @JsonKey(ignore: true)
-  _$$_ListMemberStateDataCopyWith<_$_ListMemberStateData> get copyWith =>
+  bool get isMember;
+
+  /// Create a copy of MemberStateData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ListMemberStateDataImplCopyWith<_$ListMemberStateDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

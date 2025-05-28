@@ -12,7 +12,7 @@ part of 'place_geo.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PlaceGeo _$PlaceGeoFromJson(Map<String, dynamic> json) {
   return _PlaceGeo.fromJson(json);
@@ -29,8 +29,12 @@ mixin _$PlaceGeo {
   /// The place properties.
   Map<String, dynamic> get properties => throw _privateConstructorUsedError;
 
+  /// Serializes this PlaceGeo to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PlaceGeo
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PlaceGeoCopyWith<PlaceGeo> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -53,6 +57,8 @@ class _$PlaceGeoCopyWithImpl<$Res, $Val extends PlaceGeo>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PlaceGeo
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -78,23 +84,26 @@ class _$PlaceGeoCopyWithImpl<$Res, $Val extends PlaceGeo>
 }
 
 /// @nodoc
-abstract class _$$_PlaceGeoCopyWith<$Res> implements $PlaceGeoCopyWith<$Res> {
-  factory _$$_PlaceGeoCopyWith(
-          _$_PlaceGeo value, $Res Function(_$_PlaceGeo) then) =
-      __$$_PlaceGeoCopyWithImpl<$Res>;
+abstract class _$$PlaceGeoImplCopyWith<$Res>
+    implements $PlaceGeoCopyWith<$Res> {
+  factory _$$PlaceGeoImplCopyWith(
+          _$PlaceGeoImpl value, $Res Function(_$PlaceGeoImpl) then) =
+      __$$PlaceGeoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String type, List<double> bbox, Map<String, dynamic> properties});
 }
 
 /// @nodoc
-class __$$_PlaceGeoCopyWithImpl<$Res>
-    extends _$PlaceGeoCopyWithImpl<$Res, _$_PlaceGeo>
-    implements _$$_PlaceGeoCopyWith<$Res> {
-  __$$_PlaceGeoCopyWithImpl(
-      _$_PlaceGeo _value, $Res Function(_$_PlaceGeo) _then)
+class __$$PlaceGeoImplCopyWithImpl<$Res>
+    extends _$PlaceGeoCopyWithImpl<$Res, _$PlaceGeoImpl>
+    implements _$$PlaceGeoImplCopyWith<$Res> {
+  __$$PlaceGeoImplCopyWithImpl(
+      _$PlaceGeoImpl _value, $Res Function(_$PlaceGeoImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PlaceGeo
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -102,7 +111,7 @@ class __$$_PlaceGeoCopyWithImpl<$Res>
     Object? bbox = null,
     Object? properties = null,
   }) {
-    return _then(_$_PlaceGeo(
+    return _then(_$PlaceGeoImpl(
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -121,16 +130,16 @@ class __$$_PlaceGeoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PlaceGeo implements _PlaceGeo {
-  const _$_PlaceGeo(
+class _$PlaceGeoImpl implements _PlaceGeo {
+  const _$PlaceGeoImpl(
       {required this.type,
       required final List<double> bbox,
       required final Map<String, dynamic> properties})
       : _bbox = bbox,
         _properties = properties;
 
-  factory _$_PlaceGeo.fromJson(Map<String, dynamic> json) =>
-      _$$_PlaceGeoFromJson(json);
+  factory _$PlaceGeoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PlaceGeoImplFromJson(json);
 
   /// The place type.
   @override
@@ -164,17 +173,17 @@ class _$_PlaceGeo implements _PlaceGeo {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PlaceGeo &&
+            other is _$PlaceGeoImpl &&
             (identical(other.type, type) || other.type == type) &&
             const DeepCollectionEquality().equals(other._bbox, _bbox) &&
             const DeepCollectionEquality()
                 .equals(other._properties, _properties));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -182,15 +191,17 @@ class _$_PlaceGeo implements _PlaceGeo {
       const DeepCollectionEquality().hash(_bbox),
       const DeepCollectionEquality().hash(_properties));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PlaceGeo
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PlaceGeoCopyWith<_$_PlaceGeo> get copyWith =>
-      __$$_PlaceGeoCopyWithImpl<_$_PlaceGeo>(this, _$identity);
+  _$$PlaceGeoImplCopyWith<_$PlaceGeoImpl> get copyWith =>
+      __$$PlaceGeoImplCopyWithImpl<_$PlaceGeoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PlaceGeoToJson(
+    return _$$PlaceGeoImplToJson(
       this,
     );
   }
@@ -200,24 +211,27 @@ abstract class _PlaceGeo implements PlaceGeo {
   const factory _PlaceGeo(
       {required final String type,
       required final List<double> bbox,
-      required final Map<String, dynamic> properties}) = _$_PlaceGeo;
+      required final Map<String, dynamic> properties}) = _$PlaceGeoImpl;
 
-  factory _PlaceGeo.fromJson(Map<String, dynamic> json) = _$_PlaceGeo.fromJson;
-
-  @override
+  factory _PlaceGeo.fromJson(Map<String, dynamic> json) =
+      _$PlaceGeoImpl.fromJson;
 
   /// The place type.
-  String get type;
   @override
+  String get type;
 
   /// The bounding box.
-  List<double> get bbox;
   @override
+  List<double> get bbox;
 
   /// The place properties.
-  Map<String, dynamic> get properties;
   @override
-  @JsonKey(ignore: true)
-  _$$_PlaceGeoCopyWith<_$_PlaceGeo> get copyWith =>
+  Map<String, dynamic> get properties;
+
+  /// Create a copy of PlaceGeo
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PlaceGeoImplCopyWith<_$PlaceGeoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

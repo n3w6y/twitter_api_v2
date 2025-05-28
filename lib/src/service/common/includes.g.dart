@@ -8,11 +8,11 @@ part of 'includes.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Includes _$$_IncludesFromJson(Map json) => $checkedCreate(
-      r'_$_Includes',
+_$IncludesImpl _$$IncludesImplFromJson(Map json) => $checkedCreate(
+      r'_$IncludesImpl',
       json,
       ($checkedConvert) {
-        final val = _$_Includes(
+        final val = _$IncludesImpl(
           tweets: $checkedConvert(
               'tweets',
               (v) => (v as List<dynamic>?)
@@ -54,20 +54,18 @@ _$_Includes _$$_IncludesFromJson(Map json) => $checkedCreate(
       },
     );
 
-Map<String, dynamic> _$$_IncludesToJson(_$_Includes instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('tweets', instance.tweets?.map((e) => e.toJson()).toList());
-  writeNotNull('users', instance.users?.map((e) => e.toJson()).toList());
-  writeNotNull('media', instance.media?.map((e) => e.toJson()).toList());
-  writeNotNull('places', instance.places?.map((e) => e.toJson()).toList());
-  writeNotNull('polls', instance.polls?.map((e) => e.toJson()).toList());
-  writeNotNull('topics', instance.topics?.map((e) => e.toJson()).toList());
-  return val;
-}
+Map<String, dynamic> _$$IncludesImplToJson(_$IncludesImpl instance) =>
+    <String, dynamic>{
+      if (instance.tweets?.map((e) => e.toJson()).toList() case final value?)
+        'tweets': value,
+      if (instance.users?.map((e) => e.toJson()).toList() case final value?)
+        'users': value,
+      if (instance.media?.map((e) => e.toJson()).toList() case final value?)
+        'media': value,
+      if (instance.places?.map((e) => e.toJson()).toList() case final value?)
+        'places': value,
+      if (instance.polls?.map((e) => e.toJson()).toList() case final value?)
+        'polls': value,
+      if (instance.topics?.map((e) => e.toJson()).toList() case final value?)
+        'topics': value,
+    };

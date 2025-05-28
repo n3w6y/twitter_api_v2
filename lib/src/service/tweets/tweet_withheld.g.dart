@@ -8,11 +8,11 @@ part of 'tweet_withheld.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TweetWithheld _$$_TweetWithheldFromJson(Map json) => $checkedCreate(
-      r'_$_TweetWithheld',
+_$TweetWithheldImpl _$$TweetWithheldImplFromJson(Map json) => $checkedCreate(
+      r'_$TweetWithheldImpl',
       json,
       ($checkedConvert) {
-        final val = _$_TweetWithheld(
+        final val = _$TweetWithheldImpl(
           dueToCopyright: $checkedConvert('copyright', (v) => v as bool),
           countries: $checkedConvert(
               'country_codes',
@@ -28,7 +28,7 @@ _$_TweetWithheld _$$_TweetWithheldFromJson(Map json) => $checkedCreate(
       },
     );
 
-Map<String, dynamic> _$$_TweetWithheldToJson(_$_TweetWithheld instance) =>
+Map<String, dynamic> _$$TweetWithheldImplToJson(_$TweetWithheldImpl instance) =>
     <String, dynamic>{
       'copyright': instance.dueToCopyright,
       'country_codes':

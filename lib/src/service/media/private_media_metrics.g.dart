@@ -8,21 +8,22 @@ part of 'private_media_metrics.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PrivateMediaMetrics _$$_PrivateMediaMetricsFromJson(Map json) =>
+_$PrivateMediaMetricsImpl _$$PrivateMediaMetricsImplFromJson(Map json) =>
     $checkedCreate(
-      r'_$_PrivateMediaMetrics',
+      r'_$PrivateMediaMetricsImpl',
       json,
       ($checkedConvert) {
-        final val = _$_PrivateMediaMetrics(
-          playback0Count: $checkedConvert('playback_0_count', (v) => v as int),
+        final val = _$PrivateMediaMetricsImpl(
+          playback0Count:
+              $checkedConvert('playback_0_count', (v) => (v as num).toInt()),
           playback25Count:
-              $checkedConvert('playback_25_count', (v) => v as int),
+              $checkedConvert('playback_25_count', (v) => (v as num).toInt()),
           playback50Count:
-              $checkedConvert('playback_50_count', (v) => v as int),
+              $checkedConvert('playback_50_count', (v) => (v as num).toInt()),
           playback75Count:
-              $checkedConvert('playback_75_count', (v) => v as int),
+              $checkedConvert('playback_75_count', (v) => (v as num).toInt()),
           playback100Count:
-              $checkedConvert('playback_100_count', (v) => v as int),
+              $checkedConvert('playback_100_count', (v) => (v as num).toInt()),
         );
         return val;
       },
@@ -35,8 +36,8 @@ _$_PrivateMediaMetrics _$$_PrivateMediaMetricsFromJson(Map json) =>
       },
     );
 
-Map<String, dynamic> _$$_PrivateMediaMetricsToJson(
-        _$_PrivateMediaMetrics instance) =>
+Map<String, dynamic> _$$PrivateMediaMetricsImplToJson(
+        _$PrivateMediaMetricsImpl instance) =>
     <String, dynamic>{
       'playback_0_count': instance.playback0Count,
       'playback_25_count': instance.playback25Count,

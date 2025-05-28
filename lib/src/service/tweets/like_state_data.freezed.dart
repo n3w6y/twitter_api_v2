@@ -12,7 +12,7 @@ part of 'like_state_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 LikeStateData _$LikeStateDataFromJson(Map<String, dynamic> json) {
   return _LikeStateData.fromJson(json);
@@ -25,8 +25,12 @@ mixin _$LikeStateData {
   @JsonKey(name: 'liked')
   bool get isLiked => throw _privateConstructorUsedError;
 
+  /// Serializes this LikeStateData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of LikeStateData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $LikeStateDataCopyWith<LikeStateData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -50,6 +54,8 @@ class _$LikeStateDataCopyWithImpl<$Res, $Val extends LikeStateData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of LikeStateData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -65,30 +71,32 @@ class _$LikeStateDataCopyWithImpl<$Res, $Val extends LikeStateData>
 }
 
 /// @nodoc
-abstract class _$$_LikeStateDataCopyWith<$Res>
+abstract class _$$LikeStateDataImplCopyWith<$Res>
     implements $LikeStateDataCopyWith<$Res> {
-  factory _$$_LikeStateDataCopyWith(
-          _$_LikeStateData value, $Res Function(_$_LikeStateData) then) =
-      __$$_LikeStateDataCopyWithImpl<$Res>;
+  factory _$$LikeStateDataImplCopyWith(
+          _$LikeStateDataImpl value, $Res Function(_$LikeStateDataImpl) then) =
+      __$$LikeStateDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@JsonKey(name: 'liked') bool isLiked});
 }
 
 /// @nodoc
-class __$$_LikeStateDataCopyWithImpl<$Res>
-    extends _$LikeStateDataCopyWithImpl<$Res, _$_LikeStateData>
-    implements _$$_LikeStateDataCopyWith<$Res> {
-  __$$_LikeStateDataCopyWithImpl(
-      _$_LikeStateData _value, $Res Function(_$_LikeStateData) _then)
+class __$$LikeStateDataImplCopyWithImpl<$Res>
+    extends _$LikeStateDataCopyWithImpl<$Res, _$LikeStateDataImpl>
+    implements _$$LikeStateDataImplCopyWith<$Res> {
+  __$$LikeStateDataImplCopyWithImpl(
+      _$LikeStateDataImpl _value, $Res Function(_$LikeStateDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of LikeStateData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? isLiked = null,
   }) {
-    return _then(_$_LikeStateData(
+    return _then(_$LikeStateDataImpl(
       isLiked: null == isLiked
           ? _value.isLiked
           : isLiked // ignore: cast_nullable_to_non_nullable
@@ -99,11 +107,11 @@ class __$$_LikeStateDataCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_LikeStateData implements _LikeStateData {
-  const _$_LikeStateData({@JsonKey(name: 'liked') required this.isLiked});
+class _$LikeStateDataImpl implements _LikeStateData {
+  const _$LikeStateDataImpl({@JsonKey(name: 'liked') required this.isLiked});
 
-  factory _$_LikeStateData.fromJson(Map<String, dynamic> json) =>
-      _$$_LikeStateDataFromJson(json);
+  factory _$LikeStateDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$LikeStateDataImplFromJson(json);
 
   /// Indicates whether the user likes the specified Tweet
   /// as a result of this request.
@@ -117,26 +125,28 @@ class _$_LikeStateData implements _LikeStateData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LikeStateData &&
+            other is _$LikeStateDataImpl &&
             (identical(other.isLiked, isLiked) || other.isLiked == isLiked));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, isLiked);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of LikeStateData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LikeStateDataCopyWith<_$_LikeStateData> get copyWith =>
-      __$$_LikeStateDataCopyWithImpl<_$_LikeStateData>(this, _$identity);
+  _$$LikeStateDataImplCopyWith<_$LikeStateDataImpl> get copyWith =>
+      __$$LikeStateDataImplCopyWithImpl<_$LikeStateDataImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LikeStateDataToJson(
+    return _$$LikeStateDataImplToJson(
       this,
     );
   }
@@ -144,19 +154,22 @@ class _$_LikeStateData implements _LikeStateData {
 
 abstract class _LikeStateData implements LikeStateData {
   const factory _LikeStateData(
-      {@JsonKey(name: 'liked') required final bool isLiked}) = _$_LikeStateData;
+          {@JsonKey(name: 'liked') required final bool isLiked}) =
+      _$LikeStateDataImpl;
 
   factory _LikeStateData.fromJson(Map<String, dynamic> json) =
-      _$_LikeStateData.fromJson;
-
-  @override
+      _$LikeStateDataImpl.fromJson;
 
   /// Indicates whether the user likes the specified Tweet
   /// as a result of this request.
+  @override
   @JsonKey(name: 'liked')
   bool get isLiked;
+
+  /// Create a copy of LikeStateData
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_LikeStateDataCopyWith<_$_LikeStateData> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$LikeStateDataImplCopyWith<_$LikeStateDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'locale.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Locale _$LocaleFromJson(Map<String, dynamic> json) {
   return _Locale.fromJson(json);
@@ -26,8 +26,12 @@ mixin _$Locale {
   /// The country
   Country get country => throw _privateConstructorUsedError;
 
+  /// Serializes this Locale to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Locale
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $LocaleCopyWith<Locale> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -49,6 +53,8 @@ class _$LocaleCopyWithImpl<$Res, $Val extends Locale>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Locale
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -69,28 +75,32 @@ class _$LocaleCopyWithImpl<$Res, $Val extends Locale>
 }
 
 /// @nodoc
-abstract class _$$_LocaleCopyWith<$Res> implements $LocaleCopyWith<$Res> {
-  factory _$$_LocaleCopyWith(_$_Locale value, $Res Function(_$_Locale) then) =
-      __$$_LocaleCopyWithImpl<$Res>;
+abstract class _$$LocaleImplCopyWith<$Res> implements $LocaleCopyWith<$Res> {
+  factory _$$LocaleImplCopyWith(
+          _$LocaleImpl value, $Res Function(_$LocaleImpl) then) =
+      __$$LocaleImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({Language lang, Country country});
 }
 
 /// @nodoc
-class __$$_LocaleCopyWithImpl<$Res>
-    extends _$LocaleCopyWithImpl<$Res, _$_Locale>
-    implements _$$_LocaleCopyWith<$Res> {
-  __$$_LocaleCopyWithImpl(_$_Locale _value, $Res Function(_$_Locale) _then)
+class __$$LocaleImplCopyWithImpl<$Res>
+    extends _$LocaleCopyWithImpl<$Res, _$LocaleImpl>
+    implements _$$LocaleImplCopyWith<$Res> {
+  __$$LocaleImplCopyWithImpl(
+      _$LocaleImpl _value, $Res Function(_$LocaleImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Locale
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? lang = null,
     Object? country = null,
   }) {
-    return _then(_$_Locale(
+    return _then(_$LocaleImpl(
       lang: null == lang
           ? _value.lang
           : lang // ignore: cast_nullable_to_non_nullable
@@ -105,11 +115,11 @@ class __$$_LocaleCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Locale implements _Locale {
-  const _$_Locale({required this.lang, required this.country});
+class _$LocaleImpl implements _Locale {
+  const _$LocaleImpl({required this.lang, required this.country});
 
-  factory _$_Locale.fromJson(Map<String, dynamic> json) =>
-      _$$_LocaleFromJson(json);
+  factory _$LocaleImpl.fromJson(Map<String, dynamic> json) =>
+      _$$LocaleImplFromJson(json);
 
   /// The language
   @override
@@ -125,27 +135,29 @@ class _$_Locale implements _Locale {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Locale &&
+            other is _$LocaleImpl &&
             (identical(other.lang, lang) || other.lang == lang) &&
             (identical(other.country, country) || other.country == country));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, lang, country);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Locale
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LocaleCopyWith<_$_Locale> get copyWith =>
-      __$$_LocaleCopyWithImpl<_$_Locale>(this, _$identity);
+  _$$LocaleImplCopyWith<_$LocaleImpl> get copyWith =>
+      __$$LocaleImplCopyWithImpl<_$LocaleImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LocaleToJson(
+    return _$$LocaleImplToJson(
       this,
     );
   }
@@ -154,20 +166,22 @@ class _$_Locale implements _Locale {
 abstract class _Locale implements Locale {
   const factory _Locale(
       {required final Language lang,
-      required final Country country}) = _$_Locale;
+      required final Country country}) = _$LocaleImpl;
 
-  factory _Locale.fromJson(Map<String, dynamic> json) = _$_Locale.fromJson;
-
-  @override
+  factory _Locale.fromJson(Map<String, dynamic> json) = _$LocaleImpl.fromJson;
 
   /// The language
-  Language get lang;
   @override
+  Language get lang;
 
   /// The country
-  Country get country;
   @override
-  @JsonKey(ignore: true)
-  _$$_LocaleCopyWith<_$_Locale> get copyWith =>
+  Country get country;
+
+  /// Create a copy of Locale
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$LocaleImplCopyWith<_$LocaleImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

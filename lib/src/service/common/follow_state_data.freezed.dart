@@ -12,7 +12,7 @@ part of 'follow_state_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 FollowStateData _$FollowStateDataFromJson(Map<String, dynamic> json) {
   return _FollowStateData.fromJson(json);
@@ -33,8 +33,12 @@ mixin _$FollowStateData {
   @JsonKey(name: 'pending_follow')
   bool get isPending => throw _privateConstructorUsedError;
 
+  /// Serializes this FollowStateData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of FollowStateData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $FollowStateDataCopyWith<FollowStateData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -60,6 +64,8 @@ class _$FollowStateDataCopyWithImpl<$Res, $Val extends FollowStateData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of FollowStateData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -80,11 +86,11 @@ class _$FollowStateDataCopyWithImpl<$Res, $Val extends FollowStateData>
 }
 
 /// @nodoc
-abstract class _$$_FollowStateDataCopyWith<$Res>
+abstract class _$$FollowStateDataImplCopyWith<$Res>
     implements $FollowStateDataCopyWith<$Res> {
-  factory _$$_FollowStateDataCopyWith(
-          _$_FollowStateData value, $Res Function(_$_FollowStateData) then) =
-      __$$_FollowStateDataCopyWithImpl<$Res>;
+  factory _$$FollowStateDataImplCopyWith(_$FollowStateDataImpl value,
+          $Res Function(_$FollowStateDataImpl) then) =
+      __$$FollowStateDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -93,20 +99,22 @@ abstract class _$$_FollowStateDataCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_FollowStateDataCopyWithImpl<$Res>
-    extends _$FollowStateDataCopyWithImpl<$Res, _$_FollowStateData>
-    implements _$$_FollowStateDataCopyWith<$Res> {
-  __$$_FollowStateDataCopyWithImpl(
-      _$_FollowStateData _value, $Res Function(_$_FollowStateData) _then)
+class __$$FollowStateDataImplCopyWithImpl<$Res>
+    extends _$FollowStateDataCopyWithImpl<$Res, _$FollowStateDataImpl>
+    implements _$$FollowStateDataImplCopyWith<$Res> {
+  __$$FollowStateDataImplCopyWithImpl(
+      _$FollowStateDataImpl _value, $Res Function(_$FollowStateDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of FollowStateData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? isFollowing = null,
     Object? isPending = null,
   }) {
-    return _then(_$_FollowStateData(
+    return _then(_$FollowStateDataImpl(
       isFollowing: null == isFollowing
           ? _value.isFollowing
           : isFollowing // ignore: cast_nullable_to_non_nullable
@@ -121,13 +129,13 @@ class __$$_FollowStateDataCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_FollowStateData implements _FollowStateData {
-  const _$_FollowStateData(
+class _$FollowStateDataImpl implements _FollowStateData {
+  const _$FollowStateDataImpl(
       {@JsonKey(name: 'following') required this.isFollowing,
       @JsonKey(name: 'pending_follow') this.isPending = false});
 
-  factory _$_FollowStateData.fromJson(Map<String, dynamic> json) =>
-      _$$_FollowStateDataFromJson(json);
+  factory _$FollowStateDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$FollowStateDataImplFromJson(json);
 
   /// Indicates whether the user followed the specified List as a result
   /// of the request.
@@ -150,29 +158,32 @@ class _$_FollowStateData implements _FollowStateData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FollowStateData &&
+            other is _$FollowStateDataImpl &&
             (identical(other.isFollowing, isFollowing) ||
                 other.isFollowing == isFollowing) &&
             (identical(other.isPending, isPending) ||
                 other.isPending == isPending));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, isFollowing, isPending);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of FollowStateData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FollowStateDataCopyWith<_$_FollowStateData> get copyWith =>
-      __$$_FollowStateDataCopyWithImpl<_$_FollowStateData>(this, _$identity);
+  _$$FollowStateDataImplCopyWith<_$FollowStateDataImpl> get copyWith =>
+      __$$FollowStateDataImplCopyWithImpl<_$FollowStateDataImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_FollowStateDataToJson(
+    return _$$FollowStateDataImplToJson(
       this,
     );
   }
@@ -182,28 +193,30 @@ abstract class _FollowStateData implements FollowStateData {
   const factory _FollowStateData(
           {@JsonKey(name: 'following') required final bool isFollowing,
           @JsonKey(name: 'pending_follow') final bool isPending}) =
-      _$_FollowStateData;
+      _$FollowStateDataImpl;
 
   factory _FollowStateData.fromJson(Map<String, dynamic> json) =
-      _$_FollowStateData.fromJson;
-
-  @override
+      _$FollowStateDataImpl.fromJson;
 
   /// Indicates whether the user followed the specified List as a result
   /// of the request.
+  @override
   @JsonKey(name: 'following')
   bool get isFollowing;
-  @override
 
   /// Indicates whether the target user will need to approve the follow
   /// request.
   ///
   /// Note that the authenticated user will follow the target user only
   /// when they approve the incoming follower request.
+  @override
   @JsonKey(name: 'pending_follow')
   bool get isPending;
+
+  /// Create a copy of FollowStateData
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_FollowStateDataCopyWith<_$_FollowStateData> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FollowStateDataImplCopyWith<_$FollowStateDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

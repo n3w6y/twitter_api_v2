@@ -8,11 +8,11 @@ part of 'user_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_UserData _$$_UserDataFromJson(Map json) => $checkedCreate(
-      r'_$_UserData',
+_$UserDataImpl _$$UserDataImplFromJson(Map json) => $checkedCreate(
+      r'_$UserDataImpl',
       json,
       ($checkedConvert) {
-        final val = _$_UserData(
+        final val = _$UserDataImpl(
           id: $checkedConvert('id', (v) => v as String),
           name: $checkedConvert('name', (v) => v as String),
           username: $checkedConvert('username', (v) => v as String),
@@ -59,34 +59,28 @@ _$_UserData _$$_UserDataFromJson(Map json) => $checkedCreate(
       },
     );
 
-Map<String, dynamic> _$$_UserDataToJson(_$_UserData instance) {
-  final val = <String, dynamic>{
-    'id': instance.id,
-    'name': instance.name,
-    'username': instance.username,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('description', instance.description);
-  writeNotNull('url', instance.url);
-  writeNotNull('profile_image_url', instance.profileImageUrl);
-  writeNotNull('location', instance.location);
-  writeNotNull('protected', instance.isProtected);
-  writeNotNull('verified', instance.isVerified);
-  writeNotNull(
-      'verified_type', _$UserVerifiedTypeEnumMap[instance.verifiedType]);
-  writeNotNull('pinned_tweet_id', instance.pinnedTweetId);
-  writeNotNull('entities', instance.entities?.toJson());
-  writeNotNull('public_metrics', instance.publicMetrics?.toJson());
-  writeNotNull('created_at', instance.createdAt?.toIso8601String());
-  writeNotNull('withheld', instance.withheld?.toJson());
-  return val;
-}
+Map<String, dynamic> _$$UserDataImplToJson(_$UserDataImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'username': instance.username,
+      if (instance.description case final value?) 'description': value,
+      if (instance.url case final value?) 'url': value,
+      if (instance.profileImageUrl case final value?)
+        'profile_image_url': value,
+      if (instance.location case final value?) 'location': value,
+      if (instance.isProtected case final value?) 'protected': value,
+      if (instance.isVerified case final value?) 'verified': value,
+      if (_$UserVerifiedTypeEnumMap[instance.verifiedType] case final value?)
+        'verified_type': value,
+      if (instance.pinnedTweetId case final value?) 'pinned_tweet_id': value,
+      if (instance.entities?.toJson() case final value?) 'entities': value,
+      if (instance.publicMetrics?.toJson() case final value?)
+        'public_metrics': value,
+      if (instance.createdAt?.toIso8601String() case final value?)
+        'created_at': value,
+      if (instance.withheld?.toJson() case final value?) 'withheld': value,
+    };
 
 const _$UserVerifiedTypeEnumMap = {
   UserVerifiedType.blue: 'blue',

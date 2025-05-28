@@ -12,7 +12,7 @@ part of 'referenced_tweet.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ReferencedTweet _$ReferencedTweetFromJson(Map<String, dynamic> json) {
   return _ReferencedTweet.fromJson(json);
@@ -30,8 +30,12 @@ mixin _$ReferencedTweet {
   /// or [TweetType.repliedTo] (this Tweet is a reply).
   TweetType get type => throw _privateConstructorUsedError;
 
+  /// Serializes this ReferencedTweet to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ReferencedTweet
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ReferencedTweetCopyWith<ReferencedTweet> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -55,6 +59,8 @@ class _$ReferencedTweetCopyWithImpl<$Res, $Val extends ReferencedTweet>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ReferencedTweet
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -75,31 +81,33 @@ class _$ReferencedTweetCopyWithImpl<$Res, $Val extends ReferencedTweet>
 }
 
 /// @nodoc
-abstract class _$$_ReferencedTweetCopyWith<$Res>
+abstract class _$$ReferencedTweetImplCopyWith<$Res>
     implements $ReferencedTweetCopyWith<$Res> {
-  factory _$$_ReferencedTweetCopyWith(
-          _$_ReferencedTweet value, $Res Function(_$_ReferencedTweet) then) =
-      __$$_ReferencedTweetCopyWithImpl<$Res>;
+  factory _$$ReferencedTweetImplCopyWith(_$ReferencedTweetImpl value,
+          $Res Function(_$ReferencedTweetImpl) then) =
+      __$$ReferencedTweetImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id, TweetType type});
 }
 
 /// @nodoc
-class __$$_ReferencedTweetCopyWithImpl<$Res>
-    extends _$ReferencedTweetCopyWithImpl<$Res, _$_ReferencedTweet>
-    implements _$$_ReferencedTweetCopyWith<$Res> {
-  __$$_ReferencedTweetCopyWithImpl(
-      _$_ReferencedTweet _value, $Res Function(_$_ReferencedTweet) _then)
+class __$$ReferencedTweetImplCopyWithImpl<$Res>
+    extends _$ReferencedTweetCopyWithImpl<$Res, _$ReferencedTweetImpl>
+    implements _$$ReferencedTweetImplCopyWith<$Res> {
+  __$$ReferencedTweetImplCopyWithImpl(
+      _$ReferencedTweetImpl _value, $Res Function(_$ReferencedTweetImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ReferencedTweet
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = null,
     Object? type = null,
   }) {
-    return _then(_$_ReferencedTweet(
+    return _then(_$ReferencedTweetImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -114,11 +122,11 @@ class __$$_ReferencedTweetCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReferencedTweet implements _ReferencedTweet {
-  const _$_ReferencedTweet({required this.id, required this.type});
+class _$ReferencedTweetImpl implements _ReferencedTweet {
+  const _$ReferencedTweetImpl({required this.id, required this.type});
 
-  factory _$_ReferencedTweet.fromJson(Map<String, dynamic> json) =>
-      _$$_ReferencedTweetFromJson(json);
+  factory _$ReferencedTweetImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ReferencedTweetImplFromJson(json);
 
   /// The unique identifier of the referenced Tweet.
   @override
@@ -138,27 +146,30 @@ class _$_ReferencedTweet implements _ReferencedTweet {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReferencedTweet &&
+            other is _$ReferencedTweetImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.type, type) || other.type == type));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, type);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ReferencedTweet
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReferencedTweetCopyWith<_$_ReferencedTweet> get copyWith =>
-      __$$_ReferencedTweetCopyWithImpl<_$_ReferencedTweet>(this, _$identity);
+  _$$ReferencedTweetImplCopyWith<_$ReferencedTweetImpl> get copyWith =>
+      __$$ReferencedTweetImplCopyWithImpl<_$ReferencedTweetImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReferencedTweetToJson(
+    return _$$ReferencedTweetImplToJson(
       this,
     );
   }
@@ -167,25 +178,27 @@ class _$_ReferencedTweet implements _ReferencedTweet {
 abstract class _ReferencedTweet implements ReferencedTweet {
   const factory _ReferencedTweet(
       {required final String id,
-      required final TweetType type}) = _$_ReferencedTweet;
+      required final TweetType type}) = _$ReferencedTweetImpl;
 
   factory _ReferencedTweet.fromJson(Map<String, dynamic> json) =
-      _$_ReferencedTweet.fromJson;
-
-  @override
+      _$ReferencedTweetImpl.fromJson;
 
   /// The unique identifier of the referenced Tweet.
-  String get id;
   @override
+  String get id;
 
   /// Indicates the type of relationship between this Tweet and the Tweet
   /// returned in the response:
   /// [TweetType.retweeted] (this Tweet is a Retweet),
   /// [TweetType.quoted] (a Retweet with comment, also known as Quoted Tweet),
   /// or [TweetType.repliedTo] (this Tweet is a reply).
-  TweetType get type;
   @override
-  @JsonKey(ignore: true)
-  _$$_ReferencedTweetCopyWith<_$_ReferencedTweet> get copyWith =>
+  TweetType get type;
+
+  /// Create a copy of ReferencedTweet
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ReferencedTweetImplCopyWith<_$ReferencedTweetImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

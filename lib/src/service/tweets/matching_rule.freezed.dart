@@ -12,7 +12,7 @@ part of 'matching_rule.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 MatchingRule _$MatchingRuleFromJson(Map<String, dynamic> json) {
   return _MatchingRule.fromJson(json);
@@ -27,8 +27,12 @@ mixin _$MatchingRule {
   /// Tweet delivered.
   String get tag => throw _privateConstructorUsedError;
 
+  /// Serializes this MatchingRule to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of MatchingRule
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $MatchingRuleCopyWith<MatchingRule> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -52,6 +56,8 @@ class _$MatchingRuleCopyWithImpl<$Res, $Val extends MatchingRule>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of MatchingRule
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -72,31 +78,33 @@ class _$MatchingRuleCopyWithImpl<$Res, $Val extends MatchingRule>
 }
 
 /// @nodoc
-abstract class _$$_MatchingRuleCopyWith<$Res>
+abstract class _$$MatchingRuleImplCopyWith<$Res>
     implements $MatchingRuleCopyWith<$Res> {
-  factory _$$_MatchingRuleCopyWith(
-          _$_MatchingRule value, $Res Function(_$_MatchingRule) then) =
-      __$$_MatchingRuleCopyWithImpl<$Res>;
+  factory _$$MatchingRuleImplCopyWith(
+          _$MatchingRuleImpl value, $Res Function(_$MatchingRuleImpl) then) =
+      __$$MatchingRuleImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id, String tag});
 }
 
 /// @nodoc
-class __$$_MatchingRuleCopyWithImpl<$Res>
-    extends _$MatchingRuleCopyWithImpl<$Res, _$_MatchingRule>
-    implements _$$_MatchingRuleCopyWith<$Res> {
-  __$$_MatchingRuleCopyWithImpl(
-      _$_MatchingRule _value, $Res Function(_$_MatchingRule) _then)
+class __$$MatchingRuleImplCopyWithImpl<$Res>
+    extends _$MatchingRuleCopyWithImpl<$Res, _$MatchingRuleImpl>
+    implements _$$MatchingRuleImplCopyWith<$Res> {
+  __$$MatchingRuleImplCopyWithImpl(
+      _$MatchingRuleImpl _value, $Res Function(_$MatchingRuleImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MatchingRule
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = null,
     Object? tag = null,
   }) {
-    return _then(_$_MatchingRule(
+    return _then(_$MatchingRuleImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -111,11 +119,11 @@ class __$$_MatchingRuleCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MatchingRule implements _MatchingRule {
-  const _$_MatchingRule({required this.id, required this.tag});
+class _$MatchingRuleImpl implements _MatchingRule {
+  const _$MatchingRuleImpl({required this.id, required this.tag});
 
-  factory _$_MatchingRule.fromJson(Map<String, dynamic> json) =>
-      _$$_MatchingRuleFromJson(json);
+  factory _$MatchingRuleImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MatchingRuleImplFromJson(json);
 
   /// ID of the filter rule that matched against the Tweet delivered.
   @override
@@ -132,27 +140,29 @@ class _$_MatchingRule implements _MatchingRule {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MatchingRule &&
+            other is _$MatchingRuleImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.tag, tag) || other.tag == tag));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, tag);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MatchingRule
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MatchingRuleCopyWith<_$_MatchingRule> get copyWith =>
-      __$$_MatchingRuleCopyWithImpl<_$_MatchingRule>(this, _$identity);
+  _$$MatchingRuleImplCopyWith<_$MatchingRuleImpl> get copyWith =>
+      __$$MatchingRuleImplCopyWithImpl<_$MatchingRuleImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MatchingRuleToJson(
+    return _$$MatchingRuleImplToJson(
       this,
     );
   }
@@ -160,22 +170,25 @@ class _$_MatchingRule implements _MatchingRule {
 
 abstract class _MatchingRule implements MatchingRule {
   const factory _MatchingRule(
-      {required final String id, required final String tag}) = _$_MatchingRule;
+      {required final String id,
+      required final String tag}) = _$MatchingRuleImpl;
 
   factory _MatchingRule.fromJson(Map<String, dynamic> json) =
-      _$_MatchingRule.fromJson;
-
-  @override
+      _$MatchingRuleImpl.fromJson;
 
   /// ID of the filter rule that matched against the Tweet delivered.
-  String get id;
   @override
+  String get id;
 
   /// The tag label of the filter rule that matched against the
   /// Tweet delivered.
-  String get tag;
   @override
-  @JsonKey(ignore: true)
-  _$$_MatchingRuleCopyWith<_$_MatchingRule> get copyWith =>
+  String get tag;
+
+  /// Create a copy of MatchingRule
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$MatchingRuleImplCopyWith<_$MatchingRuleImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

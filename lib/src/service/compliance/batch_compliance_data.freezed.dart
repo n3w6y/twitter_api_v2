@@ -12,7 +12,7 @@ part of 'batch_compliance_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 BatchComplianceData _$BatchComplianceDataFromJson(Map<String, dynamic> json) {
   return _BatchComplianceData.fromJson(json);
@@ -56,8 +56,12 @@ mixin _$BatchComplianceData {
   /// The date and time when the job was created.
   DateTime get createdAt => throw _privateConstructorUsedError;
 
+  /// Serializes this BatchComplianceData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of BatchComplianceData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $BatchComplianceDataCopyWith<BatchComplianceData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -90,6 +94,8 @@ class _$BatchComplianceDataCopyWithImpl<$Res, $Val extends BatchComplianceData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of BatchComplianceData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -145,11 +151,11 @@ class _$BatchComplianceDataCopyWithImpl<$Res, $Val extends BatchComplianceData>
 }
 
 /// @nodoc
-abstract class _$$_BatchComplianceDataCopyWith<$Res>
+abstract class _$$BatchComplianceDataImplCopyWith<$Res>
     implements $BatchComplianceDataCopyWith<$Res> {
-  factory _$$_BatchComplianceDataCopyWith(_$_BatchComplianceData value,
-          $Res Function(_$_BatchComplianceData) then) =
-      __$$_BatchComplianceDataCopyWithImpl<$Res>;
+  factory _$$BatchComplianceDataImplCopyWith(_$BatchComplianceDataImpl value,
+          $Res Function(_$BatchComplianceDataImpl) then) =
+      __$$BatchComplianceDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -165,13 +171,15 @@ abstract class _$$_BatchComplianceDataCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_BatchComplianceDataCopyWithImpl<$Res>
-    extends _$BatchComplianceDataCopyWithImpl<$Res, _$_BatchComplianceData>
-    implements _$$_BatchComplianceDataCopyWith<$Res> {
-  __$$_BatchComplianceDataCopyWithImpl(_$_BatchComplianceData _value,
-      $Res Function(_$_BatchComplianceData) _then)
+class __$$BatchComplianceDataImplCopyWithImpl<$Res>
+    extends _$BatchComplianceDataCopyWithImpl<$Res, _$BatchComplianceDataImpl>
+    implements _$$BatchComplianceDataImplCopyWith<$Res> {
+  __$$BatchComplianceDataImplCopyWithImpl(_$BatchComplianceDataImpl _value,
+      $Res Function(_$BatchComplianceDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of BatchComplianceData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -185,7 +193,7 @@ class __$$_BatchComplianceDataCopyWithImpl<$Res>
     Object? downloadExpiresAt = null,
     Object? createdAt = null,
   }) {
-    return _then(_$_BatchComplianceData(
+    return _then(_$BatchComplianceDataImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -228,8 +236,8 @@ class __$$_BatchComplianceDataCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_BatchComplianceData implements _BatchComplianceData {
-  const _$_BatchComplianceData(
+class _$BatchComplianceDataImpl implements _BatchComplianceData {
+  const _$BatchComplianceDataImpl(
       {required this.id,
       required this.type,
       required this.status,
@@ -240,8 +248,8 @@ class _$_BatchComplianceData implements _BatchComplianceData {
       required this.downloadExpiresAt,
       required this.createdAt});
 
-  factory _$_BatchComplianceData.fromJson(Map<String, dynamic> json) =>
-      _$$_BatchComplianceDataFromJson(json);
+  factory _$BatchComplianceDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BatchComplianceDataImplFromJson(json);
 
   /// The unique identifier for this job.
   @override
@@ -294,10 +302,10 @@ class _$_BatchComplianceData implements _BatchComplianceData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BatchComplianceData &&
+            other is _$BatchComplianceDataImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.status, status) || other.status == status) &&
@@ -315,21 +323,23 @@ class _$_BatchComplianceData implements _BatchComplianceData {
                 other.createdAt == createdAt));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, type, status, resumable,
       uploadUrl, downloadUrl, uploadExpiresAt, downloadExpiresAt, createdAt);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of BatchComplianceData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BatchComplianceDataCopyWith<_$_BatchComplianceData> get copyWith =>
-      __$$_BatchComplianceDataCopyWithImpl<_$_BatchComplianceData>(
+  _$$BatchComplianceDataImplCopyWith<_$BatchComplianceDataImpl> get copyWith =>
+      __$$BatchComplianceDataImplCopyWithImpl<_$BatchComplianceDataImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BatchComplianceDataToJson(
+    return _$$BatchComplianceDataImplToJson(
       this,
     );
   }
@@ -345,58 +355,60 @@ abstract class _BatchComplianceData implements BatchComplianceData {
       required final String downloadUrl,
       required final DateTime uploadExpiresAt,
       required final DateTime downloadExpiresAt,
-      required final DateTime createdAt}) = _$_BatchComplianceData;
+      required final DateTime createdAt}) = _$BatchComplianceDataImpl;
 
   factory _BatchComplianceData.fromJson(Map<String, dynamic> json) =
-      _$_BatchComplianceData.fromJson;
-
-  @override
+      _$BatchComplianceDataImpl.fromJson;
 
   /// The unique identifier for this job.
-  String get id;
   @override
+  String get id;
 
   /// The type of the job, whether tweets or users.
-  JobType get type;
   @override
+  JobType get type;
 
   /// Current status of this job.
-  JobStatus get status;
   @override
+  JobStatus get status;
 
   /// Indicates this job is enabled the upload URL with support for resumable
   /// uploads.
-  bool get resumable;
   @override
+  bool get resumable;
 
   /// A URL representing the location where to upload IDs consumed by your
   /// app. This URL is already signed with an authentication key, so you
   /// will not need to pass any additional credentials or headers to
   /// authenticate the request.
-  String get uploadUrl;
   @override
+  String get uploadUrl;
 
   /// The predefined location where to download the results from the
   /// compliance job. This URL is already signed with an authentication key,
   /// so you will not need to pass any additional credential or header to
   /// authenticate the request.
-  String get downloadUrl;
   @override
+  String get downloadUrl;
 
   /// The date and time until which the upload URL will be available
   /// (usually 15 minutes from the request time).
-  DateTime get uploadExpiresAt;
   @override
+  DateTime get uploadExpiresAt;
 
   /// The date and time until which the download URL will be available
   /// (usually 7 days from the request time).
-  DateTime get downloadExpiresAt;
   @override
+  DateTime get downloadExpiresAt;
 
   /// The date and time when the job was created.
-  DateTime get createdAt;
   @override
-  @JsonKey(ignore: true)
-  _$$_BatchComplianceDataCopyWith<_$_BatchComplianceData> get copyWith =>
+  DateTime get createdAt;
+
+  /// Create a copy of BatchComplianceData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BatchComplianceDataImplCopyWith<_$BatchComplianceDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'user_description_entity.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 UserDescriptionEntity _$UserDescriptionEntityFromJson(
     Map<String, dynamic> json) {
@@ -33,8 +33,12 @@ mixin _$UserDescriptionEntity {
   /// Contains details about text recognized as a user mention.
   List<Mention>? get mentions => throw _privateConstructorUsedError;
 
+  /// Serializes this UserDescriptionEntity to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UserDescriptionEntity
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UserDescriptionEntityCopyWith<UserDescriptionEntity> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -63,6 +67,8 @@ class _$UserDescriptionEntityCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of UserDescriptionEntity
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -93,11 +99,12 @@ class _$UserDescriptionEntityCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_UserDescriptionEntityCopyWith<$Res>
+abstract class _$$UserDescriptionEntityImplCopyWith<$Res>
     implements $UserDescriptionEntityCopyWith<$Res> {
-  factory _$$_UserDescriptionEntityCopyWith(_$_UserDescriptionEntity value,
-          $Res Function(_$_UserDescriptionEntity) then) =
-      __$$_UserDescriptionEntityCopyWithImpl<$Res>;
+  factory _$$UserDescriptionEntityImplCopyWith(
+          _$UserDescriptionEntityImpl value,
+          $Res Function(_$UserDescriptionEntityImpl) then) =
+      __$$UserDescriptionEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -108,13 +115,16 @@ abstract class _$$_UserDescriptionEntityCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_UserDescriptionEntityCopyWithImpl<$Res>
-    extends _$UserDescriptionEntityCopyWithImpl<$Res, _$_UserDescriptionEntity>
-    implements _$$_UserDescriptionEntityCopyWith<$Res> {
-  __$$_UserDescriptionEntityCopyWithImpl(_$_UserDescriptionEntity _value,
-      $Res Function(_$_UserDescriptionEntity) _then)
+class __$$UserDescriptionEntityImplCopyWithImpl<$Res>
+    extends _$UserDescriptionEntityCopyWithImpl<$Res,
+        _$UserDescriptionEntityImpl>
+    implements _$$UserDescriptionEntityImplCopyWith<$Res> {
+  __$$UserDescriptionEntityImplCopyWithImpl(_$UserDescriptionEntityImpl _value,
+      $Res Function(_$UserDescriptionEntityImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserDescriptionEntity
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -123,7 +133,7 @@ class __$$_UserDescriptionEntityCopyWithImpl<$Res>
     Object? cashtags = freezed,
     Object? mentions = freezed,
   }) {
-    return _then(_$_UserDescriptionEntity(
+    return _then(_$UserDescriptionEntityImpl(
       urls: freezed == urls
           ? _value._urls
           : urls // ignore: cast_nullable_to_non_nullable
@@ -147,8 +157,8 @@ class __$$_UserDescriptionEntityCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false)
-class _$_UserDescriptionEntity implements _UserDescriptionEntity {
-  const _$_UserDescriptionEntity(
+class _$UserDescriptionEntityImpl implements _UserDescriptionEntity {
+  const _$UserDescriptionEntityImpl(
       {final List<Url>? urls,
       final List<Tag>? hashtags,
       final List<Tag>? cashtags,
@@ -158,8 +168,8 @@ class _$_UserDescriptionEntity implements _UserDescriptionEntity {
         _cashtags = cashtags,
         _mentions = mentions;
 
-  factory _$_UserDescriptionEntity.fromJson(Map<String, dynamic> json) =>
-      _$$_UserDescriptionEntityFromJson(json);
+  factory _$UserDescriptionEntityImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UserDescriptionEntityImplFromJson(json);
 
   /// Contains details about any URLs included in the user's description.
   final List<Url>? _urls;
@@ -219,17 +229,17 @@ class _$_UserDescriptionEntity implements _UserDescriptionEntity {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserDescriptionEntity &&
+            other is _$UserDescriptionEntityImpl &&
             const DeepCollectionEquality().equals(other._urls, _urls) &&
             const DeepCollectionEquality().equals(other._hashtags, _hashtags) &&
             const DeepCollectionEquality().equals(other._cashtags, _cashtags) &&
             const DeepCollectionEquality().equals(other._mentions, _mentions));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -238,16 +248,18 @@ class _$_UserDescriptionEntity implements _UserDescriptionEntity {
       const DeepCollectionEquality().hash(_cashtags),
       const DeepCollectionEquality().hash(_mentions));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserDescriptionEntity
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserDescriptionEntityCopyWith<_$_UserDescriptionEntity> get copyWith =>
-      __$$_UserDescriptionEntityCopyWithImpl<_$_UserDescriptionEntity>(
-          this, _$identity);
+  _$$UserDescriptionEntityImplCopyWith<_$UserDescriptionEntityImpl>
+      get copyWith => __$$UserDescriptionEntityImplCopyWithImpl<
+          _$UserDescriptionEntityImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserDescriptionEntityToJson(
+    return _$$UserDescriptionEntityImplToJson(
       this,
     );
   }
@@ -258,29 +270,31 @@ abstract class _UserDescriptionEntity implements UserDescriptionEntity {
       {final List<Url>? urls,
       final List<Tag>? hashtags,
       final List<Tag>? cashtags,
-      final List<Mention>? mentions}) = _$_UserDescriptionEntity;
+      final List<Mention>? mentions}) = _$UserDescriptionEntityImpl;
 
   factory _UserDescriptionEntity.fromJson(Map<String, dynamic> json) =
-      _$_UserDescriptionEntity.fromJson;
-
-  @override
+      _$UserDescriptionEntityImpl.fromJson;
 
   /// Contains details about any URLs included in the user's description.
-  List<Url>? get urls;
   @override
+  List<Url>? get urls;
 
   /// Contains details about text recognized as a Hashtag.
-  List<Tag>? get hashtags;
   @override
+  List<Tag>? get hashtags;
 
   /// Contains details about text recognized as a Cashtag.
-  List<Tag>? get cashtags;
   @override
+  List<Tag>? get cashtags;
 
   /// Contains details about text recognized as a user mention.
-  List<Mention>? get mentions;
   @override
-  @JsonKey(ignore: true)
-  _$$_UserDescriptionEntityCopyWith<_$_UserDescriptionEntity> get copyWith =>
-      throw _privateConstructorUsedError;
+  List<Mention>? get mentions;
+
+  /// Create a copy of UserDescriptionEntity
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UserDescriptionEntityImplCopyWith<_$UserDescriptionEntityImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

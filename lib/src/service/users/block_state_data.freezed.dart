@@ -12,7 +12,7 @@ part of 'block_state_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 BlockStateData _$BlockStateDataFromJson(Map<String, dynamic> json) {
   return _BlockStateData.fromJson(json);
@@ -25,8 +25,12 @@ mixin _$BlockStateData {
   @JsonKey(name: 'blocking')
   bool get isBlocking => throw _privateConstructorUsedError;
 
+  /// Serializes this BlockStateData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of BlockStateData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $BlockStateDataCopyWith<BlockStateData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -50,6 +54,8 @@ class _$BlockStateDataCopyWithImpl<$Res, $Val extends BlockStateData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of BlockStateData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -65,30 +71,32 @@ class _$BlockStateDataCopyWithImpl<$Res, $Val extends BlockStateData>
 }
 
 /// @nodoc
-abstract class _$$_BlockStateDataCopyWith<$Res>
+abstract class _$$BlockStateDataImplCopyWith<$Res>
     implements $BlockStateDataCopyWith<$Res> {
-  factory _$$_BlockStateDataCopyWith(
-          _$_BlockStateData value, $Res Function(_$_BlockStateData) then) =
-      __$$_BlockStateDataCopyWithImpl<$Res>;
+  factory _$$BlockStateDataImplCopyWith(_$BlockStateDataImpl value,
+          $Res Function(_$BlockStateDataImpl) then) =
+      __$$BlockStateDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@JsonKey(name: 'blocking') bool isBlocking});
 }
 
 /// @nodoc
-class __$$_BlockStateDataCopyWithImpl<$Res>
-    extends _$BlockStateDataCopyWithImpl<$Res, _$_BlockStateData>
-    implements _$$_BlockStateDataCopyWith<$Res> {
-  __$$_BlockStateDataCopyWithImpl(
-      _$_BlockStateData _value, $Res Function(_$_BlockStateData) _then)
+class __$$BlockStateDataImplCopyWithImpl<$Res>
+    extends _$BlockStateDataCopyWithImpl<$Res, _$BlockStateDataImpl>
+    implements _$$BlockStateDataImplCopyWith<$Res> {
+  __$$BlockStateDataImplCopyWithImpl(
+      _$BlockStateDataImpl _value, $Res Function(_$BlockStateDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of BlockStateData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? isBlocking = null,
   }) {
-    return _then(_$_BlockStateData(
+    return _then(_$BlockStateDataImpl(
       isBlocking: null == isBlocking
           ? _value.isBlocking
           : isBlocking // ignore: cast_nullable_to_non_nullable
@@ -99,12 +107,12 @@ class __$$_BlockStateDataCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_BlockStateData implements _BlockStateData {
-  const _$_BlockStateData(
+class _$BlockStateDataImpl implements _BlockStateData {
+  const _$BlockStateDataImpl(
       {@JsonKey(name: 'blocking') required this.isBlocking});
 
-  factory _$_BlockStateData.fromJson(Map<String, dynamic> json) =>
-      _$$_BlockStateDataFromJson(json);
+  factory _$BlockStateDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BlockStateDataImplFromJson(json);
 
   /// Indicates whether the user is blocking the specified user as a result
   /// of this request.
@@ -118,27 +126,30 @@ class _$_BlockStateData implements _BlockStateData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BlockStateData &&
+            other is _$BlockStateDataImpl &&
             (identical(other.isBlocking, isBlocking) ||
                 other.isBlocking == isBlocking));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, isBlocking);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of BlockStateData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BlockStateDataCopyWith<_$_BlockStateData> get copyWith =>
-      __$$_BlockStateDataCopyWithImpl<_$_BlockStateData>(this, _$identity);
+  _$$BlockStateDataImplCopyWith<_$BlockStateDataImpl> get copyWith =>
+      __$$BlockStateDataImplCopyWithImpl<_$BlockStateDataImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BlockStateDataToJson(
+    return _$$BlockStateDataImplToJson(
       this,
     );
   }
@@ -147,19 +158,21 @@ class _$_BlockStateData implements _BlockStateData {
 abstract class _BlockStateData implements BlockStateData {
   const factory _BlockStateData(
           {@JsonKey(name: 'blocking') required final bool isBlocking}) =
-      _$_BlockStateData;
+      _$BlockStateDataImpl;
 
   factory _BlockStateData.fromJson(Map<String, dynamic> json) =
-      _$_BlockStateData.fromJson;
-
-  @override
+      _$BlockStateDataImpl.fromJson;
 
   /// Indicates whether the user is blocking the specified user as a result
   /// of this request.
+  @override
   @JsonKey(name: 'blocking')
   bool get isBlocking;
+
+  /// Create a copy of BlockStateData
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_BlockStateDataCopyWith<_$_BlockStateData> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlockStateDataImplCopyWith<_$BlockStateDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

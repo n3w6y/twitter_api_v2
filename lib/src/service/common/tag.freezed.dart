@@ -12,7 +12,7 @@ part of 'tag.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Tag _$TagFromJson(Map<String, dynamic> json) {
   return _Tag.fromJson(json);
@@ -31,8 +31,12 @@ mixin _$Tag {
   /// The text of the tag.
   String get tag => throw _privateConstructorUsedError;
 
+  /// Serializes this Tag to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Tag
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TagCopyWith<Tag> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -53,6 +57,8 @@ class _$TagCopyWithImpl<$Res, $Val extends Tag> implements $TagCopyWith<$Res> {
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Tag
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -78,20 +84,22 @@ class _$TagCopyWithImpl<$Res, $Val extends Tag> implements $TagCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$$_TagCopyWith<$Res> implements $TagCopyWith<$Res> {
-  factory _$$_TagCopyWith(_$_Tag value, $Res Function(_$_Tag) then) =
-      __$$_TagCopyWithImpl<$Res>;
+abstract class _$$TagImplCopyWith<$Res> implements $TagCopyWith<$Res> {
+  factory _$$TagImplCopyWith(_$TagImpl value, $Res Function(_$TagImpl) then) =
+      __$$TagImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int start, int end, String tag});
 }
 
 /// @nodoc
-class __$$_TagCopyWithImpl<$Res> extends _$TagCopyWithImpl<$Res, _$_Tag>
-    implements _$$_TagCopyWith<$Res> {
-  __$$_TagCopyWithImpl(_$_Tag _value, $Res Function(_$_Tag) _then)
+class __$$TagImplCopyWithImpl<$Res> extends _$TagCopyWithImpl<$Res, _$TagImpl>
+    implements _$$TagImplCopyWith<$Res> {
+  __$$TagImplCopyWithImpl(_$TagImpl _value, $Res Function(_$TagImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Tag
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -99,7 +107,7 @@ class __$$_TagCopyWithImpl<$Res> extends _$TagCopyWithImpl<$Res, _$_Tag>
     Object? end = null,
     Object? tag = null,
   }) {
-    return _then(_$_Tag(
+    return _then(_$TagImpl(
       start: null == start
           ? _value.start
           : start // ignore: cast_nullable_to_non_nullable
@@ -118,10 +126,11 @@ class __$$_TagCopyWithImpl<$Res> extends _$TagCopyWithImpl<$Res, _$_Tag>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Tag implements _Tag {
-  const _$_Tag({required this.start, required this.end, required this.tag});
+class _$TagImpl implements _Tag {
+  const _$TagImpl({required this.start, required this.end, required this.tag});
 
-  factory _$_Tag.fromJson(Map<String, dynamic> json) => _$$_TagFromJson(json);
+  factory _$TagImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TagImplFromJson(json);
 
   /// The start position (zero-based) of the recognized tag within the object.
   /// All start indices are inclusive.
@@ -143,28 +152,30 @@ class _$_Tag implements _Tag {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Tag &&
+            other is _$TagImpl &&
             (identical(other.start, start) || other.start == start) &&
             (identical(other.end, end) || other.end == end) &&
             (identical(other.tag, tag) || other.tag == tag));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, start, end, tag);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Tag
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TagCopyWith<_$_Tag> get copyWith =>
-      __$$_TagCopyWithImpl<_$_Tag>(this, _$identity);
+  _$$TagImplCopyWith<_$TagImpl> get copyWith =>
+      __$$TagImplCopyWithImpl<_$TagImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TagToJson(
+    return _$$TagImplToJson(
       this,
     );
   }
@@ -174,25 +185,28 @@ abstract class _Tag implements Tag {
   const factory _Tag(
       {required final int start,
       required final int end,
-      required final String tag}) = _$_Tag;
+      required final String tag}) = _$TagImpl;
 
-  factory _Tag.fromJson(Map<String, dynamic> json) = _$_Tag.fromJson;
-
-  @override
+  factory _Tag.fromJson(Map<String, dynamic> json) = _$TagImpl.fromJson;
 
   /// The start position (zero-based) of the recognized tag within the object.
   /// All start indices are inclusive.
-  int get start;
   @override
+  int get start;
 
   /// The end position (zero-based) of the recognized tag within the object.
   /// This end index is exclusive.
-  int get end;
   @override
+  int get end;
 
   /// The text of the tag.
-  String get tag;
   @override
-  @JsonKey(ignore: true)
-  _$$_TagCopyWith<_$_Tag> get copyWith => throw _privateConstructorUsedError;
+  String get tag;
+
+  /// Create a copy of Tag
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$TagImplCopyWith<_$TagImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

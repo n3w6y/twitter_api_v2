@@ -8,11 +8,12 @@ part of 'bookmark_state_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_BookmarkStateData _$$_BookmarkStateDataFromJson(Map json) => $checkedCreate(
-      r'_$_BookmarkStateData',
+_$BookmarkStateDataImpl _$$BookmarkStateDataImplFromJson(Map json) =>
+    $checkedCreate(
+      r'_$BookmarkStateDataImpl',
       json,
       ($checkedConvert) {
-        final val = _$_BookmarkStateData(
+        final val = _$BookmarkStateDataImpl(
           isBookmarked: $checkedConvert('bookmarked', (v) => v as bool),
         );
         return val;
@@ -20,8 +21,8 @@ _$_BookmarkStateData _$$_BookmarkStateDataFromJson(Map json) => $checkedCreate(
       fieldKeyMap: const {'isBookmarked': 'bookmarked'},
     );
 
-Map<String, dynamic> _$$_BookmarkStateDataToJson(
-        _$_BookmarkStateData instance) =>
+Map<String, dynamic> _$$BookmarkStateDataImplToJson(
+        _$BookmarkStateDataImpl instance) =>
     <String, dynamic>{
       'bookmarked': instance.isBookmarked,
     };

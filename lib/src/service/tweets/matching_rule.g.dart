@@ -8,11 +8,11 @@ part of 'matching_rule.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_MatchingRule _$$_MatchingRuleFromJson(Map json) => $checkedCreate(
-      r'_$_MatchingRule',
+_$MatchingRuleImpl _$$MatchingRuleImplFromJson(Map json) => $checkedCreate(
+      r'_$MatchingRuleImpl',
       json,
       ($checkedConvert) {
-        final val = _$_MatchingRule(
+        final val = _$MatchingRuleImpl(
           id: $checkedConvert('id', (v) => v as String),
           tag: $checkedConvert('tag', (v) => v as String),
         );
@@ -20,7 +20,7 @@ _$_MatchingRule _$$_MatchingRuleFromJson(Map json) => $checkedCreate(
       },
     );
 
-Map<String, dynamic> _$$_MatchingRuleToJson(_$_MatchingRule instance) =>
+Map<String, dynamic> _$$MatchingRuleImplToJson(_$MatchingRuleImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'tag': instance.tag,

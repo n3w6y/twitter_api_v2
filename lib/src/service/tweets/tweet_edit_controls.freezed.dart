@@ -12,7 +12,7 @@ part of 'tweet_edit_controls.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 TweetEditControls _$TweetEditControlsFromJson(Map<String, dynamic> json) {
   return _TweetEditControls.fromJson(json);
@@ -36,8 +36,12 @@ mixin _$TweetEditControls {
   @JsonKey(name: 'editable_until')
   DateTime get expireAt => throw _privateConstructorUsedError;
 
+  /// Serializes this TweetEditControls to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TweetEditControls
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TweetEditControlsCopyWith<TweetEditControls> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -64,6 +68,8 @@ class _$TweetEditControlsCopyWithImpl<$Res, $Val extends TweetEditControls>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TweetEditControls
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -89,11 +95,11 @@ class _$TweetEditControlsCopyWithImpl<$Res, $Val extends TweetEditControls>
 }
 
 /// @nodoc
-abstract class _$$_TweetEditControlsCopyWith<$Res>
+abstract class _$$TweetEditControlsImplCopyWith<$Res>
     implements $TweetEditControlsCopyWith<$Res> {
-  factory _$$_TweetEditControlsCopyWith(_$_TweetEditControls value,
-          $Res Function(_$_TweetEditControls) then) =
-      __$$_TweetEditControlsCopyWithImpl<$Res>;
+  factory _$$TweetEditControlsImplCopyWith(_$TweetEditControlsImpl value,
+          $Res Function(_$TweetEditControlsImpl) then) =
+      __$$TweetEditControlsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -103,13 +109,15 @@ abstract class _$$_TweetEditControlsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_TweetEditControlsCopyWithImpl<$Res>
-    extends _$TweetEditControlsCopyWithImpl<$Res, _$_TweetEditControls>
-    implements _$$_TweetEditControlsCopyWith<$Res> {
-  __$$_TweetEditControlsCopyWithImpl(
-      _$_TweetEditControls _value, $Res Function(_$_TweetEditControls) _then)
+class __$$TweetEditControlsImplCopyWithImpl<$Res>
+    extends _$TweetEditControlsCopyWithImpl<$Res, _$TweetEditControlsImpl>
+    implements _$$TweetEditControlsImplCopyWith<$Res> {
+  __$$TweetEditControlsImplCopyWithImpl(_$TweetEditControlsImpl _value,
+      $Res Function(_$TweetEditControlsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TweetEditControls
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -117,7 +125,7 @@ class __$$_TweetEditControlsCopyWithImpl<$Res>
     Object? remainingCount = null,
     Object? expireAt = null,
   }) {
-    return _then(_$_TweetEditControls(
+    return _then(_$TweetEditControlsImpl(
       isEditable: null == isEditable
           ? _value.isEditable
           : isEditable // ignore: cast_nullable_to_non_nullable
@@ -136,14 +144,14 @@ class __$$_TweetEditControlsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TweetEditControls implements _TweetEditControls {
-  const _$_TweetEditControls(
+class _$TweetEditControlsImpl implements _TweetEditControls {
+  const _$TweetEditControlsImpl(
       {@JsonKey(name: 'is_edit_eligible') required this.isEditable,
       @JsonKey(name: 'edits_remaining') required this.remainingCount,
       @JsonKey(name: 'editable_until') required this.expireAt});
 
-  factory _$_TweetEditControls.fromJson(Map<String, dynamic> json) =>
-      _$$_TweetEditControlsFromJson(json);
+  factory _$TweetEditControlsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TweetEditControlsImplFromJson(json);
 
   /// A flag indicating whether the tweet is editable or not.
   ///
@@ -170,10 +178,10 @@ class _$_TweetEditControls implements _TweetEditControls {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TweetEditControls &&
+            other is _$TweetEditControlsImpl &&
             (identical(other.isEditable, isEditable) ||
                 other.isEditable == isEditable) &&
             (identical(other.remainingCount, remainingCount) ||
@@ -182,21 +190,23 @@ class _$_TweetEditControls implements _TweetEditControls {
                 other.expireAt == expireAt));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, isEditable, remainingCount, expireAt);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TweetEditControls
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TweetEditControlsCopyWith<_$_TweetEditControls> get copyWith =>
-      __$$_TweetEditControlsCopyWithImpl<_$_TweetEditControls>(
+  _$$TweetEditControlsImplCopyWith<_$TweetEditControlsImpl> get copyWith =>
+      __$$TweetEditControlsImplCopyWithImpl<_$TweetEditControlsImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TweetEditControlsToJson(
+    return _$$TweetEditControlsImplToJson(
       this,
     );
   }
@@ -207,32 +217,34 @@ abstract class _TweetEditControls implements TweetEditControls {
           {@JsonKey(name: 'is_edit_eligible') required final bool isEditable,
           @JsonKey(name: 'edits_remaining') required final int remainingCount,
           @JsonKey(name: 'editable_until') required final DateTime expireAt}) =
-      _$_TweetEditControls;
+      _$TweetEditControlsImpl;
 
   factory _TweetEditControls.fromJson(Map<String, dynamic> json) =
-      _$_TweetEditControls.fromJson;
-
-  @override
+      _$TweetEditControlsImpl.fromJson;
 
   /// A flag indicating whether the tweet is editable or not.
   ///
   /// Editable Tweets can be edited for the first 30 minutes after creation.
+  @override
   @JsonKey(name: 'is_edit_eligible')
   bool get isEditable;
-  @override
 
   /// A number indicating how many more tweets will be allowed to be edited.
   ///
   /// Tweet can be edited up to 5 times.
+  @override
   @JsonKey(name: 'edits_remaining')
   int get remainingCount;
-  @override
 
   /// Indicates when the permission to edit tweets will expire.
+  @override
   @JsonKey(name: 'editable_until')
   DateTime get expireAt;
+
+  /// Create a copy of TweetEditControls
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_TweetEditControlsCopyWith<_$_TweetEditControls> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$TweetEditControlsImplCopyWith<_$TweetEditControlsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

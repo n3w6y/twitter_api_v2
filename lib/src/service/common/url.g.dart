@@ -8,13 +8,13 @@ part of 'url.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Url _$$_UrlFromJson(Map json) => $checkedCreate(
-      r'_$_Url',
+_$UrlImpl _$$UrlImplFromJson(Map json) => $checkedCreate(
+      r'_$UrlImpl',
       json,
       ($checkedConvert) {
-        final val = _$_Url(
-          start: $checkedConvert('start', (v) => v as int),
-          end: $checkedConvert('end', (v) => v as int),
+        final val = _$UrlImpl(
+          start: $checkedConvert('start', (v) => (v as num).toInt()),
+          end: $checkedConvert('end', (v) => (v as num).toInt()),
           url: $checkedConvert('url', (v) => v as String),
           expandedUrl: $checkedConvert('expanded_url', (v) => v as String),
           displayUrl: $checkedConvert('display_url', (v) => v as String),
@@ -31,22 +31,12 @@ _$_Url _$$_UrlFromJson(Map json) => $checkedCreate(
       },
     );
 
-Map<String, dynamic> _$$_UrlToJson(_$_Url instance) {
-  final val = <String, dynamic>{
-    'start': instance.start,
-    'end': instance.end,
-    'url': instance.url,
-    'expanded_url': instance.expandedUrl,
-    'display_url': instance.displayUrl,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('unwound_url', instance.unwoundUrl);
-  writeNotNull('media_key', instance.mediaKey);
-  return val;
-}
+Map<String, dynamic> _$$UrlImplToJson(_$UrlImpl instance) => <String, dynamic>{
+      'start': instance.start,
+      'end': instance.end,
+      'url': instance.url,
+      'expanded_url': instance.expandedUrl,
+      'display_url': instance.displayUrl,
+      if (instance.unwoundUrl case final value?) 'unwound_url': value,
+      if (instance.mediaKey case final value?) 'media_key': value,
+    };

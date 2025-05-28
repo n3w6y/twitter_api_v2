@@ -12,7 +12,7 @@ part of 'tweet_context_annotation.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 TweetContextAnnotation _$TweetContextAnnotationFromJson(
     Map<String, dynamic> json) {
@@ -37,8 +37,12 @@ mixin _$TweetContextAnnotation {
   /// Entity: Additional information regarding referenced entity.
   String? get description => throw _privateConstructorUsedError;
 
+  /// Serializes this TweetContextAnnotation to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TweetContextAnnotation
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TweetContextAnnotationCopyWith<TweetContextAnnotation> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -63,6 +67,8 @@ class _$TweetContextAnnotationCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TweetContextAnnotation
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -88,25 +94,29 @@ class _$TweetContextAnnotationCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_TweetContextAnnotationCopyWith<$Res>
+abstract class _$$TweetContextAnnotationImplCopyWith<$Res>
     implements $TweetContextAnnotationCopyWith<$Res> {
-  factory _$$_TweetContextAnnotationCopyWith(_$_TweetContextAnnotation value,
-          $Res Function(_$_TweetContextAnnotation) then) =
-      __$$_TweetContextAnnotationCopyWithImpl<$Res>;
+  factory _$$TweetContextAnnotationImplCopyWith(
+          _$TweetContextAnnotationImpl value,
+          $Res Function(_$TweetContextAnnotationImpl) then) =
+      __$$TweetContextAnnotationImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id, String name, String? description});
 }
 
 /// @nodoc
-class __$$_TweetContextAnnotationCopyWithImpl<$Res>
+class __$$TweetContextAnnotationImplCopyWithImpl<$Res>
     extends _$TweetContextAnnotationCopyWithImpl<$Res,
-        _$_TweetContextAnnotation>
-    implements _$$_TweetContextAnnotationCopyWith<$Res> {
-  __$$_TweetContextAnnotationCopyWithImpl(_$_TweetContextAnnotation _value,
-      $Res Function(_$_TweetContextAnnotation) _then)
+        _$TweetContextAnnotationImpl>
+    implements _$$TweetContextAnnotationImplCopyWith<$Res> {
+  __$$TweetContextAnnotationImplCopyWithImpl(
+      _$TweetContextAnnotationImpl _value,
+      $Res Function(_$TweetContextAnnotationImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TweetContextAnnotation
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -114,7 +124,7 @@ class __$$_TweetContextAnnotationCopyWithImpl<$Res>
     Object? name = null,
     Object? description = freezed,
   }) {
-    return _then(_$_TweetContextAnnotation(
+    return _then(_$TweetContextAnnotationImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -134,12 +144,12 @@ class __$$_TweetContextAnnotationCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false)
-class _$_TweetContextAnnotation implements _TweetContextAnnotation {
-  const _$_TweetContextAnnotation(
+class _$TweetContextAnnotationImpl implements _TweetContextAnnotation {
+  const _$TweetContextAnnotationImpl(
       {required this.id, required this.name, this.description});
 
-  factory _$_TweetContextAnnotation.fromJson(Map<String, dynamic> json) =>
-      _$$_TweetContextAnnotationFromJson(json);
+  factory _$TweetContextAnnotationImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TweetContextAnnotationImplFromJson(json);
 
   /// Domain: Contains the numeric value of the domain.
   ///
@@ -166,30 +176,32 @@ class _$_TweetContextAnnotation implements _TweetContextAnnotation {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TweetContextAnnotation &&
+            other is _$TweetContextAnnotationImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
                 other.description == description));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, description);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TweetContextAnnotation
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TweetContextAnnotationCopyWith<_$_TweetContextAnnotation> get copyWith =>
-      __$$_TweetContextAnnotationCopyWithImpl<_$_TweetContextAnnotation>(
-          this, _$identity);
+  _$$TweetContextAnnotationImplCopyWith<_$TweetContextAnnotationImpl>
+      get copyWith => __$$TweetContextAnnotationImplCopyWithImpl<
+          _$TweetContextAnnotationImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TweetContextAnnotationToJson(
+    return _$$TweetContextAnnotationImplToJson(
       this,
     );
   }
@@ -199,32 +211,34 @@ abstract class _TweetContextAnnotation implements TweetContextAnnotation {
   const factory _TweetContextAnnotation(
       {required final String id,
       required final String name,
-      final String? description}) = _$_TweetContextAnnotation;
+      final String? description}) = _$TweetContextAnnotationImpl;
 
   factory _TweetContextAnnotation.fromJson(Map<String, dynamic> json) =
-      _$_TweetContextAnnotation.fromJson;
-
-  @override
+      _$TweetContextAnnotationImpl.fromJson;
 
   /// Domain: Contains the numeric value of the domain.
   ///
   /// Entity: Unique value which correlates to an explicitly mentioned Person,
   /// Place, Product or Organization
-  String get id;
   @override
+  String get id;
 
   /// Domain: Domain name based on the Tweet text.
   ///
   /// Entity: Name or reference of entity referenced in the Tweet.
-  String get name;
   @override
+  String get name;
 
   /// Domain: Long form description of domain classification.
   ///
   /// Entity: Additional information regarding referenced entity.
-  String? get description;
   @override
-  @JsonKey(ignore: true)
-  _$$_TweetContextAnnotationCopyWith<_$_TweetContextAnnotation> get copyWith =>
-      throw _privateConstructorUsedError;
+  String? get description;
+
+  /// Create a copy of TweetContextAnnotation
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$TweetContextAnnotationImplCopyWith<_$TweetContextAnnotationImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

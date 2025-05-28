@@ -8,11 +8,12 @@ part of 'pinned_state_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PinnedStateData _$$_PinnedStateDataFromJson(Map json) => $checkedCreate(
-      r'_$_PinnedStateData',
+_$PinnedStateDataImpl _$$PinnedStateDataImplFromJson(Map json) =>
+    $checkedCreate(
+      r'_$PinnedStateDataImpl',
       json,
       ($checkedConvert) {
-        final val = _$_PinnedStateData(
+        final val = _$PinnedStateDataImpl(
           isPinned: $checkedConvert('pinned', (v) => v as bool),
         );
         return val;
@@ -20,7 +21,8 @@ _$_PinnedStateData _$$_PinnedStateDataFromJson(Map json) => $checkedCreate(
       fieldKeyMap: const {'isPinned': 'pinned'},
     );
 
-Map<String, dynamic> _$$_PinnedStateDataToJson(_$_PinnedStateData instance) =>
+Map<String, dynamic> _$$PinnedStateDataImplToJson(
+        _$PinnedStateDataImpl instance) =>
     <String, dynamic>{
       'pinned': instance.isPinned,
     };

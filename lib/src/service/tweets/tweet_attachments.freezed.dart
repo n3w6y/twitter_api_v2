@@ -12,7 +12,7 @@ part of 'tweet_attachments.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 TweetAttachments _$TweetAttachmentsFromJson(Map<String, dynamic> json) {
   return _TweetAttachments.fromJson(json);
@@ -36,8 +36,12 @@ mixin _$TweetAttachments {
   /// `TweetExpansion.attachmentsPollIds` in the request's query parameter.
   List<String>? get pollIds => throw _privateConstructorUsedError;
 
+  /// Serializes this TweetAttachments to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TweetAttachments
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TweetAttachmentsCopyWith<TweetAttachments> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -61,6 +65,8 @@ class _$TweetAttachmentsCopyWithImpl<$Res, $Val extends TweetAttachments>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TweetAttachments
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -81,31 +87,33 @@ class _$TweetAttachmentsCopyWithImpl<$Res, $Val extends TweetAttachments>
 }
 
 /// @nodoc
-abstract class _$$_TweetAttachmentsCopyWith<$Res>
+abstract class _$$TweetAttachmentsImplCopyWith<$Res>
     implements $TweetAttachmentsCopyWith<$Res> {
-  factory _$$_TweetAttachmentsCopyWith(
-          _$_TweetAttachments value, $Res Function(_$_TweetAttachments) then) =
-      __$$_TweetAttachmentsCopyWithImpl<$Res>;
+  factory _$$TweetAttachmentsImplCopyWith(_$TweetAttachmentsImpl value,
+          $Res Function(_$TweetAttachmentsImpl) then) =
+      __$$TweetAttachmentsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<String>? mediaKeys, List<String>? pollIds});
 }
 
 /// @nodoc
-class __$$_TweetAttachmentsCopyWithImpl<$Res>
-    extends _$TweetAttachmentsCopyWithImpl<$Res, _$_TweetAttachments>
-    implements _$$_TweetAttachmentsCopyWith<$Res> {
-  __$$_TweetAttachmentsCopyWithImpl(
-      _$_TweetAttachments _value, $Res Function(_$_TweetAttachments) _then)
+class __$$TweetAttachmentsImplCopyWithImpl<$Res>
+    extends _$TweetAttachmentsCopyWithImpl<$Res, _$TweetAttachmentsImpl>
+    implements _$$TweetAttachmentsImplCopyWith<$Res> {
+  __$$TweetAttachmentsImplCopyWithImpl(_$TweetAttachmentsImpl _value,
+      $Res Function(_$TweetAttachmentsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TweetAttachments
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? mediaKeys = freezed,
     Object? pollIds = freezed,
   }) {
-    return _then(_$_TweetAttachments(
+    return _then(_$TweetAttachmentsImpl(
       mediaKeys: freezed == mediaKeys
           ? _value._mediaKeys
           : mediaKeys // ignore: cast_nullable_to_non_nullable
@@ -121,14 +129,14 @@ class __$$_TweetAttachmentsCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false)
-class _$_TweetAttachments implements _TweetAttachments {
-  const _$_TweetAttachments(
+class _$TweetAttachmentsImpl implements _TweetAttachments {
+  const _$TweetAttachmentsImpl(
       {final List<String>? mediaKeys, final List<String>? pollIds})
       : _mediaKeys = mediaKeys,
         _pollIds = pollIds;
 
-  factory _$_TweetAttachments.fromJson(Map<String, dynamic> json) =>
-      _$$_TweetAttachmentsFromJson(json);
+  factory _$TweetAttachmentsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TweetAttachmentsImplFromJson(json);
 
   /// List of unique identifiers of media attached to this Tweet. These
   /// identifiers use the same media key format as those returned by the
@@ -182,31 +190,34 @@ class _$_TweetAttachments implements _TweetAttachments {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TweetAttachments &&
+            other is _$TweetAttachmentsImpl &&
             const DeepCollectionEquality()
                 .equals(other._mediaKeys, _mediaKeys) &&
             const DeepCollectionEquality().equals(other._pollIds, _pollIds));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_mediaKeys),
       const DeepCollectionEquality().hash(_pollIds));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TweetAttachments
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TweetAttachmentsCopyWith<_$_TweetAttachments> get copyWith =>
-      __$$_TweetAttachmentsCopyWithImpl<_$_TweetAttachments>(this, _$identity);
+  _$$TweetAttachmentsImplCopyWith<_$TweetAttachmentsImpl> get copyWith =>
+      __$$TweetAttachmentsImplCopyWithImpl<_$TweetAttachmentsImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TweetAttachmentsToJson(
+    return _$$TweetAttachmentsImplToJson(
       this,
     );
   }
@@ -215,12 +226,10 @@ class _$_TweetAttachments implements _TweetAttachments {
 abstract class _TweetAttachments implements TweetAttachments {
   const factory _TweetAttachments(
       {final List<String>? mediaKeys,
-      final List<String>? pollIds}) = _$_TweetAttachments;
+      final List<String>? pollIds}) = _$TweetAttachmentsImpl;
 
   factory _TweetAttachments.fromJson(Map<String, dynamic> json) =
-      _$_TweetAttachments.fromJson;
-
-  @override
+      _$TweetAttachmentsImpl.fromJson;
 
   /// List of unique identifiers of media attached to this Tweet. These
   /// identifiers use the same media key format as those returned by the
@@ -228,8 +237,8 @@ abstract class _TweetAttachments implements TweetAttachments {
   ///
   /// You can obtain the expanded object in includes.media by adding
   /// `TweetExpansion.attachmentsMediaKeys` in the request's query parameter.
-  List<String>? get mediaKeys;
   @override
+  List<String>? get mediaKeys;
 
   /// List of unique identifiers of polls present in the Tweets returned.
   /// These are returned as a string in order to avoid complications with
@@ -237,9 +246,13 @@ abstract class _TweetAttachments implements TweetAttachments {
   ///
   /// You can obtain the expanded object in includes.polls by adding
   /// `TweetExpansion.attachmentsPollIds` in the request's query parameter.
-  List<String>? get pollIds;
   @override
-  @JsonKey(ignore: true)
-  _$$_TweetAttachmentsCopyWith<_$_TweetAttachments> get copyWith =>
+  List<String>? get pollIds;
+
+  /// Create a copy of TweetAttachments
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$TweetAttachmentsImplCopyWith<_$TweetAttachmentsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

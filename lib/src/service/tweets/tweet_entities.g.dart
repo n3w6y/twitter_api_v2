@@ -8,11 +8,11 @@ part of 'tweet_entities.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TweetEntities _$$_TweetEntitiesFromJson(Map json) => $checkedCreate(
-      r'_$_TweetEntities',
+_$TweetEntitiesImpl _$$TweetEntitiesImplFromJson(Map json) => $checkedCreate(
+      r'_$TweetEntitiesImpl',
       json,
       ($checkedConvert) {
-        final val = _$_TweetEntities(
+        final val = _$TweetEntitiesImpl(
           annotations: $checkedConvert(
               'annotations',
               (v) => (v as List<dynamic>?)
@@ -48,20 +48,17 @@ _$_TweetEntities _$$_TweetEntitiesFromJson(Map json) => $checkedCreate(
       },
     );
 
-Map<String, dynamic> _$$_TweetEntitiesToJson(_$_TweetEntities instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull(
-      'annotations', instance.annotations?.map((e) => e.toJson()).toList());
-  writeNotNull('hashtags', instance.hashtags?.map((e) => e.toJson()).toList());
-  writeNotNull('cashtags', instance.cashtags?.map((e) => e.toJson()).toList());
-  writeNotNull('mentions', instance.mentions?.map((e) => e.toJson()).toList());
-  writeNotNull('urls', instance.urls?.map((e) => e.toJson()).toList());
-  return val;
-}
+Map<String, dynamic> _$$TweetEntitiesImplToJson(_$TweetEntitiesImpl instance) =>
+    <String, dynamic>{
+      if (instance.annotations?.map((e) => e.toJson()).toList()
+          case final value?)
+        'annotations': value,
+      if (instance.hashtags?.map((e) => e.toJson()).toList() case final value?)
+        'hashtags': value,
+      if (instance.cashtags?.map((e) => e.toJson()).toList() case final value?)
+        'cashtags': value,
+      if (instance.mentions?.map((e) => e.toJson()).toList() case final value?)
+        'mentions': value,
+      if (instance.urls?.map((e) => e.toJson()).toList() case final value?)
+        'urls': value,
+    };

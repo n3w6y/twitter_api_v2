@@ -8,11 +8,12 @@ part of 'retweet_state_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_RetweetStateData _$$_RetweetStateDataFromJson(Map json) => $checkedCreate(
-      r'_$_RetweetStateData',
+_$RetweetStateDataImpl _$$RetweetStateDataImplFromJson(Map json) =>
+    $checkedCreate(
+      r'_$RetweetStateDataImpl',
       json,
       ($checkedConvert) {
-        final val = _$_RetweetStateData(
+        final val = _$RetweetStateDataImpl(
           isRetweeted: $checkedConvert('retweeted', (v) => v as bool),
         );
         return val;
@@ -20,7 +21,8 @@ _$_RetweetStateData _$$_RetweetStateDataFromJson(Map json) => $checkedCreate(
       fieldKeyMap: const {'isRetweeted': 'retweeted'},
     );
 
-Map<String, dynamic> _$$_RetweetStateDataToJson(_$_RetweetStateData instance) =>
+Map<String, dynamic> _$$RetweetStateDataImplToJson(
+        _$RetweetStateDataImpl instance) =>
     <String, dynamic>{
       'retweeted': instance.isRetweeted,
     };

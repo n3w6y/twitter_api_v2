@@ -12,7 +12,7 @@ part of 'user_url_entity.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 UserUrlEntity _$UserUrlEntityFromJson(Map<String, dynamic> json) {
   return _UserUrlEntity.fromJson(json);
@@ -23,8 +23,12 @@ mixin _$UserUrlEntity {
   /// Contains details about the user's profile website.
   List<Url> get urls => throw _privateConstructorUsedError;
 
+  /// Serializes this UserUrlEntity to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UserUrlEntity
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UserUrlEntityCopyWith<UserUrlEntity> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -48,6 +52,8 @@ class _$UserUrlEntityCopyWithImpl<$Res, $Val extends UserUrlEntity>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of UserUrlEntity
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -63,30 +69,32 @@ class _$UserUrlEntityCopyWithImpl<$Res, $Val extends UserUrlEntity>
 }
 
 /// @nodoc
-abstract class _$$_UserUrlEntityCopyWith<$Res>
+abstract class _$$UserUrlEntityImplCopyWith<$Res>
     implements $UserUrlEntityCopyWith<$Res> {
-  factory _$$_UserUrlEntityCopyWith(
-          _$_UserUrlEntity value, $Res Function(_$_UserUrlEntity) then) =
-      __$$_UserUrlEntityCopyWithImpl<$Res>;
+  factory _$$UserUrlEntityImplCopyWith(
+          _$UserUrlEntityImpl value, $Res Function(_$UserUrlEntityImpl) then) =
+      __$$UserUrlEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<Url> urls});
 }
 
 /// @nodoc
-class __$$_UserUrlEntityCopyWithImpl<$Res>
-    extends _$UserUrlEntityCopyWithImpl<$Res, _$_UserUrlEntity>
-    implements _$$_UserUrlEntityCopyWith<$Res> {
-  __$$_UserUrlEntityCopyWithImpl(
-      _$_UserUrlEntity _value, $Res Function(_$_UserUrlEntity) _then)
+class __$$UserUrlEntityImplCopyWithImpl<$Res>
+    extends _$UserUrlEntityCopyWithImpl<$Res, _$UserUrlEntityImpl>
+    implements _$$UserUrlEntityImplCopyWith<$Res> {
+  __$$UserUrlEntityImplCopyWithImpl(
+      _$UserUrlEntityImpl _value, $Res Function(_$UserUrlEntityImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserUrlEntity
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? urls = null,
   }) {
-    return _then(_$_UserUrlEntity(
+    return _then(_$UserUrlEntityImpl(
       urls: null == urls
           ? _value._urls
           : urls // ignore: cast_nullable_to_non_nullable
@@ -97,11 +105,11 @@ class __$$_UserUrlEntityCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserUrlEntity implements _UserUrlEntity {
-  const _$_UserUrlEntity({required final List<Url> urls}) : _urls = urls;
+class _$UserUrlEntityImpl implements _UserUrlEntity {
+  const _$UserUrlEntityImpl({required final List<Url> urls}) : _urls = urls;
 
-  factory _$_UserUrlEntity.fromJson(Map<String, dynamic> json) =>
-      _$$_UserUrlEntityFromJson(json);
+  factory _$UserUrlEntityImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UserUrlEntityImplFromJson(json);
 
   /// Contains details about the user's profile website.
   final List<Url> _urls;
@@ -120,27 +128,29 @@ class _$_UserUrlEntity implements _UserUrlEntity {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserUrlEntity &&
+            other is _$UserUrlEntityImpl &&
             const DeepCollectionEquality().equals(other._urls, _urls));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_urls));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserUrlEntity
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserUrlEntityCopyWith<_$_UserUrlEntity> get copyWith =>
-      __$$_UserUrlEntityCopyWithImpl<_$_UserUrlEntity>(this, _$identity);
+  _$$UserUrlEntityImplCopyWith<_$UserUrlEntityImpl> get copyWith =>
+      __$$UserUrlEntityImplCopyWithImpl<_$UserUrlEntityImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserUrlEntityToJson(
+    return _$$UserUrlEntityImplToJson(
       this,
     );
   }
@@ -148,17 +158,19 @@ class _$_UserUrlEntity implements _UserUrlEntity {
 
 abstract class _UserUrlEntity implements UserUrlEntity {
   const factory _UserUrlEntity({required final List<Url> urls}) =
-      _$_UserUrlEntity;
+      _$UserUrlEntityImpl;
 
   factory _UserUrlEntity.fromJson(Map<String, dynamic> json) =
-      _$_UserUrlEntity.fromJson;
-
-  @override
+      _$UserUrlEntityImpl.fromJson;
 
   /// Contains details about the user's profile website.
-  List<Url> get urls;
   @override
-  @JsonKey(ignore: true)
-  _$$_UserUrlEntityCopyWith<_$_UserUrlEntity> get copyWith =>
+  List<Url> get urls;
+
+  /// Create a copy of UserUrlEntity
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UserUrlEntityImplCopyWith<_$UserUrlEntityImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

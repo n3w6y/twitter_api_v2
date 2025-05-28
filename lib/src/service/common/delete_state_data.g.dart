@@ -8,11 +8,12 @@ part of 'delete_state_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_DeleteStateData _$$_DeleteStateDataFromJson(Map json) => $checkedCreate(
-      r'_$_DeleteStateData',
+_$DeleteStateDataImpl _$$DeleteStateDataImplFromJson(Map json) =>
+    $checkedCreate(
+      r'_$DeleteStateDataImpl',
       json,
       ($checkedConvert) {
-        final val = _$_DeleteStateData(
+        final val = _$DeleteStateDataImpl(
           isDeleted: $checkedConvert('deleted', (v) => v as bool),
         );
         return val;
@@ -20,7 +21,8 @@ _$_DeleteStateData _$$_DeleteStateDataFromJson(Map json) => $checkedCreate(
       fieldKeyMap: const {'isDeleted': 'deleted'},
     );
 
-Map<String, dynamic> _$$_DeleteStateDataToJson(_$_DeleteStateData instance) =>
+Map<String, dynamic> _$$DeleteStateDataImplToJson(
+        _$DeleteStateDataImpl instance) =>
     <String, dynamic>{
       'deleted': instance.isDeleted,
     };

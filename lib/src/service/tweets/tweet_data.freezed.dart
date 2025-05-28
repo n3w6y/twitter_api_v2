@@ -12,7 +12,7 @@ part of 'tweet_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 TweetData _$TweetDataFromJson(Map<String, dynamic> json) {
   return _TweetData.fromJson(json);
@@ -255,8 +255,12 @@ mixin _$TweetData {
   ///   used for time-series analysis etc.
   DateTime? get createdAt => throw _privateConstructorUsedError;
 
+  /// Serializes this TweetData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TweetData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TweetDataCopyWith<TweetData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -311,6 +315,8 @@ class _$TweetDataCopyWithImpl<$Res, $Val extends TweetData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TweetData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -429,6 +435,8 @@ class _$TweetDataCopyWithImpl<$Res, $Val extends TweetData>
     ) as $Val);
   }
 
+  /// Create a copy of TweetData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $TweetEntitiesCopyWith<$Res>? get entities {
@@ -441,6 +449,8 @@ class _$TweetDataCopyWithImpl<$Res, $Val extends TweetData>
     });
   }
 
+  /// Create a copy of TweetData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $TweetAttachmentsCopyWith<$Res>? get attachments {
@@ -453,6 +463,8 @@ class _$TweetDataCopyWithImpl<$Res, $Val extends TweetData>
     });
   }
 
+  /// Create a copy of TweetData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PrivateTweetMetricsCopyWith<$Res>? get privateMetrics {
@@ -465,6 +477,8 @@ class _$TweetDataCopyWithImpl<$Res, $Val extends TweetData>
     });
   }
 
+  /// Create a copy of TweetData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $OrganicTweetMetricsCopyWith<$Res>? get organicMetrics {
@@ -477,6 +491,8 @@ class _$TweetDataCopyWithImpl<$Res, $Val extends TweetData>
     });
   }
 
+  /// Create a copy of TweetData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PromotedTweetMetricsCopyWith<$Res>? get promotedMetrics {
@@ -490,6 +506,8 @@ class _$TweetDataCopyWithImpl<$Res, $Val extends TweetData>
     });
   }
 
+  /// Create a copy of TweetData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PublicTweetMetricsCopyWith<$Res>? get publicMetrics {
@@ -502,6 +520,8 @@ class _$TweetDataCopyWithImpl<$Res, $Val extends TweetData>
     });
   }
 
+  /// Create a copy of TweetData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $GeoCopyWith<$Res>? get geo {
@@ -514,6 +534,8 @@ class _$TweetDataCopyWithImpl<$Res, $Val extends TweetData>
     });
   }
 
+  /// Create a copy of TweetData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $TweetEditControlsCopyWith<$Res>? get editControls {
@@ -526,6 +548,8 @@ class _$TweetDataCopyWithImpl<$Res, $Val extends TweetData>
     });
   }
 
+  /// Create a copy of TweetData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $TweetWithheldCopyWith<$Res>? get withheld {
@@ -540,10 +564,11 @@ class _$TweetDataCopyWithImpl<$Res, $Val extends TweetData>
 }
 
 /// @nodoc
-abstract class _$$_TweetDataCopyWith<$Res> implements $TweetDataCopyWith<$Res> {
-  factory _$$_TweetDataCopyWith(
-          _$_TweetData value, $Res Function(_$_TweetData) then) =
-      __$$_TweetDataCopyWithImpl<$Res>;
+abstract class _$$TweetDataImplCopyWith<$Res>
+    implements $TweetDataCopyWith<$Res> {
+  factory _$$TweetDataImplCopyWith(
+          _$TweetDataImpl value, $Res Function(_$TweetDataImpl) then) =
+      __$$TweetDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -591,13 +616,15 @@ abstract class _$$_TweetDataCopyWith<$Res> implements $TweetDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_TweetDataCopyWithImpl<$Res>
-    extends _$TweetDataCopyWithImpl<$Res, _$_TweetData>
-    implements _$$_TweetDataCopyWith<$Res> {
-  __$$_TweetDataCopyWithImpl(
-      _$_TweetData _value, $Res Function(_$_TweetData) _then)
+class __$$TweetDataImplCopyWithImpl<$Res>
+    extends _$TweetDataCopyWithImpl<$Res, _$TweetDataImpl>
+    implements _$$TweetDataImplCopyWith<$Res> {
+  __$$TweetDataImplCopyWithImpl(
+      _$TweetDataImpl _value, $Res Function(_$TweetDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TweetData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -624,7 +651,7 @@ class __$$_TweetDataCopyWithImpl<$Res>
     Object? withheld = freezed,
     Object? createdAt = freezed,
   }) {
-    return _then(_$_TweetData(
+    return _then(_$TweetDataImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -720,8 +747,8 @@ class __$$_TweetDataCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false)
-class _$_TweetData implements _TweetData {
-  const _$_TweetData(
+class _$TweetDataImpl implements _TweetData {
+  const _$TweetDataImpl(
       {required this.id,
       required this.text,
       this.authorId,
@@ -748,8 +775,8 @@ class _$_TweetData implements _TweetData {
         _contextAnnotations = contextAnnotations,
         _editHistoryTweetIds = editHistoryTweetIds;
 
-  factory _$_TweetData.fromJson(Map<String, dynamic> json) =>
-      _$$_TweetDataFromJson(json);
+  factory _$TweetDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TweetDataImplFromJson(json);
 
   /// Unique identifier of this Tweet. This is returned as a string in order
   /// to avoid complications with languages and tools that cannot handle
@@ -1063,10 +1090,10 @@ class _$_TweetData implements _TweetData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TweetData &&
+            other is _$TweetDataImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.text, text) || other.text == text) &&
             (identical(other.authorId, authorId) ||
@@ -1108,7 +1135,7 @@ class _$_TweetData implements _TweetData {
                 other.createdAt == createdAt));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -1136,15 +1163,17 @@ class _$_TweetData implements _TweetData {
         createdAt
       ]);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TweetData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TweetDataCopyWith<_$_TweetData> get copyWith =>
-      __$$_TweetDataCopyWithImpl<_$_TweetData>(this, _$identity);
+  _$$TweetDataImplCopyWith<_$TweetDataImpl> get copyWith =>
+      __$$TweetDataImplCopyWithImpl<_$TweetDataImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TweetDataToJson(
+    return _$$TweetDataImplToJson(
       this,
     );
   }
@@ -1162,26 +1191,22 @@ abstract class _TweetData implements TweetData {
       final TweetEntities? entities,
       final TweetAttachments? attachments,
       @JsonKey(name: 'non_public_metrics')
-          final PrivateTweetMetrics? privateMetrics,
+      final PrivateTweetMetrics? privateMetrics,
       final OrganicTweetMetrics? organicMetrics,
       final PromotedTweetMetrics? promotedMetrics,
       final PublicTweetMetrics? publicMetrics,
       final Geo? geo,
       final Language? lang,
-      @JsonKey(name: 'possibly_sensitive')
-          final bool? isPossiblySensitive,
-      @JsonKey(name: 'reply_settings')
-          final ReplySetting? replySetting,
+      @JsonKey(name: 'possibly_sensitive') final bool? isPossiblySensitive,
+      @JsonKey(name: 'reply_settings') final ReplySetting? replySetting,
       final String? source,
       final TweetEditControls? editControls,
       final List<String>? editHistoryTweetIds,
       final TweetWithheld? withheld,
-      final DateTime? createdAt}) = _$_TweetData;
+      final DateTime? createdAt}) = _$TweetDataImpl;
 
   factory _TweetData.fromJson(Map<String, dynamic> json) =
-      _$_TweetData.fromJson;
-
-  @override
+      _$TweetDataImpl.fromJson;
 
   /// Unique identifier of this Tweet. This is returned as a string in order
   /// to avoid complications with languages and tools that cannot handle
@@ -1190,8 +1215,8 @@ abstract class _TweetData implements TweetData {
   /// ## How It Can Be Used
   ///
   /// - Use this to programmatically retrieve a specific Tweet.
-  String get id;
   @override
+  String get id;
 
   /// The actual UTF-8 text of the Tweet. See [twitter-text](https://github.com/twitter/twitter-text/) for details on
   /// what characters are currently considered valid.
@@ -1199,8 +1224,8 @@ abstract class _TweetData implements TweetData {
   /// ## How It Can Be Used
   ///
   /// - Keyword extraction and sentiment analysis/classification.
-  String get text;
   @override
+  String get text;
 
   /// Unique identifier of this user. This is returned as a string in order
   /// to avoid complications with languages and tools that cannot handle large
@@ -1212,8 +1237,8 @@ abstract class _TweetData implements TweetData {
   /// ## How It Can Be Used
   ///
   /// - Hydrating User object, sharing dataset for peer review.
-  String? get authorId;
   @override
+  String? get authorId;
 
   /// If this Tweet is a Reply, indicates the user ID of the parent Tweet's
   /// author. This is returned as a string in order to avoid complications
@@ -1225,8 +1250,8 @@ abstract class _TweetData implements TweetData {
   /// ## How It Can Be Used
   ///
   /// - Use this to determine if this Tweet was in reply to another Tweet.
-  String? get inReplyToUserId;
   @override
+  String? get inReplyToUserId;
 
   /// The Tweet ID of the original Tweet of the conversation (which includes
   /// direct replies, replies of replies).
@@ -1237,8 +1262,8 @@ abstract class _TweetData implements TweetData {
   /// ## How It Can Be Used
   ///
   /// - Use this to reconstruct the conversation from a Tweet.
-  String? get conversationId;
   @override
+  String? get conversationId;
 
   /// A list of Tweets this Tweet refers to. For example, if the parent Tweet
   /// is a Retweet, a Retweet with comment (also known as Quoted Tweet) or a
@@ -1251,8 +1276,8 @@ abstract class _TweetData implements TweetData {
   ///
   /// - This field can be used to understand conversational aspects of
   ///   retweets etc.
-  List<ReferencedTweet>? get referencedTweets;
   @override
+  List<ReferencedTweet>? get referencedTweets;
 
   /// Contains context annotations for the Tweet.
   ///
@@ -1262,8 +1287,8 @@ abstract class _TweetData implements TweetData {
   /// ## How It Can Be Used
   ///
   /// - Entity recognition/extraction, topical analysis.
-  List<TweetContextAnnotationGroup>? get contextAnnotations;
   @override
+  List<TweetContextAnnotationGroup>? get contextAnnotations;
 
   /// Contains details about text that has a special meaning in a Tweet.
   ///
@@ -1278,8 +1303,8 @@ abstract class _TweetData implements TweetData {
   ///   all start indices are inclusive. The majority of end indices are
   ///   exclusive, except for entities.annotations.end, which is currently
   ///   inclusive.
-  TweetEntities? get entities;
   @override
+  TweetEntities? get entities;
 
   /// Specifies the type of attachments (if any) present in this Tweet.
   ///
@@ -1289,8 +1314,8 @@ abstract class _TweetData implements TweetData {
   /// ## How It Can Be Used
   ///
   /// - Understanding the objects returned for requested expansions
-  TweetAttachments? get attachments;
   @override
+  TweetAttachments? get attachments;
 
   /// Non-public engagement metrics for the Tweet at the time of the request.
   ///
@@ -1300,9 +1325,9 @@ abstract class _TweetData implements TweetData {
   ///
   /// - Use this to determine the total number of impressions generated for
   ///   the Tweet.
+  @override
   @JsonKey(name: 'non_public_metrics')
   PrivateTweetMetrics? get privateMetrics;
-  @override
 
   /// Engagement metrics, tracked in an organic context, for the Tweet at
   /// the time of the request.
@@ -1312,8 +1337,8 @@ abstract class _TweetData implements TweetData {
   /// ## How It Can Be Used
   ///
   /// - Use this to measure organic engagement for the Tweet.
-  OrganicTweetMetrics? get organicMetrics;
   @override
+  OrganicTweetMetrics? get organicMetrics;
 
   /// Engagement metrics, tracked in a promoted context, for the Tweet at the
   /// time of the request.
@@ -1323,8 +1348,8 @@ abstract class _TweetData implements TweetData {
   /// ## How It Can Be Used
   ///
   /// - Use this to measure engagement for the Tweet when it was promoted.
-  PromotedTweetMetrics? get promotedMetrics;
   @override
+  PromotedTweetMetrics? get promotedMetrics;
 
   /// Engagement metrics for the Tweet at the time of the request.
   ///
@@ -1334,8 +1359,8 @@ abstract class _TweetData implements TweetData {
   /// ## How It Can Be Used
   ///
   /// - Use this to measure Tweet engagement.
-  PublicTweetMetrics? get publicMetrics;
   @override
+  PublicTweetMetrics? get publicMetrics;
 
   /// Contains details about the location tagged by the user in this Tweet,
   /// if they specified one.
@@ -1347,8 +1372,8 @@ abstract class _TweetData implements TweetData {
   ///
   /// - Determine if a Tweet is related to a named location with corresponding
   ///   geo coordinates.
-  Geo? get geo;
   @override
+  Geo? get geo;
 
   /// Language of the Tweet, if detected by Twitter. Returned as a BCP47
   /// language.
@@ -1359,8 +1384,8 @@ abstract class _TweetData implements TweetData {
   /// ## How It Can Be Used
   ///
   /// - Classify Tweets by spoken language.
-  Language? get lang;
   @override
+  Language? get lang;
 
   /// Indicates if this Tweet contains URLs marked as sensitive, for example
   /// content suitable for mature audiences.
@@ -1371,9 +1396,9 @@ abstract class _TweetData implements TweetData {
   /// ## How It Can Be Used
   ///
   /// - Studying circulation of certain types of content.
+  @override
   @JsonKey(name: 'possibly_sensitive')
   bool? get isPossiblySensitive;
-  @override
 
   /// Shows who can reply to this Tweet. Fields returned are
   /// [ReplySetting.everyone], [ReplySetting.mentionedUsers],
@@ -1385,9 +1410,9 @@ abstract class _TweetData implements TweetData {
   ///
   /// - This field allows you to determine whether conversation reply settings
   /// have been set for the Tweet and if so, what settings have been set.
+  @override
   @JsonKey(name: 'reply_settings')
   ReplySetting? get replySetting;
-  @override
 
   /// The name of the app the user Tweeted from.
   ///
@@ -1398,16 +1423,16 @@ abstract class _TweetData implements TweetData {
   ///
   /// - Determine if a Twitter user posted from the web, mobile device, or
   /// other app.
-  String? get source;
   @override
+  String? get source;
 
   /// Indicates if a Tweet is eligible for edit, how long it is editable for,
   /// and the number of remaining edits.
   ///
   /// Editable Tweets can be edited for the first 30 minutes after
   /// creation and can be edited up to five times.
-  TweetEditControls? get editControls;
   @override
+  TweetEditControls? get editControls;
 
   /// Unique identifiers indicating all versions of an edited Tweet.
   ///
@@ -1415,15 +1440,15 @@ abstract class _TweetData implements TweetData {
   /// history, there will be multiple IDs, arranged in ascending order
   /// reflecting the order of edit, with the most recent version in the last
   /// position of the array.
-  List<String>? get editHistoryTweetIds;
   @override
+  List<String>? get editHistoryTweetIds;
 
   /// Contains withholding details for [withheld content](https://help.twitter.com/en/rules-and-policies/tweet-withheld-by-country).
   ///
   /// To return this field, add `TweetField.withheld` in the request's query
   /// parameter.
-  TweetWithheld? get withheld;
   @override
+  TweetWithheld? get withheld;
 
   /// Creation time of the Tweet.
   ///
@@ -1434,9 +1459,13 @@ abstract class _TweetData implements TweetData {
   ///
   /// - This field can be used to understand when a Tweet was created and
   ///   used for time-series analysis etc.
-  DateTime? get createdAt;
   @override
-  @JsonKey(ignore: true)
-  _$$_TweetDataCopyWith<_$_TweetData> get copyWith =>
+  DateTime? get createdAt;
+
+  /// Create a copy of TweetData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$TweetDataImplCopyWith<_$TweetDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

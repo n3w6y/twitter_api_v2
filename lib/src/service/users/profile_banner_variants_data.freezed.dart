@@ -12,7 +12,7 @@ part of 'profile_banner_variants_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ProfileBannerVariantsData _$ProfileBannerVariantsDataFromJson(
     Map<String, dynamic> json) {
@@ -39,8 +39,12 @@ mixin _$ProfileBannerVariantsData {
   /// The banner image for mobile retina.
   ProfileBannerVariant get mobileRetina => throw _privateConstructorUsedError;
 
+  /// Serializes this ProfileBannerVariantsData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ProfileBannerVariantsData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ProfileBannerVariantsDataCopyWith<ProfileBannerVariantsData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -78,6 +82,8 @@ class _$ProfileBannerVariantsDataCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ProfileBannerVariantsData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -116,6 +122,8 @@ class _$ProfileBannerVariantsDataCopyWithImpl<$Res,
     ) as $Val);
   }
 
+  /// Create a copy of ProfileBannerVariantsData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ProfileBannerVariantCopyWith<$Res> get ipad {
@@ -124,6 +132,8 @@ class _$ProfileBannerVariantsDataCopyWithImpl<$Res,
     });
   }
 
+  /// Create a copy of ProfileBannerVariantsData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ProfileBannerVariantCopyWith<$Res> get ipadRetina {
@@ -132,6 +142,8 @@ class _$ProfileBannerVariantsDataCopyWithImpl<$Res,
     });
   }
 
+  /// Create a copy of ProfileBannerVariantsData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ProfileBannerVariantCopyWith<$Res> get web {
@@ -140,6 +152,8 @@ class _$ProfileBannerVariantsDataCopyWithImpl<$Res,
     });
   }
 
+  /// Create a copy of ProfileBannerVariantsData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ProfileBannerVariantCopyWith<$Res> get webRetina {
@@ -148,6 +162,8 @@ class _$ProfileBannerVariantsDataCopyWithImpl<$Res,
     });
   }
 
+  /// Create a copy of ProfileBannerVariantsData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ProfileBannerVariantCopyWith<$Res> get mobile {
@@ -156,6 +172,8 @@ class _$ProfileBannerVariantsDataCopyWithImpl<$Res,
     });
   }
 
+  /// Create a copy of ProfileBannerVariantsData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ProfileBannerVariantCopyWith<$Res> get mobileRetina {
@@ -166,12 +184,12 @@ class _$ProfileBannerVariantsDataCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ProfileBannerVariantsDataCopyWith<$Res>
+abstract class _$$ProfileBannerVariantsDataImplCopyWith<$Res>
     implements $ProfileBannerVariantsDataCopyWith<$Res> {
-  factory _$$_ProfileBannerVariantsDataCopyWith(
-          _$_ProfileBannerVariantsData value,
-          $Res Function(_$_ProfileBannerVariantsData) then) =
-      __$$_ProfileBannerVariantsDataCopyWithImpl<$Res>;
+  factory _$$ProfileBannerVariantsDataImplCopyWith(
+          _$ProfileBannerVariantsDataImpl value,
+          $Res Function(_$ProfileBannerVariantsDataImpl) then) =
+      __$$ProfileBannerVariantsDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -197,15 +215,17 @@ abstract class _$$_ProfileBannerVariantsDataCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ProfileBannerVariantsDataCopyWithImpl<$Res>
+class __$$ProfileBannerVariantsDataImplCopyWithImpl<$Res>
     extends _$ProfileBannerVariantsDataCopyWithImpl<$Res,
-        _$_ProfileBannerVariantsData>
-    implements _$$_ProfileBannerVariantsDataCopyWith<$Res> {
-  __$$_ProfileBannerVariantsDataCopyWithImpl(
-      _$_ProfileBannerVariantsData _value,
-      $Res Function(_$_ProfileBannerVariantsData) _then)
+        _$ProfileBannerVariantsDataImpl>
+    implements _$$ProfileBannerVariantsDataImplCopyWith<$Res> {
+  __$$ProfileBannerVariantsDataImplCopyWithImpl(
+      _$ProfileBannerVariantsDataImpl _value,
+      $Res Function(_$ProfileBannerVariantsDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ProfileBannerVariantsData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -216,7 +236,7 @@ class __$$_ProfileBannerVariantsDataCopyWithImpl<$Res>
     Object? mobile = null,
     Object? mobileRetina = null,
   }) {
-    return _then(_$_ProfileBannerVariantsData(
+    return _then(_$ProfileBannerVariantsDataImpl(
       ipad: null == ipad
           ? _value.ipad
           : ipad // ignore: cast_nullable_to_non_nullable
@@ -247,8 +267,8 @@ class __$$_ProfileBannerVariantsDataCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ProfileBannerVariantsData implements _ProfileBannerVariantsData {
-  const _$_ProfileBannerVariantsData(
+class _$ProfileBannerVariantsDataImpl implements _ProfileBannerVariantsData {
+  const _$ProfileBannerVariantsDataImpl(
       {required this.ipad,
       required this.ipadRetina,
       required this.web,
@@ -256,8 +276,8 @@ class _$_ProfileBannerVariantsData implements _ProfileBannerVariantsData {
       required this.mobile,
       required this.mobileRetina});
 
-  factory _$_ProfileBannerVariantsData.fromJson(Map<String, dynamic> json) =>
-      _$$_ProfileBannerVariantsDataFromJson(json);
+  factory _$ProfileBannerVariantsDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ProfileBannerVariantsDataImplFromJson(json);
 
   /// The banner image for ipad.
   @override
@@ -289,10 +309,10 @@ class _$_ProfileBannerVariantsData implements _ProfileBannerVariantsData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ProfileBannerVariantsData &&
+            other is _$ProfileBannerVariantsDataImpl &&
             (identical(other.ipad, ipad) || other.ipad == ipad) &&
             (identical(other.ipadRetina, ipadRetina) ||
                 other.ipadRetina == ipadRetina) &&
@@ -304,21 +324,23 @@ class _$_ProfileBannerVariantsData implements _ProfileBannerVariantsData {
                 other.mobileRetina == mobileRetina));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, ipad, ipadRetina, web, webRetina, mobile, mobileRetina);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProfileBannerVariantsData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ProfileBannerVariantsDataCopyWith<_$_ProfileBannerVariantsData>
-      get copyWith => __$$_ProfileBannerVariantsDataCopyWithImpl<
-          _$_ProfileBannerVariantsData>(this, _$identity);
+  _$$ProfileBannerVariantsDataImplCopyWith<_$ProfileBannerVariantsDataImpl>
+      get copyWith => __$$ProfileBannerVariantsDataImplCopyWithImpl<
+          _$ProfileBannerVariantsDataImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ProfileBannerVariantsDataToJson(
+    return _$$ProfileBannerVariantsDataImplToJson(
       this,
     );
   }
@@ -332,37 +354,39 @@ abstract class _ProfileBannerVariantsData implements ProfileBannerVariantsData {
           required final ProfileBannerVariant webRetina,
           required final ProfileBannerVariant mobile,
           required final ProfileBannerVariant mobileRetina}) =
-      _$_ProfileBannerVariantsData;
+      _$ProfileBannerVariantsDataImpl;
 
   factory _ProfileBannerVariantsData.fromJson(Map<String, dynamic> json) =
-      _$_ProfileBannerVariantsData.fromJson;
-
-  @override
+      _$ProfileBannerVariantsDataImpl.fromJson;
 
   /// The banner image for ipad.
-  ProfileBannerVariant get ipad;
   @override
+  ProfileBannerVariant get ipad;
 
   /// The banner image for ipad retina.
-  ProfileBannerVariant get ipadRetina;
   @override
+  ProfileBannerVariant get ipadRetina;
 
   /// The banner image for web.
-  ProfileBannerVariant get web;
   @override
+  ProfileBannerVariant get web;
 
   /// The banner image for web retina.
-  ProfileBannerVariant get webRetina;
   @override
+  ProfileBannerVariant get webRetina;
 
   /// The banner image for mobile.
-  ProfileBannerVariant get mobile;
   @override
+  ProfileBannerVariant get mobile;
 
   /// The banner image for mobile retina.
-  ProfileBannerVariant get mobileRetina;
   @override
-  @JsonKey(ignore: true)
-  _$$_ProfileBannerVariantsDataCopyWith<_$_ProfileBannerVariantsData>
+  ProfileBannerVariant get mobileRetina;
+
+  /// Create a copy of ProfileBannerVariantsData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ProfileBannerVariantsDataImplCopyWith<_$ProfileBannerVariantsDataImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

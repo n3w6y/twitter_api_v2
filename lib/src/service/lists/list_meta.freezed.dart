@@ -12,7 +12,7 @@ part of 'list_meta.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ListMeta _$ListMetaFromJson(Map<String, dynamic> json) {
   return _ListMeta.fromJson(json);
@@ -40,8 +40,12 @@ mixin _$ListMeta {
   /// are on the first page of results.
   String? get previousToken => throw _privateConstructorUsedError;
 
+  /// Serializes this ListMeta to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ListMeta
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ListMetaCopyWith<ListMeta> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -64,6 +68,8 @@ class _$ListMetaCopyWithImpl<$Res, $Val extends ListMeta>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ListMeta
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -89,23 +95,26 @@ class _$ListMetaCopyWithImpl<$Res, $Val extends ListMeta>
 }
 
 /// @nodoc
-abstract class _$$_ListMetaCopyWith<$Res> implements $ListMetaCopyWith<$Res> {
-  factory _$$_ListMetaCopyWith(
-          _$_ListMeta value, $Res Function(_$_ListMeta) then) =
-      __$$_ListMetaCopyWithImpl<$Res>;
+abstract class _$$ListMetaImplCopyWith<$Res>
+    implements $ListMetaCopyWith<$Res> {
+  factory _$$ListMetaImplCopyWith(
+          _$ListMetaImpl value, $Res Function(_$ListMetaImpl) then) =
+      __$$ListMetaImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int? resultCount, String? nextToken, String? previousToken});
 }
 
 /// @nodoc
-class __$$_ListMetaCopyWithImpl<$Res>
-    extends _$ListMetaCopyWithImpl<$Res, _$_ListMeta>
-    implements _$$_ListMetaCopyWith<$Res> {
-  __$$_ListMetaCopyWithImpl(
-      _$_ListMeta _value, $Res Function(_$_ListMeta) _then)
+class __$$ListMetaImplCopyWithImpl<$Res>
+    extends _$ListMetaCopyWithImpl<$Res, _$ListMetaImpl>
+    implements _$$ListMetaImplCopyWith<$Res> {
+  __$$ListMetaImplCopyWithImpl(
+      _$ListMetaImpl _value, $Res Function(_$ListMetaImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ListMeta
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -113,7 +122,7 @@ class __$$_ListMetaCopyWithImpl<$Res>
     Object? nextToken = freezed,
     Object? previousToken = freezed,
   }) {
-    return _then(_$_ListMeta(
+    return _then(_$ListMetaImpl(
       resultCount: freezed == resultCount
           ? _value.resultCount
           : resultCount // ignore: cast_nullable_to_non_nullable
@@ -133,11 +142,11 @@ class __$$_ListMetaCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false)
-class _$_ListMeta implements _ListMeta {
-  const _$_ListMeta({this.resultCount, this.nextToken, this.previousToken});
+class _$ListMetaImpl implements _ListMeta {
+  const _$ListMetaImpl({this.resultCount, this.nextToken, this.previousToken});
 
-  factory _$_ListMeta.fromJson(Map<String, dynamic> json) =>
-      _$$_ListMetaFromJson(json);
+  factory _$ListMetaImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ListMetaImplFromJson(json);
 
   /// The number of users returned in this request. Note that this number
   /// may be lower than what was specified in the max_results query parameter.
@@ -168,10 +177,10 @@ class _$_ListMeta implements _ListMeta {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ListMeta &&
+            other is _$ListMetaImpl &&
             (identical(other.resultCount, resultCount) ||
                 other.resultCount == resultCount) &&
             (identical(other.nextToken, nextToken) ||
@@ -180,20 +189,22 @@ class _$_ListMeta implements _ListMeta {
                 other.previousToken == previousToken));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, resultCount, nextToken, previousToken);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ListMeta
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ListMetaCopyWith<_$_ListMeta> get copyWith =>
-      __$$_ListMetaCopyWithImpl<_$_ListMeta>(this, _$identity);
+  _$$ListMetaImplCopyWith<_$ListMetaImpl> get copyWith =>
+      __$$ListMetaImplCopyWithImpl<_$ListMetaImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ListMetaToJson(
+    return _$$ListMetaImplToJson(
       this,
     );
   }
@@ -203,16 +214,15 @@ abstract class _ListMeta implements ListMeta {
   const factory _ListMeta(
       {final int? resultCount,
       final String? nextToken,
-      final String? previousToken}) = _$_ListMeta;
+      final String? previousToken}) = _$ListMetaImpl;
 
-  factory _ListMeta.fromJson(Map<String, dynamic> json) = _$_ListMeta.fromJson;
-
-  @override
+  factory _ListMeta.fromJson(Map<String, dynamic> json) =
+      _$ListMetaImpl.fromJson;
 
   /// The number of users returned in this request. Note that this number
   /// may be lower than what was specified in the max_results query parameter.
-  int? get resultCount;
   @override
+  int? get resultCount;
 
   /// Pagination token for the next page of results. This value is returned
   /// when there are multiple pages of results, as the current request may
@@ -220,8 +230,8 @@ abstract class _ListMeta implements ListMeta {
   /// the value from this field in the pagination_token query parameter. When
   /// this field is not returned in the response, it means you've reached the
   /// last page of results, and that there are no further pages.
-  String? get nextToken;
   @override
+  String? get nextToken;
 
   /// Pagination token for the previous page of results. This value is
   /// returned when there are multiple pages of results, as the current
@@ -229,9 +239,13 @@ abstract class _ListMeta implements ListMeta {
   /// page, passing the value from this field in the pagination_token query
   /// parameter. When this field is not returned in the response, it means you
   /// are on the first page of results.
-  String? get previousToken;
   @override
-  @JsonKey(ignore: true)
-  _$$_ListMetaCopyWith<_$_ListMeta> get copyWith =>
+  String? get previousToken;
+
+  /// Create a copy of ListMeta
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ListMetaImplCopyWith<_$ListMetaImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

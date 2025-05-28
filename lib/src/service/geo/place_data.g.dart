@@ -8,11 +8,11 @@ part of 'place_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PlaceData _$$_PlaceDataFromJson(Map json) => $checkedCreate(
-      r'_$_PlaceData',
+_$PlaceDataImpl _$$PlaceDataImplFromJson(Map json) => $checkedCreate(
+      r'_$PlaceDataImpl',
       json,
       ($checkedConvert) {
-        final val = _$_PlaceData(
+        final val = _$PlaceDataImpl(
           id: $checkedConvert('id', (v) => v as String),
           fullName: $checkedConvert('full_name', (v) => v as String),
           name: $checkedConvert('name', (v) => v as String?),
@@ -40,26 +40,19 @@ _$_PlaceData _$$_PlaceDataFromJson(Map json) => $checkedCreate(
       },
     );
 
-Map<String, dynamic> _$$_PlaceDataToJson(_$_PlaceData instance) {
-  final val = <String, dynamic>{
-    'id': instance.id,
-    'full_name': instance.fullName,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('name', instance.name);
-  writeNotNull('place_type', _$PlaceTypeEnumMap[instance.placeType]);
-  writeNotNull('country', instance.countryName);
-  writeNotNull('country_code', _$CountryEnumMap[instance.country]);
-  writeNotNull('geo', instance.geo?.toJson());
-  writeNotNull('contained_within', instance.containedWithin);
-  return val;
-}
+Map<String, dynamic> _$$PlaceDataImplToJson(_$PlaceDataImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'full_name': instance.fullName,
+      if (instance.name case final value?) 'name': value,
+      if (_$PlaceTypeEnumMap[instance.placeType] case final value?)
+        'place_type': value,
+      if (instance.countryName case final value?) 'country': value,
+      if (_$CountryEnumMap[instance.country] case final value?)
+        'country_code': value,
+      if (instance.geo?.toJson() case final value?) 'geo': value,
+      if (instance.containedWithin case final value?) 'contained_within': value,
+    };
 
 const _$PlaceTypeEnumMap = {
   PlaceType.poi: 'poi',

@@ -8,11 +8,11 @@ part of 'reply_state_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ReplyStateData _$$_ReplyStateDataFromJson(Map json) => $checkedCreate(
-      r'_$_ReplyStateData',
+_$ReplyStateDataImpl _$$ReplyStateDataImplFromJson(Map json) => $checkedCreate(
+      r'_$ReplyStateDataImpl',
       json,
       ($checkedConvert) {
-        final val = _$_ReplyStateData(
+        final val = _$ReplyStateDataImpl(
           isHidden: $checkedConvert('hidden', (v) => v as bool),
         );
         return val;
@@ -20,7 +20,8 @@ _$_ReplyStateData _$$_ReplyStateDataFromJson(Map json) => $checkedCreate(
       fieldKeyMap: const {'isHidden': 'hidden'},
     );
 
-Map<String, dynamic> _$$_ReplyStateDataToJson(_$_ReplyStateData instance) =>
+Map<String, dynamic> _$$ReplyStateDataImplToJson(
+        _$ReplyStateDataImpl instance) =>
     <String, dynamic>{
       'hidden': instance.isHidden,
     };

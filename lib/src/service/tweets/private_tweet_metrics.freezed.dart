@@ -12,7 +12,7 @@ part of 'private_tweet_metrics.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PrivateTweetMetrics _$PrivateTweetMetricsFromJson(Map<String, dynamic> json) {
   return _PrivateTweetMetrics.fromJson(json);
@@ -35,8 +35,12 @@ mixin _$PrivateTweetMetrics {
   @JsonKey(name: 'url_link_clicks')
   int? get linkClickCount => throw _privateConstructorUsedError;
 
+  /// Serializes this PrivateTweetMetrics to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PrivateTweetMetrics
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PrivateTweetMetricsCopyWith<PrivateTweetMetrics> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -63,6 +67,8 @@ class _$PrivateTweetMetricsCopyWithImpl<$Res, $Val extends PrivateTweetMetrics>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PrivateTweetMetrics
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -88,11 +94,11 @@ class _$PrivateTweetMetricsCopyWithImpl<$Res, $Val extends PrivateTweetMetrics>
 }
 
 /// @nodoc
-abstract class _$$_PrivateTweetMetricsCopyWith<$Res>
+abstract class _$$PrivateTweetMetricsImplCopyWith<$Res>
     implements $PrivateTweetMetricsCopyWith<$Res> {
-  factory _$$_PrivateTweetMetricsCopyWith(_$_PrivateTweetMetrics value,
-          $Res Function(_$_PrivateTweetMetrics) then) =
-      __$$_PrivateTweetMetricsCopyWithImpl<$Res>;
+  factory _$$PrivateTweetMetricsImplCopyWith(_$PrivateTweetMetricsImpl value,
+          $Res Function(_$PrivateTweetMetricsImpl) then) =
+      __$$PrivateTweetMetricsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -102,13 +108,15 @@ abstract class _$$_PrivateTweetMetricsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PrivateTweetMetricsCopyWithImpl<$Res>
-    extends _$PrivateTweetMetricsCopyWithImpl<$Res, _$_PrivateTweetMetrics>
-    implements _$$_PrivateTweetMetricsCopyWith<$Res> {
-  __$$_PrivateTweetMetricsCopyWithImpl(_$_PrivateTweetMetrics _value,
-      $Res Function(_$_PrivateTweetMetrics) _then)
+class __$$PrivateTweetMetricsImplCopyWithImpl<$Res>
+    extends _$PrivateTweetMetricsCopyWithImpl<$Res, _$PrivateTweetMetricsImpl>
+    implements _$$PrivateTweetMetricsImplCopyWith<$Res> {
+  __$$PrivateTweetMetricsImplCopyWithImpl(_$PrivateTweetMetricsImpl _value,
+      $Res Function(_$PrivateTweetMetricsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PrivateTweetMetrics
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -116,7 +124,7 @@ class __$$_PrivateTweetMetricsCopyWithImpl<$Res>
     Object? profileClickCount = null,
     Object? linkClickCount = freezed,
   }) {
-    return _then(_$_PrivateTweetMetrics(
+    return _then(_$PrivateTweetMetricsImpl(
       impressionCount: null == impressionCount
           ? _value.impressionCount
           : impressionCount // ignore: cast_nullable_to_non_nullable
@@ -136,14 +144,14 @@ class __$$_PrivateTweetMetricsCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false)
-class _$_PrivateTweetMetrics implements _PrivateTweetMetrics {
-  const _$_PrivateTweetMetrics(
+class _$PrivateTweetMetricsImpl implements _PrivateTweetMetrics {
+  const _$PrivateTweetMetricsImpl(
       {required this.impressionCount,
       @JsonKey(name: 'user_profile_clicks') required this.profileClickCount,
       @JsonKey(name: 'url_link_clicks') this.linkClickCount});
 
-  factory _$_PrivateTweetMetrics.fromJson(Map<String, dynamic> json) =>
-      _$$_PrivateTweetMetricsFromJson(json);
+  factory _$PrivateTweetMetricsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PrivateTweetMetricsImplFromJson(json);
 
   /// A count of how many times the Tweet has been viewed
   /// (not unique by user). A view is counted if any part of the Tweet is
@@ -169,10 +177,10 @@ class _$_PrivateTweetMetrics implements _PrivateTweetMetrics {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PrivateTweetMetrics &&
+            other is _$PrivateTweetMetricsImpl &&
             (identical(other.impressionCount, impressionCount) ||
                 other.impressionCount == impressionCount) &&
             (identical(other.profileClickCount, profileClickCount) ||
@@ -181,21 +189,23 @@ class _$_PrivateTweetMetrics implements _PrivateTweetMetrics {
                 other.linkClickCount == linkClickCount));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, impressionCount, profileClickCount, linkClickCount);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PrivateTweetMetrics
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PrivateTweetMetricsCopyWith<_$_PrivateTweetMetrics> get copyWith =>
-      __$$_PrivateTweetMetricsCopyWithImpl<_$_PrivateTweetMetrics>(
+  _$$PrivateTweetMetricsImplCopyWith<_$PrivateTweetMetricsImpl> get copyWith =>
+      __$$PrivateTweetMetricsImplCopyWithImpl<_$PrivateTweetMetricsImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PrivateTweetMetricsToJson(
+    return _$$PrivateTweetMetricsImplToJson(
       this,
     );
   }
@@ -203,35 +213,37 @@ class _$_PrivateTweetMetrics implements _PrivateTweetMetrics {
 
 abstract class _PrivateTweetMetrics implements PrivateTweetMetrics {
   const factory _PrivateTweetMetrics(
-      {required final int impressionCount,
-      @JsonKey(name: 'user_profile_clicks')
+          {required final int impressionCount,
+          @JsonKey(name: 'user_profile_clicks')
           required final int profileClickCount,
-      @JsonKey(name: 'url_link_clicks')
-          final int? linkClickCount}) = _$_PrivateTweetMetrics;
+          @JsonKey(name: 'url_link_clicks') final int? linkClickCount}) =
+      _$PrivateTweetMetricsImpl;
 
   factory _PrivateTweetMetrics.fromJson(Map<String, dynamic> json) =
-      _$_PrivateTweetMetrics.fromJson;
-
-  @override
+      _$PrivateTweetMetricsImpl.fromJson;
 
   /// A count of how many times the Tweet has been viewed
   /// (not unique by user). A view is counted if any part of the Tweet is
   /// visible on the screen.
-  int get impressionCount;
   @override
+  int get impressionCount;
 
   /// A count of the number of times a user clicks the following portions of
   /// a Tweet: display name, user name, profile picture.
+  @override
   @JsonKey(name: 'user_profile_clicks')
   int get profileClickCount;
-  @override
 
   /// A count of the number of times a user clicks on a URL link or URL
   /// preview card in a Tweet.
+  @override
   @JsonKey(name: 'url_link_clicks')
   int? get linkClickCount;
+
+  /// Create a copy of PrivateTweetMetrics
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_PrivateTweetMetricsCopyWith<_$_PrivateTweetMetrics> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PrivateTweetMetricsImplCopyWith<_$PrivateTweetMetricsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

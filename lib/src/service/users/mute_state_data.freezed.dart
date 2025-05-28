@@ -12,7 +12,7 @@ part of 'mute_state_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 MuteStateData _$MuteStateDataFromJson(Map<String, dynamic> json) {
   return _MuteStateData.fromJson(json);
@@ -27,8 +27,12 @@ mixin _$MuteStateData {
   @JsonKey(name: 'muting')
   bool get isMuting => throw _privateConstructorUsedError;
 
+  /// Serializes this MuteStateData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of MuteStateData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $MuteStateDataCopyWith<MuteStateData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -52,6 +56,8 @@ class _$MuteStateDataCopyWithImpl<$Res, $Val extends MuteStateData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of MuteStateData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -67,30 +73,32 @@ class _$MuteStateDataCopyWithImpl<$Res, $Val extends MuteStateData>
 }
 
 /// @nodoc
-abstract class _$$_MuteStateDataCopyWith<$Res>
+abstract class _$$MuteStateDataImplCopyWith<$Res>
     implements $MuteStateDataCopyWith<$Res> {
-  factory _$$_MuteStateDataCopyWith(
-          _$_MuteStateData value, $Res Function(_$_MuteStateData) then) =
-      __$$_MuteStateDataCopyWithImpl<$Res>;
+  factory _$$MuteStateDataImplCopyWith(
+          _$MuteStateDataImpl value, $Res Function(_$MuteStateDataImpl) then) =
+      __$$MuteStateDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@JsonKey(name: 'muting') bool isMuting});
 }
 
 /// @nodoc
-class __$$_MuteStateDataCopyWithImpl<$Res>
-    extends _$MuteStateDataCopyWithImpl<$Res, _$_MuteStateData>
-    implements _$$_MuteStateDataCopyWith<$Res> {
-  __$$_MuteStateDataCopyWithImpl(
-      _$_MuteStateData _value, $Res Function(_$_MuteStateData) _then)
+class __$$MuteStateDataImplCopyWithImpl<$Res>
+    extends _$MuteStateDataCopyWithImpl<$Res, _$MuteStateDataImpl>
+    implements _$$MuteStateDataImplCopyWith<$Res> {
+  __$$MuteStateDataImplCopyWithImpl(
+      _$MuteStateDataImpl _value, $Res Function(_$MuteStateDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MuteStateData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? isMuting = null,
   }) {
-    return _then(_$_MuteStateData(
+    return _then(_$MuteStateDataImpl(
       isMuting: null == isMuting
           ? _value.isMuting
           : isMuting // ignore: cast_nullable_to_non_nullable
@@ -101,11 +109,11 @@ class __$$_MuteStateDataCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MuteStateData implements _MuteStateData {
-  const _$_MuteStateData({@JsonKey(name: 'muting') required this.isMuting});
+class _$MuteStateDataImpl implements _MuteStateData {
+  const _$MuteStateDataImpl({@JsonKey(name: 'muting') required this.isMuting});
 
-  factory _$_MuteStateData.fromJson(Map<String, dynamic> json) =>
-      _$$_MuteStateDataFromJson(json);
+  factory _$MuteStateDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MuteStateDataImplFromJson(json);
 
   /// Indicates whether the user is muting the specified user as a result of
   /// this request.
@@ -121,27 +129,29 @@ class _$_MuteStateData implements _MuteStateData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MuteStateData &&
+            other is _$MuteStateDataImpl &&
             (identical(other.isMuting, isMuting) ||
                 other.isMuting == isMuting));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, isMuting);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MuteStateData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MuteStateDataCopyWith<_$_MuteStateData> get copyWith =>
-      __$$_MuteStateDataCopyWithImpl<_$_MuteStateData>(this, _$identity);
+  _$$MuteStateDataImplCopyWith<_$MuteStateDataImpl> get copyWith =>
+      __$$MuteStateDataImplCopyWithImpl<_$MuteStateDataImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MuteStateDataToJson(
+    return _$$MuteStateDataImplToJson(
       this,
     );
   }
@@ -150,21 +160,23 @@ class _$_MuteStateData implements _MuteStateData {
 abstract class _MuteStateData implements MuteStateData {
   const factory _MuteStateData(
           {@JsonKey(name: 'muting') required final bool isMuting}) =
-      _$_MuteStateData;
+      _$MuteStateDataImpl;
 
   factory _MuteStateData.fromJson(Map<String, dynamic> json) =
-      _$_MuteStateData.fromJson;
-
-  @override
+      _$MuteStateDataImpl.fromJson;
 
   /// Indicates whether the user is muting the specified user as a result of
   /// this request.
   ///
   /// The returned value is `false` for a successful unmute request.
+  @override
   @JsonKey(name: 'muting')
   bool get isMuting;
+
+  /// Create a copy of MuteStateData
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_MuteStateDataCopyWith<_$_MuteStateData> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$MuteStateDataImplCopyWith<_$MuteStateDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'url.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Url _$UrlFromJson(Map<String, dynamic> json) {
   return _Url.fromJson(json);
@@ -43,8 +43,12 @@ mixin _$Url {
   /// The unique key to the media.
   String? get mediaKey => throw _privateConstructorUsedError;
 
+  /// Serializes this Url to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Url
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UrlCopyWith<Url> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -72,6 +76,8 @@ class _$UrlCopyWithImpl<$Res, $Val extends Url> implements $UrlCopyWith<$Res> {
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Url
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -117,9 +123,9 @@ class _$UrlCopyWithImpl<$Res, $Val extends Url> implements $UrlCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$$_UrlCopyWith<$Res> implements $UrlCopyWith<$Res> {
-  factory _$$_UrlCopyWith(_$_Url value, $Res Function(_$_Url) then) =
-      __$$_UrlCopyWithImpl<$Res>;
+abstract class _$$UrlImplCopyWith<$Res> implements $UrlCopyWith<$Res> {
+  factory _$$UrlImplCopyWith(_$UrlImpl value, $Res Function(_$UrlImpl) then) =
+      __$$UrlImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -133,11 +139,13 @@ abstract class _$$_UrlCopyWith<$Res> implements $UrlCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UrlCopyWithImpl<$Res> extends _$UrlCopyWithImpl<$Res, _$_Url>
-    implements _$$_UrlCopyWith<$Res> {
-  __$$_UrlCopyWithImpl(_$_Url _value, $Res Function(_$_Url) _then)
+class __$$UrlImplCopyWithImpl<$Res> extends _$UrlCopyWithImpl<$Res, _$UrlImpl>
+    implements _$$UrlImplCopyWith<$Res> {
+  __$$UrlImplCopyWithImpl(_$UrlImpl _value, $Res Function(_$UrlImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Url
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -149,7 +157,7 @@ class __$$_UrlCopyWithImpl<$Res> extends _$UrlCopyWithImpl<$Res, _$_Url>
     Object? unwoundUrl = freezed,
     Object? mediaKey = freezed,
   }) {
-    return _then(_$_Url(
+    return _then(_$UrlImpl(
       start: null == start
           ? _value.start
           : start // ignore: cast_nullable_to_non_nullable
@@ -185,8 +193,8 @@ class __$$_UrlCopyWithImpl<$Res> extends _$UrlCopyWithImpl<$Res, _$_Url>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false)
-class _$_Url implements _Url {
-  const _$_Url(
+class _$UrlImpl implements _Url {
+  const _$UrlImpl(
       {required this.start,
       required this.end,
       required this.url,
@@ -195,7 +203,8 @@ class _$_Url implements _Url {
       this.unwoundUrl,
       this.mediaKey});
 
-  factory _$_Url.fromJson(Map<String, dynamic> json) => _$$_UrlFromJson(json);
+  factory _$UrlImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UrlImplFromJson(json);
 
   /// The start position (zero-based) of the recognized URL within the object.
   /// All start indices are inclusive.
@@ -233,10 +242,10 @@ class _$_Url implements _Url {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Url &&
+            other is _$UrlImpl &&
             (identical(other.start, start) || other.start == start) &&
             (identical(other.end, end) || other.end == end) &&
             (identical(other.url, url) || other.url == url) &&
@@ -250,20 +259,22 @@ class _$_Url implements _Url {
                 other.mediaKey == mediaKey));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, start, end, url, expandedUrl,
       displayUrl, unwoundUrl, mediaKey);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Url
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UrlCopyWith<_$_Url> get copyWith =>
-      __$$_UrlCopyWithImpl<_$_Url>(this, _$identity);
+  _$$UrlImplCopyWith<_$UrlImpl> get copyWith =>
+      __$$UrlImplCopyWithImpl<_$UrlImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UrlToJson(
+    return _$$UrlImplToJson(
       this,
     );
   }
@@ -277,41 +288,44 @@ abstract class _Url implements Url {
       required final String expandedUrl,
       required final String displayUrl,
       final String? unwoundUrl,
-      final String? mediaKey}) = _$_Url;
+      final String? mediaKey}) = _$UrlImpl;
 
-  factory _Url.fromJson(Map<String, dynamic> json) = _$_Url.fromJson;
-
-  @override
+  factory _Url.fromJson(Map<String, dynamic> json) = _$UrlImpl.fromJson;
 
   /// The start position (zero-based) of the recognized URL within the object.
   /// All start indices are inclusive.
-  int get start;
   @override
+  int get start;
 
   /// The end position (zero-based) of the recognized URL within the object.
   /// This end index is exclusive.
-  int get end;
   @override
+  int get end;
 
   /// The URL in the format posted by the user.
-  String get url;
   @override
+  String get url;
 
   /// The fully resolved URL.
-  String get expandedUrl;
   @override
+  String get expandedUrl;
 
   /// The URL as displayed in the Twitter client.
-  String get displayUrl;
   @override
+  String get displayUrl;
 
   /// The full destination URL.
-  String? get unwoundUrl;
   @override
+  String? get unwoundUrl;
 
   /// The unique key to the media.
-  String? get mediaKey;
   @override
-  @JsonKey(ignore: true)
-  _$$_UrlCopyWith<_$_Url> get copyWith => throw _privateConstructorUsedError;
+  String? get mediaKey;
+
+  /// Create a copy of Url
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UrlImplCopyWith<_$UrlImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

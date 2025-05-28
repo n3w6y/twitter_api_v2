@@ -1,115 +1,126 @@
-// Copyright 2022 Kato Shinya. All rights reserved.
-// Redistribution and use in source and binary forms, with or without
-// modification, are permitted provided the conditions.
-
-// 🎯 Dart imports:
 import 'dart:convert';
-
-// 📦 Package imports:
 import 'package:http/http.dart' as http;
+import 'package:twitter_api_v2/src/core/client/client.dart';
+import 'package:twitter_api_v2/src/core/exception/data_not_found_exception.dart';
+import 'package:twitter_api_v2/src/core/exception/rate_limit_exceeded_exception.dart';
+import 'package:twitter_api_v2/src/core/exception/twitter_exception.dart';
+import 'package:twitter_api_v2/src/core/exception/unauthorized_exception.dart';
+import 'package:twitter_api_v2/src/service/common/rate_limit.dart';
+import 'package:twitter_api_v2/src/service/response/twitter_response.dart';
+import 'package:twitter_api_v2/src/service/response/twitter_request.dart';
 
-// 🌎 Project imports:
-import 'client.dart';
+class OAuth2Client implements Client {
+  OAuth2Client({
+    required this.bearerToken,
+    required this.timeout,
+    http.Client? client,
+  }) : _httpClient = client ?? http.Client();
 
-class OAuth2Client extends Client {
-  /// Returns the new instance of [OAuth2Client].
-  const OAuth2Client({required String bearerToken})
-      : _bearerToken = bearerToken;
-
-  /// The token to authenticate OAuth 2.0
-  final String _bearerToken;
+  final String bearerToken;
+  final Duration timeout;
+  final http.Client _httpClient;
 
   @override
-  Future<http.Response> get(
+  Future<TwitterResponse<D, M>> get<D, M>(
     Uri uri, {
-    required Duration timeout,
-  }) async =>
-      await http.get(
-        uri,
-        headers: {'Authorization': 'Bearer $_bearerToken'},
-      ).timeout(timeout);
-
-  @override
-  Future<http.StreamedResponse> getStream(
-    http.BaseRequest request, {
-    Map<String, String> headers = const {},
-    required Duration timeout,
+    required D Function(Map<String, dynamic>) fromJsonData,
+    M Function(Map<String, dynamic>)? fromJsonMeta,
   }) async {
-    request.headers.addAll(
-      {'Authorization': 'Bearer $_bearerToken', ...headers},
-    );
-
-    return request.send().timeout(timeout);
+    final response = await _httpClient.get(uri,
+        headers: {'Authorization': 'Bearer $bearerToken'}).timeout(timeout);
+    return _processResponse(response, fromJsonData, fromJsonMeta);
   }
 
   @override
-  Future<http.Response> post(
+  Future<TwitterResponse<D, M>> post<D, M>(
     Uri uri, {
-    Map<String, String> headers = const {},
+    required D Function(Map<String, dynamic>) fromJsonData,
+    M Function(Map<String, dynamic>)? fromJsonMeta,
+    Map<String, String>? headers,
     dynamic body,
-    required Duration timeout,
-  }) async =>
-      await http
-          .post(
-            uri,
-            headers: {'Authorization': 'Bearer $_bearerToken'}..addAll(headers),
-            body: body,
-            encoding: utf8,
-          )
-          .timeout(timeout);
+  }) async {
+    final effectiveHeaders = {
+      ...?headers,
+      'Authorization': 'Bearer $bearerToken',
+    };
+    final response = await _httpClient
+        .post(uri, headers: effectiveHeaders, body: body)
+        .timeout(timeout);
+    return _processResponse(response, fromJsonData, fromJsonMeta);
+  }
 
   @override
-  Future<http.Response> postMultipart(
-    http.MultipartRequest request, {
-    List<http.MultipartFile> files = const [],
-    required Duration timeout,
+  Future<TwitterResponse<D, M>> postMultipart<D, M>(
+    Uri uri, {
+    required D Function(Map<String, dynamic>) fromJsonData,
+    M Function(Map<String, dynamic>)? fromJsonMeta,
+    List<http.MultipartFile>? files,
+    Map<String, String>? data,
   }) async {
-    request.files.addAll(files);
-    request.headers.addAll({'Authorization': 'Bearer $_bearerToken'});
+    final request = http.MultipartRequest('POST', uri);
+    request.headers['Authorization'] = 'Bearer $bearerToken';
+    if (files != null) request.files.addAll(files);
+    if (data != null) request.fields.addAll(data);
 
-    return http.Response.fromStream(await request.send())
-        .timeout(timeout)
-        .then((response) {
-      if (response.statusCode >= 200 && response.statusCode < 300) {
-        return response;
-      } else {
-        return Future.error(response);
+    final response = await _httpClient.send(request).timeout(timeout);
+    final httpResponse = await http.Response.fromStream(response);
+    return _processResponse(httpResponse, fromJsonData, fromJsonMeta);
+  }
+
+  @override
+  Future<TwitterResponse<D, M>> delete<D, M>(
+    Uri uri, {
+    required D Function(Map<String, dynamic>) fromJsonData,
+    M Function(Map<String, dynamic>)? fromJsonMeta,
+  }) async {
+    final response = await _httpClient.delete(uri,
+        headers: {'Authorization': 'Bearer $bearerToken'}).timeout(timeout);
+    return _processResponse(response, fromJsonData, fromJsonMeta);
+  }
+
+  TwitterResponse<D, M> _processResponse<D, M>(
+    http.Response response,
+    D Function(Map<String, dynamic>) fromJsonData,
+    M Function(Map<String, dynamic>)? fromJsonMeta,
+  ) {
+    final headers = response.headers;
+    final rateLimit = RateLimit.fromJson(headers);
+
+    if (response.statusCode >= 400) {
+      final jsonBody = jsonDecode(response.body);
+      final errorMessage = jsonBody['title'] ?? jsonBody['message'] ?? '';
+      final httpResponse =
+          http.Response(response.body, response.statusCode, headers: headers);
+
+      switch (response.statusCode) {
+        case 401:
+          throw UnauthorizedException(errorMessage, httpResponse);
+        case 404:
+          throw DataNotFoundException(errorMessage, httpResponse);
+        case 429:
+          throw RateLimitExceededException(errorMessage, httpResponse);
+        default:
+          throw TwitterException(errorMessage, httpResponse);
       }
-    });
+    }
+
+    final jsonBody = jsonDecode(response.body);
+
+    return TwitterResponse<D, M>(
+      headers: headers,
+      rateLimit: rateLimit,
+      status: response.statusCode,
+      request: TwitterResponse(
+        url: Uri.parse(response.request!.url.toString()),
+        method: response.request!.method.toLowerCase(),
+      ),
+      data: fromJsonData(jsonBody['data'] ?? jsonBody),
+      meta: fromJsonMeta != null && jsonBody['meta'] != null
+          ? fromJsonMeta(jsonBody['meta'])
+          : null,
+    );
   }
 
   @override
-  Future<http.Response> delete(
-    Uri uri, {
-    Map<String, String> headers = const {},
-    dynamic body,
-    required Duration timeout,
-  }) async =>
-      await http
-          .delete(
-            uri,
-            headers: {'Authorization': 'Bearer $_bearerToken'}..addAll(headers),
-            body: body,
-            encoding: utf8,
-          )
-          .timeout(timeout);
-
-  @override
-  Future<http.Response> put(
-    Uri uri, {
-    Map<String, String> headers = const {},
-    body,
-    required Duration timeout,
-  }) async =>
-      await http
-          .put(
-            uri,
-            headers: {'Authorization': 'Bearer $_bearerToken'}..addAll(headers),
-            body: body,
-            encoding: utf8,
-          )
-          .timeout(timeout);
-
-  /// Returns true if this client is for app only, otherwise false.
-  bool get isAppOnly => _bearerToken.startsWith('AAAAAAAAAAAAAAAAAAAAA');
+  void close() => _httpClient.close();
 }

@@ -12,7 +12,7 @@ part of 'tweet_meta.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 TweetMeta _$TweetMetaFromJson(Map<String, dynamic> json) {
   return _TweetMeta.fromJson(json);
@@ -37,8 +37,12 @@ mixin _$TweetMeta {
   /// requested, via the `pagination_token` request parameter.
   String? get previousToken => throw _privateConstructorUsedError;
 
+  /// Serializes this TweetMeta to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TweetMeta
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TweetMetaCopyWith<TweetMeta> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -66,6 +70,8 @@ class _$TweetMetaCopyWithImpl<$Res, $Val extends TweetMeta>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TweetMeta
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -101,10 +107,11 @@ class _$TweetMetaCopyWithImpl<$Res, $Val extends TweetMeta>
 }
 
 /// @nodoc
-abstract class _$$_TweetMetaCopyWith<$Res> implements $TweetMetaCopyWith<$Res> {
-  factory _$$_TweetMetaCopyWith(
-          _$_TweetMeta value, $Res Function(_$_TweetMeta) then) =
-      __$$_TweetMetaCopyWithImpl<$Res>;
+abstract class _$$TweetMetaImplCopyWith<$Res>
+    implements $TweetMetaCopyWith<$Res> {
+  factory _$$TweetMetaImplCopyWith(
+          _$TweetMetaImpl value, $Res Function(_$TweetMetaImpl) then) =
+      __$$TweetMetaImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -116,13 +123,15 @@ abstract class _$$_TweetMetaCopyWith<$Res> implements $TweetMetaCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_TweetMetaCopyWithImpl<$Res>
-    extends _$TweetMetaCopyWithImpl<$Res, _$_TweetMeta>
-    implements _$$_TweetMetaCopyWith<$Res> {
-  __$$_TweetMetaCopyWithImpl(
-      _$_TweetMeta _value, $Res Function(_$_TweetMeta) _then)
+class __$$TweetMetaImplCopyWithImpl<$Res>
+    extends _$TweetMetaCopyWithImpl<$Res, _$TweetMetaImpl>
+    implements _$$TweetMetaImplCopyWith<$Res> {
+  __$$TweetMetaImplCopyWithImpl(
+      _$TweetMetaImpl _value, $Res Function(_$TweetMetaImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TweetMeta
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -132,7 +141,7 @@ class __$$_TweetMetaCopyWithImpl<$Res>
     Object? nextToken = freezed,
     Object? previousToken = freezed,
   }) {
-    return _then(_$_TweetMeta(
+    return _then(_$TweetMetaImpl(
       newestId: freezed == newestId
           ? _value.newestId
           : newestId // ignore: cast_nullable_to_non_nullable
@@ -160,16 +169,16 @@ class __$$_TweetMetaCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false)
-class _$_TweetMeta implements _TweetMeta {
-  const _$_TweetMeta(
+class _$TweetMetaImpl implements _TweetMeta {
+  const _$TweetMetaImpl(
       {this.newestId,
       this.oldestId,
       this.resultCount,
       this.nextToken,
       this.previousToken});
 
-  factory _$_TweetMeta.fromJson(Map<String, dynamic> json) =>
-      _$$_TweetMetaFromJson(json);
+  factory _$TweetMetaImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TweetMetaImplFromJson(json);
 
   /// The Tweet ID of the most recent Tweet returned in the response.
   @override
@@ -199,10 +208,10 @@ class _$_TweetMeta implements _TweetMeta {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TweetMeta &&
+            other is _$TweetMetaImpl &&
             (identical(other.newestId, newestId) ||
                 other.newestId == newestId) &&
             (identical(other.oldestId, oldestId) ||
@@ -215,20 +224,22 @@ class _$_TweetMeta implements _TweetMeta {
                 other.previousToken == previousToken));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, newestId, oldestId, resultCount, nextToken, previousToken);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TweetMeta
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TweetMetaCopyWith<_$_TweetMeta> get copyWith =>
-      __$$_TweetMetaCopyWithImpl<_$_TweetMeta>(this, _$identity);
+  _$$TweetMetaImplCopyWith<_$TweetMetaImpl> get copyWith =>
+      __$$TweetMetaImplCopyWithImpl<_$TweetMetaImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TweetMetaToJson(
+    return _$$TweetMetaImplToJson(
       this,
     );
   }
@@ -240,35 +251,37 @@ abstract class _TweetMeta implements TweetMeta {
       final String? oldestId,
       final int? resultCount,
       final String? nextToken,
-      final String? previousToken}) = _$_TweetMeta;
+      final String? previousToken}) = _$TweetMetaImpl;
 
   factory _TweetMeta.fromJson(Map<String, dynamic> json) =
-      _$_TweetMeta.fromJson;
-
-  @override
+      _$TweetMetaImpl.fromJson;
 
   /// The Tweet ID of the most recent Tweet returned in the response.
-  String? get newestId;
   @override
+  String? get newestId;
 
   /// The Tweet ID of the oldest Tweet returned in the response.
-  String? get oldestId;
   @override
+  String? get oldestId;
 
   /// The number of Tweet results returned in the response.
-  int? get resultCount;
   @override
+  int? get resultCount;
 
   /// A value that encodes the next 'page' of results that can be requested,
   /// via the `pagination_token` request parameter.
-  String? get nextToken;
   @override
+  String? get nextToken;
 
   /// A value that encodes the previous 'page' of results that can be
   /// requested, via the `pagination_token` request parameter.
-  String? get previousToken;
   @override
-  @JsonKey(ignore: true)
-  _$$_TweetMetaCopyWith<_$_TweetMeta> get copyWith =>
+  String? get previousToken;
+
+  /// Create a copy of TweetMeta
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$TweetMetaImplCopyWith<_$TweetMetaImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'message_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 MessageData _$MessageDataFromJson(Map<String, dynamic> json) {
   return _MessageData.fromJson(json);
@@ -28,8 +28,12 @@ mixin _$MessageData {
   @JsonKey(name: 'dm_conversation_id')
   String get conversationId => throw _privateConstructorUsedError;
 
+  /// Serializes this MessageData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of MessageData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $MessageDataCopyWith<MessageData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -55,6 +59,8 @@ class _$MessageDataCopyWithImpl<$Res, $Val extends MessageData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of MessageData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -75,11 +81,11 @@ class _$MessageDataCopyWithImpl<$Res, $Val extends MessageData>
 }
 
 /// @nodoc
-abstract class _$$_MessageDataCopyWith<$Res>
+abstract class _$$MessageDataImplCopyWith<$Res>
     implements $MessageDataCopyWith<$Res> {
-  factory _$$_MessageDataCopyWith(
-          _$_MessageData value, $Res Function(_$_MessageData) then) =
-      __$$_MessageDataCopyWithImpl<$Res>;
+  factory _$$MessageDataImplCopyWith(
+          _$MessageDataImpl value, $Res Function(_$MessageDataImpl) then) =
+      __$$MessageDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -88,20 +94,22 @@ abstract class _$$_MessageDataCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MessageDataCopyWithImpl<$Res>
-    extends _$MessageDataCopyWithImpl<$Res, _$_MessageData>
-    implements _$$_MessageDataCopyWith<$Res> {
-  __$$_MessageDataCopyWithImpl(
-      _$_MessageData _value, $Res Function(_$_MessageData) _then)
+class __$$MessageDataImplCopyWithImpl<$Res>
+    extends _$MessageDataCopyWithImpl<$Res, _$MessageDataImpl>
+    implements _$$MessageDataImplCopyWith<$Res> {
+  __$$MessageDataImplCopyWithImpl(
+      _$MessageDataImpl _value, $Res Function(_$MessageDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MessageData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? eventId = null,
     Object? conversationId = null,
   }) {
-    return _then(_$_MessageData(
+    return _then(_$MessageDataImpl(
       eventId: null == eventId
           ? _value.eventId
           : eventId // ignore: cast_nullable_to_non_nullable
@@ -116,13 +124,13 @@ class __$$_MessageDataCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MessageData implements _MessageData {
-  const _$_MessageData(
+class _$MessageDataImpl implements _MessageData {
+  const _$MessageDataImpl(
       {@JsonKey(name: 'dm_event_id') required this.eventId,
       @JsonKey(name: 'dm_conversation_id') required this.conversationId});
 
-  factory _$_MessageData.fromJson(Map<String, dynamic> json) =>
-      _$$_MessageDataFromJson(json);
+  factory _$MessageDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MessageDataImplFromJson(json);
 
   /// The `id` of the event sent in this conversation.
   @override
@@ -140,28 +148,30 @@ class _$_MessageData implements _MessageData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MessageData &&
+            other is _$MessageDataImpl &&
             (identical(other.eventId, eventId) || other.eventId == eventId) &&
             (identical(other.conversationId, conversationId) ||
                 other.conversationId == conversationId));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, eventId, conversationId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MessageData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MessageDataCopyWith<_$_MessageData> get copyWith =>
-      __$$_MessageDataCopyWithImpl<_$_MessageData>(this, _$identity);
+  _$$MessageDataImplCopyWith<_$MessageDataImpl> get copyWith =>
+      __$$MessageDataImplCopyWithImpl<_$MessageDataImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MessageDataToJson(
+    return _$$MessageDataImplToJson(
       this,
     );
   }
@@ -169,26 +179,27 @@ class _$_MessageData implements _MessageData {
 
 abstract class _MessageData implements MessageData {
   const factory _MessageData(
-      {@JsonKey(name: 'dm_event_id')
-          required final String eventId,
+      {@JsonKey(name: 'dm_event_id') required final String eventId,
       @JsonKey(name: 'dm_conversation_id')
-          required final String conversationId}) = _$_MessageData;
+      required final String conversationId}) = _$MessageDataImpl;
 
   factory _MessageData.fromJson(Map<String, dynamic> json) =
-      _$_MessageData.fromJson;
-
-  @override
+      _$MessageDataImpl.fromJson;
 
   /// The `id` of the event sent in this conversation.
+  @override
   @JsonKey(name: 'dm_event_id')
   String get eventId;
-  @override
 
   /// The `id` of the DM conversation.
+  @override
   @JsonKey(name: 'dm_conversation_id')
   String get conversationId;
+
+  /// Create a copy of MessageData
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_MessageDataCopyWith<_$_MessageData> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$MessageDataImplCopyWith<_$MessageDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

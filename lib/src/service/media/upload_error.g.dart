@@ -8,12 +8,12 @@ part of 'upload_error.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_UploadError _$$_UploadErrorFromJson(Map json) => $checkedCreate(
-      r'_$_UploadError',
+_$UploadErrorImpl _$$UploadErrorImplFromJson(Map json) => $checkedCreate(
+      r'_$UploadErrorImpl',
       json,
       ($checkedConvert) {
-        final val = _$_UploadError(
-          code: $checkedConvert('code', (v) => v as int),
+        final val = _$UploadErrorImpl(
+          code: $checkedConvert('code', (v) => (v as num).toInt()),
           name: $checkedConvert('name', (v) => v as String),
           message: $checkedConvert('message', (v) => v as String),
         );
@@ -21,7 +21,7 @@ _$_UploadError _$$_UploadErrorFromJson(Map json) => $checkedCreate(
       },
     );
 
-Map<String, dynamic> _$$_UploadErrorToJson(_$_UploadError instance) =>
+Map<String, dynamic> _$$UploadErrorImplToJson(_$UploadErrorImpl instance) =>
     <String, dynamic>{
       'code': instance.code,
       'name': instance.name,

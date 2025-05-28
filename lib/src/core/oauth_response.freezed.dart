@@ -12,7 +12,7 @@ part of 'oauth_response.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 OAuthResponse _$OAuthResponseFromJson(Map<String, dynamic> json) {
   return _OAuthResponse.fromJson(json);
@@ -29,8 +29,12 @@ mixin _$OAuthResponse {
   @DateTimeConverter()
   DateTime get expiresAt => throw _privateConstructorUsedError;
 
+  /// Serializes this OAuthResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of OAuthResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $OAuthResponseCopyWith<OAuthResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -58,6 +62,8 @@ class _$OAuthResponseCopyWithImpl<$Res, $Val extends OAuthResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of OAuthResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -88,11 +94,11 @@ class _$OAuthResponseCopyWithImpl<$Res, $Val extends OAuthResponse>
 }
 
 /// @nodoc
-abstract class _$$_OAuthResponseCopyWith<$Res>
+abstract class _$$OAuthResponseImplCopyWith<$Res>
     implements $OAuthResponseCopyWith<$Res> {
-  factory _$$_OAuthResponseCopyWith(
-          _$_OAuthResponse value, $Res Function(_$_OAuthResponse) then) =
-      __$$_OAuthResponseCopyWithImpl<$Res>;
+  factory _$$OAuthResponseImplCopyWith(
+          _$OAuthResponseImpl value, $Res Function(_$OAuthResponseImpl) then) =
+      __$$OAuthResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -103,13 +109,15 @@ abstract class _$$_OAuthResponseCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OAuthResponseCopyWithImpl<$Res>
-    extends _$OAuthResponseCopyWithImpl<$Res, _$_OAuthResponse>
-    implements _$$_OAuthResponseCopyWith<$Res> {
-  __$$_OAuthResponseCopyWithImpl(
-      _$_OAuthResponse _value, $Res Function(_$_OAuthResponse) _then)
+class __$$OAuthResponseImplCopyWithImpl<$Res>
+    extends _$OAuthResponseCopyWithImpl<$Res, _$OAuthResponseImpl>
+    implements _$$OAuthResponseImplCopyWith<$Res> {
+  __$$OAuthResponseImplCopyWithImpl(
+      _$OAuthResponseImpl _value, $Res Function(_$OAuthResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of OAuthResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -118,7 +126,7 @@ class __$$_OAuthResponseCopyWithImpl<$Res>
     Object? scopes = null,
     Object? expiresAt = null,
   }) {
-    return _then(_$_OAuthResponse(
+    return _then(_$OAuthResponseImpl(
       accessToken: null == accessToken
           ? _value.accessToken
           : accessToken // ignore: cast_nullable_to_non_nullable
@@ -141,21 +149,21 @@ class __$$_OAuthResponseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_OAuthResponse extends _OAuthResponse {
-  const _$_OAuthResponse(
+class _$OAuthResponseImpl extends _OAuthResponse {
+  const _$OAuthResponseImpl(
       {required this.accessToken,
       required this.refreshToken,
       @JsonKey(name: 'scope')
       @ScopeConverter()
-          required final List<Scope> scopes,
+      required final List<Scope> scopes,
       @JsonKey(name: 'expires_in')
       @DateTimeConverter()
-          required this.expiresAt})
+      required this.expiresAt})
       : _scopes = scopes,
         super._();
 
-  factory _$_OAuthResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_OAuthResponseFromJson(json);
+  factory _$OAuthResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$OAuthResponseImplFromJson(json);
 
   @override
   final String accessToken;
@@ -182,10 +190,10 @@ class _$_OAuthResponse extends _OAuthResponse {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OAuthResponse &&
+            other is _$OAuthResponseImpl &&
             (identical(other.accessToken, accessToken) ||
                 other.accessToken == accessToken) &&
             (identical(other.refreshToken, refreshToken) ||
@@ -195,20 +203,22 @@ class _$_OAuthResponse extends _OAuthResponse {
                 other.expiresAt == expiresAt));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, accessToken, refreshToken,
       const DeepCollectionEquality().hash(_scopes), expiresAt);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of OAuthResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OAuthResponseCopyWith<_$_OAuthResponse> get copyWith =>
-      __$$_OAuthResponseCopyWithImpl<_$_OAuthResponse>(this, _$identity);
+  _$$OAuthResponseImplCopyWith<_$OAuthResponseImpl> get copyWith =>
+      __$$OAuthResponseImplCopyWithImpl<_$OAuthResponseImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_OAuthResponseToJson(
+    return _$$OAuthResponseImplToJson(
       this,
     );
   }
@@ -220,14 +230,14 @@ abstract class _OAuthResponse extends OAuthResponse {
       required final String refreshToken,
       @JsonKey(name: 'scope')
       @ScopeConverter()
-          required final List<Scope> scopes,
+      required final List<Scope> scopes,
       @JsonKey(name: 'expires_in')
       @DateTimeConverter()
-          required final DateTime expiresAt}) = _$_OAuthResponse;
+      required final DateTime expiresAt}) = _$OAuthResponseImpl;
   const _OAuthResponse._() : super._();
 
   factory _OAuthResponse.fromJson(Map<String, dynamic> json) =
-      _$_OAuthResponse.fromJson;
+      _$OAuthResponseImpl.fromJson;
 
   @override
   String get accessToken;
@@ -241,8 +251,11 @@ abstract class _OAuthResponse extends OAuthResponse {
   @JsonKey(name: 'expires_in')
   @DateTimeConverter()
   DateTime get expiresAt;
+
+  /// Create a copy of OAuthResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_OAuthResponseCopyWith<_$_OAuthResponse> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$OAuthResponseImplCopyWith<_$OAuthResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'tweet_count_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 TweetCountData _$TweetCountDataFromJson(Map<String, dynamic> json) {
   return _TweetCountData.fromJson(json);
@@ -30,8 +30,12 @@ mixin _$TweetCountData {
   @JsonKey(name: 'tweet_count')
   int get count => throw _privateConstructorUsedError;
 
+  /// Serializes this TweetCountData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TweetCountData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TweetCountDataCopyWith<TweetCountData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -56,6 +60,8 @@ class _$TweetCountDataCopyWithImpl<$Res, $Val extends TweetCountData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TweetCountData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -81,11 +87,11 @@ class _$TweetCountDataCopyWithImpl<$Res, $Val extends TweetCountData>
 }
 
 /// @nodoc
-abstract class _$$_TweetCountDataCopyWith<$Res>
+abstract class _$$TweetCountDataImplCopyWith<$Res>
     implements $TweetCountDataCopyWith<$Res> {
-  factory _$$_TweetCountDataCopyWith(
-          _$_TweetCountData value, $Res Function(_$_TweetCountData) then) =
-      __$$_TweetCountDataCopyWithImpl<$Res>;
+  factory _$$TweetCountDataImplCopyWith(_$TweetCountDataImpl value,
+          $Res Function(_$TweetCountDataImpl) then) =
+      __$$TweetCountDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -93,13 +99,15 @@ abstract class _$$_TweetCountDataCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_TweetCountDataCopyWithImpl<$Res>
-    extends _$TweetCountDataCopyWithImpl<$Res, _$_TweetCountData>
-    implements _$$_TweetCountDataCopyWith<$Res> {
-  __$$_TweetCountDataCopyWithImpl(
-      _$_TweetCountData _value, $Res Function(_$_TweetCountData) _then)
+class __$$TweetCountDataImplCopyWithImpl<$Res>
+    extends _$TweetCountDataCopyWithImpl<$Res, _$TweetCountDataImpl>
+    implements _$$TweetCountDataImplCopyWith<$Res> {
+  __$$TweetCountDataImplCopyWithImpl(
+      _$TweetCountDataImpl _value, $Res Function(_$TweetCountDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TweetCountData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -107,7 +115,7 @@ class __$$_TweetCountDataCopyWithImpl<$Res>
     Object? end = null,
     Object? count = null,
   }) {
-    return _then(_$_TweetCountData(
+    return _then(_$TweetCountDataImpl(
       start: null == start
           ? _value.start
           : start // ignore: cast_nullable_to_non_nullable
@@ -126,14 +134,14 @@ class __$$_TweetCountDataCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TweetCountData implements _TweetCountData {
-  const _$_TweetCountData(
+class _$TweetCountDataImpl implements _TweetCountData {
+  const _$TweetCountDataImpl(
       {required this.start,
       required this.end,
       @JsonKey(name: 'tweet_count') required this.count});
 
-  factory _$_TweetCountData.fromJson(Map<String, dynamic> json) =>
-      _$$_TweetCountDataFromJson(json);
+  factory _$TweetCountDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TweetCountDataImplFromJson(json);
 
   /// Start time for the granularity.
   @override
@@ -154,28 +162,31 @@ class _$_TweetCountData implements _TweetCountData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TweetCountData &&
+            other is _$TweetCountDataImpl &&
             (identical(other.start, start) || other.start == start) &&
             (identical(other.end, end) || other.end == end) &&
             (identical(other.count, count) || other.count == count));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, start, end, count);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TweetCountData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TweetCountDataCopyWith<_$_TweetCountData> get copyWith =>
-      __$$_TweetCountDataCopyWithImpl<_$_TweetCountData>(this, _$identity);
+  _$$TweetCountDataImplCopyWith<_$TweetCountDataImpl> get copyWith =>
+      __$$TweetCountDataImplCopyWithImpl<_$TweetCountDataImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TweetCountDataToJson(
+    return _$$TweetCountDataImplToJson(
       this,
     );
   }
@@ -186,26 +197,28 @@ abstract class _TweetCountData implements TweetCountData {
           {required final DateTime start,
           required final DateTime end,
           @JsonKey(name: 'tweet_count') required final int count}) =
-      _$_TweetCountData;
+      _$TweetCountDataImpl;
 
   factory _TweetCountData.fromJson(Map<String, dynamic> json) =
-      _$_TweetCountData.fromJson;
-
-  @override
+      _$TweetCountDataImpl.fromJson;
 
   /// Start time for the granularity.
-  DateTime get start;
   @override
+  DateTime get start;
 
   /// End time for the granularity.
-  DateTime get end;
   @override
+  DateTime get end;
 
   /// Count of the volume of Tweets that match the query.
+  @override
   @JsonKey(name: 'tweet_count')
   int get count;
+
+  /// Create a copy of TweetCountData
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_TweetCountDataCopyWith<_$_TweetCountData> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$TweetCountDataImplCopyWith<_$TweetCountDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

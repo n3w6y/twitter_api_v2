@@ -8,11 +8,12 @@ part of 'update_state_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_UpdateStateData _$$_UpdateStateDataFromJson(Map json) => $checkedCreate(
-      r'_$_UpdateStateData',
+_$UpdateStateDataImpl _$$UpdateStateDataImplFromJson(Map json) =>
+    $checkedCreate(
+      r'_$UpdateStateDataImpl',
       json,
       ($checkedConvert) {
-        final val = _$_UpdateStateData(
+        final val = _$UpdateStateDataImpl(
           isUpdated: $checkedConvert('updated', (v) => v as bool),
         );
         return val;
@@ -20,7 +21,8 @@ _$_UpdateStateData _$$_UpdateStateDataFromJson(Map json) => $checkedCreate(
       fieldKeyMap: const {'isUpdated': 'updated'},
     );
 
-Map<String, dynamic> _$$_UpdateStateDataToJson(_$_UpdateStateData instance) =>
+Map<String, dynamic> _$$UpdateStateDataImplToJson(
+        _$UpdateStateDataImpl instance) =>
     <String, dynamic>{
       'updated': instance.isUpdated,
     };

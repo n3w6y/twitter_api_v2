@@ -8,21 +8,21 @@ part of 'public_media_metrics.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PublicMediaMetrics _$$_PublicMediaMetricsFromJson(Map json) =>
+_$PublicMediaMetricsImpl _$$PublicMediaMetricsImplFromJson(Map json) =>
     $checkedCreate(
-      r'_$_PublicMediaMetrics',
+      r'_$PublicMediaMetricsImpl',
       json,
       ($checkedConvert) {
-        final val = _$_PublicMediaMetrics(
-          viewCount: $checkedConvert('view_count', (v) => v as int),
+        final val = _$PublicMediaMetricsImpl(
+          viewCount: $checkedConvert('view_count', (v) => (v as num).toInt()),
         );
         return val;
       },
       fieldKeyMap: const {'viewCount': 'view_count'},
     );
 
-Map<String, dynamic> _$$_PublicMediaMetricsToJson(
-        _$_PublicMediaMetrics instance) =>
+Map<String, dynamic> _$$PublicMediaMetricsImplToJson(
+        _$PublicMediaMetricsImpl instance) =>
     <String, dynamic>{
       'view_count': instance.viewCount,
     };

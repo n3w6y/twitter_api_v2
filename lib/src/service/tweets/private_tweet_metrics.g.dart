@@ -8,16 +8,18 @@ part of 'private_tweet_metrics.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PrivateTweetMetrics _$$_PrivateTweetMetricsFromJson(Map json) =>
+_$PrivateTweetMetricsImpl _$$PrivateTweetMetricsImplFromJson(Map json) =>
     $checkedCreate(
-      r'_$_PrivateTweetMetrics',
+      r'_$PrivateTweetMetricsImpl',
       json,
       ($checkedConvert) {
-        final val = _$_PrivateTweetMetrics(
-          impressionCount: $checkedConvert('impression_count', (v) => v as int),
+        final val = _$PrivateTweetMetricsImpl(
+          impressionCount:
+              $checkedConvert('impression_count', (v) => (v as num).toInt()),
           profileClickCount:
-              $checkedConvert('user_profile_clicks', (v) => v as int),
-          linkClickCount: $checkedConvert('url_link_clicks', (v) => v as int?),
+              $checkedConvert('user_profile_clicks', (v) => (v as num).toInt()),
+          linkClickCount:
+              $checkedConvert('url_link_clicks', (v) => (v as num?)?.toInt()),
         );
         return val;
       },
@@ -28,19 +30,10 @@ _$_PrivateTweetMetrics _$$_PrivateTweetMetricsFromJson(Map json) =>
       },
     );
 
-Map<String, dynamic> _$$_PrivateTweetMetricsToJson(
-    _$_PrivateTweetMetrics instance) {
-  final val = <String, dynamic>{
-    'impression_count': instance.impressionCount,
-    'user_profile_clicks': instance.profileClickCount,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('url_link_clicks', instance.linkClickCount);
-  return val;
-}
+Map<String, dynamic> _$$PrivateTweetMetricsImplToJson(
+        _$PrivateTweetMetricsImpl instance) =>
+    <String, dynamic>{
+      'impression_count': instance.impressionCount,
+      'user_profile_clicks': instance.profileClickCount,
+      if (instance.linkClickCount case final value?) 'url_link_clicks': value,
+    };

@@ -8,12 +8,12 @@ part of 'member_state_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ListMemberStateData _$$_ListMemberStateDataFromJson(Map json) =>
+_$ListMemberStateDataImpl _$$ListMemberStateDataImplFromJson(Map json) =>
     $checkedCreate(
-      r'_$_ListMemberStateData',
+      r'_$ListMemberStateDataImpl',
       json,
       ($checkedConvert) {
-        final val = _$_ListMemberStateData(
+        final val = _$ListMemberStateDataImpl(
           isMember: $checkedConvert('is_member', (v) => v as bool),
         );
         return val;
@@ -21,8 +21,8 @@ _$_ListMemberStateData _$$_ListMemberStateDataFromJson(Map json) =>
       fieldKeyMap: const {'isMember': 'is_member'},
     );
 
-Map<String, dynamic> _$$_ListMemberStateDataToJson(
-        _$_ListMemberStateData instance) =>
+Map<String, dynamic> _$$ListMemberStateDataImplToJson(
+        _$ListMemberStateDataImpl instance) =>
     <String, dynamic>{
       'is_member': instance.isMember,
     };
