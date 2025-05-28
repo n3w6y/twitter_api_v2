@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:http/http.dart' as http;
 import 'package:twitter_api_v2/src/core/client/client_context.dart';
 import 'package:twitter_api_v2/src/core/client/user_context.dart';
 import 'package:twitter_api_v2/src/service/base_media_service.dart';
@@ -33,10 +34,8 @@ class _MediaService extends BaseMediaService implements MediaService {
     required File file,
     String? altText,
   }) async {
-    final multipartFile = await _createMultipartFile(
-      file: file,
-      field: 'media',
-    );
+    final fileBytes = await file.readAsBytes();
+    final multipartFile = http.MultipartFile.fromBytes('media', fileBytes);
 
     final response = await super.postMultipart(
       context,
@@ -59,10 +58,8 @@ class _MediaService extends BaseMediaService implements MediaService {
     required File file,
     String? altText,
   }) async {
-    final multipartFile = await _createMultipartFile(
-      file: file,
-      field: 'media',
-    );
+    final fileBytes = await file.readAsBytes();
+    final multipartFile = http.MultipartFile.fromBytes('media', fileBytes);
 
     final response = await super.postMultipart(
       context,
