@@ -96,7 +96,7 @@ use in nested groups or outside of groups.
     if (_sample != null) {
       //! Add sampling rule
       appendLogicalOperator(And());
-      appendSingletonOperator(_sample!);
+      appendSingletonOperator(_sample);
     }
 
     final buffer = StringBuffer();
