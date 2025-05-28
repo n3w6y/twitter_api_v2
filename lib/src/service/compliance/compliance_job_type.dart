@@ -1,0 +1,4 @@
+enum JobType {
+  tweets,
+  users,
+}
