@@ -5,6 +5,8 @@ import 'package:twitter_api_v2/src/core/exception/data_not_found_exception.dart'
 import 'package:twitter_api_v2/src/core/exception/rate_limit_exceeded_exception.dart';
 import 'package:twitter_api_v2/src/core/exception/twitter_exception.dart';
 import 'package:twitter_api_v2/src/core/exception/unauthorized_exception.dart';
+import 'package:twitter_api_v2/src/core/http_method.dart';
+import 'package:twitter_api_v2/src/core/https_status.dart';
 import 'package:twitter_api_v2/src/service/common/rate_limit.dart';
 import 'package:twitter_api_v2/src/service/response/twitter_response.dart';
 import 'package:twitter_api_v2/src/service/response/twitter_request.dart';
@@ -106,13 +108,52 @@ class OAuth2Client implements Client {
 
     final jsonBody = jsonDecode(response.body);
 
+    HttpStatus status;
+    switch (response.statusCode) {
+      case 200:
+        status = HttpStatus.ok;
+        break;
+      case 201:
+        status = HttpStatus.created;
+        break;
+      case 401:
+        status = HttpStatus.unauthorized;
+        break;
+      case 404:
+        status = HttpStatus.notFound;
+        break;
+      case 429:
+        status = HttpStatus.tooManyRequests;
+        break;
+      default:
+        status = HttpStatus.internalServerError;
+    }
+
+    HttpMethod method;
+    switch (response.request!.method.toUpperCase()) {
+      case 'GET':
+        method = HttpMethod.get;
+        break;
+      case 'POST':
+        method = HttpMethod.post;
+        break;
+      case 'DELETE':
+        method = HttpMethod.delete;
+        break;
+      case 'PUT':
+        method = HttpMethod.put;
+        break;
+      default:
+        method = HttpMethod.get;
+    }
+
     return TwitterResponse<D, M>(
       headers: headers,
       rateLimit: rateLimit,
-      status: response.statusCode,
-      request: TwitterResponse(
+      status: status,
+      request: TwitterRequest(
         url: Uri.parse(response.request!.url.toString()),
-        method: response.request!.method.toLowerCase(),
+        method: method,
       ),
       data: fromJsonData(jsonBody['data'] ?? jsonBody),
       meta: fromJsonMeta != null && jsonBody['meta'] != null
