@@ -144,40 +144,40 @@ class OAuth1Client implements Client {
     HttpStatus status;
     switch (response.statusCode) {
       case 200:
-        status = HttpStatus.OK;
+        status = HttpStatus.ok;
         break;
       case 201:
-        status = HttpStatus.CREATED;
+        status = HttpStatus.created;
         break;
       case 401:
-        status = HttpStatus.UNAUTHORIZED;
+        status = HttpStatus.unauthorized;
         break;
       case 404:
-        status = HttpStatus.NOT_FOUND;
+        status = HttpStatus.notFound;
         break;
       case 429:
-        status = HttpStatus.TOO_MANY_REQUESTS;
+        status = HttpStatus.tooManyRequests;
         break;
       default:
-        status = HttpStatus.INTERNAL_SERVER_ERROR;
+        status = HttpStatus.internalServerError;
     }
 
     HttpMethod method;
     switch (response.request!.method.toUpperCase()) {
       case 'GET':
-        method = HttpMethod.GET;
+        method = HttpMethod.get;
         break;
       case 'POST':
-        method = HttpMethod.POST;
+        method = HttpMethod.post;
         break;
       case 'DELETE':
-        method = HttpMethod.DELETE;
+        method = HttpMethod.delete;
         break;
       case 'PUT':
-        method = HttpMethod.PUT;
+        method = HttpMethod.put;
         break;
       default:
-        method = HttpMethod.GET;
+        method = HttpMethod.get;
     }
 
     return TwitterResponse<D, M>(
