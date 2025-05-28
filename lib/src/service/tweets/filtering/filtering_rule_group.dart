@@ -1,110 +1,93 @@
-// Copyright 2022 Kato Shinya. All rights reserved.
-// Redistribution and use in source and binary forms, with or without
-// modification, are permitted provided the conditions.
+//import 'dart:convert';
+//import 'package:twitter_api_v2/src/core/client/client_context.dart';
+import 'package:twitter_api_v2/src/core/client/user_context.dart';
+import 'package:twitter_api_v2/src/service/base_service.dart';
+import 'package:twitter_api_v2/src/service/response/twitter_response.dart';
+import 'package:twitter_api_v2/src/service/tweets/filtering_rule_data.dart';
 
-// 🌎 Project imports:
-import 'channel/entry_channel.dart';
-import 'channel/logical_channel.dart';
-import 'channel/post_logical_channel.dart';
-import 'operator/conjunction/singleton/has_operator.dart';
-import 'operator/conjunction/singleton/is_operator.dart';
-import 'operator/conjunction/singleton/sample.dart';
-import 'operator/conjunction/singleton/singleton_operator.dart';
-import 'operator/filtering_rule_operator.dart';
-import 'operator/logical/and.dart';
-import 'operator/logical/group.dart';
-import 'operator/logical/logical_operator.dart';
-import 'operator/operator.dart';
+class FilteringRuleGroup extends BaseService {
+  FilteringRuleGroup({required super.context});
 
-class FilteringRuleGroup {
-  /// Returns the new instance of [FilteringRuleGroup].
-  FilteringRuleGroup([int? samplePercent])
-      : _sample = samplePercent != null ? Sample(samplePercent) : null {
-    _entryChannel = EntryChannel(this);
-    _logicalChannel = LogicalChannel(this);
-    _postLogicalChannel = PostLogicalChannel(this);
+  Future<TwitterResponse<List<FilteringRuleData>, void>> lookup() async {
+    return await super.get(
+      context,
+      '/2/tweets/search/stream/rules',
+      fromJsonData: (json) => (json['data'] as List? ?? [])
+          .map((e) => FilteringRuleData.fromJson(e))
+          .toList(),
+      userContext: UserContext.oauth2OrOAuth1,
+    );
   }
 
-  final _singletonError = UnsupportedError('''
-The same singleton operators cannot be used within a single group.
-
-If you want to use multiple combinations of the same singleton operator,
-use in nested groups or outside of groups.
-
-❌ You Should Not
-#TwitterDev has:retweet OR #TwitterAPI -has:retweet
-
-✅ Instead, You Should
-(#TwitterDev has:retweet) OR (#TwitterAPI -has:retweet)
-            ''');
-
-  /// The operators
-  final _operators = <FilteringRuleOperator>[];
-
-  /// The sample
-  final Sample? _sample;
-
-  late EntryChannel _entryChannel;
-  late LogicalChannel _logicalChannel;
-  late PostLogicalChannel _postLogicalChannel;
-
-  /// Returns the entry channel.
-  EntryChannel get entryChannel => _entryChannel;
-
-  LogicalChannel appendOperator(
-    final Operator operator,
-  ) {
-    _operators.add(operator);
-
-    return _logicalChannel;
-  }
-
-  LogicalChannel appendSingletonOperator(
-    final SingletonOperator operator,
-  ) {
-    for (final $operator in _operators) {
-      if (($operator is IsOperator && operator is IsOperator) ||
-          ($operator is HasOperator && operator is HasOperator)) {
-        if (($operator as dynamic).type == (operator as dynamic).type) {
-          throw _singletonError;
+  Future<TwitterResponse<List<FilteringRuleData>, void>> create({
+    required String value,
+    String? tag,
+  }) async {
+    final body = {
+      'add': [
+        {
+          'value': value,
+          if (tag != null) 'tag': tag,
         }
+      ]
+    };
+
+    return await super.post(
+      context,
+      '/2/tweets/search/stream/rules',
+      fromJsonData: (json) => (json['data'] as List? ?? [])
+          .map((e) => FilteringRuleData.fromJson(e))
+          .toList(),
+      body: body,
+      userContext: UserContext.oauth2OrOAuth1,
+    );
+  }
+
+  Future<TwitterResponse<List<FilteringRuleData>, void>> deleteRules({
+    required List<String> ruleIds,
+  }) async {
+    final body = {
+      'delete': {
+        'ids': ruleIds,
       }
-    }
+    };
 
-    _operators.add(operator);
-
-    return _logicalChannel;
+    return await super.post(
+      context,
+      '/2/tweets/search/stream/rules',
+      fromJsonData: (json) => (json['data'] as List? ?? [])
+          .map((e) => FilteringRuleData.fromJson(e))
+          .toList(),
+      body: body,
+      userContext: UserContext.oauth2OrOAuth1,
+    );
   }
 
-  PostLogicalChannel appendLogicalOperator(
-    final LogicalOperator operator,
-  ) {
-    _operators.add(operator);
+  Future<TwitterResponse<List<FilteringRuleData>, void>> update({
+    required String value,
+    String? tag,
+    required List<String> ruleIds,
+  }) async {
+    final body = {
+      'add': [
+        {
+          'value': value,
+          if (tag != null) 'tag': tag,
+        }
+      ],
+      'delete': {
+        'ids': ruleIds,
+      }
+    };
 
-    return _postLogicalChannel;
-  }
-
-  LogicalChannel appendGroup(
-    final Group group,
-  ) {
-    _operators.add(group);
-
-    return _logicalChannel;
-  }
-
-  String build() {
-    if (_sample != null) {
-      //! Add sampling rule
-      appendLogicalOperator(And());
-      appendSingletonOperator(_sample);
-    }
-
-    final buffer = StringBuffer();
-
-    for (final operator in _operators) {
-      buffer.write(operator.toString());
-    }
-
-    return buffer.toString();
+    return await super.post(
+      context,
+      '/2/tweets/search/stream/rules',
+      fromJsonData: (json) => (json['data'] as List? ?? [])
+          .map((e) => FilteringRuleData.fromJson(e))
+          .toList(),
+      body: body,
+      userContext: UserContext.oauth2OrOAuth1,
+    );
   }
 }
