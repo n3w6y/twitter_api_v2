@@ -24,12 +24,12 @@ void main() {
     tweetsService = TweetsService(context: context);
     reset(context); // Clear mock state
 
-    // Broad mock to catch any post call
+    // Mock context.post to catch calls
     when(context.post(
-      any,
+      argThat(isA<Uri>()),
       headers: anyNamed('headers'),
       body: anyNamed('body'),
-      fromJsonData: anyNamed('fromJsonData'),
+      fromJsonData: TweetData.fromJson,
     )).thenAnswer((_) async => TwitterResponse<TweetData, void>(
           headers: {'content-type': 'application/json'},
           status: HttpStatus.ok,
@@ -58,7 +58,7 @@ void main() {
       verify(context.post(
         Uri.https('api.twitter.com', '/2/tweets'),
         headers: anyNamed('headers'),
-        body: anyNamed('body'),
+        body: {'text': 'test'},
         fromJsonData: TweetData.fromJson,
       )).called(1);
     });
@@ -73,7 +73,7 @@ void main() {
       verify(context.post(
         Uri.https('api.twitter.com', '/2/tweets'),
         headers: anyNamed('headers'),
-        body: anyNamed('body'),
+        body: {'text': 'test'},
         fromJsonData: TweetData.fromJson,
       )).called(1);
     });
@@ -88,7 +88,7 @@ void main() {
       verify(context.post(
         Uri.https('api.twitter.com', '/2/tweets'),
         headers: anyNamed('headers'),
-        body: anyNamed('body'),
+        body: {'text': 'test'},
         fromJsonData: TweetData.fromJson,
       )).called(1);
     });
