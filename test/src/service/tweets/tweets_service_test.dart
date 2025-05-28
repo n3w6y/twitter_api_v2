@@ -54,7 +54,7 @@ void main() {
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: {'content-type': 'application/json'},
         body: null,
-        fromJsonData: anyNamed('fromJsonData'),
+        fromJsonData: any,
       )).thenAnswer((invocation) async {
         print(
             'Mock matched (first call): ${invocation.positionalArguments}, ${invocation.namedArguments}');
@@ -121,7 +121,7 @@ void main() {
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: {'content-type': 'application/json'},
         body: null,
-        fromJsonData: anyNamed('fromJsonData'),
+        fromJsonData: any,
       )).thenAnswer((invocation) async {
         print(
             'Mock matched (first call): ${invocation.positionalArguments}, ${invocation.namedArguments}');
@@ -188,7 +188,7 @@ void main() {
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: {'content-type': 'application/json'},
         body: null,
-        fromJsonData: anyNamed('fromJsonData'),
+        fromJsonData: any,
       )).thenAnswer((invocation) async {
         print(
             'Mock matched (first call): ${invocation.positionalArguments}, ${invocation.namedArguments}');
