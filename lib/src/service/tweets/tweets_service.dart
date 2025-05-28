@@ -117,6 +117,7 @@ class _TweetsService extends BaseService implements TweetsService {
     );
   }
 
+  @override
   Future<TwitterResponse<bool, void>> deleteTweet({
     required String tweetId,
   }) async {
