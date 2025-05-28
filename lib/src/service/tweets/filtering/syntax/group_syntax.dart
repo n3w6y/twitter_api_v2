@@ -1,26 +1,35 @@
-// Copyright 2022 Kato Shinya. All rights reserved.
-// Redistribution and use in source and binary forms, with or without
-// modification, are permitted provided the conditions.
+import 'package:twitter_api_v2/src/core/client/client_context.dart';
+import 'package:twitter_api_v2/src/service/tweets/filtering/filtering_rule.dart';
+import 'package:twitter_api_v2/src/service/tweets/filtering/syntax/filtering_rule_syntax.dart';
+import 'package:twitter_api_v2/src/service/tweets/filtering/syntax/logical_syntax.dart';
 
-// 🌎 Project imports:
-import '../channel/logical_channel.dart';
-import '../filtering_rule_group.dart';
-import '../operation/logical_operation.dart';
-import 'conclusion.dart';
-import 'filtering_rule_syntax.dart';
+class GroupSyntax extends FilteringRuleSyntax {
+  GroupSyntax({super.initialRule = ''}) : _localRule = initialRule;
 
-/// The object representing the syntax of a group operator.
-abstract class GroupSyntax implements FilteringRuleSyntax {
-  const GroupSyntax(this._buffer);
+  String _localRule;
 
-  /// The logical operation
-  static const _logicalOperation = LogicalOperation();
+  void _append(String value) {
+    final newRule = _localRule.isEmpty ? value : '$_localRule $value';
+    _localRule = newRule;
+  }
 
-  /// The buffer
-  final FilteringRuleGroup _buffer;
+  LogicalSyntax group({
+    required String value,
+    String? tag,
+  }) {
+    _append('($value)');
+    return LogicalSyntax(initialRule: _localRule);
+  }
 
-  /// Add grouped rules.
-  LogicalChannel group(final Conclusion conclusion) => _buffer.appendGroup(
-        _logicalOperation.createGroup(conclusion),
-      );
+  @override
+  String build() => _localRule.trim();
+
+  @override
+  FilteringRule buildRule({required ClientContext context, String? tag}) {
+    return FilteringRule(
+      context: context,
+      value: build(),
+      tag: tag,
+    );
+  }
 }
