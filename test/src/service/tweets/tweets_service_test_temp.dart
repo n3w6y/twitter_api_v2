@@ -48,7 +48,8 @@ void main() {
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: {'content-type': 'application/json'},
         body: jsonEncode({'text': 'test'}),
-        fromJsonData: (Map<String, dynamic> json) => TweetData.fromJson(json),
+        // ignore: unnecessary_cast
+        fromJsonData: TweetData.fromJson,
         fromJsonMeta: null,
       )).thenAnswer((_) async {
         print('Mock matched: create call');
