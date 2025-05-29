@@ -49,7 +49,7 @@ void main() {
         headers: {'content-type': 'application/json'},
         body: jsonEncode({'text': 'test'}),
         // ignore: unnecessary_cast
-        fromJsonData: TweetData.fromJson,
+        fromJsonData: (Map<String, dynamic> json) => TweetData.fromJson(json),
         fromJsonMeta: null,
       )).thenAnswer((_) async {
         print('Mock matched: create call');
