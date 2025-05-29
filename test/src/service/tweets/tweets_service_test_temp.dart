@@ -4,6 +4,7 @@
 // license are met. See https://github.com/twitter-dart/twitter-api-v2
 // for details.
 
+import 'dart:convert';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 import 'package:twitter_api_v2/src/core/client/client_context.dart';
@@ -46,7 +47,7 @@ void main() {
       when(context.post(
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: {'content-type': 'application/json'},
-        body: {'text': 'test'},
+        body: jsonEncode({'text': 'test'}),
         fromJsonData: TweetData.fromJson,
         fromJsonMeta: null,
       )).thenAnswer((_) async {
@@ -80,7 +81,7 @@ void main() {
       verify(context.post(
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: {'content-type': 'application/json'},
-        body: {'text': 'test'},
+        body: jsonEncode({'text': 'test'}),
         fromJsonData: TweetData.fromJson,
         fromJsonMeta: null,
       )).called(1);
@@ -88,5 +89,4 @@ void main() {
   });
 }
 // Note: This code is a temporary test file for the TweetsService in the Twitter API V2 package.
-// It tests the `create` method, as `post` and `tweet` methods are not defined in the updated TweetsService.
-// It is not intended for production use and should be replaced with proper tests.
+// It tests the `create` method, as `post` and `tweet` methods are not defined in
