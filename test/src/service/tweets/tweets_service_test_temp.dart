@@ -7,6 +7,10 @@
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 import 'package:twitter_api_v2/src/core/client/client_context.dart';
+import 'package:twitter_api_v2/src/core/http_method.dart';
+import 'package:twitter_api_v2/src/core/https_status.dart';
+import 'package:twitter_api_v2/src/service/common/rate_limit.dart';
+import 'package:twitter_api_v2/src/service/response/twitter_request.dart';
 import 'package:twitter_api_v2/src/service/tweets/tweet_data.dart';
 import 'package:twitter_api_v2/src/service/tweets/tweets_service.dart';
 import 'package:twitter_api_v2/src/service/response/twitter_response.dart';
@@ -47,9 +51,9 @@ void main() {
         print('Mock matched: create call');
         return TwitterResponse<TweetData, void>(
           headers: {'content-type': 'application/json'},
-          status: 200,
+          status: HttpStatus.ok,
           request: TwitterRequest(
-            method: 'POST',
+            method: HttpMethod.post,
             url: Uri.parse('https://api.twitter.com/2/tweets'),
           ),
           rateLimit: RateLimit(
@@ -78,93 +82,8 @@ void main() {
         fromJsonData: (Map<String, dynamic> json) => TweetData.fromJson(json),
       )).called(1);
     });
-
-    test('post', () async {
-      // Mock the expected POST call
-      when(context.post(
-        Uri.parse('https://api.twitter.com/2/tweets'),
-        headers: {'content-type': 'application/json'},
-        body: {'text': 'test'},
-        fromJsonData: (Map<String, dynamic> json) => TweetData.fromJson(json),
-      )).thenAnswer((_) async {
-        print('Mock matched: post call');
-        return TwitterResponse<TweetData, void>(
-          headers: {'content-type': 'application/json'},
-          status: 200,
-          request: TwitterRequest(
-            method: 'POST',
-            url: Uri.parse('https://api.twitter.com/2/tweets'),
-          ),
-          rateLimit: RateLimit(
-            limitCount: 100,
-            remainingCount: 99,
-            resetAt: DateTime.now().add(Duration(minutes: 15)),
-          ),
-          data: TweetData.fromJson({'id': '123', 'text': 'test'}),
-          meta: null,
-        );
-      });
-
-      // Call the post method
-      final response = await tweetsService.post(text: 'test');
-
-      // Verify the response
-      expect(response, isA<TwitterResponse<TweetData, void>>());
-      expect(response.data.id, '123');
-      expect(response.data.text, 'test');
-
-      // Verify the exact POST call
-      verify(context.post(
-        Uri.parse('https://api.twitter.com/2/tweets'),
-        headers: {'content-type': 'application/json'},
-        body: {'text': 'test'},
-        fromJsonData: (Map<String, dynamic> json) => TweetData.fromJson(json),
-      )).called(1);
-    });
-
-    test('tweet', () async {
-      // Mock the expected POST call
-      when(context.post(
-        Uri.parse('https://api.twitter.com/2/tweets'),
-        headers: {'content-type': 'application/json'},
-        body: {'text': 'test'},
-        fromJsonData: (Map<String, dynamic> json) => TweetData.fromJson(json),
-      )).thenAnswer((_) async {
-        print('Mock matched: tweet call');
-        return TwitterResponse<TweetData, void>(
-          headers: {'content-type': 'application/json'},
-          status: 200,
-          request: TwitterRequest(
-            method: 'POST',
-            url: Uri.parse('https://api.twitter.com/2/tweets'),
-          ),
-          rateLimit: RateLimit(
-            limitCount: 100,
-            remainingCount: 99,
-            resetAt: DateTime.now().add(Duration(minutes: 15)),
-          ),
-          data: TweetData.fromJson({'id': '123', 'text': 'test'}),
-          meta: null,
-        );
-      });
-
-      // Call the tweet method
-      final response = await tweetsService.tweet(text: 'test');
-
-      // Verify the response
-      expect(response, isA<TwitterResponse<TweetData, void>>());
-      expect(response.data.id, '123');
-      expect(response.data.text, 'test');
-
-      // Verify the exact POST call
-      verify(context.post(
-        Uri.parse('https://api.twitter.com/2/tweets'),
-        headers: {'content-type': 'application/json'},
-        body: {'text': 'test'},
-        fromJsonData: (Map<String, dynamic> json) => TweetData.fromJson(json),
-      )).called(1);
-    });
   });
 }
 // Note: This code is a temporary test file for the TweetsService in the Twitter API V2 package.
+// It tests the `create` method, as `post` and `tweet` methods are not defined in the updated TweetsService.
 // It is not intended for production use and should be replaced with proper tests.
