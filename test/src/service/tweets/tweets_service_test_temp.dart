@@ -51,7 +51,7 @@ void main() {
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: null,
         body: jsonEncode({'text': 'test'}),
-        fromJsonData: (Map<String, dynamic> json) => TweetData.fromJson(json),
+        fromJsonData: TweetData.fromJson,
         fromJsonMeta: null,
       )).thenAnswer((_) async {
         print('Mock matched: POST call');
@@ -72,19 +72,6 @@ void main() {
         );
       });
 
-      // Fallback mock for unmatched calls
-      when(context.post(
-        Uri.parse('https://api.twitter.com/2/tweets'),
-        headers: null,
-        body: jsonEncode({'text': 'test'}),
-        fromJsonData: (Map<String, dynamic> json) => TweetData.fromJson(json),
-        fromJsonMeta: null,
-      )).thenAnswer((invocation) async {
-        print(
-            'Fallback mock triggered: uri=${invocation.positionalArguments[0]}, headers=${invocation.namedArguments[#headers]}, body=${invocation.namedArguments[#body]}, fromJsonData=${invocation.namedArguments[#fromJsonData]}, fromJsonMeta=${invocation.namedArguments[#fromJsonMeta]}');
-        throw UnimplementedError('Fallback mock called');
-      });
-
       // Call the create method
       final response = await tweetsService.create(text: 'test');
 
@@ -98,7 +85,7 @@ void main() {
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: null,
         body: jsonEncode({'text': 'test'}),
-        fromJsonData: (Map<String, dynamic> json) => TweetData.fromJson(json),
+        fromJsonData: TweetData.fromJson,
         fromJsonMeta: null,
       )).called(1);
     });
