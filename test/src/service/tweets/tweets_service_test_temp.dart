@@ -25,13 +25,12 @@ class MockClientContext extends Mock implements ClientContext {
     required D Function(Map<String, dynamic>) fromJsonData,
     M Function(Map<String, dynamic>)? fromJsonMeta,
   }) async {
-    D normalizedFromJsonData(Map<String, dynamic> json) => fromJsonData(json);
     print(
-        'Actual post call: uri=$uri, headers=$headers, body=$body, fromJsonData=$fromJsonData, normalizedFromJsonData=$normalizedFromJsonData, fromJsonMeta=$fromJsonMeta, uriType=${uri.runtimeType}, headersType=${headers.runtimeType}, bodyType=${body.runtimeType}, fromJsonDataType=${fromJsonData.runtimeType}, normalizedFromJsonDataType=${normalizedFromJsonData.runtimeType}, isTweetDataFromJson=${fromJsonData == TweetData.fromJson}, uriMatches=${uri == Uri.parse('https://api.twitter.com/2/tweets')}, headersMatches=${headers == null}, bodyMatches=${body == jsonEncode({
+        'Actual post call: uri=$uri, headers=$headers, body=$body, fromJsonData=$fromJsonData, fromJsonMeta=$fromJsonMeta, uriType=${uri.runtimeType}, headersType=${headers.runtimeType}, bodyType=${body.runtimeType}, fromJsonDataType=${fromJsonData.runtimeType}, isTweetDataFromJson=${fromJsonData == TweetData.fromJson}, uriMatches=${uri == Uri.parse('https://api.twitter.com/2/tweets')}, headersMatches=${headers == null}, bodyMatches=${body == jsonEncode({
                   'text': 'test'
                 })}');
     throw UnimplementedError(
-        'Unmocked post call: uri=$uri, headers=$headers, body=$body, fromJsonData=$normalizedFromJsonData, fromJsonMeta=$fromJsonMeta');
+        'Unmocked post call: uri=$uri, headers=$headers, body=$body, fromJsonData=$fromJsonData, fromJsonMeta=$fromJsonMeta');
   }
 }
 
@@ -48,11 +47,12 @@ void main() {
   group('TweetsService', () {
     test('create', () async {
       // Mock the expected POST call
-      when(context.post(
+      when(context.post<TweetData, void>(
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: null,
         body: jsonEncode({'text': 'test'}),
-        fromJsonData: TweetData.fromJson,
+        fromJsonData:
+            TweetData.fromJson as TweetData Function(Map<String, dynamic>),
         fromJsonMeta: null,
       )).thenAnswer((_) async {
         print('Mock matched: POST call');
@@ -82,11 +82,12 @@ void main() {
       expect(response.data.text, 'test');
 
       // Verify the exact POST call
-      verify(context.post(
+      verify(context.post<TweetData, void>(
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: null,
         body: jsonEncode({'text': 'test'}),
-        fromJsonData: TweetData.fromJson,
+        fromJsonData:
+            TweetData.fromJson as TweetData Function(Map<String, dynamic>),
         fromJsonMeta: null,
       )).called(1);
     });
