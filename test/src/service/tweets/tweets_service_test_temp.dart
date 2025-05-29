@@ -25,8 +25,7 @@ class MockClientContext extends Mock implements ClientContext {
     required D Function(Map<String, dynamic>) fromJsonData,
     M Function(Map<String, dynamic>)? fromJsonMeta,
   }) async {
-    final TweetData Function(Map<String, dynamic>) castedFromJsonData =
-        (Map<String, dynamic> json) => fromJsonData(json);
+    D castedFromJsonData(Map<String, dynamic> json) => fromJsonData(json);
     print(
         'Actual post call: uri=$uri, headers=$headers, body=$body, fromJsonData=$castedFromJsonData, fromJsonMeta=$fromJsonMeta, isTweetDataFromJson=${castedFromJsonData == TweetData.fromJson}');
     throw UnimplementedError(
@@ -51,9 +50,7 @@ void main() {
         headers: {'content-type': 'application/json'},
         body: jsonEncode({'text': 'test'}),
         fromJsonData: argThat(
-            (f) =>
-                f is Function && f({'id': '123', 'text': 'test'}) is TweetData,
-            named: 'fromJsonData'),
+           fromJsonData: (Map<String, dynamic> json) => TweetData.fromJson(json),
         fromJsonMeta: null,
       )).thenAnswer((_) async {
         print('Mock matched: create call');
@@ -69,7 +66,7 @@ void main() {
             remainingCount: 99,
             resetAt: DateTime.now().add(Duration(minutes: 15)),
           ),
-          data: TweetData.fromJson({'id': '123', 'text': 'test'}),
+          fromJsonData: (Map<String, dynamic> json) => TweetData.fromJson(json),
           meta: null,
         );
       });
