@@ -26,12 +26,9 @@ class MockClientContext extends Mock implements ClientContext {
     M Function(Map<String, dynamic>)? fromJsonMeta,
   }) async {
     print(
-        'Actual post call: uri=$uri, headers=$headers, headersKeys=${headers?.keys}, headersValues=${headers?.values}, body=$body, fromJsonData=$fromJsonData, fromJsonMeta=$fromJsonMeta, uriType=${uri.runtimeType}, headersType=${headers.runtimeType}, bodyType=${body.runtimeType}, fromJsonDataType=${fromJsonData.runtimeType}, isTweetDataFromJson=${fromJsonData == TweetData.fromJson}, uriMatches=${uri == Uri.parse('https://api.twitter.com/2/tweets')}, headersMatches=${headers == null}, bodyMatches=${body == jsonEncode({
+        'Actual post call: uri=$uri, headers=$headers, body=$body, fromJsonData=$fromJsonData, fromJsonMeta=$fromJsonMeta, uriType=${uri.runtimeType}, headersType=${headers.runtimeType}, bodyType=${body.runtimeType}, fromJsonDataType=${fromJsonData.runtimeType}, isTweetDataFromJson=${fromJsonData == TweetData.fromJson}, uriMatches=${uri == Uri.parse('https://api.twitter.com/2/tweets')}, headersMatches=${headers == null}, bodyMatches=${body == jsonEncode({
                   'text': 'test'
-                })}, fromJsonDataMatches=${fromJsonData({
-          'id': '123',
-          'text': 'test'
-        }) is TweetData}');
+                })}');
     throw UnimplementedError(
         'Unmocked post call: uri=$uri, headers=$headers, body=$body, fromJsonData=$fromJsonData, fromJsonMeta=$fromJsonMeta');
   }
@@ -43,6 +40,7 @@ void main() {
 
   setUp(() {
     context = MockClientContext();
+    reset(context); // Reset mock state to clear any prior stubs
     tweetsService = TweetsService(context: context);
   });
 
@@ -56,7 +54,7 @@ void main() {
         fromJsonData: (Map<String, dynamic> json) => TweetData.fromJson(json),
         fromJsonMeta: null,
       )).thenAnswer((_) async {
-        print('Mock matched: create call');
+        print('Mock matched: POST call');
         return TwitterResponse<TweetData, void>(
           headers: {'Content-Type': 'application/json'},
           status: HttpStatus.ok,
@@ -79,7 +77,7 @@ void main() {
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: null,
         body: jsonEncode({'text': 'test'}),
-        fromJsonData: anyNamed('fromJsonData'),
+        fromJsonData: (Map<String, dynamic> json) => TweetData.fromJson(json),
         fromJsonMeta: null,
       )).thenAnswer((invocation) async {
         print(
