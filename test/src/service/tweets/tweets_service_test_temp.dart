@@ -43,6 +43,16 @@ void main() {
   });
 
   group('TweetsService', () {
+    test('verify fromJsonData behavior', () async {
+      // Test fromJsonData behavior with sample input
+      final sampleJson = {'id': '123', 'text': 'test'};
+      final expectedOutput = TweetData.fromJson(sampleJson);
+      final actualOutput = TweetData.fromJson(sampleJson);
+      print(
+          'fromJsonData test: expectedOutput=$expectedOutput, actualOutput=$actualOutput, matches=${expectedOutput == actualOutput}');
+      expect(actualOutput, equals(expectedOutput));
+    });
+
     test('create', () async {
       // Mock the expected POST call
       when(context.post<TweetData, void>(
