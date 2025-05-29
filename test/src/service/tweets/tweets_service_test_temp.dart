@@ -11,18 +11,6 @@ import 'package:twitter_api_v2/src/service/tweets/tweet_data.dart';
 import 'package:twitter_api_v2/src/service/tweets/tweets_service.dart';
 import 'package:twitter_api_v2/src/service/tweets/tweets_service_extension.dart';
 
-// Custom matcher for fromJsonData
-class FromJsonDataMatcher extends Matcher {
-  @override
-  bool matches(item, Map matchState) {
-    return item is Function && item is TweetData Function(Map<String, dynamic>);
-  }
-
-  @override
-  Description describe(Description description) => description
-      .add('is a function returning TweetData from Map<String, dynamic>');
-}
-
 class MockClient extends Mock implements http.Client {}
 
 class MockClientContext extends Mock implements ClientContext {
@@ -66,7 +54,7 @@ void main() {
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: {'content-type': 'application/json'},
         body: null,
-        fromJsonData: anyThat(FromJsonDataMatcher()),
+        fromJsonData: argThat(isA<Function>()),
       )).thenAnswer((invocation) async {
         print(
             'Mock matched (first call): ${invocation.positionalArguments}, ${invocation.namedArguments}');
@@ -92,7 +80,7 @@ void main() {
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: null,
         body: {'text': 'test'},
-        fromJsonData: anyThat(FromJsonDataMatcher()),
+        fromJsonData: argThat(isA<Function>()),
       )).thenAnswer((invocation) async {
         print(
             'Mock matched (main call): ${invocation.positionalArguments}, ${invocation.namedArguments}');
@@ -115,10 +103,10 @@ void main() {
 
       // Fallback mock for unmatched calls
       when(context.post(
-        any,
+        argThat(isA<Uri>()),
         headers: anyNamed('headers'),
         body: anyNamed('body'),
-        fromJsonData: any,
+        fromJsonData: argThat(isA<Function>()),
       )).thenAnswer((invocation) async {
         print(
             'Mock matched (fallback): ${invocation.positionalArguments}, ${invocation.namedArguments}');
@@ -146,7 +134,7 @@ void main() {
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: {'content-type': 'application/json'},
         body: null,
-        fromJsonData: anyThat(FromJsonDataMatcher()),
+        fromJsonData: argThat(isA<Function>()),
       )).thenAnswer((invocation) async {
         print(
             'Mock matched (first call): ${invocation.positionalArguments}, ${invocation.namedArguments}');
@@ -172,7 +160,7 @@ void main() {
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: null,
         body: {'text': 'test'},
-        fromJsonData: anyThat(FromJsonDataMatcher()),
+        fromJsonData: argThat(isA<Function>()),
       )).thenAnswer((invocation) async {
         print(
             'Mock matched (main call): ${invocation.positionalArguments}, ${invocation.namedArguments}');
@@ -195,10 +183,10 @@ void main() {
 
       // Fallback mock for unmatched calls
       when(context.post(
-        any,
+        argThat(isA<Uri>()),
         headers: anyNamed('headers'),
         body: anyNamed('body'),
-        fromJsonData: any,
+        fromJsonData: argThat(isA<Function>()),
       )).thenAnswer((invocation) async {
         print(
             'Mock matched (fallback): ${invocation.positionalArguments}, ${invocation.namedArguments}');
@@ -226,7 +214,7 @@ void main() {
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: {'content-type': 'application/json'},
         body: null,
-        fromJsonData: anyThat(FromJsonDataMatcher()),
+        fromJsonData: argThat(isA<Function>()),
       )).thenAnswer((invocation) async {
         print(
             'Mock matched (first call): ${invocation.positionalArguments}, ${invocation.namedArguments}');
@@ -252,7 +240,7 @@ void main() {
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: null,
         body: {'text': 'test'},
-        fromJsonData: anyThat(FromJsonDataMatcher()),
+        fromJsonData: argThat(isA<Function>()),
       )).thenAnswer((invocation) async {
         print(
             'Mock matched (main call): ${invocation.positionalArguments}, ${invocation.namedArguments}');
@@ -275,10 +263,10 @@ void main() {
 
       // Fallback mock for unmatched calls
       when(context.post(
-        any,
+        argThat(isA<Uri>()),
         headers: anyNamed('headers'),
         body: anyNamed('body'),
-        fromJsonData: any,
+        fromJsonData: argThat(isA<Function>()),
       )).thenAnswer((invocation) async {
         print(
             'Mock matched (fallback): ${invocation.positionalArguments}, ${invocation.namedArguments}');

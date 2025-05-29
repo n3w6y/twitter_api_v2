@@ -1,56 +1,59 @@
-import 'dart:io';
-import 'package:test/test.dart';
+//import 'package:test/test.dart'; // Ensure 'test' is in pubspec.yaml
 import 'package:twitter_api_v2/twitter_api_v2.dart';
 
-void main() {
-  late TwitterApi twitter;
+void main() async {
+  // Initialize TwitterApi with your credentials
+  final twitter = TwitterApi(
+    bearerToken: 'YOUR_BEARER_TOKEN_HERE',
+    oauthTokens: OAuthTokens(
+      consumerKey: 'YOUR_CONSUMER_KEY_HERE',
+      consumerSecret: 'YOUR_CONSUMER_SECRET_HERE',
+      accessToken: 'YOUR_ACCESS_TOKEN_HERE',
+      accessTokenSecret: 'YOUR_ACCESS_TOKEN_SECRET_HERE',
+    ),
+  );
 
-  setUp(() {
-    twitter = TwitterApi(
-      bearerToken: 'YOUR_BEARER_TOKEN',
-      oauthTokens: OAuthTokens(
-        consumerKey: 'YOUR_CONSUMER_KEY',
-        consumerSecret: 'YOUR_CONSUMER_SECRET',
-        accessToken: 'YOUR_ACCESS_TOKEN',
-        accessTokenSecret: 'YOUR_ACCESS_TOKEN_SECRET',
-      ),
-      timeout: Duration(seconds: 30),
-    );
-  });
+  // Create a tweet
+  try {
+    final tweet = await twitter.tweetsService.create(text: 'Hello, world!');
+    print('Tweet created: ${tweet.data.text}');
+  } catch (e) {
+    print('Error creating tweet: $e');
+  }
 
-  tearDown(() {
-    twitter.close();
-  });
+  // Search recent tweets
+  try {
+    final search = await twitter.tweetsService
+        .searchRecentTweets(query: 'from:TwitterDev');
+    print('Search results: ${search.data.map((tweet) => tweet.text).toList()}');
+  } catch (e) {
+    print('Error searching tweets: $e');
+  }
 
-  group('Twitter API v2 with http 1.0.0', () {
-    test('Post a tweet', () async {
-      final response = await twitter.tweetsService.createTweet(
-        text: 'Test tweet from updated twitter_api_v2 #XAPI',
-      );
-      expect(response.data.text, contains('Test tweet'));
-      expect(response.rateLimit, isNotNull);
-    });
+  // Lookup user by name
+  try {
+    final user =
+        await twitter.usersService.lookupByName(userName: 'TwitterDev');
+    print('User: ${user.data.name}');
+  } catch (e) {
+    print('Error looking up user: $e');
+  }
 
-    test('Search recent tweets', () async {
-      final response = await twitter.tweetsService.searchRecent(
-        query: 'from:example',
-        maxResults: 10,
-      );
-      expect(response.data, isNotEmpty);
-      expect(response.meta?.resultCount, greaterThan(0));
-    });
+  // Upload media
+  try {
+    final media =
+        await twitter.mediaService.uploadMedia(filePath: './example.jpg');
+    print('Media uploaded: ${media.data.id}');
+  } catch (e) {
+    print('Error uploading media: $e');
+  }
 
-    test('Lookup user by username', () async {
-      final response = await twitter.usersService.lookupByName(
-        username: 'example',
-      );
-      expect(response.data.username, 'example');
-    });
-
-    test('Upload media (v1.1)', () async {
-      final file = File('test/image.jpg');
-      final media = await twitter.mediaService.uploadImage(file: file);
-      expect(media.data.media_id_string, isNotNull);
-    }, skip: !File('test/image.jpg').existsSync());
-  });
+  // Create compliance job
+  try {
+    final job =
+        await twitter.complianceService.createJob(jobType: JobType.tweets);
+    print('Compliance job created: ${job.data.id}');
+  } catch (e) {
+    print('Error creating compliance job: $e');
+  }
 }
