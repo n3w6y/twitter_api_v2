@@ -25,11 +25,12 @@ class MockClientContext extends Mock implements ClientContext {
     required D Function(Map<String, dynamic>) fromJsonData,
     M Function(Map<String, dynamic>)? fromJsonMeta,
   }) async {
-    D castedFromJsonData(Map<String, dynamic> json) => fromJsonData(json);
+    final D Function(Map<String, dynamic>) normalizedFromJsonData =
+        (Map<String, dynamic> json) => fromJsonData(json);
     print(
-        'Actual post call: uri=$uri, headers=$headers, body=$body, fromJsonData=$castedFromJsonData, fromJsonMeta=$fromJsonMeta, isTweetDataFromJson=${castedFromJsonData == TweetData.fromJson}');
+        'Actual post call: uri=$uri, headers=$headers, body=$body, fromJsonData=$normalizedFromJsonData, fromJsonMeta=$fromJsonMeta, fromJsonDataType=${fromJsonData.runtimeType}, isTweetDataFromJson=${fromJsonData == TweetData.fromJson}');
     throw UnimplementedError(
-        'Unmocked post call: uri=$uri, headers=$headers, body=$body, fromJsonData=$castedFromJsonData, fromJsonMeta=$fromJsonMeta');
+        'Unmocked post call: uri=$uri, headers=$headers, body=$body, fromJsonData=$normalizedFromJsonData, fromJsonMeta=$fromJsonMeta');
   }
 }
 
