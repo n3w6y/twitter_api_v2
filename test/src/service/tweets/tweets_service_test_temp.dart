@@ -25,7 +25,8 @@ class MockClientContext extends Mock implements ClientContext {
     required D Function(Map<String, dynamic>) fromJsonData,
     M Function(Map<String, dynamic>)? fromJsonMeta,
   }) async {
-    D castedFromJsonData(Map<String, dynamic> json) => fromJsonData(json);
+    final D Function(Map<String, dynamic>) castedFromJsonData =
+        (Map<String, dynamic> json) => fromJsonData(json);
     print(
         'Actual post call: uri=$uri, headers=$headers, body=$body, fromJsonData=$castedFromJsonData, fromJsonMeta=$fromJsonMeta, isTweetDataFromJson=${castedFromJsonData == TweetData.fromJson}');
     throw UnimplementedError(
@@ -49,8 +50,7 @@ void main() {
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: {'content-type': 'application/json'},
         body: jsonEncode({'text': 'test'}),
-        fromJsonData: argThat(
-           fromJsonData: (Map<String, dynamic> json) => TweetData.fromJson(json),
+        fromJsonData: (Map<String, dynamic> json) => TweetData.fromJson(json),
         fromJsonMeta: null,
       )).thenAnswer((_) async {
         print('Mock matched: create call');
@@ -66,13 +66,13 @@ void main() {
             remainingCount: 99,
             resetAt: DateTime.now().add(Duration(minutes: 15)),
           ),
-          fromJsonData: (Map<String, dynamic> json) => TweetData.fromJson(json),
+          data: TweetData.fromJson({'id': '123', 'text': 'test'}),
           meta: null,
         );
       });
 
       // Call the create method
-      final response = await tweetsService.create(text: 'test');
+      final response = await tweetsService.create('test');
 
       // Verify the response
       expect(response, isA<TwitterResponse<TweetData, void>>());
@@ -83,7 +83,7 @@ void main() {
       verify(context.post(
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: {'content-type': 'application/json'},
-        body: jsonEncode({'text': ''}),
+        body: jsonEncode({'text': 'test'}),
         fromJsonData: (Map<String, dynamic> json) => TweetData.fromJson(json),
         fromJsonMeta: null,
       )).called(1);
@@ -92,4 +92,4 @@ void main() {
 }
 // Note: This code is a temporary test file for the TweetsService in the Twitter API v2 package.
 // It tests the `create` method, as `post` and `tweet` methods are not defined in the updated TweetsService.
-// It is not intended for production use and should be replaced with proper tests. - force push
+// It is not intended for production use and should be replaced with proper tests.
