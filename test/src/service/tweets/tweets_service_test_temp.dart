@@ -25,12 +25,14 @@ class MockClientContext extends Mock implements ClientContext {
     required D Function(Map<String, dynamic>) fromJsonData,
     M Function(Map<String, dynamic>)? fromJsonMeta,
   }) async {
+    final D Function(Map<String, dynamic>) normalizedFromJsonData =
+        (Map<String, dynamic> json) => fromJsonData(json);
     print(
-        'Actual post call: uri=$uri, headers=$headers, body=$body, fromJsonData=$fromJsonData, fromJsonMeta=$fromJsonMeta, uriType=${uri.runtimeType}, headersType=${headers.runtimeType}, bodyType=${body.runtimeType}, fromJsonDataType=${fromJsonData.runtimeType}, isTweetDataFromJson=${fromJsonData == TweetData.fromJson}, uriMatches=${uri == Uri.parse('https://api.twitter.com/2/tweets')}, headersMatches=${headers == null}, bodyMatches=${body == jsonEncode({
+        'Actual post call: uri=$uri, headers=$headers, body=$body, fromJsonData=$fromJsonData, normalizedFromJsonData=$normalizedFromJsonData, fromJsonMeta=$fromJsonMeta, uriType=${uri.runtimeType}, headersType=${headers.runtimeType}, bodyType=${body.runtimeType}, fromJsonDataType=${fromJsonData.runtimeType}, normalizedFromJsonDataType=${normalizedFromJsonData.runtimeType}, isTweetDataFromJson=${fromJsonData == TweetData.fromJson}, uriMatches=${uri == Uri.parse('https://api.twitter.com/2/tweets')}, headersMatches=${headers == null}, bodyMatches=${body == jsonEncode({
                   'text': 'test'
                 })}');
     throw UnimplementedError(
-        'Unmocked post call: uri=$uri, headers=$headers, body=$body, fromJsonData=$fromJsonData, fromJsonMeta=$fromJsonMeta');
+        'Unmocked post call: uri=$uri, headers=$headers, body=$body, fromJsonData=$normalizedFromJsonData, fromJsonMeta=$fromJsonMeta');
   }
 }
 
