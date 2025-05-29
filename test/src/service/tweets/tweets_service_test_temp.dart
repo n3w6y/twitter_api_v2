@@ -48,7 +48,8 @@ void main() {
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: {'content-type': 'application/json'},
         body: jsonEncode({'text': 'test'}),
-        fromJsonData: TweetData.fromJson,
+        fromJsonData: argThat((func) => func == TweetData.fromJson,
+            named: 'fromJsonData'),
         fromJsonMeta: null,
       )).thenAnswer((_) async {
         print('Mock matched: create call');
@@ -67,6 +68,20 @@ void main() {
           data: TweetData.fromJson({'id': '123', 'text': 'test'}),
           meta: null,
         );
+      });
+
+      // Fallback mock for unmatched calls
+      when(context.post(
+        any,
+        headers: anyNamed('headers'),
+        body: anyNamed('body'),
+        fromJsonData: anyNamed('fromJsonData'),
+        fromJsonMeta: anyNamed('fromJsonMeta'),
+      )).thenAnswer((invocation) async {
+        print(
+            'Fallback mock triggered: ${invocation.positionalArguments}, ${invocation.namedArguments}');
+        throw UnimplementedError(
+            'Unexpected post call: ${invocation.positionalArguments}, ${invocation.namedArguments}');
       });
 
       // Call the create method
@@ -89,4 +104,5 @@ void main() {
   });
 }
 // Note: This code is a temporary test file for the TweetsService in the Twitter API V2 package.
-// It tests the `create` method, as `post` and `tweet` methods are not defined in
+// It tests the `create` method, as `post` and `tweet` methods are not defined in the updated TweetsService.
+// It is not intended for production use and should be replaced with proper tests.
