@@ -26,9 +26,9 @@ class MockClientContext extends Mock implements ClientContext {
     M Function(Map<String, dynamic>)? fromJsonMeta,
   }) async {
     final D Function(Map<String, dynamic>) normalizedFromJsonData =
-        TweetData.fromJson as D Function(Map<String, dynamic>);
+        (Map<String, dynamic> json) => fromJsonData(json);
     print(
-        'Actual post call: uri=$uri, headers=$headers, body=$body, fromJsonData=$fromJsonData, normalizedFromJsonData=$normalizedFromJsonData, fromJsonMeta=$fromJsonMeta, fromJsonDataType=${fromJsonData.runtimeType}, isTweetDataFromJson=${fromJsonData == TweetData.fromJson}');
+        'Actual post call: uri=$uri, headers=$headers, body=$body, fromJsonData=$fromJsonData, normalizedFromJsonData=$normalizedFromJsonData, fromJsonMeta=$fromJsonMeta, uriType=${uri.runtimeType}, headersType=${headers.runtimeType}, bodyType=${body.runtimeType}, fromJsonDataType=${fromJsonData.runtimeType}, isTweetDataFromJson=${fromJsonData == TweetData.fromJson}');
     throw UnimplementedError(
         'Unmocked post call: uri=$uri, headers=$headers, body=$body, fromJsonData=$normalizedFromJsonData, fromJsonMeta=$fromJsonMeta');
   }
@@ -50,7 +50,7 @@ void main() {
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: {'content-type': 'application/json'},
         body: jsonEncode({'text': 'test'}),
-        fromJsonData: TweetData.fromJson,
+        fromJsonData: (Map<String, dynamic> json) => TweetData.fromJson(json),
         fromJsonMeta: null,
       )).thenAnswer((_) async {
         print('Mock matched: create call');
@@ -84,7 +84,7 @@ void main() {
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: {'content-type': 'application/json'},
         body: jsonEncode({'text': 'test'}),
-        fromJsonData: TweetData.fromJson,
+        fromJsonData: (Map<String, dynamic> json) => TweetData.fromJson(json),
         fromJsonMeta: null,
       )).called(1);
     });
