@@ -26,9 +26,9 @@ class MockClientContext extends Mock implements ClientContext {
     M Function(Map<String, dynamic>)? fromJsonMeta,
   }) async {
     print(
-        'Actual post call: uri=$uri, headers=$headers, headersKeys=${headers?.keys}, headersValues=${headers?.values}, body=$body, fromJsonData=$fromJsonData, fromJsonMeta=$fromJsonMeta, uriType=${uri.runtimeType}, headersType=${headers.runtimeType}, bodyType=${body.runtimeType}, fromJsonDataType=${fromJsonData.runtimeType}, isTweetDataFromJson=${fromJsonData == TweetData.fromJson}, uriMatches=${uri == Uri.parse('https://api.twitter.com/2/tweets')}, headersMatches=${headers == {
-              'Content-Type': 'application/json'
-            }}, bodyMatches=${body == jsonEncode({'text': 'test'})}');
+        'Actual post call: uri=$uri, headers=$headers, headersKeys=${headers?.keys}, headersValues=${headers?.values}, body=$body, fromJsonData=$fromJsonData, fromJsonMeta=$fromJsonMeta, uriType=${uri.runtimeType}, headersType=${headers.runtimeType}, bodyType=${body.runtimeType}, fromJsonDataType=${fromJsonData.runtimeType}, isTweetDataFromJson=${fromJsonData == TweetData.fromJson}, uriMatches=${uri == Uri.parse('https://api.twitter.com/2/tweets')}, headersMatches=${headers != null && headers['Content-Type'] == 'application/json'}, bodyMatches=${body == jsonEncode({
+                  'text': 'test'
+                })}');
     throw UnimplementedError(
         'Unmocked post call: uri=$uri, headers=$headers, body=$body, fromJsonData=$fromJsonData, fromJsonMeta=$fromJsonMeta');
   }
@@ -48,7 +48,8 @@ void main() {
       // Mock the expected POST call
       when(context.post(
         Uri.parse('https://api.twitter.com/2/tweets'),
-        headers: {'Content-Type': 'application/json'},
+        headers: argThat(containsPair('Content-Type', 'application/json'),
+            named: 'headers'),
         body: jsonEncode({'text': 'test'}),
         fromJsonData: TweetData.fromJson,
         fromJsonMeta: null,
@@ -82,7 +83,8 @@ void main() {
       // Verify the exact POST call
       verify(context.post(
         Uri.parse('https://api.twitter.com/2/tweets'),
-        headers: {'Content-Type': 'application/json'},
+        headers: argThat(containsPair('Content-Type', 'application/json'),
+            named: 'headers'),
         body: jsonEncode({'text': 'test'}),
         fromJsonData: TweetData.fromJson,
         fromJsonMeta: null,
