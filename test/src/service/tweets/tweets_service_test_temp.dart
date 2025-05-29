@@ -17,12 +17,13 @@ import 'package:twitter_api_v2/src/service/tweets/tweets_service.dart';
 import 'package:twitter_api_v2/src/service/response/twitter_response.dart';
 
 class MockClientContext extends Mock implements ClientContext {
-  Future<TwitterResponse<TweetData, void>> postTweet(
+  @override
+  Future<TwitterResponse<D, M>> post<D, M>(
     Uri uri, {
     Map<String, String>? headers,
     dynamic body,
-    required TweetData Function(Map<String, dynamic>) fromJsonData,
-    void Function(Map<String, dynamic>)? fromJsonMeta,
+    required D Function(Map<String, dynamic>) fromJsonData,
+    M Function(Map<String, dynamic>)? fromJsonMeta,
   }) async {
     print(
         'Actual post call: uri=$uri, headers=$headers, body=$body, fromJsonDataType=${fromJsonData.runtimeType}, isTweetDataFromJson=${fromJsonData == TweetData.fromJson}');
@@ -54,11 +55,12 @@ void main() {
 
     test('create', () async {
       // Mock the expected POST call
-      when(context.postTweet(
+      when(context.post<TweetData, void>(
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: null,
         body: jsonEncode({'text': 'test'}),
-        fromJsonData: TweetData.fromJson,
+        fromJsonData:
+            TweetData.fromJson as TweetData Function(Map<String, dynamic>),
         fromJsonMeta: null,
       )).thenAnswer((_) async {
         print('Mock matched: POST call');
@@ -84,16 +86,16 @@ void main() {
 
       // Verify the response
       expect(response, isA<TwitterResponse<TweetData, void>>());
-      expect(response, isNotNull);
       expect(response.data.id, '123');
       expect(response.data.text, 'test');
 
       // Verify the exact POST call
-      verify(context.postTweet(
+      verify(context.post<TweetData, void>(
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: null,
         body: jsonEncode({'text': 'test'}),
-        fromJsonData: TweetData.fromJson,
+        fromJsonData:
+            TweetData.fromJson as TweetData Function(Map<String, dynamic>),
         fromJsonMeta: null,
       )).called(1);
     });
