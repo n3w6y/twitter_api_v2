@@ -25,13 +25,12 @@ class MockClientContext extends Mock implements ClientContext {
     required D Function(Map<String, dynamic>) fromJsonData,
     M Function(Map<String, dynamic>)? fromJsonMeta,
   }) async {
-    D castedFromJsonData(Map<String, dynamic> json) => fromJsonData(json);
     print(
-        'Actual post call: uri=$uri, headers=$headers, body=$body, fromJsonData=$fromJsonData, castedFromJsonData=$castedFromJsonData, fromJsonMeta=$fromJsonMeta, uriType=${uri.runtimeType}, headersType=${headers.runtimeType}, bodyType=${body.runtimeType}, fromJsonDataType=${fromJsonData.runtimeType}, isTweetDataFromJson=${fromJsonData == TweetData.fromJson}, uriMatches=${uri == Uri.parse('https://api.twitter.com/2/tweets')}, headersMatches=${headers == {
-              'content-type': 'application/json'
+        'Actual post call: uri=$uri, headers=$headers, headersKeys=${headers?.keys}, headersValues=${headers?.values}, body=$body, fromJsonData=$fromJsonData, fromJsonMeta=$fromJsonMeta, uriType=${uri.runtimeType}, headersType=${headers.runtimeType}, bodyType=${body.runtimeType}, fromJsonDataType=${fromJsonData.runtimeType}, isTweetDataFromJson=${fromJsonData == TweetData.fromJson}, uriMatches=${uri == Uri.parse('https://api.twitter.com/2/tweets')}, headersMatches=${headers == {
+              'Content-Type': 'application/json'
             }}, bodyMatches=${body == jsonEncode({'text': 'test'})}');
     throw UnimplementedError(
-        'Unmocked post call: uri=$uri, headers=$headers, body=$body, fromJsonData=$castedFromJsonData, fromJsonMeta=$fromJsonMeta');
+        'Unmocked post call: uri=$uri, headers=$headers, body=$body, fromJsonData=$fromJsonData, fromJsonMeta=$fromJsonMeta');
   }
 }
 
@@ -49,14 +48,14 @@ void main() {
       // Mock the expected POST call
       when(context.post(
         Uri.parse('https://api.twitter.com/2/tweets'),
-        headers: {'content-type': 'application/json'},
+        headers: {'Content-Type': 'application/json'},
         body: jsonEncode({'text': 'test'}),
         fromJsonData: TweetData.fromJson,
         fromJsonMeta: null,
       )).thenAnswer((_) async {
         print('Mock matched: create call');
         return TwitterResponse<TweetData, void>(
-          headers: {'content-type': 'application/json'},
+          headers: {'Content-Type': 'application/json'},
           status: HttpStatus.ok,
           request: TwitterRequest(
             method: HttpMethod.post,
@@ -83,7 +82,7 @@ void main() {
       // Verify the exact POST call
       verify(context.post(
         Uri.parse('https://api.twitter.com/2/tweets'),
-        headers: {'content-type': 'application/json'},
+        headers: {'Content-Type': 'application/json'},
         body: jsonEncode({'text': 'test'}),
         fromJsonData: TweetData.fromJson,
         fromJsonMeta: null,
