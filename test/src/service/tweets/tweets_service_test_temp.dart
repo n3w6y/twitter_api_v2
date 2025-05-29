@@ -27,7 +27,7 @@ class MockClientContext extends Mock implements ClientContext {
     print(
         'Actual post call: uri=$uri, headers=$headers, body=$body, fromJsonData=$fromJsonData, fromJsonMeta=$fromJsonMeta');
     throw UnimplementedError(
-        'Unmocked post call: uri=$uri, headers=$headers, body=$body');
+        'Unmocked post call: uri=$uri, headers=$headers, body=$body, fromJsonData=$fromJsonData, fromJsonMeta=$fromJsonMeta');
   }
 }
 
