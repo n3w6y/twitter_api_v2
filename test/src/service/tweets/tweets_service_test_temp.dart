@@ -45,7 +45,7 @@ void main() {
   group('TweetsService', () {
     test('create', () async {
       // Mock the expected POST call
-      when(context.post<TweetData, void>(
+      when(context.post(
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: null,
         body: jsonEncode({'text': 'test'}),
@@ -80,7 +80,7 @@ void main() {
       expect(response.data.text, 'test');
 
       // Verify the exact POST call
-      verify(context.post<TweetData, void>(
+      verify(context.post(
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: null,
         body: jsonEncode({'text': 'test'}),
