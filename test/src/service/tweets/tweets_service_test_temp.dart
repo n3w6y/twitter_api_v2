@@ -50,7 +50,6 @@ void main() {
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: {'content-type': 'application/json'},
         body: jsonEncode({'text': 'test'}),
-        // ignore: unnecessary_cast
         fromJsonData: (Map<String, dynamic> json) => TweetData.fromJson(json),
         fromJsonMeta: null,
       )).thenAnswer((_) async {
@@ -84,8 +83,8 @@ void main() {
       verify(context.post(
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: {'content-type': 'application/json'},
-        body: jsonEncode({'text': 'test'}),
-        fromJsonData: TweetData.fromJson,
+        body: jsonEncode({'text': ''}),
+        fromJsonData: (Map<String, dynamic> json) => TweetData.fromJson(json),
         fromJsonMeta: null,
       )).called(1);
     });
