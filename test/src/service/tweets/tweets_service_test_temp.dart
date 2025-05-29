@@ -54,7 +54,7 @@ void main() {
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: {'content-type': 'application/json'},
         body: null,
-        fromJsonData: (Map<String, dynamic> json) => TweetData.fromJson(json),
+        fromJsonData: any,
       )).thenAnswer((invocation) async {
         print(
             'Mock matched (first call): ${invocation.positionalArguments}, ${invocation.namedArguments}');
@@ -80,7 +80,7 @@ void main() {
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: null,
         body: {'text': 'test'},
-        fromJsonData: (Map<String, dynamic> json) => TweetData.fromJson(json),
+        fromJsonData: any,
       )).thenAnswer((invocation) async {
         print(
             'Mock matched (main call): ${invocation.positionalArguments}, ${invocation.namedArguments}');
@@ -99,6 +99,19 @@ void main() {
           data: TweetData.fromJson({'id': '123', 'text': 'test'}),
           meta: null,
         );
+      });
+
+      // Fallback mock for unmatched calls
+      when(context.post(
+        any,
+        headers: anyNamed('headers'),
+        body: anyNamed('body'),
+        fromJsonData: any,
+      )).thenAnswer((invocation) async {
+        print(
+            'Mock matched (fallback): ${invocation.positionalArguments}, ${invocation.namedArguments}');
+        throw Exception(
+            'Unexpected post call: ${invocation.positionalArguments}, ${invocation.namedArguments}');
       });
 
       final response = await tweetsService.create(text: 'test');
@@ -121,7 +134,7 @@ void main() {
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: {'content-type': 'application/json'},
         body: null,
-        fromJsonData: (Map<String, dynamic> json) => TweetData.fromJson(json),
+        fromJsonData: any,
       )).thenAnswer((invocation) async {
         print(
             'Mock matched (first call): ${invocation.positionalArguments}, ${invocation.namedArguments}');
@@ -147,7 +160,7 @@ void main() {
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: null,
         body: {'text': 'test'},
-        fromJsonData: (Map<String, dynamic> json) => TweetData.fromJson(json),
+        fromJsonData: any,
       )).thenAnswer((invocation) async {
         print(
             'Mock matched (main call): ${invocation.positionalArguments}, ${invocation.namedArguments}');
@@ -166,6 +179,19 @@ void main() {
           data: TweetData.fromJson({'id': '123', 'text': 'test'}),
           meta: null,
         );
+      });
+
+      // Fallback mock for unmatched calls
+      when(context.post(
+        any,
+        headers: anyNamed('headers'),
+        body: anyNamed('body'),
+        fromJsonData: any,
+      )).thenAnswer((invocation) async {
+        print(
+            'Mock matched (fallback): ${invocation.positionalArguments}, ${invocation.namedArguments}');
+        throw Exception(
+            'Unexpected post call: ${invocation.positionalArguments}, ${invocation.namedArguments}');
       });
 
       final response = await tweetsService.post(text: 'test');
@@ -188,7 +214,7 @@ void main() {
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: {'content-type': 'application/json'},
         body: null,
-        fromJsonData: (Map<String, dynamic> json) => TweetData.fromJson(json),
+        fromJsonData: any,
       )).thenAnswer((invocation) async {
         print(
             'Mock matched (first call): ${invocation.positionalArguments}, ${invocation.namedArguments}');
@@ -214,7 +240,7 @@ void main() {
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: null,
         body: {'text': 'test'},
-        fromJsonData: (Map<String, dynamic> json) => TweetData.fromJson(json),
+        fromJsonData: any,
       )).thenAnswer((invocation) async {
         print(
             'Mock matched (main call): ${invocation.positionalArguments}, ${invocation.namedArguments}');
@@ -233,6 +259,19 @@ void main() {
           data: TweetData.fromJson({'id': '123', 'text': 'test'}),
           meta: null,
         );
+      });
+
+      // Fallback mock for unmatched calls
+      when(context.post(
+        any,
+        headers: anyNamed('headers'),
+        body: anyNamed('body'),
+        fromJsonData: any,
+      )).thenAnswer((invocation) async {
+        print(
+            'Mock matched (fallback): ${invocation.positionalArguments}, ${invocation.namedArguments}');
+        throw Exception(
+            'Unexpected post call: ${invocation.positionalArguments}, ${invocation.namedArguments}');
       });
 
       final response = await tweetsService.tweet(text: 'test');
