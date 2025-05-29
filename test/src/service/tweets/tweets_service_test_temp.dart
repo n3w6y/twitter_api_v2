@@ -55,12 +55,11 @@ void main() {
 
     test('create', () async {
       // Mock the expected POST call
-      when(context.post<TweetData, void>(
+      when(context.post(
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: null,
         body: jsonEncode({'text': 'test'}),
-        fromJsonData:
-            TweetData.fromJson as TweetData Function(Map<String, dynamic>),
+        fromJsonData: (Map<String, dynamic> json) => TweetData.fromJson(json),
         fromJsonMeta: null,
       )).thenAnswer((_) async {
         print('Mock matched: POST call');
@@ -90,12 +89,11 @@ void main() {
       expect(response.data.text, 'test');
 
       // Verify the exact POST call
-      verify(context.post<TweetData, void>(
+      verify(context.post(
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: null,
         body: jsonEncode({'text': 'test'}),
-        fromJsonData:
-            TweetData.fromJson as TweetData Function(Map<String, dynamic>),
+        fromJsonData: (Map<String, dynamic> json) => TweetData.fromJson(json),
         fromJsonMeta: null,
       )).called(1);
     });
