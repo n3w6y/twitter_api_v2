@@ -21,19 +21,19 @@ void main() {
   group('TwitterApi', () {
     test('search tweets', () async {
       final response = await twitter.tweetsService
-          .lookupByQuery(query: 'test'); // Fixed: lookupByQuery
+          .lookupTweets(query: 'test'); // Fixed: lookupTweets
       expect(response, isNotNull);
     });
 
     test('upload media', () async {
       final response = await twitter.mediaService
           .uploadMedia(file: File('test/assets/image.jpg')); // Fixed path
-      expect(response.data.media_id, isNotNull); // Fixed: media_id
+      expect(response.data.mediaId, isNotNull); // Fixed: mediaId
     });
 
     test('create compliance job', () async {
       final response = await twitter.complianceService.createJob(
-        jobType: compliance_job_type.JobType.tweets, // Fixed: jobType
+        jobType: compliance_job_type.JobType.tweets,
       );
       expect(response, isNotNull);
     });
