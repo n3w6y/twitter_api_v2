@@ -17,13 +17,12 @@ import 'package:twitter_api_v2/src/service/tweets/tweets_service.dart';
 import 'package:twitter_api_v2/src/service/response/twitter_response.dart';
 
 class MockClientContext extends Mock implements ClientContext {
-  @override
-  Future<TwitterResponse<D, M>> post<D, M>(
+  Future<TwitterResponse<TweetData, void>> postTweet(
     Uri uri, {
     Map<String, String>? headers,
     dynamic body,
-    required D Function(Map<String, dynamic>) fromJsonData,
-    M Function(Map<String, dynamic>)? fromJsonMeta,
+    required TweetData Function(Map<String, dynamic>) fromJsonData,
+    void Function(Map<String, dynamic>)? fromJsonMeta,
   }) async {
     print(
         'Actual post call: uri=$uri, headers=$headers, body=$body, fromJsonDataType=${fromJsonData.runtimeType}, isTweetDataFromJson=${fromJsonData == TweetData.fromJson}');
@@ -55,14 +54,11 @@ void main() {
 
     test('create', () async {
       // Mock the expected POST call
-      final fromJsonData =
-          (Map<String, dynamic> json) => TweetData.fromJson(json);
-      print('Stubbed fromJsonDataType=${fromJsonData.runtimeType}');
-      when(context.post(
+      when(context.postTweet(
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: null,
         body: jsonEncode({'text': 'test'}),
-        fromJsonData: fromJsonData,
+        fromJsonData: TweetData.fromJson,
         fromJsonMeta: null,
       )).thenAnswer((_) async {
         print('Mock matched: POST call');
@@ -92,11 +88,11 @@ void main() {
       expect(response.data.text, 'test');
 
       // Verify the exact POST call
-      verify(context.post(
+      verify(context.postTweet(
         Uri.parse('https://api.twitter.com/2/tweets'),
         headers: null,
         body: jsonEncode({'text': 'test'}),
-        fromJsonData: fromJsonData,
+        fromJsonData: TweetData.fromJson,
         fromJsonMeta: null,
       )).called(1);
     });
