@@ -21,14 +21,14 @@ void main() {
   group('TwitterApi', () {
     test('search tweets', () async {
       final response = await twitter.tweetsService
-          .lookupTweets(query: 'test'); // Fixed: lookupTweets
+          .lookupTweets(userId: '123'); // Fixed: lookupTweets, userId
       expect(response, isNotNull);
     });
 
     test('upload media', () async {
       final response = await twitter.mediaService
           .uploadMedia(file: File('test/assets/image.jpg')); // Fixed path
-      expect(response.data.mediaId, isNotNull); // Fixed: mediaId
+      expect(response.data.media_id, isNotNull); // Fixed: media_id
     });
 
     test('create compliance job', () async {
