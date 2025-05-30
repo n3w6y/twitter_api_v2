@@ -25,8 +25,7 @@ void main() {
         return;
       }
       final response = await twitter.mediaService.uploadMedia(file: file);
-      expect(response.data.mediaIdString,
-          isNotNull); // Assumes mediaIdString is correct
+      expect(response.data.mediaIdString, isNotNull); // Uses correct field name
     });
 
     test('create compliance job', () async {
