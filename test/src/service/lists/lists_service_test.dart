@@ -6,8 +6,7 @@
 import 'package:test/test.dart';
 
 // 🌎 Project imports:
-import 'package:twitter_api_v2/src/core/client/client_context.dart';
-import 'package:twitter_api_v2/src/core/client/oauth_tokens.dart';
+
 import 'package:twitter_api_v2/src/core/client/user_context.dart';
 import 'package:twitter_api_v2/src/service/lists/list_data.dart';
 import 'package:twitter_api_v2/src/service/lists/lists_service.dart';
@@ -41,15 +40,12 @@ void main() {
 
     test('with invalid access token', () async {
       final listsService = ListsService(
-        context: ClientContext(
-          bearerToken: '',
-          oauthTokens: OAuthTokens(
-            consumerKey: '1234',
-            consumerSecret: '1234',
-            accessToken: '1234',
-            accessTokenSecret: '1234',
-          ),
-          timeout: const Duration(seconds: 10),
+        context: context.buildGetStub(
+          UserContext.oauth2OrOAuth1,
+          '/2/lists/5555',
+          'test/src/service/lists/data/unauthorized_error.json',
+          {},
+          statusCode: 401,
         ),
       );
 
@@ -125,15 +121,12 @@ void main() {
 
     test('with invalid access token', () async {
       final listsService = ListsService(
-        context: ClientContext(
-          bearerToken: '',
-          oauthTokens: OAuthTokens(
-            consumerKey: '1234',
-            consumerSecret: '1234',
-            accessToken: '1234',
-            accessTokenSecret: '1234',
-          ),
-          timeout: const Duration(seconds: 10),
+        context: context.buildGetStub(
+          UserContext.oauth2OrOAuth1,
+          '/2/users/5555/owned_lists',
+          'test/src/service/lists/data/unauthorized_error.json',
+          {},
+          statusCode: 401,
         ),
       );
 
@@ -232,15 +225,12 @@ void main() {
 
     test('with invalid access token', () async {
       final listsService = ListsService(
-        context: ClientContext(
-          bearerToken: '',
-          oauthTokens: OAuthTokens(
-            consumerKey: '1234',
-            consumerSecret: '1234',
-            accessToken: '1234',
-            accessTokenSecret: '1234',
-          ),
-          timeout: const Duration(seconds: 10),
+        context: context.buildPostStub(
+          UserContext.oauth2OrOAuth1,
+          '/2/lists',
+          'test/src/service/lists/data/unauthorized_error.json',
+          {'name': 'My List'},
+          statusCode: 401,
         ),
       );
 
@@ -317,15 +307,11 @@ void main() {
 
     test('with invalid access token', () async {
       final listsService = ListsService(
-        context: ClientContext(
-          bearerToken: '',
-          oauthTokens: OAuthTokens(
-            consumerKey: '1234',
-            consumerSecret: '1234',
-            accessToken: '1234',
-            accessTokenSecret: '1234',
-          ),
-          timeout: const Duration(seconds: 10),
+        context: context.buildDeleteStub(
+          UserContext.oauth2OrOAuth1,
+          '/2/lists/5555',
+          'test/src/service/lists/data/unauthorized_error.json',
+          statusCode: 401,
         ),
       );
 
@@ -358,15 +344,12 @@ void main() {
 
     test('with invalid access token', () async {
       final listsService = ListsService(
-        context: ClientContext(
-          bearerToken: '',
-          oauthTokens: OAuthTokens(
-            consumerKey: '1234',
-            consumerSecret: '1234',
-            accessToken: '1234',
-            accessTokenSecret: '1234',
-          ),
-          timeout: const Duration(seconds: 10),
+        context: context.buildPostStub(
+          UserContext.oauth2OrOAuth1,
+          '/2/lists/5555/members',
+          'test/src/service/lists/data/unauthorized_error.json',
+          {'user_id': '1234'},
+          statusCode: 401,
         ),
       );
 
@@ -483,15 +466,12 @@ void main() {
 
     test('with invalid access token', () async {
       final listsService = ListsService(
-        context: ClientContext(
-          bearerToken: '',
-          oauthTokens: OAuthTokens(
-            consumerKey: '1234',
-            consumerSecret: '1234',
-            accessToken: '1234',
-            accessTokenSecret: '1234',
-          ),
-          timeout: const Duration(seconds: 10),
+        context: context.buildGetStub(
+          UserContext.oauth2OrOAuth1,
+          '/2/lists/5555/members',
+          'test/src/service/lists/data/unauthorized_error.json',
+          {},
+          statusCode: 401,
         ),
       );
 
