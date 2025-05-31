@@ -293,6 +293,9 @@ class _StubClientContext implements ClientContext {
     print('🔍 DEBUG: extractedData = $extractedData');
     print('🔍 DEBUG: extractedData type = ${extractedData.runtimeType}');
 
+    // Pass the full jsonData to fromJsonData - it knows how to extract what it needs
+    print('🔍 DEBUG: Passing full jsonData to fromJsonData: $jsonData');
+
     // Ensure we pass the right type to fromJsonData - with better null safety
     Map<String, dynamic> dataToPass;
 
@@ -327,7 +330,7 @@ class _StubClientContext implements ClientContext {
         remainingCount: statusCode == 429 ? 0 : 99,
         resetAt: DateTime.now().add(const Duration(minutes: 15)),
       ),
-      data: fromJsonData(dataToPass),
+      data: fromJsonData(jsonData),
       meta: fromJsonMeta != null && jsonData['meta'] != null
           ? fromJsonMeta(jsonData['meta'] as Map<String, dynamic>)
           : null,
