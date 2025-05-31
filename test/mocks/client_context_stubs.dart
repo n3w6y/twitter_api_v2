@@ -94,31 +94,40 @@ class _StubClientContext implements ClientContext {
   }
 
   Map<String, dynamic> _loadJsonData() {
+    print('🔍 DEBUG: Loading JSON from $jsonFilePath with status $statusCode');
     try {
       final file = File(jsonFilePath);
       if (!file.existsSync()) {
+        print('🔍 DEBUG: File does not exist, generating mock response');
         return _generateMockResponse();
       }
       final jsonString = file.readAsStringSync();
       if (jsonString.isEmpty) {
+        print('🔍 DEBUG: File is empty, generating mock response');
         return _generateMockResponse();
       }
       final data = json.decode(jsonString) as Map<String, dynamic>;
+      print('🔍 DEBUG: Loaded JSON data: $data');
 
       // If file data doesn't have proper structure for success case, enhance it
       if (statusCode == 200 &&
           data['data'] == null &&
           !data.containsKey('errors')) {
+        print(
+            '🔍 DEBUG: File data missing structure, generating mock response');
         return _generateMockResponse();
       }
 
       return data;
     } catch (e) {
+      print('🔍 DEBUG: Error loading JSON: $e, generating mock response');
       return _generateMockResponse();
     }
   }
 
   Map<String, dynamic> _generateMockResponse() {
+    print(
+        '🔍 DEBUG: Generating mock response for status $statusCode and method $httpMethod');
     // Generate response based on status code and HTTP method
     switch (statusCode) {
       case 429:
@@ -182,6 +191,7 @@ class _StubClientContext implements ClientContext {
   }
 
   void _checkForErrorsAndThrow(Map<String, dynamic> jsonData, Uri uri) {
+    print('🔍 DEBUG: Checking for errors in: $jsonData');
     // Only throw for actual error status codes
     if (statusCode >= 400) {
       final errorMessage =
@@ -212,10 +222,16 @@ class _StubClientContext implements ClientContext {
   }
 
   dynamic _extractDataForParsing(Map<String, dynamic> jsonData, Uri uri) {
-    // If we have data, check what type it should be
+    print('🔍 DEBUG: Extracting data from: $jsonData for URI: ${uri.path}');
+
+    // First check if we have actual data from JSON files
     if (jsonData['data'] != null) {
+      print('🔍 DEBUG: Found data in JSON: ${jsonData['data']}');
       return jsonData['data'];
     }
+
+    print(
+        '🔍 DEBUG: No data in JSON, generating fallback based on URI: ${uri.path}');
 
     // Generate fallback data based on URI patterns
     final path = uri.path;
@@ -258,7 +274,7 @@ class _StubClientContext implements ClientContext {
         'name': 'Mock List',
       };
     } else {
-      // Single list lookup
+      // Single list lookup - provide default structure
       return {
         'id': '1234567890',
         'name': 'Mock List',
@@ -274,12 +290,23 @@ class _StubClientContext implements ClientContext {
   ) {
     final extractedData = _extractDataForParsing(jsonData, uri);
 
-    // Ensure we pass the right type to fromJsonData
-    final dataToPass = extractedData is Map<String, dynamic>
-        ? extractedData
-        : (extractedData is List && extractedData.isNotEmpty)
-            ? extractedData[0] as Map<String, dynamic>
-            : <String, dynamic>{};
+    print('🔍 DEBUG: extractedData = $extractedData');
+    print('🔍 DEBUG: extractedData type = ${extractedData.runtimeType}');
+
+    // Ensure we pass the right type to fromJsonData - with better null safety
+    Map<String, dynamic> dataToPass;
+
+    if (extractedData is Map<String, dynamic>) {
+      dataToPass = extractedData;
+    } else if (extractedData is List && extractedData.isNotEmpty) {
+      final firstItem = extractedData[0];
+      dataToPass =
+          firstItem is Map<String, dynamic> ? firstItem : <String, dynamic>{};
+    } else {
+      dataToPass = <String, dynamic>{};
+    }
+
+    print('🔍 DEBUG: dataToPass = $dataToPass');
 
     return TwitterResponse<D, M>(
       headers: {
