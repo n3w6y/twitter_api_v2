@@ -147,58 +147,44 @@ class _StubClientContext implements ClientContext {
   }
 
   Map<String, dynamic> _getDefaultMockDataByEndpoint() {
-    final endpoint = expectedEndpoint ?? '';
+    // Since expectedEndpoint might not be reliable, we'll return comprehensive mock data
+    // that covers all the different response patterns needed by the lists service
 
-    // Handle lists service endpoints
-    if (endpoint.contains('/lists')) {
-      if (httpMethod == HttpMethod.post && endpoint == '/2/lists') {
-        // Create list endpoint
+    switch (httpMethod) {
+      case HttpMethod.post:
+        // Handle all POST endpoints with specific response patterns
         return {
           'data': {
+            // For create list
             'id': '1234567890',
             'name': 'Mock List',
-          }
-        };
-      } else if (httpMethod == HttpMethod.post &&
-          endpoint.contains('/members')) {
-        // Add member endpoint
-        return {
-          'data': {
+            // For update list
+            'updated': true,
+            // For add member
             'is_member': true,
           }
         };
-      } else if (httpMethod == HttpMethod.delete &&
-          endpoint.contains('/members/')) {
-        // Remove member endpoint
+
+      case HttpMethod.delete:
+        // Handle all DELETE endpoints
         return {
           'data': {
+            // For delete list
+            'deleted': true,
+            // For remove member
             'is_member': false,
           }
         };
-      } else if (httpMethod == HttpMethod.post &&
-          endpoint.contains('/2/lists/')) {
-        // Update list endpoint
-        return {
-          'data': {
-            'updated': true,
-          }
-        };
-      } else if (httpMethod == HttpMethod.delete &&
-          endpoint.contains('/2/lists/')) {
-        // Delete list endpoint
-        return {
-          'data': {
-            'deleted': true,
-          }
-        };
-      } else if (endpoint.contains('/followers') ||
-          endpoint.contains('/members')) {
-        // Followers/members endpoints that return arrays
+
+      case HttpMethod.get:
+      default:
+        // For GET endpoints, we need to handle both single objects and arrays
+        // Since we can't reliably detect the endpoint, return a structure that works for both
         return {
           'data': [
             {
               'id': '1234567890',
-              'name': 'Mock User',
+              'name': 'Mock List',
               'username': 'mockuser',
             }
           ],
@@ -208,40 +194,7 @@ class _StubClientContext implements ClientContext {
             'previous_token': 'PREVIOUS_TOKEN',
           }
         };
-      } else if (endpoint.contains('/owned')) {
-        // Owned lists endpoint that returns array
-        return {
-          'data': [
-            {
-              'id': '1234567890',
-              'name': 'Mock List',
-            }
-          ],
-          'meta': {
-            'result_count': 1,
-            'next_token': 'NEXT_TOKEN',
-            'previous_token': 'PREVIOUS_TOKEN',
-          }
-        };
-      } else {
-        // Default single list lookup
-        return {
-          'data': {
-            'id': '1234567890',
-            'name': 'Mock List',
-          }
-        };
-      }
     }
-
-    // Default fallback for other services
-    return {
-      'data': {
-        'id': '1234567890',
-        'text': 'Mock data',
-        'name': 'Mock Data',
-      }
-    };
   }
 
   HttpStatus _getHttpStatus() {
@@ -295,6 +248,82 @@ class _StubClientContext implements ClientContext {
     }
   }
 
+  Map<String, dynamic> _prepareDataForParsing(
+      Map<String, dynamic> jsonData, Uri uri) {
+    // If we have valid data, use it
+    if (jsonData['data'] != null) {
+      return jsonData['data'] as Map<String, dynamic>;
+    }
+
+    // If we don't have data but no errors, generate appropriate mock data based on URI
+    final path = uri.path;
+
+    if (path.contains('/lists/') &&
+        path.contains('/members') &&
+        httpMethod == HttpMethod.post) {
+      // Add member endpoint
+      return {'is_member': true};
+    } else if (path.contains('/lists/') &&
+        path.contains('/members/') &&
+        httpMethod == HttpMethod.delete) {
+      // Remove member endpoint
+      return {'is_member': false};
+    } else if (path.contains('/lists/') &&
+        httpMethod == HttpMethod.post &&
+        !path.contains('/members')) {
+      // Update list endpoint
+      return {'updated': true};
+    } else if (path.contains('/lists/') && httpMethod == HttpMethod.delete) {
+      // Delete list endpoint
+      return {'deleted': true};
+    } else if (path.contains('/lists') && httpMethod == HttpMethod.post) {
+      // Create list endpoint
+      return {
+        'id': '1234567890',
+        'name': 'Mock List',
+      };
+    } else if (path.contains('/followers') || path.contains('/members')) {
+      // These expect arrays, so return the first item from our mock array
+      final mockData = _getDefaultMockDataByEndpoint();
+      final dataArray = mockData['data'] as List;
+      return dataArray.isNotEmpty
+          ? dataArray[0] as Map<String, dynamic>
+          : <String, dynamic>{};
+    } else if (path.contains('/owned')) {
+      // Owned lists - also array, return first item
+      final mockData = _getDefaultMockDataByEndpoint();
+      final dataArray = mockData['data'] as List;
+      return dataArray.isNotEmpty
+          ? dataArray[0] as Map<String, dynamic>
+          : <String, dynamic>{};
+    } else {
+      // Single list lookup
+      return {
+        'id': '1234567890',
+        'name': 'Mock List',
+      };
+    }
+  }
+
+  List<dynamic>? _prepareArrayDataForParsing(
+      Map<String, dynamic> jsonData, Uri uri) {
+    // If we have valid data array, use it
+    if (jsonData['data'] != null && jsonData['data'] is List) {
+      return jsonData['data'] as List<dynamic>;
+    }
+
+    // Check if this endpoint expects an array based on URI
+    final path = uri.path;
+    if (path.contains('/followers') ||
+        path.contains('/members') ||
+        path.contains('/owned')) {
+      final mockData = _getDefaultMockDataByEndpoint();
+      return mockData['data'] as List<dynamic>;
+    }
+
+    return null;
+  }
+
   @override
   Future<TwitterResponse<D, M>> get<D, M>(
     Uri uri, {
@@ -313,12 +342,9 @@ class _StubClientContext implements ClientContext {
     // Check for error conditions and throw appropriate exceptions
     _checkForErrorsAndThrow(jsonData, uri);
 
-    // Handle cases where jsonData might not have 'data' field
-    final dataForParsing = jsonData['data'] ?? jsonData;
-    // Ensure we have a valid data structure to pass to fromJsonData
-    final nonNullData = dataForParsing is Map<String, dynamic>
-        ? dataForParsing
-        : <String, dynamic>{};
+    // Determine if this endpoint expects an array or single object
+    final arrayData = _prepareArrayDataForParsing(jsonData, uri);
+    final dataForParsing = arrayData ?? _prepareDataForParsing(jsonData, uri);
 
     return TwitterResponse<D, M>(
       headers: {
@@ -340,7 +366,9 @@ class _StubClientContext implements ClientContext {
         remainingCount: statusCode == 429 ? 0 : 99,
         resetAt: DateTime.now().add(const Duration(minutes: 15)),
       ),
-      data: fromJsonData(nonNullData),
+      data: fromJsonData(dataForParsing is Map<String, dynamic>
+          ? dataForParsing
+          : <String, dynamic>{}),
       meta: fromJsonMeta != null && jsonData['meta'] != null
           ? fromJsonMeta(jsonData['meta'] as Map<String, dynamic>)
           : null,
@@ -367,12 +395,7 @@ class _StubClientContext implements ClientContext {
     // Check for error conditions and throw appropriate exceptions
     _checkForErrorsAndThrow(jsonData, uri);
 
-    // Handle cases where jsonData might not have 'data' field
-    final dataForParsing = jsonData['data'] ?? jsonData;
-    // Ensure we have a valid data structure to pass to fromJsonData
-    final nonNullData = dataForParsing is Map<String, dynamic>
-        ? dataForParsing
-        : <String, dynamic>{};
+    final dataForParsing = _prepareDataForParsing(jsonData, uri);
 
     return TwitterResponse<D, M>(
       headers: {
@@ -395,7 +418,7 @@ class _StubClientContext implements ClientContext {
         remainingCount: statusCode == 429 ? 0 : 99,
         resetAt: DateTime.now().add(const Duration(minutes: 15)),
       ),
-      data: fromJsonData(nonNullData),
+      data: fromJsonData(dataForParsing),
       meta: fromJsonMeta != null && jsonData['meta'] != null
           ? fromJsonMeta(jsonData['meta'] as Map<String, dynamic>)
           : null,
@@ -415,12 +438,7 @@ class _StubClientContext implements ClientContext {
     // Check for error conditions and throw appropriate exceptions
     _checkForErrorsAndThrow(jsonData, uri);
 
-    // Handle cases where jsonData might not have 'data' field
-    final dataForParsing = jsonData['data'] ?? jsonData;
-    // Ensure we have a valid data structure to pass to fromJsonData
-    final nonNullData = dataForParsing is Map<String, dynamic>
-        ? dataForParsing
-        : <String, dynamic>{};
+    final dataForParsing = _prepareDataForParsing(jsonData, uri);
 
     return TwitterResponse<D, M>(
       headers: {
@@ -442,7 +460,7 @@ class _StubClientContext implements ClientContext {
         remainingCount: statusCode == 429 ? 0 : 99,
         resetAt: DateTime.now().add(const Duration(minutes: 15)),
       ),
-      data: fromJsonData(nonNullData),
+      data: fromJsonData(dataForParsing),
       meta: fromJsonMeta != null && jsonData['meta'] != null
           ? fromJsonMeta(jsonData['meta'] as Map<String, dynamic>)
           : null,
@@ -467,12 +485,7 @@ class _StubClientContext implements ClientContext {
     // Check for error conditions and throw appropriate exceptions
     _checkForErrorsAndThrow(jsonData, uri);
 
-    // Handle cases where jsonData might not have 'data' field
-    final dataForParsing = jsonData['data'] ?? jsonData;
-    // Ensure we have a valid data structure to pass to fromJsonData
-    final nonNullData = dataForParsing is Map<String, dynamic>
-        ? dataForParsing
-        : <String, dynamic>{};
+    final dataForParsing = _prepareDataForParsing(jsonData, uri);
 
     return TwitterResponse<D, M>(
       headers: {
@@ -494,7 +507,7 @@ class _StubClientContext implements ClientContext {
         remainingCount: statusCode == 429 ? 0 : 99,
         resetAt: DateTime.now().add(const Duration(minutes: 15)),
       ),
-      data: fromJsonData(nonNullData),
+      data: fromJsonData(dataForParsing),
       meta: fromJsonMeta != null && jsonData['meta'] != null
           ? fromJsonMeta(jsonData['meta'] as Map<String, dynamic>)
           : null,
