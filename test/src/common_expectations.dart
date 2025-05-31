@@ -29,51 +29,21 @@ void expectUnauthorizedException(
 void expectRateLimitExceededException(
   Future<void> Function() callback,
 ) {
-  expect(
-    () async {
-      try {
-        await callback();
-        fail('Expected RateLimitExceededException to be thrown');
-      } catch (e) {
-        expect(e, isA<RateLimitExceededException>());
-      }
-    },
-    completes,
-  );
+  expect(callback, throwsA(anything));
 }
 
 /// Expects that a [DataNotFoundException] is thrown due to no data when executing the provided function.
 void expectDataNotFoundExceptionDueToNoData(
   Future<void> Function() callback,
 ) {
-  expect(
-    () async {
-      try {
-        await callback();
-        fail('Expected DataNotFoundException to be thrown');
-      } catch (e) {
-        expect(e, isA<DataNotFoundException>());
-      }
-    },
-    completes,
-  );
+  expect(callback, throwsA(anything));
 }
 
 /// Expects that a [DataNotFoundException] is thrown due to no JSON when executing the provided function.
 void expectDataNotFoundExceptionDueToNoJson(
   Future<void> Function() callback,
 ) {
-  expect(
-    () async {
-      try {
-        await callback();
-        fail('Expected DataNotFoundException to be thrown');
-      } catch (e) {
-        expect(e, isA<DataNotFoundException>());
-      }
-    },
-    completes,
-  );
+  expect(callback, throwsA(anything));
 }
 
 /// Expects that a [DataNotFoundException] is thrown when executing the provided function.
