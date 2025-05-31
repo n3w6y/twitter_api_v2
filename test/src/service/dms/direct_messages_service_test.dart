@@ -18,7 +18,7 @@ import 'package:twitter_api_v2/src/service/pagination/pagination_control.dart';
 import 'package:twitter_api_v2/src/service/response/pagination_response.dart';
 import 'package:twitter_api_v2/src/service/response/twitter_response.dart';
 import '../../../mocks/client_context_stubs.dart' as context;
-import '../common_expectations.dart';
+import '../../common_expectations.dart';
 
 void main() {
   group('.lookupEvents', () {
