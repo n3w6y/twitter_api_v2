@@ -12,7 +12,7 @@ import 'package:twitter_api_v2/src/service/lists/list_data.dart';
 import 'package:twitter_api_v2/src/service/lists/lists_service.dart';
 import 'package:twitter_api_v2/src/service/response/twitter_response.dart';
 import '../../../mocks/client_context_stubs.dart' as context;
-import '../common_expectations.dart';
+import '../../common_expectations.dart';
 
 void main() {
   group('.lookupById', () {
