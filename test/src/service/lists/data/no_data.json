@@ -1,3 +1,9 @@
 {
-    "errors": []
+    "errors": [
+        {
+            "message": "No data found",
+            "code": 34
+        }
+    ],
+    "data": null
 }
