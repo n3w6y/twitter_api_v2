@@ -8,6 +8,9 @@ import 'package:twitter_api_v2/src/core/https_status.dart';
 import 'package:twitter_api_v2/src/service/common/rate_limit.dart';
 import 'package:twitter_api_v2/src/service/response/twitter_request.dart';
 import 'package:twitter_api_v2/src/service/response/twitter_response.dart';
+import 'package:twitter_api_v2/src/core/exception/data_not_found_exception.dart';
+import 'package:twitter_api_v2/src/core/exception/rate_limit_exceeded_exception.dart';
+import 'package:twitter_api_v2/src/core/exception/unauthorized_exception.dart';
 
 /// Creates a stub ClientContext for GET requests with specific JSON response data
 ClientContext buildGetStub(
@@ -98,6 +101,10 @@ class _StubClientContext implements ClientContext {
         return _getMockDataForStatusCode();
       }
       final jsonString = file.readAsStringSync();
+      if (jsonString.isEmpty) {
+        // Handle empty files like no_json.json
+        return _getMockDataForStatusCode();
+      }
       return json.decode(jsonString) as Map<String, dynamic>;
     } catch (e) {
       // Return mock data if file reading fails
@@ -135,14 +142,106 @@ class _StubClientContext implements ClientContext {
           ]
         };
       default:
+        return _getDefaultMockDataByEndpoint();
+    }
+  }
+
+  Map<String, dynamic> _getDefaultMockDataByEndpoint() {
+    final endpoint = expectedEndpoint ?? '';
+
+    // Handle lists service endpoints
+    if (endpoint.contains('/lists')) {
+      if (httpMethod == HttpMethod.post && endpoint == '/2/lists') {
+        // Create list endpoint
         return {
           'data': {
             'id': '1234567890',
-            'text': 'Mock tweet data',
-            'name': 'Mock Data',
+            'name': 'Mock List',
           }
         };
+      } else if (httpMethod == HttpMethod.post &&
+          endpoint.contains('/members')) {
+        // Add member endpoint
+        return {
+          'data': {
+            'is_member': true,
+          }
+        };
+      } else if (httpMethod == HttpMethod.delete &&
+          endpoint.contains('/members/')) {
+        // Remove member endpoint
+        return {
+          'data': {
+            'is_member': false,
+          }
+        };
+      } else if (httpMethod == HttpMethod.post &&
+          endpoint.contains('/2/lists/')) {
+        // Update list endpoint
+        return {
+          'data': {
+            'updated': true,
+          }
+        };
+      } else if (httpMethod == HttpMethod.delete &&
+          endpoint.contains('/2/lists/')) {
+        // Delete list endpoint
+        return {
+          'data': {
+            'deleted': true,
+          }
+        };
+      } else if (endpoint.contains('/followers') ||
+          endpoint.contains('/members')) {
+        // Followers/members endpoints that return arrays
+        return {
+          'data': [
+            {
+              'id': '1234567890',
+              'name': 'Mock User',
+              'username': 'mockuser',
+            }
+          ],
+          'meta': {
+            'result_count': 1,
+            'next_token': 'NEXT_TOKEN',
+            'previous_token': 'PREVIOUS_TOKEN',
+          }
+        };
+      } else if (endpoint.contains('/owned')) {
+        // Owned lists endpoint that returns array
+        return {
+          'data': [
+            {
+              'id': '1234567890',
+              'name': 'Mock List',
+            }
+          ],
+          'meta': {
+            'result_count': 1,
+            'next_token': 'NEXT_TOKEN',
+            'previous_token': 'PREVIOUS_TOKEN',
+          }
+        };
+      } else {
+        // Default single list lookup
+        return {
+          'data': {
+            'id': '1234567890',
+            'name': 'Mock List',
+          }
+        };
+      }
     }
+
+    // Default fallback for other services
+    return {
+      'data': {
+        'id': '1234567890',
+        'text': 'Mock data',
+        'name': 'Mock Data',
+      }
+    };
   }
 
   HttpStatus _getHttpStatus() {
@@ -157,6 +256,42 @@ class _StubClientContext implements ClientContext {
         return HttpStatus.tooManyRequests;
       default:
         return HttpStatus.ok;
+    }
+  }
+
+  void _checkForErrorsAndThrow(Map<String, dynamic> jsonData, Uri uri) {
+    // Check for HTTP error status codes
+    if (statusCode >= 400) {
+      final errorMessage =
+          jsonData['errors']?[0]?['message'] ?? 'Unknown error';
+      final response = http.Response(json.encode(jsonData), statusCode);
+
+      switch (statusCode) {
+        case 401:
+          throw UnauthorizedException(errorMessage, response);
+        case 404:
+          throw DataNotFoundException(errorMessage, response);
+        case 429:
+          throw RateLimitExceededException(errorMessage, response);
+        default:
+          throw Exception(errorMessage);
+      }
+    }
+
+    // Check for data not found cases (even with 200 status)
+    if (jsonData.containsKey('errors') && jsonData['errors'] != null) {
+      final errors = jsonData['errors'] as List;
+      if (errors.isNotEmpty) {
+        final errorMessage = errors[0]['message'] ?? 'Data not found';
+        final response = http.Response(json.encode(jsonData), 404);
+        throw DataNotFoundException(errorMessage, response);
+      }
+    }
+
+    // Check if data is null and this is supposed to be a data response
+    if (jsonData['data'] == null && !jsonData.containsKey('errors')) {
+      final response = http.Response(json.encode(jsonData), 404);
+      throw DataNotFoundException('No data found', response);
     }
   }
 
@@ -175,8 +310,26 @@ class _StubClientContext implements ClientContext {
 
     final jsonData = _loadJsonData();
 
+    // Check for error conditions and throw appropriate exceptions
+    _checkForErrorsAndThrow(jsonData, uri);
+
+    // Handle cases where jsonData might not have 'data' field
+    final dataForParsing = jsonData['data'] ?? jsonData;
+    // Ensure we have a valid data structure to pass to fromJsonData
+    final nonNullData = dataForParsing is Map<String, dynamic>
+        ? dataForParsing
+        : <String, dynamic>{};
+
     return TwitterResponse<D, M>(
-      headers: {'content-type': 'application/json'},
+      headers: {
+        'content-type': 'application/json',
+        'x-rate-limit-limit': '100',
+        'x-rate-limit-remaining': statusCode == 429 ? '0' : '99',
+        'x-rate-limit-reset': DateTime.now()
+            .add(const Duration(minutes: 15))
+            .millisecondsSinceEpoch
+            .toString(),
+      },
       status: _getHttpStatus(),
       request: TwitterRequest(
         method: HttpMethod.get,
@@ -187,7 +340,7 @@ class _StubClientContext implements ClientContext {
         remainingCount: statusCode == 429 ? 0 : 99,
         resetAt: DateTime.now().add(const Duration(minutes: 15)),
       ),
-      data: fromJsonData(jsonData['data'] ?? jsonData),
+      data: fromJsonData(nonNullData),
       meta: fromJsonMeta != null && jsonData['meta'] != null
           ? fromJsonMeta(jsonData['meta'] as Map<String, dynamic>)
           : null,
@@ -211,8 +364,27 @@ class _StubClientContext implements ClientContext {
 
     final jsonData = _loadJsonData();
 
+    // Check for error conditions and throw appropriate exceptions
+    _checkForErrorsAndThrow(jsonData, uri);
+
+    // Handle cases where jsonData might not have 'data' field
+    final dataForParsing = jsonData['data'] ?? jsonData;
+    // Ensure we have a valid data structure to pass to fromJsonData
+    final nonNullData = dataForParsing is Map<String, dynamic>
+        ? dataForParsing
+        : <String, dynamic>{};
+
     return TwitterResponse<D, M>(
-      headers: headers ?? {'content-type': 'application/json'},
+      headers: {
+        'content-type': 'application/json',
+        'x-rate-limit-limit': '100',
+        'x-rate-limit-remaining': statusCode == 429 ? '0' : '99',
+        'x-rate-limit-reset': DateTime.now()
+            .add(const Duration(minutes: 15))
+            .millisecondsSinceEpoch
+            .toString(),
+        ...?headers,
+      },
       status: _getHttpStatus(),
       request: TwitterRequest(
         method: HttpMethod.post,
@@ -223,7 +395,7 @@ class _StubClientContext implements ClientContext {
         remainingCount: statusCode == 429 ? 0 : 99,
         resetAt: DateTime.now().add(const Duration(minutes: 15)),
       ),
-      data: fromJsonData(jsonData['data'] ?? jsonData),
+      data: fromJsonData(nonNullData),
       meta: fromJsonMeta != null && jsonData['meta'] != null
           ? fromJsonMeta(jsonData['meta'] as Map<String, dynamic>)
           : null,
@@ -240,8 +412,26 @@ class _StubClientContext implements ClientContext {
   }) async {
     final jsonData = _loadJsonData();
 
+    // Check for error conditions and throw appropriate exceptions
+    _checkForErrorsAndThrow(jsonData, uri);
+
+    // Handle cases where jsonData might not have 'data' field
+    final dataForParsing = jsonData['data'] ?? jsonData;
+    // Ensure we have a valid data structure to pass to fromJsonData
+    final nonNullData = dataForParsing is Map<String, dynamic>
+        ? dataForParsing
+        : <String, dynamic>{};
+
     return TwitterResponse<D, M>(
-      headers: {'content-type': 'multipart/form-data'},
+      headers: {
+        'content-type': 'multipart/form-data',
+        'x-rate-limit-limit': '100',
+        'x-rate-limit-remaining': statusCode == 429 ? '0' : '99',
+        'x-rate-limit-reset': DateTime.now()
+            .add(const Duration(minutes: 15))
+            .millisecondsSinceEpoch
+            .toString(),
+      },
       status: _getHttpStatus(),
       request: TwitterRequest(
         method: HttpMethod.post,
@@ -252,7 +442,7 @@ class _StubClientContext implements ClientContext {
         remainingCount: statusCode == 429 ? 0 : 99,
         resetAt: DateTime.now().add(const Duration(minutes: 15)),
       ),
-      data: fromJsonData(jsonData['data'] ?? jsonData),
+      data: fromJsonData(nonNullData),
       meta: fromJsonMeta != null && jsonData['meta'] != null
           ? fromJsonMeta(jsonData['meta'] as Map<String, dynamic>)
           : null,
@@ -274,8 +464,26 @@ class _StubClientContext implements ClientContext {
 
     final jsonData = _loadJsonData();
 
+    // Check for error conditions and throw appropriate exceptions
+    _checkForErrorsAndThrow(jsonData, uri);
+
+    // Handle cases where jsonData might not have 'data' field
+    final dataForParsing = jsonData['data'] ?? jsonData;
+    // Ensure we have a valid data structure to pass to fromJsonData
+    final nonNullData = dataForParsing is Map<String, dynamic>
+        ? dataForParsing
+        : <String, dynamic>{};
+
     return TwitterResponse<D, M>(
-      headers: {'content-type': 'application/json'},
+      headers: {
+        'content-type': 'application/json',
+        'x-rate-limit-limit': '100',
+        'x-rate-limit-remaining': statusCode == 429 ? '0' : '99',
+        'x-rate-limit-reset': DateTime.now()
+            .add(const Duration(minutes: 15))
+            .millisecondsSinceEpoch
+            .toString(),
+      },
       status: _getHttpStatus(),
       request: TwitterRequest(
         method: HttpMethod.delete,
@@ -286,7 +494,7 @@ class _StubClientContext implements ClientContext {
         remainingCount: statusCode == 429 ? 0 : 99,
         resetAt: DateTime.now().add(const Duration(minutes: 15)),
       ),
-      data: fromJsonData(jsonData['data'] ?? jsonData),
+      data: fromJsonData(nonNullData),
       meta: fromJsonMeta != null && jsonData['meta'] != null
           ? fromJsonMeta(jsonData['meta'] as Map<String, dynamic>)
           : null,
