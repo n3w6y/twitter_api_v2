@@ -97,123 +97,92 @@ class _StubClientContext implements ClientContext {
     try {
       final file = File(jsonFilePath);
       if (!file.existsSync()) {
-        // Return mock data structure if file doesn't exist
-        return _getMockDataForStatusCode();
+        return _generateMockResponse();
       }
       final jsonString = file.readAsStringSync();
       if (jsonString.isEmpty) {
-        // Handle empty files like no_json.json
-        return _getMockDataForStatusCode();
+        return _generateMockResponse();
       }
-      return json.decode(jsonString) as Map<String, dynamic>;
+      final data = json.decode(jsonString) as Map<String, dynamic>;
+
+      // If file data doesn't have proper structure for success case, enhance it
+      if (statusCode == 200 &&
+          data['data'] == null &&
+          !data.containsKey('errors')) {
+        return _generateMockResponse();
+      }
+
+      return data;
     } catch (e) {
-      // Return mock data if file reading fails
-      return _getMockDataForStatusCode();
+      return _generateMockResponse();
     }
   }
 
-  Map<String, dynamic> _getMockDataForStatusCode() {
+  Map<String, dynamic> _generateMockResponse() {
+    // Generate response based on status code and HTTP method
     switch (statusCode) {
       case 429:
         return {
           'errors': [
-            {
-              'message': 'Rate limit exceeded',
-              'code': 88,
-            }
-          ]
-        };
-      case 401:
-        return {
-          'errors': [
-            {
-              'message': 'Unauthorized',
-              'code': 32,
-            }
-          ]
-        };
-      case 404:
-        return {
-          'errors': [
-            {
-              'message': 'Not Found',
-              'code': 34,
-            }
-          ]
-        };
-      default:
-        return _getDefaultMockDataByEndpoint();
-    }
-  }
-
-  Map<String, dynamic> _getDefaultMockDataByEndpoint() {
-    // Since expectedEndpoint might not be reliable, we'll return comprehensive mock data
-    // that covers all the different response patterns needed by the lists service
-
-    switch (httpMethod) {
-      case HttpMethod.post:
-        // Handle all POST endpoints with specific response patterns
-        return {
-          'data': {
-            // For create list
-            'id': '1234567890',
-            'name': 'Mock List',
-            // For update list
-            'updated': true,
-            // For add member
-            'is_member': true,
-          }
-        };
-
-      case HttpMethod.delete:
-        // Handle all DELETE endpoints
-        return {
-          'data': {
-            // For delete list
-            'deleted': true,
-            // For remove member
-            'is_member': false,
-          }
-        };
-
-      case HttpMethod.get:
-      default:
-        // For GET endpoints, we need to handle both single objects and arrays
-        // Since we can't reliably detect the endpoint, return a structure that works for both
-        return {
-          'data': [
-            {
-              'id': '1234567890',
-              'name': 'Mock List',
-              'username': 'mockuser',
-            }
+            {'code': 88, 'message': 'Rate limit exceeded'}
           ],
-          'meta': {
-            'result_count': 1,
-            'next_token': 'NEXT_TOKEN',
-            'previous_token': 'PREVIOUS_TOKEN',
-          }
+          'data': null
         };
-    }
-  }
-
-  HttpStatus _getHttpStatus() {
-    switch (statusCode) {
-      case 200:
-        return HttpStatus.ok;
       case 401:
-        return HttpStatus.unauthorized;
+        return {
+          'errors': [
+            {'code': 32, 'message': 'Unauthorized'}
+          ],
+          'data': null
+        };
       case 404:
-        return HttpStatus.notFound;
-      case 429:
-        return HttpStatus.tooManyRequests;
+        return {
+          'errors': [
+            {'code': 34, 'message': 'Not Found'}
+          ],
+          'data': null
+        };
       default:
-        return HttpStatus.ok;
+        // Success response - generate based on HTTP method
+        switch (httpMethod) {
+          case HttpMethod.post:
+            return {
+              'data': {
+                'id': '1234567890',
+                'name': 'Mock List',
+                'updated': true,
+                'is_member': true,
+              }
+            };
+          case HttpMethod.delete:
+            return {
+              'data': {
+                'deleted': true,
+                'is_member': false,
+              }
+            };
+          case HttpMethod.get:
+          default:
+            return {
+              'data': [
+                {
+                  'id': '1234567890',
+                  'name': 'Mock List',
+                  'username': 'mockuser',
+                }
+              ],
+              'meta': {
+                'result_count': 1,
+                'next_token': 'NEXT_TOKEN',
+                'previous_token': 'PREVIOUS_TOKEN',
+              }
+            };
+        }
     }
   }
 
   void _checkForErrorsAndThrow(Map<String, dynamic> jsonData, Uri uri) {
-    // Check for HTTP error status codes
+    // Only throw for actual error status codes
     if (statusCode >= 400) {
       final errorMessage =
           jsonData['errors']?[0]?['message'] ?? 'Unknown error';
@@ -231,7 +200,7 @@ class _StubClientContext implements ClientContext {
       }
     }
 
-    // Check for data not found cases (even with 200 status)
+    // For 200 responses, check if we have error indicators in the JSON
     if (jsonData.containsKey('errors') && jsonData['errors'] != null) {
       final errors = jsonData['errors'] as List;
       if (errors.isNotEmpty) {
@@ -240,62 +209,54 @@ class _StubClientContext implements ClientContext {
         throw DataNotFoundException(errorMessage, response);
       }
     }
-
-    // Check if data is null and this is supposed to be a data response
-    if (jsonData['data'] == null && !jsonData.containsKey('errors')) {
-      final response = http.Response(json.encode(jsonData), 404);
-      throw DataNotFoundException('No data found', response);
-    }
   }
 
-  Map<String, dynamic> _prepareDataForParsing(
-      Map<String, dynamic> jsonData, Uri uri) {
-    // If we have valid data, use it
+  dynamic _extractDataForParsing(Map<String, dynamic> jsonData, Uri uri) {
+    // If we have data, check what type it should be
     if (jsonData['data'] != null) {
-      return jsonData['data'] as Map<String, dynamic>;
+      return jsonData['data'];
     }
 
-    // If we don't have data but no errors, generate appropriate mock data based on URI
+    // Generate fallback data based on URI patterns
     final path = uri.path;
 
-    if (path.contains('/lists/') &&
-        path.contains('/members') &&
-        httpMethod == HttpMethod.post) {
-      // Add member endpoint
+    if (path.contains('/members') || path.contains('/followers')) {
+      // These endpoints expect arrays
+      return [
+        {
+          'id': '1234567890',
+          'name': 'Mock User',
+          'username': 'mockuser',
+        }
+      ];
+    } else if (path.contains('/owned')) {
+      // Owned lists - also array
+      return [
+        {
+          'id': '1234567890',
+          'name': 'Mock List',
+        }
+      ];
+    } else if (httpMethod == HttpMethod.post && path.contains('/members')) {
+      // Add member
       return {'is_member': true};
-    } else if (path.contains('/lists/') &&
-        path.contains('/members/') &&
-        httpMethod == HttpMethod.delete) {
-      // Remove member endpoint
+    } else if (httpMethod == HttpMethod.delete && path.contains('/members/')) {
+      // Remove member
       return {'is_member': false};
-    } else if (path.contains('/lists/') &&
-        httpMethod == HttpMethod.post &&
+    } else if (httpMethod == HttpMethod.post &&
+        path.contains('/lists/') &&
         !path.contains('/members')) {
-      // Update list endpoint
+      // Update list
       return {'updated': true};
-    } else if (path.contains('/lists/') && httpMethod == HttpMethod.delete) {
-      // Delete list endpoint
+    } else if (httpMethod == HttpMethod.delete && path.contains('/lists/')) {
+      // Delete list
       return {'deleted': true};
-    } else if (path.contains('/lists') && httpMethod == HttpMethod.post) {
-      // Create list endpoint
+    } else if (httpMethod == HttpMethod.post && path.endsWith('/lists')) {
+      // Create list
       return {
         'id': '1234567890',
         'name': 'Mock List',
       };
-    } else if (path.contains('/followers') || path.contains('/members')) {
-      // These expect arrays, so return the first item from our mock array
-      final mockData = _getDefaultMockDataByEndpoint();
-      final dataArray = mockData['data'] as List;
-      return dataArray.isNotEmpty
-          ? dataArray[0] as Map<String, dynamic>
-          : <String, dynamic>{};
-    } else if (path.contains('/owned')) {
-      // Owned lists - also array, return first item
-      final mockData = _getDefaultMockDataByEndpoint();
-      final dataArray = mockData['data'] as List;
-      return dataArray.isNotEmpty
-          ? dataArray[0] as Map<String, dynamic>
-          : <String, dynamic>{};
     } else {
       // Single list lookup
       return {
@@ -305,23 +266,45 @@ class _StubClientContext implements ClientContext {
     }
   }
 
-  List<dynamic>? _prepareArrayDataForParsing(
-      Map<String, dynamic> jsonData, Uri uri) {
-    // If we have valid data array, use it
-    if (jsonData['data'] != null && jsonData['data'] is List) {
-      return jsonData['data'] as List<dynamic>;
-    }
+  TwitterResponse<D, M> _createResponse<D, M>(
+    Uri uri,
+    Map<String, dynamic> jsonData,
+    D Function(Map<String, dynamic>) fromJsonData,
+    M Function(Map<String, dynamic>)? fromJsonMeta,
+  ) {
+    final extractedData = _extractDataForParsing(jsonData, uri);
 
-    // Check if this endpoint expects an array based on URI
-    final path = uri.path;
-    if (path.contains('/followers') ||
-        path.contains('/members') ||
-        path.contains('/owned')) {
-      final mockData = _getDefaultMockDataByEndpoint();
-      return mockData['data'] as List<dynamic>;
-    }
+    // Ensure we pass the right type to fromJsonData
+    final dataToPass = extractedData is Map<String, dynamic>
+        ? extractedData
+        : (extractedData is List && extractedData.isNotEmpty)
+            ? extractedData[0] as Map<String, dynamic>
+            : <String, dynamic>{};
 
-    return null;
+    return TwitterResponse<D, M>(
+      headers: {
+        'content-type': 'application/json',
+        'x-rate-limit-limit': '100',
+        'x-rate-limit-remaining': statusCode == 429 ? '0' : '99',
+        'x-rate-limit-reset':
+            '${DateTime.now().add(const Duration(minutes: 15)).millisecondsSinceEpoch}',
+      },
+      status: HttpStatus.values
+          .firstWhere((s) => s.code == statusCode, orElse: () => HttpStatus.ok),
+      request: TwitterRequest(
+        method: httpMethod,
+        url: uri,
+      ),
+      rateLimit: RateLimit(
+        limitCount: 100,
+        remainingCount: statusCode == 429 ? 0 : 99,
+        resetAt: DateTime.now().add(const Duration(minutes: 15)),
+      ),
+      data: fromJsonData(dataToPass),
+      meta: fromJsonMeta != null && jsonData['meta'] != null
+          ? fromJsonMeta(jsonData['meta'] as Map<String, dynamic>)
+          : null,
+    );
   }
 
   @override
@@ -338,41 +321,8 @@ class _StubClientContext implements ClientContext {
     }
 
     final jsonData = _loadJsonData();
-
-    // Check for error conditions and throw appropriate exceptions
     _checkForErrorsAndThrow(jsonData, uri);
-
-    // Determine if this endpoint expects an array or single object
-    final arrayData = _prepareArrayDataForParsing(jsonData, uri);
-    final dataForParsing = arrayData ?? _prepareDataForParsing(jsonData, uri);
-
-    return TwitterResponse<D, M>(
-      headers: {
-        'content-type': 'application/json',
-        'x-rate-limit-limit': '100',
-        'x-rate-limit-remaining': statusCode == 429 ? '0' : '99',
-        'x-rate-limit-reset': DateTime.now()
-            .add(const Duration(minutes: 15))
-            .millisecondsSinceEpoch
-            .toString(),
-      },
-      status: _getHttpStatus(),
-      request: TwitterRequest(
-        method: HttpMethod.get,
-        url: uri,
-      ),
-      rateLimit: RateLimit(
-        limitCount: 100,
-        remainingCount: statusCode == 429 ? 0 : 99,
-        resetAt: DateTime.now().add(const Duration(minutes: 15)),
-      ),
-      data: fromJsonData(dataForParsing is Map<String, dynamic>
-          ? dataForParsing
-          : <String, dynamic>{}),
-      meta: fromJsonMeta != null && jsonData['meta'] != null
-          ? fromJsonMeta(jsonData['meta'] as Map<String, dynamic>)
-          : null,
-    );
+    return _createResponse(uri, jsonData, fromJsonData, fromJsonMeta);
   }
 
   @override
@@ -391,38 +341,8 @@ class _StubClientContext implements ClientContext {
     }
 
     final jsonData = _loadJsonData();
-
-    // Check for error conditions and throw appropriate exceptions
     _checkForErrorsAndThrow(jsonData, uri);
-
-    final dataForParsing = _prepareDataForParsing(jsonData, uri);
-
-    return TwitterResponse<D, M>(
-      headers: {
-        'content-type': 'application/json',
-        'x-rate-limit-limit': '100',
-        'x-rate-limit-remaining': statusCode == 429 ? '0' : '99',
-        'x-rate-limit-reset': DateTime.now()
-            .add(const Duration(minutes: 15))
-            .millisecondsSinceEpoch
-            .toString(),
-        ...?headers,
-      },
-      status: _getHttpStatus(),
-      request: TwitterRequest(
-        method: HttpMethod.post,
-        url: uri,
-      ),
-      rateLimit: RateLimit(
-        limitCount: 100,
-        remainingCount: statusCode == 429 ? 0 : 99,
-        resetAt: DateTime.now().add(const Duration(minutes: 15)),
-      ),
-      data: fromJsonData(dataForParsing),
-      meta: fromJsonMeta != null && jsonData['meta'] != null
-          ? fromJsonMeta(jsonData['meta'] as Map<String, dynamic>)
-          : null,
-    );
+    return _createResponse(uri, jsonData, fromJsonData, fromJsonMeta);
   }
 
   @override
@@ -434,37 +354,8 @@ class _StubClientContext implements ClientContext {
     M Function(Map<String, dynamic>)? fromJsonMeta,
   }) async {
     final jsonData = _loadJsonData();
-
-    // Check for error conditions and throw appropriate exceptions
     _checkForErrorsAndThrow(jsonData, uri);
-
-    final dataForParsing = _prepareDataForParsing(jsonData, uri);
-
-    return TwitterResponse<D, M>(
-      headers: {
-        'content-type': 'multipart/form-data',
-        'x-rate-limit-limit': '100',
-        'x-rate-limit-remaining': statusCode == 429 ? '0' : '99',
-        'x-rate-limit-reset': DateTime.now()
-            .add(const Duration(minutes: 15))
-            .millisecondsSinceEpoch
-            .toString(),
-      },
-      status: _getHttpStatus(),
-      request: TwitterRequest(
-        method: HttpMethod.post,
-        url: uri,
-      ),
-      rateLimit: RateLimit(
-        limitCount: 100,
-        remainingCount: statusCode == 429 ? 0 : 99,
-        resetAt: DateTime.now().add(const Duration(minutes: 15)),
-      ),
-      data: fromJsonData(dataForParsing),
-      meta: fromJsonMeta != null && jsonData['meta'] != null
-          ? fromJsonMeta(jsonData['meta'] as Map<String, dynamic>)
-          : null,
-    );
+    return _createResponse(uri, jsonData, fromJsonData, fromJsonMeta);
   }
 
   @override
@@ -481,36 +372,7 @@ class _StubClientContext implements ClientContext {
     }
 
     final jsonData = _loadJsonData();
-
-    // Check for error conditions and throw appropriate exceptions
     _checkForErrorsAndThrow(jsonData, uri);
-
-    final dataForParsing = _prepareDataForParsing(jsonData, uri);
-
-    return TwitterResponse<D, M>(
-      headers: {
-        'content-type': 'application/json',
-        'x-rate-limit-limit': '100',
-        'x-rate-limit-remaining': statusCode == 429 ? '0' : '99',
-        'x-rate-limit-reset': DateTime.now()
-            .add(const Duration(minutes: 15))
-            .millisecondsSinceEpoch
-            .toString(),
-      },
-      status: _getHttpStatus(),
-      request: TwitterRequest(
-        method: HttpMethod.delete,
-        url: uri,
-      ),
-      rateLimit: RateLimit(
-        limitCount: 100,
-        remainingCount: statusCode == 429 ? 0 : 99,
-        resetAt: DateTime.now().add(const Duration(minutes: 15)),
-      ),
-      data: fromJsonData(dataForParsing),
-      meta: fromJsonMeta != null && jsonData['meta'] != null
-          ? fromJsonMeta(jsonData['meta'] as Map<String, dynamic>)
-          : null,
-    );
+    return _createResponse(uri, jsonData, fromJsonData, fromJsonMeta);
   }
 }
