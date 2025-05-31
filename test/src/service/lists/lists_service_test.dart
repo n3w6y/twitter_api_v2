@@ -26,6 +26,10 @@ void main() {
           {},
         ),
       );
+      print('🔍 RUNNING LISTS SERVICE TEST - VERSION CHECK');
+      print('File timestamp: ${DateTime.now()}');
+
+      // ... rest of your test code
 
       final response = await listsService.lookupById(listId: '5555');
 
