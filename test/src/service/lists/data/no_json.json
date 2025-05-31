@@ -1,0 +1,9 @@
+{
+    "errors": [
+        {
+            "message": "Invalid JSON response",
+            "code": 3
+        }
+    ],
+    "data": null
+}
