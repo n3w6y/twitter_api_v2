@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:test/test.dart';
-import 'package:twitter_api_v2/twitter_api_v2.dart' hide JobType;
-import 'package:twitter_api_v2/src/service/compliance/compliance_job_type.dart'
-    as compliance_job_type;
+import 'package:twitter_api_v2/twitter_api_v2.dart';
+//import 'package:twitter_api_v2/src/service/compliance/job_type.dart'; // Use unified JobType
+//import 'package:twitter_api_v2/src/service/compliance/job_status.dart'; // For JobStatus
 
 void main() {
   late TwitterApi twitter;
@@ -43,7 +43,7 @@ void main() {
     }, skip: 'Requires valid API credentials');
 
     test('Lookup user by username', () async {
-      final response = await twitter.usersService.lookupby(
+      final response = await twitter.usersService.lookupByUsername(
         username: 'example',
       );
       expect(response.data.username, 'example');
@@ -75,8 +75,8 @@ void main() {
 
     test('Batch compliance', () async {
       final response = await twitter.complianceService.lookupJobs(
-        jobType: compliance_job_type.JobType.tweets,
-        ids: ['JOB_ID'],
+        jobType: JobType.tweets,
+        jobStatus: JobStatus.complete,
       );
       expect(response.data, isNotEmpty);
     }, skip: 'Replace JOB_ID with valid ID');
