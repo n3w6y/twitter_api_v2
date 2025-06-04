@@ -1,5 +1,18 @@
 import 'package:test/test.dart';
 
+void expectUnauthorizedExceptionForOAuth1(Future<void> Function() fn) {
+  expect(
+    fn,
+    throwsA(
+      predicate(
+        (e) =>
+            e.runtimeType.toString().contains('UnauthorizedException') ||
+            e.toString().contains('401'),
+      ),
+    ),
+  );
+}
+
 Future<void> expectUnauthorizedExceptionForOAuth2(
     Future<void> Function() fn) async {
   try {
