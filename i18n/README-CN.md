@@ -272,7 +272,7 @@ Future<void> main() async {
     );
 
     //! 发表图文推特。
-    await twitter.tweets.createTweet(
+    await twitter.tweets.create(
       text: 'Tweet with uploaded media',
       media: v2.TweetMediaParam(
         mediaIds: [uploadedMedia.data.id],
@@ -736,7 +736,7 @@ import 'package:twitter_api_v2/twitter_api_v2.dart' as v2;
 Future<void> main() async {
   final twitter = v2.TwitterApi(bearerToken: 'YOUR_TOKEN_HERE');
 
-  await twitter.tweets.createTweet(
+  await twitter.tweets.create(
     text: 'Hello, World!',
     // 因为这些参数是空，所以在请求时会被忽略。
     mediaIds: null,

@@ -3,6 +3,7 @@ import 'package:twitter_api_v2/src/core/client/user_context.dart';
 import 'package:twitter_api_v2/src/service/base_service.dart';
 import 'package:twitter_api_v2/src/service/response/twitter_response.dart';
 import 'package:twitter_api_v2/src/service/tweets/tweet_data.dart';
+import 'package:twitter_api_v2/src/service/tweets/tweet_meta.dart'; // If you have TweetMeta
 
 abstract class TweetsService {
   factory TweetsService({required ClientContext context}) =>
@@ -375,6 +376,28 @@ class _TweetsService extends BaseService implements TweetsService {
       context,
       '/2/tweets/sample10/stream',
       fromJsonData: (json) => TweetData.fromJson(json['data']),
+      userContext: UserContext.oauth2OrOAuth1,
+    );
+  }
+
+  Future<TwitterResponse<List<TweetData>, TweetMeta>> searchRecent({
+    required String query,
+    int? maxResults,
+    String? nextToken,
+  }) async {
+    final queryParameters = {
+      'query': query,
+      if (maxResults != null) 'max_results': maxResults.toString(),
+      if (nextToken != null) 'next_token': nextToken,
+    };
+
+    return await super.get(
+      context,
+      '/2/tweets/search/recent',
+      fromJsonData: (json) =>
+          (json['data'] as List).map((e) => TweetData.fromJson(e)).toList(),
+      fromJsonMeta: (json) => TweetMeta.fromJson(json['meta']),
+      queryParameters: queryParameters,
       userContext: UserContext.oauth2OrOAuth1,
     );
   }

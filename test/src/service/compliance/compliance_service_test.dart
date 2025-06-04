@@ -99,6 +99,11 @@ void main() {
         UserContext.appOnly,
         '/2/compliance/jobs',
         'test/src/service/compliance/data/create_job.json',
+        {
+          'type': 'tweets',
+          'name': 'test',
+          'resumable': true,
+        },
       ),
     );
 

@@ -12,7 +12,7 @@ abstract class UsersService {
     required String userId,
   });
 
-  Future<TwitterResponse<UserData, void>> lookupByName({
+  Future<TwitterResponse<UserData, void>> expectUnauthorizedExceptionForOAuth1({
     required String userName,
   });
 

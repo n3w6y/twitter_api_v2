@@ -22,9 +22,9 @@ void main() async {
     final me = await twitter.usersService.lookupMe();
     final media =
         await twitter.mediaService.uploadImage(file: File('image.jpg'));
-    final postedTweet = await twitter.tweetsService.createTweet(
+    final postedTweet = await twitter.tweetsService.create(
       text: 'Hello, World!',
-      media: TweetMediaParam(mediaIds: [media.data.media_id_string]),
+      media: TweetMediaParam(mediaIds: [media.data.mediaIdString]),
     );
 
     print(postedTweet);

@@ -18,7 +18,7 @@ import 'package:twitter_api_v2/src/service/tweets/tweet_data.dart';
 import 'package:twitter_api_v2/src/service/tweets/tweet_meta.dart';
 import 'package:twitter_api_v2/src/service/users/user_data.dart';
 import '../../../mocks/client_context_stubs.dart' as context;
-import '../common_expectations.dart';
+import './../../common_expectations.dart';
 
 void main() {
   group('.search', () {
@@ -63,8 +63,8 @@ void main() {
           UserContext.oauth2Only,
           '/2/spaces/search',
           'test/src/service/spaces/data/rate_limit_exceeded_error.json',
-          statusCode: 429,
           {'query': 'Hello, World!'},
+          statusCode: 429,
         ),
       );
 
@@ -142,8 +142,8 @@ void main() {
           UserContext.oauth2Only,
           '/2/spaces/2222',
           'test/src/service/spaces/data/rate_limit_exceeded_error.json',
-          statusCode: 429,
           {},
+          statusCode: 429,
         ),
       );
 
@@ -248,8 +248,8 @@ void main() {
           UserContext.oauth2Only,
           '/2/spaces',
           'test/src/service/spaces/data/rate_limit_exceeded_error.json',
-          statusCode: 429,
           {'ids': '1DXxyRYNejbKM,2DXxyRYNejbKM'},
+          statusCode: 429,
         ),
       );
 
@@ -332,8 +332,8 @@ void main() {
           UserContext.oauth2Only,
           '/2/spaces/2222/buyers',
           'test/src/service/spaces/data/rate_limit_exceeded_error.json',
-          statusCode: 429,
           {},
+          statusCode: 429,
         ),
       );
 
@@ -412,8 +412,8 @@ void main() {
           UserContext.oauth2Only,
           '/2/spaces/2222/tweets',
           'test/src/service/spaces/data/rate_limit_exceeded_error.json',
-          statusCode: 429,
           {},
+          statusCode: 429,
         ),
       );
 
@@ -496,8 +496,8 @@ void main() {
           UserContext.oauth2Only,
           '/2/spaces/by/creator_ids',
           'test/src/service/spaces/data/rate_limit_exceeded_error.json',
-          statusCode: 429,
           {'user_ids': '1DXxyRYNejbKM,2DXxyRYNejbKM'},
+          statusCode: 429,
         ),
       );
 

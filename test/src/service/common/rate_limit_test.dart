@@ -29,6 +29,16 @@ void main() {
 
       expect(rateLimit.isExceeded, isFalse);
     });
+
+    test('when remaining count is null (treated as not exceeded)', () {
+      final rateLimit = RateLimit(
+        limitCount: 150,
+        remainingCount: null,
+        resetAt: DateTime.now(),
+      );
+
+      expect(rateLimit.isExceeded, isFalse);
+    });
   });
 
   group('.isNotExceeded', () {
@@ -46,6 +56,16 @@ void main() {
       final rateLimit = RateLimit(
         limitCount: 150,
         remainingCount: 1,
+        resetAt: DateTime.now(),
+      );
+
+      expect(rateLimit.isNotExceeded, isTrue);
+    });
+
+    test('when remaining count is null (treated as not exceeded)', () {
+      final rateLimit = RateLimit(
+        limitCount: 150,
+        remainingCount: null,
         resetAt: DateTime.now(),
       );
 

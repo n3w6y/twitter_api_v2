@@ -7,8 +7,7 @@ import 'package:twitter_api_v2/src/core/client/oauth1_client.dart'
 import 'package:twitter_api_v2/src/core/client/oauth2_client.dart'
     as oauth2_client;
 import 'package:twitter_api_v2/src/service/response/twitter_response.dart';
-
-enum AuthenticationType { oauth1, oauth2 }
+import 'package:twitter_api_v2/src/core/client/authentication_type.dart';
 
 class ClientContext {
   ClientContext({
@@ -36,8 +35,8 @@ class ClientContext {
 
   AuthenticationType get authenticationType =>
       _client is oauth1_client.OAuth1Client
-          ? AuthenticationType.oauth1
-          : AuthenticationType.oauth2;
+          ? AuthenticationType.oauth1UserContext
+          : AuthenticationType.oauth2BearerToken;
 
   Future<TwitterResponse<D, M>> get<D, M>(
     Uri uri, {

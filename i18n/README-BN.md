@@ -460,7 +460,7 @@ import 'package:twitter_api_v2/twitter_api_v2.dart' as v2;
 Future<void> main() async {
   final twitter = v2.TwitterApi(bearerToken: 'YOUR_TOKEN_HERE');
 
-  await twitter.tweets.createTweet(
+  await twitter.tweets.create(
     text: 'Hello, World!',
     // এই প্যারামিটারগুলো রিকোয়েস্ট পাঠানোর সময় বাতিল হিসাবে গণ্য হয় কারণ তাদের মান হচ্ছে নাল।
     mediaIds: null,

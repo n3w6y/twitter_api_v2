@@ -11,6 +11,8 @@ import 'package:twitter_api_v2/src/service/response/twitter_response.dart';
 import 'package:twitter_api_v2/src/core/exception/data_not_found_exception.dart';
 import 'package:twitter_api_v2/src/core/exception/rate_limit_exceeded_exception.dart';
 import 'package:twitter_api_v2/src/core/exception/unauthorized_exception.dart';
+import 'package:twitter_api_v2/src/core/client/authentication_type.dart'
+    as auth_type;
 
 /// Creates a stub ClientContext for GET requests with specific JSON response data
 ClientContext buildGetStub(
@@ -86,7 +88,8 @@ class _StubClientContext implements ClientContext {
   final bool anyUri;
 
   @override
-  AuthenticationType get authenticationType => AuthenticationType.oauth2;
+  auth_type.AuthenticationType get authenticationType =>
+      auth_type.AuthenticationType.oauth2BearerToken;
 
   @override
   void close() {

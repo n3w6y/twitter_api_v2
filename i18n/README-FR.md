@@ -458,7 +458,7 @@ import 'package:twitter_api_v2/twitter_api_v2.dart' as v2;
 Future<void> main() async {
   final twitter = v2.TwitterApi(bearerToken: 'YOUR_TOKEN_HERE');
 
-  await twitter.tweets.createTweet(
+  await twitter.tweets.create(
     text: 'Hello, World!',
     // These parameters are ignored at request because they are null.
     mediaIds: null,

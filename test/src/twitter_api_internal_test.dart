@@ -26,7 +26,7 @@ void main() {
 
   group('Twitter API v2 with http 1.0.0', () {
     test('Post a tweet', () async {
-      final response = await twitter.tweetsService.createTweet(
+      final response = await twitter.tweetsService.create(
         text: 'Test tweet from updated twitter_api_v2 #XAPI',
       );
       expect(response.data.text, contains('Test tweet'));

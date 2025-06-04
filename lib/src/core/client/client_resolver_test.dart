@@ -1,4 +1,4 @@
-import 'package:oauth1/oauth1.dart' as oauth1;
+//import 'package:oauth1/oauth1.dart' as oauth1;
 import 'package:test/test.dart';
 import 'package:twitter_api_v2/src/core/client/client_resolver.dart';
 import 'package:twitter_api_v2/src/core/client/oauth1_client.dart'

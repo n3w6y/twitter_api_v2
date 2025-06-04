@@ -14,7 +14,7 @@ import 'package:twitter_api_v2/src/service/trends/trend_data.dart';
 import 'package:twitter_api_v2/src/service/trends/trending_location_data.dart';
 import 'package:twitter_api_v2/src/service/trends/trends_service.dart';
 import '../../../mocks/client_context_stubs.dart' as context;
-import '../common_expectations.dart';
+import '../../common_expectations.dart';
 
 void main() {
   group('.searchAvailableLocations', () {

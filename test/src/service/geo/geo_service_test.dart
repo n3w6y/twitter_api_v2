@@ -14,7 +14,7 @@ import 'package:twitter_api_v2/src/service/geo/geo_service.dart';
 import 'package:twitter_api_v2/src/service/geo/place_data.dart';
 import 'package:twitter_api_v2/src/service/response/twitter_response.dart';
 import '../../../mocks/client_context_stubs.dart' as context;
-import '../common_expectations.dart';
+import '../../common_expectations.dart';
 
 void main() {
   group('.lookupById', () {
@@ -46,7 +46,7 @@ void main() {
             accessToken: '1234',
             accessTokenSecret: '1234',
           ),
-          timeout: Duration(seconds: 10),
+          timeout: const Duration(seconds: 10),
         ),
       );
 
@@ -63,8 +63,8 @@ void main() {
           UserContext.oauth1Only,
           '/1.1/geo/id/1111.json',
           'test/src/service/geo/data/lookup_by_id.json',
-          statusCode: 429,
           {},
+          statusCode: 429,
         ),
       );
 
@@ -147,7 +147,7 @@ void main() {
             accessToken: '1234',
             accessTokenSecret: '1234',
           ),
-          timeout: Duration(seconds: 10),
+          timeout: const Duration(seconds: 10),
         ),
       );
 
@@ -162,10 +162,10 @@ void main() {
           UserContext.oauth1Only,
           '/1.1/geo/search.json',
           'test/src/service/geo/data/search_locations.json',
-          statusCode: 429,
           {
             'query': '1111',
           },
+          statusCode: 429,
         ),
       );
 
@@ -250,7 +250,7 @@ void main() {
             accessToken: '1234',
             accessTokenSecret: '1234',
           ),
-          timeout: Duration(seconds: 10),
+          timeout: const Duration(seconds: 10),
         ),
       );
 
@@ -268,11 +268,11 @@ void main() {
           UserContext.oauth1Only,
           '/1.1/geo/reverse_geocode.json',
           'test/src/service/geo/data/lookup_reversed_geocoded_locations.json',
-          statusCode: 429,
           {
             'lat': '10.0',
             'long': '20.0',
           },
+          statusCode: 429,
         ),
       );
 

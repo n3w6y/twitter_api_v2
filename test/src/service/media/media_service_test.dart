@@ -15,7 +15,7 @@ import 'package:twitter_api_v2/src/core/exception/twitter_upload_exception.dart'
 import 'package:twitter_api_v2/src/service/media/media_service.dart';
 import 'package:twitter_api_v2/src/service/media/uploaded_media_data.dart';
 import '../../../mocks/client_context_stubs.dart' as context;
-import '../common_expectations.dart';
+import '../../common_expectations.dart';
 
 void main() {
   group('.uploadImage', () {

@@ -55,8 +55,8 @@ void main() {
 
     test('create', () async {
       // Mock the expected POST call
-      final fromJsonData =
-          (Map<String, dynamic> json) => TweetData.fromJson(json);
+      TweetData fromJsonData(Map<String, dynamic> json) =>
+          TweetData.fromJson(json);
       print('Stubbed fromJsonDataType=${fromJsonData.runtimeType}');
       when(context.post(
         Uri.parse('https://api.twitter.com/2/tweets'),

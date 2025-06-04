@@ -3,8 +3,8 @@ import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 import 'package:twitter_api_v2/twitter_api_v2.dart';
 import 'package:twitter_api_v2/src/core/client/client_context.dart';
-import 'package:twitter_api_v2/src/service/response/twitter_request.dart';
-import 'package:twitter_api_v2/src/service/common/rate_limit.dart';
+//import 'package:twitter_api_v2/src/service/response/twitter_request.dart';
+//import 'package:twitter_api_v2/src/service/common/rate_limit.dart';
 
 class MockClientContext extends Mock implements ClientContext {}
 

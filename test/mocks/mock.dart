@@ -5,10 +5,13 @@ import 'package:twitter_api_v2/src/core/https_status.dart';
 import 'package:twitter_api_v2/src/service/common/rate_limit.dart';
 import 'package:twitter_api_v2/src/service/response/twitter_request.dart';
 import 'package:twitter_api_v2/src/service/response/twitter_response.dart';
+import 'package:twitter_api_v2/src/core/client/authentication_type.dart'
+    as auth_type;
 
 class MockClientContext implements ClientContext {
   @override
-  AuthenticationType get authenticationType => AuthenticationType.oauth2;
+  auth_type.AuthenticationType get authenticationType =>
+      auth_type.AuthenticationType.oauth2BearerToken;
 
   @override
   void close() {

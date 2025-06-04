@@ -1,61 +1,62 @@
-import 'package:twitter_api_v2/src/core/client/client_context.dart';
-//import 'package:twitter_api_v2/src/core/client/user_context.dart';
+//import 'package:twitter_api_v2/src/core/client/client_context.dart';
+import 'package:twitter_api_v2/src/core/client/user_context.dart';
 import 'package:twitter_api_v2/src/service/base_service.dart';
-import 'package:twitter_api_v2/src/service/compliance/compliance_job_type.dart';
-import 'package:twitter_api_v2/src/service/compliance/data/compliance_job_data.dart';
+import 'package:twitter_api_v2/src/service/compliance/batch_compliance_data.dart';
+import 'package:twitter_api_v2/src/service/compliance/job_status.dart';
+import 'package:twitter_api_v2/src/service/compliance/job_type.dart';
 import 'package:twitter_api_v2/src/service/response/twitter_response.dart';
 
-abstract class ComplianceService {
-  factory ComplianceService({required ClientContext context}) =>
-      _ComplianceService(context: context);
+class ComplianceService extends BaseService {
+  ComplianceService({required super.context});
 
-  Future<TwitterResponse<ComplianceJobData, void>> createJob({
-    required JobType jobType,
-    String? name,
-  });
-
-  Future<TwitterResponse<List<ComplianceJobData>, void>> lookupJobs({
-    required JobType jobType,
-    List<String>? jobIds,
-  });
-}
-
-class _ComplianceService extends BaseService implements ComplianceService {
-  _ComplianceService({required super.context});
-
-  @override
-  Future<TwitterResponse<ComplianceJobData, void>> createJob({
-    required JobType jobType,
-    String? name,
+  Future<TwitterResponse<BatchComplianceData, void>> lookupJob({
+    required String jobId,
   }) async {
-    return await super.post(
+    return await super.get(
       context,
-      '/2/compliance/jobs',
-      fromJsonData: (json) => ComplianceJobData.fromJson(json),
-      body: {
-        'type': jobType.name,
-        if (name != null) 'name': name,
-      },
+      '/2/compliance/jobs/$jobId',
+      fromJsonData: (json) => BatchComplianceData.fromJson(json['data']),
+      userContext: UserContext.appOnly,
     );
   }
 
-  @override
-  Future<TwitterResponse<List<ComplianceJobData>, void>> lookupJobs({
+  Future<TwitterResponse<List<BatchComplianceData>, void>> lookupJobs({
     required JobType jobType,
-    List<String>? jobIds,
+    required JobStatus jobStatus,
   }) async {
     final queryParameters = {
       'type': jobType.name,
-      if (jobIds != null && jobIds.isNotEmpty) 'job_ids': jobIds.join(','),
+      'status': jobStatus.name,
     };
 
     return await super.get(
       context,
       '/2/compliance/jobs',
       fromJsonData: (json) => (json['data'] as List)
-          .map((e) => ComplianceJobData.fromJson(e))
+          .map((e) => BatchComplianceData.fromJson(e))
           .toList(),
       queryParameters: queryParameters,
+      userContext: UserContext.appOnly,
+    );
+  }
+
+  Future<TwitterResponse<BatchComplianceData, void>> createJob({
+    required JobType jobType,
+    required String jobName,
+    required bool resumable,
+  }) async {
+    final body = {
+      'type': jobType.name,
+      'name': jobName,
+      'resumable': resumable,
+    };
+
+    return await super.post(
+      context,
+      '/2/compliance/jobs',
+      fromJsonData: (json) => BatchComplianceData.fromJson(json['data']),
+      body: body,
+      userContext: UserContext.appOnly,
     );
   }
 }

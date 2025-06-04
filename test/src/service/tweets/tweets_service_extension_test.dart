@@ -11,7 +11,7 @@ import 'package:twitter_api_v2/src/service/response/twitter_response.dart';
 import 'package:twitter_api_v2/src/service/tweets/tweet_data.dart';
 import 'package:twitter_api_v2/src/service/tweets/tweet_param.dart';
 import 'package:twitter_api_v2/src/service/tweets/tweets_service.dart';
-import 'package:twitter_api_v2/src/service/tweets/tweets_service_extension.dart';
+//import 'package:twitter_api_v2/src/service/tweets/tweets_service_extension.dart';
 import '../../../mocks/client_context_stubs.dart' as context;
 
 void main() {
@@ -22,6 +22,7 @@ void main() {
           UserContext.oauth2OrOAuth1,
           '/2/tweets',
           'test/src/service/tweets/data/create_tweet.json',
+          {},
         ),
       );
 
@@ -40,6 +41,7 @@ void main() {
           UserContext.oauth2OrOAuth1,
           '/2/tweets',
           'test/src/service/tweets/data/create_tweet.json',
+          {},
         ),
       );
 
@@ -68,6 +70,7 @@ void main() {
           UserContext.oauth2OrOAuth1,
           '/2/tweets',
           'test/src/service/tweets/data/create_tweet.json',
+          {},
         ),
       );
 
@@ -90,6 +93,7 @@ void main() {
           UserContext.oauth2OrOAuth1,
           '/2/tweets',
           'test/src/service/tweets/data/create_tweet.json',
+          {},
         ),
       );
 
