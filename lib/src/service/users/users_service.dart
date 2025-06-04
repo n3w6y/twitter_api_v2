@@ -12,16 +12,16 @@ abstract class UsersService {
     required String userId,
   });
 
-  Future<TwitterResponse<UserData, void>> expectUnauthorizedExceptionForOAuth1({
-    required String userName,
+  Future<TwitterResponse<UserData, void>> lookupByUsername({
+    required String username,
   });
 
   Future<TwitterResponse<List<UserData>, void>> lookupByIds({
     required List<String> userIds,
   });
 
-  Future<TwitterResponse<List<UserData>, void>> lookupByNames({
-    required List<String> userNames,
+  Future<TwitterResponse<List<UserData>, void>> lookupByUsernames({
+    required List<String> usernames,
   });
 
   Future<TwitterResponse<bool, void>> follow({
@@ -97,12 +97,12 @@ class _UsersService extends BaseService implements UsersService {
   }
 
   @override
-  Future<TwitterResponse<UserData, void>> lookupByName({
-    required String userName,
+  Future<TwitterResponse<UserData, void>> lookupByUsername({
+    required String username,
   }) async {
     return await super.get(
       context,
-      '/2/users/by/username/$userName',
+      '/2/users/by/username/$username',
       fromJsonData: (json) => UserData.fromJson(json['data']),
       userContext: UserContext.oauth2OrOAuth1,
     );
@@ -127,11 +127,11 @@ class _UsersService extends BaseService implements UsersService {
   }
 
   @override
-  Future<TwitterResponse<List<UserData>, void>> lookupByNames({
-    required List<String> userNames,
+  Future<TwitterResponse<List<UserData>, void>> lookupByUsernames({
+    required List<String> usernames,
   }) async {
     final queryParameters = {
-      'usernames': userNames.join(','),
+      'usernames': usernames.join(','),
     };
 
     return await super.get(

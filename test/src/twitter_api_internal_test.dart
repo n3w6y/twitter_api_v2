@@ -43,7 +43,7 @@ void main() {
     }, skip: 'Requires valid API credentials');
 
     test('Lookup user by username', () async {
-      final response = await twitter.usersService.lookupByName(
+      final response = await twitter.usersService.lookupby(
         username: 'example',
       );
       expect(response.data.username, 'example');
