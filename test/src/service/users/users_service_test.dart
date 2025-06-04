@@ -32,7 +32,7 @@ void buildGetStub(
 
 void main() {
   group('UsersService', () {
-    test('lookupByName returns user data', () async {
+    test('lookupByUserName returns user data', () async {
       final context = MockClientContext();
       final service = UsersService(context: context);
 
