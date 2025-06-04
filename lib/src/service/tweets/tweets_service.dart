@@ -3,7 +3,7 @@ import 'package:twitter_api_v2/src/core/client/user_context.dart';
 import 'package:twitter_api_v2/src/service/base_service.dart';
 import 'package:twitter_api_v2/src/service/response/twitter_response.dart';
 import 'package:twitter_api_v2/src/service/tweets/tweet_data.dart';
-import 'package:twitter_api_v2/src/service/tweets/tweet_meta.dart'; // If you have TweetMeta
+import 'package:twitter_api_v2/src/service/tweets/tweet_meta.dart';
 
 abstract class TweetsService {
   factory TweetsService({required ClientContext context}) =>
@@ -85,6 +85,12 @@ abstract class TweetsService {
     required String tweetId,
     int? maxResults,
     String? paginationToken,
+  });
+
+  Future<TwitterResponse<List<TweetData>, TweetMeta>> searchRecent({
+    required String query,
+    int? maxResults,
+    String? nextToken,
   });
 
   Stream<TwitterResponse<TweetData, void>> connectFilteredStream();
@@ -380,6 +386,7 @@ class _TweetsService extends BaseService implements TweetsService {
     );
   }
 
+  @override
   Future<TwitterResponse<List<TweetData>, TweetMeta>> searchRecent({
     required String query,
     int? maxResults,
