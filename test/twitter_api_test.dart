@@ -1,9 +1,9 @@
 // test/twitter_api_test.dart
 import 'dart:io';
 import 'package:test/test.dart';
+import 'package:twitter_api_v2/src/service/compliance/job_type.dart';
 import 'package:twitter_api_v2/twitter_api_v2.dart' hide JobType;
-import 'package:twitter_api_v2/src/service/compliance/compliance_job_type.dart'
-    as compliance_job_type;
+//import 'package:twitter_api_v2/src/service/compliance/compliance_job_type.dart'  as job_type;
 
 void main() {
   late TwitterApi twitter;
@@ -24,8 +24,8 @@ void main() {
     });
 
     test('JobType imports resolved', () {
-      expect(compliance_job_type.JobType.tweets, isNotNull);
-      expect(compliance_job_type.JobType.users, isNotNull);
+      expect(JobType.tweets, isNotNull);
+      expect(JobType.users, isNotNull);
       print('✅ JobType conflict resolution working');
     });
 
@@ -50,7 +50,9 @@ void main() {
 
     test('create compliance job', () async {
       final response = await twitter.complianceService.createJob(
-        jobType: compliance_job_type.JobType.tweets,
+        jobType: JobType.tweets,
+        jobName: '',
+        resumable: false,
       );
       expect(response, isNotNull);
     }, skip: skipRealApiTests ? 'Requires real API credentials' : null);
