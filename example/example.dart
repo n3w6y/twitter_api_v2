@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:twitter_api_v2/twitter_api_v2.dart';
+//import 'package:twitter_api_v2/src/service/tweets/tweet_media_param.dart';
 
 void main() async {
   final twitter = TwitterApi(
@@ -13,30 +14,31 @@ void main() async {
   );
 
   try {
-    final users = await twitter.usersService.lookupByName(username: 'example');
+    final users =
+        await twitter.usersService.lookupByUsername(username: 'example');
     print(users);
 
     final tweets = await twitter.tweetsService.searchRecent(query: '#example');
     print(tweets);
 
     final me = await twitter.usersService.lookupMe();
-    final media =
-        await twitter.mediaService.uploadImage(file: File('image.jpg'));
+    final media = await twitter.mediaService
+        .uploadImage(file: File('test/assets/image.jpg'));
     final postedTweet = await twitter.tweetsService.create(
       text: 'Hello, World!',
-      media: TweetMediaParam(mediaIds: [media.data.mediaIdString]),
+      mediaIds: [media.data.mediaIdString],
     );
 
     print(postedTweet);
 
-    final retweet = await twitter.tweetsService.createRetweet(
+    final retweet = await twitter.tweetsService.retweet(
       userId: me.data.id,
       tweetId: postedTweet.data.id,
     );
 
     print(retweet);
 
-    final deletedTweet = await twitter.tweetsService.destroyTweet(
+    final deletedTweet = await twitter.tweetsService.deleteTweet(
       tweetId: postedTweet.data.id,
     );
 
