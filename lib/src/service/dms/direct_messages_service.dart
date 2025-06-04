@@ -3,6 +3,8 @@ import 'package:twitter_api_v2/src/core/client/user_context.dart';
 import 'package:twitter_api_v2/src/service/base_service.dart';
 import 'package:twitter_api_v2/src/service/dms/data/direct_message_data.dart';
 import 'package:twitter_api_v2/src/service/response/twitter_response.dart';
+import 'package:twitter_api_v2/src/service/dms/dm_event_data.dart';
+import 'package:twitter_api_v2/src/service/dms/dm_event_meta.dart';
 
 abstract class DirectMessagesService {
   factory DirectMessagesService({required ClientContext context}) =>
@@ -22,6 +24,8 @@ abstract class DirectMessagesService {
     required String participantId,
     required String text,
   });
+
+  Future<TwitterResponse<List<DMEventData>, DMEventMeta>> lookupEvents();
 }
 
 class _DirectMessagesService extends BaseService
@@ -75,6 +79,18 @@ class _DirectMessagesService extends BaseService
       body: {
         'text': text,
       },
+      userContext: UserContext.oauth2OrOAuth1,
+    );
+  }
+
+  @override
+  Future<TwitterResponse<List<DMEventData>, DMEventMeta>> lookupEvents() async {
+    return await super.get(
+      context,
+      '/2/dm_events',
+      fromJsonData: (json) =>
+          (json['data'] as List).map((e) => DMEventData.fromJson(e)).toList(),
+      fromJsonMeta: (json) => DMEventMeta.fromJson(json['meta']),
       userContext: UserContext.oauth2OrOAuth1,
     );
   }
