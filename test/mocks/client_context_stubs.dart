@@ -409,3 +409,13 @@ class _StubClientContext implements ClientContext {
     return _createResponse(uri, jsonData, fromJsonData, fromJsonMeta);
   }
 }
+
+ClientContext buildUploadPostMultipartStub(
+  UserContext userContext,
+  String path,
+  String resourcePath,
+) {
+  // Implement your stub logic here, or mock as needed for your tests.
+  // This is a placeholder.
+  throw UnimplementedError('buildUploadPostMultipartStub needs implementation');
+}
