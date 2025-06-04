@@ -35,7 +35,7 @@ void main() {
       );
 
       expect(response.data, isA<UploadedMediaData>());
-      expect(response.data.id, '710511363345354753');
+      expect(response.data.mediaIdString, '710511363345354753');
     });
 
     test('with invalid oauth token', () async {
