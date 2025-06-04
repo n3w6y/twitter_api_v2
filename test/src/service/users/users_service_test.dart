@@ -3,6 +3,7 @@ import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 import 'package:twitter_api_v2/twitter_api_v2.dart';
 import 'package:twitter_api_v2/src/core/client/client_context.dart';
+//import 'package:twitter_api_v2/src/service/users/users_service.dart';
 //import 'package:twitter_api_v2/src/service/response/twitter_request.dart';
 //import 'package:twitter_api_v2/src/service/common/rate_limit.dart';
 
@@ -15,14 +16,15 @@ void buildGetStub(
 ) {
   when(context.get<dynamic, dynamic>(
     Uri.https('api.twitter.com', unencodedPath),
-    fromJsonData: anyNamed('fromJsonData'),
-    fromJsonMeta: anyNamed('fromJsonMeta'),
+    fromJsonData: anyNamed('fromJsonData') ?? (json) => json,
+    fromJsonMeta: anyNamed('fromJsonMeta') ?? (json) => json,
   )).thenAnswer((_) async => TwitterResponse(
         headers: {},
         rateLimit: RateLimit.fromJson({}),
-        status: 200,
+        status: HttpStatus.ok,
         request: TwitterRequest(
-            url: 'https://api.twitter.com$unencodedPath', method: 'GET'),
+            url: Uri.https('api.twitter.com', unencodedPath),
+            method: HttpMethod.get),
         data: jsonDecode(resource),
         meta: null,
       ));
@@ -37,7 +39,7 @@ void main() {
       buildGetStub(context, '/2/users/by/username/example',
           '{"data": {"id": "123", "username": "example"}}');
 
-      final response = await service.lookupByName(username: 'example');
+      final response = await service.lookupByUsername(username: 'example');
       expect(response.data.username, 'example');
     });
 
