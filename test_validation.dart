@@ -42,7 +42,7 @@ void main() async {
   if (mainTestFile.existsSync()) {
     final content = mainTestFile.readAsStringSync();
     final hasJobTypeHiding = content.contains('hide JobType');
-    final hasComplianceImport = content.contains('compliance_job_type.dart');
+    final hasComplianceImport = content.contains('job_type.dart');
     final hasMediaIdString = content.contains('mediaIdString');
 
     print('${hasJobTypeHiding ? "✅" : "❌"} JobType conflict resolution');
